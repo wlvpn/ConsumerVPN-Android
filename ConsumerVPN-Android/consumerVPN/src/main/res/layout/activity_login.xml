@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".activities.MainActivity">
+
+        <ImageView
+            android:id="@+id/activity_login_image_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@drawable/banner_main"
+            android:contentDescription="@string/accessibility_logo_banner" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="3"
+            android:background="@color/login_background"
+            android:orientation="vertical"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:contentDescription="@string/accessibility_username_icon"
+                    android:src="@drawable/ic_user" />
+
+                <EditText
+                    android:id="@+id/activity_login_et_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:hint="@string/login_hint_username"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:theme="@style/WLVPNEditTextStyle" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:contentDescription="@string/accessibility_password_icon"
+                    android:src="@drawable/ic_lock" />
+
+                <EditText
+                    android:id="@+id/activity_login_et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:hint="@string/login_hint_password"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:theme="@style/WLVPNEditTextStyle" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/login_tv_forgot_username_password"
+                style="@style/WLVPNTextViewMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/login_forgot_username_password"
+                android:textColor="@color/text_hover" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/login_background">
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/activity_login_button_sign_in"
+                style="@style/WLVPNButtonPrimary"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/login_sign_in"
+                android:theme="@style/WLVPNAppPrimaryButtonTheme" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/activity_login_button_sign_up"
+                style="@style/WLVPNButtonSecondary"
+                android:layout_toLeftOf="@id/activity_login_button_sign_in"
+                android:layout_toStartOf="@id/activity_login_button_sign_in"
+                android:text="@string/login_sign_up"
+                android:theme="@style/WLVPNAppSecondaryButtonTheme" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/progress_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_80"
+        android:clickable="true"
+        android:focusable="false"
+        android:visibility="gone"
+        tools:ignore="KeyboardInaccessibleWidget">
+
+        <com.wlvpn.slider.whitelabelvpn.widget.SupportProgressBar
+            android:id="@+id/activity_login_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:color="@color/color_accent" />
+
+    </FrameLayout>
+</FrameLayout>

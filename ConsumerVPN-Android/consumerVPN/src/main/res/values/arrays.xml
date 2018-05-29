@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="preference_protocol_types">
+        <item>@string/protocol_vpn_tcp</item>
+        <item>@string/protocol_vpn_udp</item>
+    </array>
+
+    <array name="preference_port_types">
+        <item>@string/port_443</item>
+        <item>@string/port_1194</item>
+    </array>
+
+</resources>

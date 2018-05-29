@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_connecting_ll_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/connected_location_row"
+        style="@style/ConnectedRowContainer"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/fragment_connected_iv_visible_location"
+            style="@style/ConnectedImageView"
+            android:contentDescription="@string/accessibility_location_icon"
+            android:src="@drawable/ic_location"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/connected_visible_location_label"
+            style="@style/ConnectedSmallTextView"
+            android:text="@string/connected_visible_location"
+            app:layout_constraintBottom_toTopOf="@id/connected_visible_location_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fragment_connected_iv_visible_location"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/connected_visible_location_text"
+            style="@style/ConnectedLargeTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fragment_connected_iv_visible_location"
+            app:layout_constraintTop_toBottomOf="@id/connected_visible_location_label"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="@string/slider_default_location" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/connected_ip_row"
+        style="@style/ConnectedRowContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/connected_location_row">
+
+        <ImageView
+            android:id="@+id/fragment_connected_iv_public_ip"
+            style="@style/ConnectedImageView"
+            android:contentDescription="@string/accessibility_globe_icon"
+            android:src="@drawable/ic_ip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_connected_tv_ip_label"
+            style="@style/ConnectedSmallTextView"
+            android:text="@string/connected_public_ip"
+            app:layout_constraintBottom_toTopOf="@id/fragment_connected_tv_public_ip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fragment_connected_iv_public_ip"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/fragment_connected_tv_public_ip"
+            style="@style/ConnectedLargeTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fragment_connected_iv_public_ip"
+            app:layout_constraintTop_toBottomOf="@id/fragment_connected_tv_ip_label"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="192.168.1.254" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/connected_encryption_row"
+        style="@style/ConnectedRowContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/connected_ip_row">
+
+        <ImageView
+            android:id="@+id/fragment_connected_iv_protocol_option"
+            style="@style/ConnectedImageView"
+            android:contentDescription="@string/accessibility_encryption_icon"
+            android:src="@drawable/ic_encryption"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_connected_tv_protocol_label"
+            style="@style/ConnectedSmallTextView"
+            android:text="@string/connected_protocol_option"
+            app:layout_constraintBottom_toTopOf="@id/fragment_connected_tv_protocol_option"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fragment_connected_iv_protocol_option"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/fragment_connected_tv_protocol_option"
+            style="@style/ConnectedLargeTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fragment_connected_iv_protocol_option"
+            app:layout_constraintTop_toBottomOf="@id/fragment_connected_tv_protocol_label"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="@string/encryption_secure_title" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/fragment_slider_dotmap"
+        android:layout_width="@dimen/ui_zero"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/content_description_dot_map"
+        android:paddingEnd="@dimen/activity_small_normal_spacing"
+        android:paddingLeft="@dimen/activity_small_normal_spacing"
+        android:paddingRight="@dimen/activity_small_normal_spacing"
+        android:paddingStart="@dimen/activity_small_normal_spacing"
+        android:src="@drawable/bg_dotmap"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/connected_encryption_row" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/connected_encryption_row">
+
+        <com.eftimoff.androipathview.PathView
+            android:id="@+id/connected_ic_encryption"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="@dimen/activity_normal_spacing"
+            android:layout_marginRight="@dimen/activity_normal_spacing"
+            app:pathColor="@color/color_tertiary_text"
+            app:pathWidth="2dp" />
+
+        <TextView
+            android:id="@+id/connected_tv_encryption"
+            style="@style/WLVPNTextViewLarge"
+            android:text="@string/secure" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

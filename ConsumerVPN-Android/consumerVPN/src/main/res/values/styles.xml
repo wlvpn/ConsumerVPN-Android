@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="WLVPNAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="android:textColorPrimary">@color/color_primary_text</item>
+        <item name="android:textColorSecondary">@color/color_secondary_text</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="android:editTextStyle">@style/WLVPNEditTextStyle</item>
+    </style>
+
+    <style name="WLVPNANoActionBar" parent="WLVPNAppTheme">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="WLVPNAlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/dialog_button_accent_color</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
+
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:colorBackground">@color/popup_menu_background</item>
+        <item name="android:textColor">@color/popup_menu_text_color</item>
+    </style>
+
+    <!-- Connected -->
+    <style name="ConnectedImageView">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+    </style>
+
+    <style name="ConnectedSmallTextView" parent="WLVPNTextViewSmall">
+        <item name="android:layout_width">@dimen/ui_zero</item>
+        <item name="android:gravity">start</item>
+        <item name="android:layout_marginStart" tools:targetApi="jelly_bean_mr1">
+            @dimen/activity_normal_spacing
+        </item>
+        <item name="android:layout_marginEnd" tools:targetApi="jelly_bean_mr1">@dimen/ui_zero</item>
+        <item name="android:layout_marginLeft">@dimen/activity_normal_spacing</item>
+        <item name="android:layout_marginRight">@dimen/ui_zero</item>
+    </style>
+
+    <style name="ConnectedLargeTextView">
+        <item name="android:layout_width">@dimen/ui_zero</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_primary_text</item>
+        <item name="android:gravity">start</item>
+        <item name="android:layout_marginStart" tools:targetApi="jelly_bean_mr1">
+            @dimen/activity_normal_spacing
+        </item>
+        <item name="android:layout_marginEnd" tools:targetApi="jelly_bean_mr1">@dimen/ui_zero</item>
+        <item name="android:layout_marginLeft">@dimen/activity_normal_spacing</item>
+        <item name="android:layout_marginRight">@dimen/ui_zero</item>
+        <item name="android:textSize">@dimen/text_label_title</item>
+    </style>
+
+    <style name="ConnectedRowContainer">
+        <item name="android:layout_width">@dimen/ui_zero</item>
+        <item name="android:layout_height">@dimen/item_row_height</item>
+        <item name="android:paddingLeft">@dimen/activity_normal_spacing</item>
+        <item name="android:paddingRight">@dimen/activity_normal_spacing</item>
+        <item name="android:paddingStart" tools:targetApi="jelly_bean_mr1">
+            @dimen/activity_normal_spacing
+        </item>
+        <item name="android:paddingEnd" tools:targetApi="jelly_bean_mr1">
+            @dimen/activity_normal_spacing
+        </item>
+    </style>
+
+    <!-- Text Themes -->
+    <style name="WLVPNEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/control_color</item>
+        <item name="colorControlActivated">@color/control_highlight_color</item>
+        <item name="colorControlHighlight">@color/control_highlight_color</item>
+        <item name="android:textColorHint">@color/control_color</item>
+        <item name="android:textColor">@color/color_secondary_text</item>
+        <item name="android:textColorPrimary">@color/color_secondary_text</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
+
+    <style name="WLVPNTextViewLarge" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_primary_text</item>
+    </style>
+
+    <style name="WLVPNTextViewMedium" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_primary_text</item>
+    </style>
+
+    <style name="WLVPNTextViewMediumSmall" parent="WLVPNTextViewMedium">
+        <item name="android:textSize">@dimen/text_secondary_button</item>
+        <item name="android:textColor">@color/color_primary_text</item>
+    </style>
+
+    <style name="WLVPNTextViewSmall" parent="@android:style/TextAppearance.Small">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_primary_text</item>
+    </style>
+
+    <style name="WLVPNLatencyTextView" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- Button Styles && Themes -->
+    <style name="WLVPNButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/button_default_height</item>
+    </style>
+
+    <style name="WLVPNButtonPrimary" parent="WLVPNButton">
+        <item name="android:background">@drawable/button_primary</item>
+        <item name="android:textColor">@color/button_primary_text_color</item>
+    </style>
+
+    <style name="WLVPNButtonSecondary" parent="WLVPNButton">
+        <item name="android:background">@drawable/button_secondary</item>
+        <item name="android:textColor">@color/button_secondary_text_color</item>
+    </style>
+
+    <style name="WLVPNButtonTertiary" parent="WLVPNButton">
+        <item name="android:background">@drawable/button_tertiary</item>
+        <item name="android:textColor">@color/button_tertiary_text_color</item>
+    </style>
+
+    <!-- Form Inputs -->
+    <style name="WLVPNSettingsContainer">
+        <item name="android:layout_width">@dimen/ui_zero</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/settings_primary_background</item>
+        <item name="android:elevation" tools:targetApi="lollipop">@dimen/default_elevation</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- Form Inputs -->
+    <style name="WLVPNInputTitle">
+        <item name="android:layout_height">@dimen/text_view_subtitle_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">bottom|left|start</item>
+        <item name="android:textColor">@color/color_primary_text</item>
+        <item name="android:paddingStart" tools:targetApi="jelly_bean_mr1">
+            @dimen/activity_normal_spacing
+        </item>
+        <item name="android:paddingLeft">@dimen/activity_normal_spacing</item>
+        <item name="android:paddingEnd" tools:targetApi="jelly_bean_mr1">
+            @dimen/activity_normal_spacing
+        </item>
+        <item name="android:paddingRight">@dimen/activity_normal_spacing</item>
+        <item name="android:paddingBottom">@dimen/activity_small_spacing</item>
+    </style>
+
+    <style name="WLVPNRadioButton">
+        <item name="android:layout_height">@dimen/text_view_subtitle_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">@dimen/text_label_title</item>
+        <item name="android:textColor">@color/color_primary_text</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:paddingLeft">@dimen/activity_normal_spacing</item>
+        <item name="android:paddingStart" tools:targetApi="jelly_bean_mr1">
+            @dimen/activity_normal_spacing
+        </item>
+        <item name="android:paddingRight">@dimen/activity_normal_spacing</item>
+        <item name="android:paddingEnd" tools:targetApi="jelly_bean_mr1">
+            @dimen/activity_normal_spacing
+        </item>
+        <item name="android:background">@drawable/settings_row</item>
+        <item name="android:layoutDirection" tools:targetApi="jelly_bean_mr1">rtl</item>
+    </style>
+
+    <style name="WLVPNCheckbox">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/text_label_title</item>
+        <item name="android:textColor">@color/color_secondary_text</item>
+        <item name="android:background">@drawable/settings_row</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingStart" tools:targetApi="jelly_bean_mr1">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingEnd" tools:targetApi="jelly_bean_mr1">16dp</item>
+        <item name="android:layoutDirection" tools:targetApi="jelly_bean_mr1">rtl</item>
+    </style>
+
+    <style name="ConsumerVPNLocationItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/item_row_height</item>
+        <item name="android:background">@drawable/location_row</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+</resources>
+

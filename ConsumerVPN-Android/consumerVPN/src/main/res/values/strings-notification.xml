@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="notification_vpn_connection_channel_title">Connection</string>
+    <string name="notification_vpn_connecting_title">Connecting to %1$s, %2$s</string>
+    <string name="notification_vpn_connecting_content">%1$s/s %2$s - %3$s/s %4$s</string>
+    <string name="notification_vpn_connected_title">Connected to %1$s, %2$s</string>
+    <string name="notification_vpn_action_disconnect">Disconnect</string>
+
+    <string name="notification_insecure_wifi_title">Insecure Network</string>
+    <string name="notification_insecure_wifi_content">Connected Wi-Fi network may be insecure. Protect your connection with %1$s</string>
+
+    <string name="notification_scheduled_maintenance_title">Scheduled Maintenance</string>
+    <string name="notification_scheduled_maintenance_content">Your connected server is scheduled for maintenance at %1$s. Switch servers to avoid being disconnected.</string>
+    <string name="notification_scheduled_maintenance_switch_servers">Switch Servers</string>
+
+</resources>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/settings_top_container"
+            style="@style/WLVPNSettingsContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/WLVPNInputTitle"
+                android:text="@string/startup_title" />
+
+            <RadioGroup
+                android:id="@+id/startup_connect_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/startup_do_not_connect"
+                    style="@style/WLVPNRadioButton"
+                    android:text="@string/startup_do_not_connect"
+                    tools:ignore="UnusedAttribute" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/startup_connect_to_last"
+                    style="@style/WLVPNRadioButton"
+                    android:text="@string/startup_connect_to_last" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/startup_connect_to_fastest"
+                    style="@style/WLVPNRadioButton"
+                    android:text="@string/startup_connect_to_fastest" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/startup_connect_to_fastest_country"
+                    style="@style/WLVPNRadioButton"
+                    android:text="@string/startup_connect_to_fastest_country" />
+            </RadioGroup>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/startup_fastest_country_label"
+                style="@style/WLVPNInputTitle"
+                android:background="@drawable/settings_row"
+                android:descendantFocusability="blocksDescendants"
+                android:focusable="false"
+                android:gravity="start|center_vertical"
+                android:paddingLeft="32dp"
+                android:paddingStart="32dp"
+                android:textColor="@color/color_secondary_text"
+                android:visibility="invisible"
+                tools:ignore="KeyboardInaccessibleWidget,RtlSymmetry" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/settings_bottom_container"
+            style="@style/WLVPNSettingsContainer"
+            android:layout_marginTop="@dimen/activity_normal_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/settings_top_container"
+            tools:targetApi="lollipop">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/WLVPNInputTitle"
+                android:text="@string/connection_title" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/connection_auto_reconnect"
+                style="@style/WLVPNCheckbox"
+                android:text="@string/auto_reconnect" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/connection_scramble"
+                style="@style/WLVPNCheckbox"
+                android:text="@string/scramble" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/connection_protocol"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_row_height"
+                android:background="@drawable/settings_row"
+                android:clickable="true"
+                android:descendantFocusability="blocksDescendants"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/connection_protocol_title"
+                    style="@style/WLVPNTextViewMedium"
+                    android:layout_width="@dimen/ui_zero"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:paddingEnd="@dimen/activity_normal_spacing"
+                    android:paddingLeft="@dimen/activity_normal_spacing"
+                    android:paddingRight="@dimen/activity_normal_spacing"
+                    android:paddingStart="@dimen/activity_normal_spacing"
+                    android:text="@string/protocol_title"
+                    app:layout_constraintBottom_toTopOf="@id/connection_protocol_value"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/connection_protocol_value"
+                    style="@style/WLVPNTextViewSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:paddingEnd="@dimen/activity_normal_spacing"
+                    android:paddingLeft="@dimen/activity_normal_spacing"
+                    android:paddingRight="@dimen/activity_normal_spacing"
+                    android:paddingStart="@dimen/activity_normal_spacing"
+                    android:text="@string/protocol_default"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/connection_protocol_title"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/connection_port"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_row_height"
+                android:background="@drawable/settings_row"
+                android:clickable="true"
+                android:descendantFocusability="blocksDescendants"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/port_title"
+                    style="@style/WLVPNTextViewMedium"
+                    android:layout_width="@dimen/ui_zero"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:paddingEnd="@dimen/activity_normal_spacing"
+                    android:paddingLeft="@dimen/activity_normal_spacing"
+                    android:paddingRight="@dimen/activity_normal_spacing"
+                    android:paddingStart="@dimen/activity_normal_spacing"
+                    android:text="@string/port_title"
+                    app:layout_constraintBottom_toTopOf="@id/connection_port_value"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/connection_port_value"
+                    style="@style/WLVPNTextViewSmall"
+                    android:layout_width="@dimen/ui_zero"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:paddingEnd="@dimen/activity_normal_spacing"
+                    android:paddingLeft="@dimen/activity_normal_spacing"
+                    android:paddingRight="@dimen/activity_normal_spacing"
+                    android:paddingStart="@dimen/activity_normal_spacing"
+                    android:text="@string/port_default"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/port_title"
+                    app:layout_constraintVertical_chainStyle="packed" />
+            </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/ui_zero"
+            android:layout_height="@dimen/activity_normal_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/settings_bottom_container" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

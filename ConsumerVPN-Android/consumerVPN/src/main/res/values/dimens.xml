@@ -1,0 +1,38 @@
+<resources>
+    <dimen name="ui_zero">0dp</dimen>
+
+    <!-- Space -->
+    <dimen name="activity_small_spacing">8dp</dimen>
+    <dimen name="activity_small_normal_spacing">12dp</dimen>
+    <dimen name="activity_normal_spacing">16dp</dimen>
+    <dimen name="activity_medium_spacing">24dp</dimen>
+    <dimen name="activity_large_spacing">32dp</dimen>
+
+    <!-- Fonts -->
+    <dimen name="text_title">20sp</dimen>
+    <dimen name="text_primary_button">22sp</dimen>
+    <dimen name="text_secondary_button">16sp</dimen>
+    <dimen name="text_label_title">18sp</dimen>
+
+    <!-- Material Dimens -->
+    <dimen name="default_elevation">4dp</dimen>
+    <dimen name="text_view_subtitle_height">48dp</dimen>
+    <dimen name="item_row_height">72dp</dimen>
+    <dimen name="tabs_two_row_height">72dp</dimen>
+    <dimen name="button_default_height">48dp</dimen>
+    <dimen name="button_inset_horizontal_material">4dp</dimen>
+    <dimen name="button_inset_vertical_material">6dp</dimen>
+    <dimen name="button_padding_horizontal_material">8dp</dimen>
+    <dimen name="button_padding_vertical_material">4dp</dimen>
+    <dimen name="button_corner_material">2dp</dimen>
+
+    <!-- Main Screen -->
+    <dimen name="main_location_button_height">52dp</dimen>
+
+
+    <!-- location item list -->
+    <dimen name="location_list_item_width_height">40dp</dimen>
+    <dimen name="location_list_item_icon_margin">16dp</dimen>
+    <dimen name="location_list_item_text_left_margin">32dp</dimen>
+    <dimen name="location_list_item_text_right_margin">16dp</dimen>
+</resources>

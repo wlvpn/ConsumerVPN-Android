@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_unknown_error">Unknown Error</string>
+    <string name="no_connection">No Connection</string>
+    <string name="username_password_invalid">Username or password not valid</string>
+</resources>
