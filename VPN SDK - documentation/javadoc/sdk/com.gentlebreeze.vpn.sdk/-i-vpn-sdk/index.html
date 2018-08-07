@@ -1,0 +1,362 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>IVpnSdk - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk</a>&nbsp;/&nbsp;<a href="./index.html">IVpnSdk</a><br/>
+<br/>
+<h1>IVpnSdk</h1>
+<code><span class="keyword">interface </span><span class="identifier">IVpnSdk</span></code>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="connect.html">connect</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">connect</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/pop">pop</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-pop/index.html"><span class="identifier">VpnPop</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html"><span class="identifier">VpnConnectionConfiguration</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">connect</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnServer, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/server">server</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-server/index.html"><span class="identifier">VpnServer</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnServer, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnServer, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html"><span class="identifier">VpnConnectionConfiguration</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Attempt to connect to the given server.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">connect</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$connect(kotlin.String, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/countryCode">countryCode</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$connect(kotlin.String, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$connect(kotlin.String, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html"><span class="identifier">VpnConnectionConfiguration</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Attempt connect to the best server in a country</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">connect</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html"><span class="identifier">VpnConnectionConfiguration</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Attempt to connect to the best server relative to your geolocation
+with no preference for country or city</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="disconnect.html">disconnect</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">disconnect</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Disconnect from the connected/connecting vpn connection. Callback returns true if disconnect was successful.
+False may be returned to indicate disconnect was not necessary or failed.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="fetch-all-pops.html">fetchAllPops</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">fetchAllPops</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-pop/index.html"><span class="identifier">VpnPop</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Get a list of all pops</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">fetchAllPops</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchAllPops(com.gentlebreeze.vpn.sdk.sort.SortPop)/sortPop">sortPop</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.sort/-sort-pop/index.html"><span class="identifier">SortPop</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-pop/index.html"><span class="identifier">VpnPop</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Get a list of all pops in specific order</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="fetch-all-pops-by-country-code.html">fetchAllPopsByCountryCode</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">fetchAllPopsByCountryCode</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchAllPopsByCountryCode(kotlin.String)/countryCode">countryCode</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-pop/index.html"><span class="identifier">VpnPop</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Get a lists of all pops in a country</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">fetchAllPopsByCountryCode</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchAllPopsByCountryCode(kotlin.String, com.gentlebreeze.vpn.sdk.sort.SortPop)/countryCode">countryCode</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchAllPopsByCountryCode(kotlin.String, com.gentlebreeze.vpn.sdk.sort.SortPop)/sortPop">sortPop</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.sort/-sort-pop/index.html"><span class="identifier">SortPop</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-pop/index.html"><span class="identifier">VpnPop</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Get a lists of all pops in a country
+in a specific order</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="fetch-all-servers.html">fetchAllServers</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">fetchAllServers</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-server/index.html"><span class="identifier">VpnServer</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Get a list of all servers</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">fetchAllServers</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchAllServers(com.gentlebreeze.vpn.sdk.sort.SortServer)/sortServer">sortServer</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.sort/-sort-server/index.html"><span class="identifier">SortServer</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-server/index.html"><span class="identifier">VpnServer</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Get a list of all servers in specific order</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="fetch-all-servers-by-pop.html">fetchAllServersByPop</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">fetchAllServersByPop</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchAllServersByPop(com.gentlebreeze.vpn.sdk.model.VpnPop)/pop">pop</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-pop/index.html"><span class="identifier">VpnPop</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-server/index.html"><span class="identifier">VpnServer</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Get a list of all servers in a given pop</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">fetchAllServersByPop</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchAllServersByPop(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.sort.SortServer)/pop">pop</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-pop/index.html"><span class="identifier">VpnPop</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchAllServersByPop(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.sort.SortServer)/sortServer">sortServer</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.sort/-sort-server/index.html"><span class="identifier">SortServer</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-server/index.html"><span class="identifier">VpnServer</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Get a list of all servers in a given pop in specific order</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="fetch-available-vpn-port-options.html">fetchAvailableVpnPortOptions</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">fetchAvailableVpnPortOptions</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchAvailableVpnPortOptions(com.gentlebreeze.vpn.sdk.model.VpnProtocolOptions, kotlin.Boolean)/vpnProtocol">vpnProtocol</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-protocol-options/index.html"><span class="identifier">VpnProtocolOptions</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchAvailableVpnPortOptions(com.gentlebreeze.vpn.sdk.model.VpnProtocolOptions, kotlin.Boolean)/scrambleEnabled">scrambleEnabled</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-port-options/index.html"><span class="identifier">VpnPortOptions</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Returns a List of available VpnPortOptions</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="fetch-connection-info.html">fetchConnectionInfo</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><s><span class="identifier">fetchConnectionInfo</span></s><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-info/index.html"><span class="identifier">VpnConnectionInfo</span></a><span class="symbol">&gt;</span></code>
+<p>Returns a VpnConnectionInfo object containing
+information on the currently connected server</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="fetch-geo-info.html">fetchGeoInfo</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">fetchGeoInfo</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-geo-data/index.html"><span class="identifier">VpnGeoData</span></a><span class="symbol">&gt;</span></code>
+<p>Get user's IpGeo location</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="fetch-ip-geo-location.html">fetchIpGeoLocation</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><s><span class="identifier">fetchIpGeoLocation</span></s><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-ip-geo-response/index.html"><span class="identifier">VpnIpGeoResponse</span></a><span class="symbol">&gt;</span></code>
+<p>Get user's IPGeo location</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="fetch-pop-by-country-code-and-city.html">fetchPopByCountryCodeAndCity</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">fetchPopByCountryCodeAndCity</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchPopByCountryCodeAndCity(kotlin.String, kotlin.String)/countryCode">countryCode</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchPopByCountryCodeAndCity(kotlin.String, kotlin.String)/city">city</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-pop/index.html"><span class="identifier">VpnPop</span></a><span class="symbol">&gt;</span></code>
+<p>Fetches a pop by its city name</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="fetch-pop-by-name.html">fetchPopByName</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">fetchPopByName</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchPopByName(kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-pop/index.html"><span class="identifier">VpnPop</span></a><span class="symbol">&gt;</span></code>
+<p>Fetches a pop by its name</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="fetch-server-by-name.html">fetchServerByName</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">fetchServerByName</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchServerByName(kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-server/index.html"><span class="identifier">VpnServer</span></a><span class="symbol">&gt;</span></code>
+<p>Fetches a server by its name</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-account-info.html">getAccountInfo</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getAccountInfo</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-account-info/index.html"><span class="identifier">VpnAccountInfo</span></a></code>
+<p>Get an object containing account info</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-auth-info.html">getAuthInfo</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getAuthInfo</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-auth-info/index.html"><span class="identifier">VpnAuthInfo</span></a></code>
+<p>Get an object containing authentication info</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-connected-date.html">getConnectedDate</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getConnectedDate</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://developer.android.com/reference/java/util/Date.html"><span class="identifier">Date</span></a></code>
+<p>Get the Date of the initial connection</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-connected-time-in-seconds.html">getConnectedTimeInSeconds</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getConnectedTimeInSeconds</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code>
+<p>Get Connected Time in Seconds</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-connection-description.html">getConnectionDescription</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getConnectionDescription</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Get the description of the current VPN State</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-connection-info.html">getConnectionInfo</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getConnectionInfo</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-info/index.html"><span class="identifier">VpnConnectionInfo</span></a></code>
+<p>Get the current connection info</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-connection-state.html">getConnectionState</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getConnectionState</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Get the last known VPN state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-device-info.html">getDeviceInfo</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getDeviceInfo</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-device-info/index.html"><span class="identifier">VpnDeviceInfo</span></a></code>
+<p>Gen an object container current device information</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-geo-info.html">getGeoInfo</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><s><span class="identifier">getGeoInfo</span></s><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-geo-data/index.html"><span class="identifier">VpnGeoData</span></a></code>
+<p>Get Geo Info</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-access-token-valid.html">isAccessTokenValid</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">isAccessTokenValid</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Checks if access token is valid</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-connected.html">isConnected</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">isConnected</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Determine if the device is connected</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-user-logged-in.html">isUserLoggedIn</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">isUserLoggedIn</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Detects if user is logged in by checking access token</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-vpn-service-prepared.html">isVpnServicePrepared</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">isVpnServicePrepared</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Check if the application has been approved to provide VPN service.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="listen-to-connect-state.html">listenToConnectState</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">listenToConnectState</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-state/index.html"><span class="identifier">VpnState</span></a><span class="symbol">&gt;</span></code>
+<p>Listens to the Connection state. Must be unsubscribed
+from when finished listening. Returns a State object
+containing both the connection state description and enum value</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="listen-to-connection-data.html">listenToConnectionData</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">listenToConnectionData</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-data-usage/index.html"><span class="identifier">VpnDataUsage</span></a><span class="symbol">&gt;</span></code>
+<p>Listens to the Connection Data. Must be unsubscribed
+from when finished listening. Returns a Stateobject
+containing both the connection state description and enum value</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="login-with-username.html">loginWithUsername</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">loginWithUsername</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$loginWithUsername(kotlin.String, kotlin.String)/username">username</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$loginWithUsername(kotlin.String, kotlin.String)/password">password</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-callback/index.html"><span class="identifier">Callback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-login-response/index.html"><span class="identifier">VpnLoginResponse</span></a><span class="symbol">&gt;</span></code>
+<p>Attempts to log the user into the VPN service</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="logout.html">logout</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">logout</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-callback/index.html"><span class="identifier">Callback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">&gt;</span></code>
+<p>Log the user out of the VPN service; clears auth and account info</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="prepare-vpn-service.html">prepareVpnService</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">prepareVpnService</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$prepareVpnService(android.app.Activity)/activity">activity</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Activity.html"><span class="identifier">Activity</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">prepareVpnService</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$prepareVpnService(android.app.Fragment)/fragment">fragment</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Fragment.html"><span class="identifier">Fragment</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Start the intent to prepare the VPN service.
+Will show the permission dialog or return null
+if VPN service is already prepared.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="refresh-token.html">refreshToken</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">refreshToken</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-callback/index.html"><span class="identifier">Callback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-login-response/index.html"><span class="identifier">VpnLoginResponse</span></a><span class="symbol">&gt;</span></code>
+<p>Uses internal auth info refresh token to refresh
+the authentication token</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="seed-server-list.html">seedServerList</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">seedServerList</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">&gt;</span></code>
+<p>Updates list of servers from internal json file
+raw/severs.json, raw/protocols.json</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="update-server-list.html">updateServerList</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">updateServerList</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">&gt;</span></code>
+<p>Updates list of servers from API</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-vpn-sdk/index.html">VpnSdk</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">VpnSdk</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">IVpnSdk</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
