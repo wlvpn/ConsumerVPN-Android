@@ -1,0 +1,87 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Callback - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk.callback</a>&nbsp;/&nbsp;<a href="./index.html">Callback</a><br/>
+<br/>
+<h1>Callback</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Callback</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>Callback is a lightweight wrapper class built around an RxJava Observable.  Callback simplifies
+our handling of threading, data manipulation, and event buses by ensuring users of the SDK are not
+required to implement RxJava in their own codebase.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">Callback</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.callback.Callback$<init>(rx.Observable((com.gentlebreeze.vpn.sdk.callback.Callback.T)))/observable">observable</span><span class="symbol">:</span>&nbsp;<span class="identifier">Observable</span><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">)</span></code>
+<p>Callback is a lightweight wrapper class built around an RxJava Observable.  Callback simplifies
+our handling of threading, data manipulation, and event buses by ensuring users of the SDK are not
+required to implement RxJava in their own codebase.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="observe-on.html">observeOn</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">observeOn</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.callback.Callback$observeOn(java.util.concurrent.ThreadPoolExecutor)/scheduler">scheduler</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/ThreadPoolExecutor.html"><span class="identifier">ThreadPoolExecutor</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>Wrapper for RX observeOn. Sets the Scheduler to observe changes.
+Defaults to Android Main thread</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-error.html">onError</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onError</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.callback.Callback$onError(kotlin.Function1((kotlin.Throwable, kotlin.Unit)))/callback">callback</span><span class="symbol">:</span>&nbsp;<a href="../-error-action.html"><span class="identifier">ErrorAction</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Callback</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>On Error contains the throwable if error is thrown</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-next.html">onNext</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onNext</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.callback.Callback$onNext(kotlin.Function1((com.gentlebreeze.vpn.sdk.callback.Callback.T, kotlin.Unit)))/callback">callback</span><span class="symbol">:</span>&nbsp;<a href="../-next-action.html"><span class="identifier">NextAction</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Callback</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>On result contains the value of the completed observable</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="subscribe.html">subscribe</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">subscribe</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.callback.Callback$subscribe(kotlin.Function1((com.gentlebreeze.vpn.sdk.callback.Callback.T, kotlin.Unit)), kotlin.Function1((kotlin.Throwable, kotlin.Unit)))/nextCallback">nextCallback</span><span class="symbol">:</span>&nbsp;<a href="../-next-action.html"><span class="identifier">NextAction</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.callback.Callback$subscribe(kotlin.Function1((com.gentlebreeze.vpn.sdk.callback.Callback.T, kotlin.Unit)), kotlin.Function1((kotlin.Throwable, kotlin.Unit)))/errorCallback">errorCallback</span><span class="symbol">:</span>&nbsp;<a href="../-error-action.html"><span class="identifier">ErrorAction</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>Wrapper for RX subscribe that uses the stored callbacks
+and fires off the RX chain.</p>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">subscribe</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>Overload to allow Java developers to call subscribe() without explicitly
+passing null for each parameter</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="unsubscribe.html">unsubscribe</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">unsubscribe</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Unsubscribes from the subscription if it exists</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

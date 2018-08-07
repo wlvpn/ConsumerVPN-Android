@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>VpnState - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk.model</a>&nbsp;/&nbsp;<a href="./index.html">VpnState</a><br/>
+<br/>
+<h1>VpnState</h1>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">VpnState</span></code>
+<p>This object holds information relevant to the current state of the VPN connection</p>
+<h3>Parameters</h3>
+<p><a name="connectionState"></a>
+<code>connectionState</code> - <code>int</code> value that contains current connection state</p>
+<p><a name="connectionDescription"></a>
+<code>connectionDescription</code> - <code>String</code> value that contains detailed description of the current connection state</p>
+<p><a name="dataUsageRecord"></a>
+<code>dataUsageRecord</code> - (Deprecated) <code>VpnDataUsage</code> value object with current connection usage
+<em>(Data usage is now accessible by using the <code>listenToConnectionData()</code> callback)</em></p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">VpnState</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.model.VpnState$<init>(kotlin.Int, kotlin.String, com.gentlebreeze.vpn.sdk.model.VpnDataUsage)/connectionState">connectionState</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.model.VpnState$<init>(kotlin.Int, kotlin.String, com.gentlebreeze.vpn.sdk.model.VpnDataUsage)/connectionDescription">connectionDescription</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.model.VpnState$<init>(kotlin.Int, kotlin.String, com.gentlebreeze.vpn.sdk.model.VpnDataUsage)/dataUsageRecord">dataUsageRecord</span><span class="symbol">:</span>&nbsp;<a href="../-vpn-data-usage/index.html"><span class="identifier">VpnDataUsage</span></a><span class="symbol">)</span></code>
+<p>This object holds information relevant to the current state of the VPN connection</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="connection-description.html">connectionDescription</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">connectionDescription</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p><code>String</code> value that contains detailed description of the current connection state</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="connection-state.html">connectionState</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">connectionState</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p><code>int</code> value that contains current connection state</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="data-usage-record.html">dataUsageRecord</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><s><span class="identifier">dataUsageRecord</span></s><span class="symbol">: </span><a href="../-vpn-data-usage/index.html"><span class="identifier">VpnDataUsage</span></a></code>
+<p>(Deprecated) <code>VpnDataUsage</code> value object with current connection usage
+<em>(Data usage is now accessible by using the <code>listenToConnectionData()</code> callback)</em></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-c-o-n-n-e-c-t-e-d.html">CONNECTED</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">CONNECTED</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-c-o-n-n-e-c-t-i-n-g.html">CONNECTING</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">CONNECTING</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-d-i-s-c-o-n-n-e-c-t-e-d.html">DISCONNECTED</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">DISCONNECTED</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

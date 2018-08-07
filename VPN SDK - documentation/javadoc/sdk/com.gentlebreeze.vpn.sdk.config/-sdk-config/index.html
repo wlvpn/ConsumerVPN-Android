@@ -1,0 +1,160 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SdkConfig - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk.config</a>&nbsp;/&nbsp;<a href="./index.html">SdkConfig</a><br/>
+<br/>
+<h1>SdkConfig</h1>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">SdkConfig</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">VpnApiConfiguration</span><span class="symbol">, </span><span class="identifier">IpGeoConfiguration</span></code>
+<p>Contains information needed to initialize the SDK in your application. <code>accountName</code>, <code>apiKey</code>,
+and <code>authSuffix</code> are required and will be provided. All other parameters are optional and, in
+most cases, will not be needed to modify.</p>
+<h3>Parameters</h3>
+<p><a name="accountName"></a>
+<code>accountName</code> - <code>String</code> value containing your account name</p>
+<p><a name="apiKey"></a>
+<code>apiKey</code> - <code>String</code> value containing your API key</p>
+<p><a name="authSuffix"></a>
+<code>authSuffix</code> - <code>String</code> value containing your auth suffix</p>
+<p><a name="client"></a>
+<code>client</code> - <code>String</code> value designating the client (e.g. Android)</p>
+<p><a name="apiHost"></a>
+<code>apiHost</code> - <code>String</code> value designating the API hostname</p>
+<p><a name="ipGeoUrl"></a>
+<code>ipGeoUrl</code> - <code>String</code> value designating the IP Geo API hostname</p>
+<p><a name="apiLoginEndpoint"></a>
+<code>apiLoginEndpoint</code> - <code>String</code> value endpoint for the API login</p>
+<p><a name="apiTokenRefreshEndpoint"></a>
+<code>apiTokenRefreshEndpoint</code> - <code>String</code> value endpoint for the API token refresh</p>
+<p><a name="apiProtocolListEndpoint"></a>
+<code>apiProtocolListEndpoint</code> - <code>String</code> value endpoint for the API protocol list</p>
+<p><a name="apiServerListEndpoint"></a>
+<code>apiServerListEndpoint</code> - <code>String</code> value endpoint for the API server list</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-builder/index.html">Builder</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Builder</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">SdkConfig</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.config.SdkConfig$<init>(kotlin.String, kotlin.String)/accountName">accountName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.config.SdkConfig$<init>(kotlin.String, kotlin.String)/apiKey">apiKey</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span></code><code><span class="identifier">SdkConfig</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.config.SdkConfig$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/accountName">accountName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.config.SdkConfig$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/apiKey">apiKey</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.config.SdkConfig$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/authSuffix">authSuffix</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;accountName<span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.config.SdkConfig$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/client">client</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;BuildConfig.CLIENT<span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.config.SdkConfig$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/apiHost">apiHost</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;BuildConfig.ENDPOINT<span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.config.SdkConfig$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/ipGeoUrl">ipGeoUrl</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;BuildConfig.IP_GEO<span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.config.SdkConfig$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/apiLoginEndpoint">apiLoginEndpoint</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;BuildConfig.LOGIN_API<span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.config.SdkConfig$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/apiTokenRefreshEndpoint">apiTokenRefreshEndpoint</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;BuildConfig.TOKEN_REFRESH_API<span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.config.SdkConfig$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/apiProtocolListEndpoint">apiProtocolListEndpoint</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;BuildConfig.PROTOCOL_LIST_API<span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.config.SdkConfig$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/apiServerListEndpoint">apiServerListEndpoint</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;BuildConfig.SERVER_LIST_API<span class="symbol">)</span></code>
+<p>Contains information needed to initialize the SDK in your application. <code>accountName</code>, <code>apiKey</code>,
+and <code>authSuffix</code> are required and will be provided. All other parameters are optional and, in
+most cases, will not be needed to modify.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="account-name.html">accountName</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">accountName</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p><code>String</code> value containing your account name</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="api-host.html">apiHost</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">apiHost</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p><code>String</code> value designating the API hostname</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="api-key.html">apiKey</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">apiKey</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p><code>String</code> value containing your API key</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="api-login-endpoint.html">apiLoginEndpoint</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">apiLoginEndpoint</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p><code>String</code> value endpoint for the API login</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="api-protocol-list-endpoint.html">apiProtocolListEndpoint</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">apiProtocolListEndpoint</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p><code>String</code> value endpoint for the API protocol list</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="api-server-list-endpoint.html">apiServerListEndpoint</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">apiServerListEndpoint</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p><code>String</code> value endpoint for the API server list</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="api-token-refresh-endpoint.html">apiTokenRefreshEndpoint</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">apiTokenRefreshEndpoint</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p><code>String</code> value endpoint for the API token refresh</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="auth-suffix.html">authSuffix</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">authSuffix</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p><code>String</code> value containing your auth suffix</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="client.html">client</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">client</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p><code>String</code> value designating the client (e.g. Android)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="ip-geo-url.html">ipGeoUrl</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">ipGeoUrl</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p><code>String</code> value designating the IP Geo API hostname</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
