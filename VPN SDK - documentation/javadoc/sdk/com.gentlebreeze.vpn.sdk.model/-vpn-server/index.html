@@ -1,0 +1,132 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>VpnServer - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk.model</a>&nbsp;/&nbsp;<a href="./index.html">VpnServer</a><br/>
+<br/>
+<h1>VpnServer</h1>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">VpnServer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Parcelable.html"><span class="identifier">Parcelable</span></a></code>
+<p>Contains information about a server</p>
+<h3>Parameters</h3>
+<p><a name="name"></a>
+<code>name</code> - name of server</p>
+<p><a name="popName"></a>
+<code>popName</code> - name of pop this server is located in</p>
+<p><a name="ipAddress"></a>
+<code>ipAddress</code> - IP address of server</p>
+<p><a name="isInMaintenance"></a>
+<code>isInMaintenance</code> - is this server in maintenance?</p>
+<p><a name="scheduledMaintenance"></a>
+<code>scheduledMaintenance</code> - timestamp of scheduled maintenance</p>
+<p><a name="capacity"></a>
+<code>capacity</code> - capacity of the server</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">VpnServer</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.model.VpnServer$<init>(com.gentlebreeze.vpn.db.sqlite.models.ServerJoin)/serverJoin">serverJoin</span><span class="symbol">:</span>&nbsp;<span class="identifier">ServerJoin</span><span class="symbol">)</span></code><br/>
+<code><span class="identifier">VpnServer</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.model.VpnServer$<init>(android.os.Parcel)/source">source</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Parcel.html"><span class="identifier">Parcel</span></a><span class="symbol">)</span></code><code><span class="identifier">VpnServer</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.model.VpnServer$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.Boolean, kotlin.Long, kotlin.Int)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.model.VpnServer$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.Boolean, kotlin.Long, kotlin.Int)/popName">popName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.model.VpnServer$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.Boolean, kotlin.Long, kotlin.Int)/ipAddress">ipAddress</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.model.VpnServer$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.Boolean, kotlin.Long, kotlin.Int)/isInMaintenance">isInMaintenance</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.model.VpnServer$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.Boolean, kotlin.Long, kotlin.Int)/scheduledMaintenance">scheduledMaintenance</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.model.VpnServer$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.Boolean, kotlin.Long, kotlin.Int)/capacity">capacity</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span></code>
+<p>Contains information about a server</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="capacity.html">capacity</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">capacity</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>capacity of the server</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="ip-address.html">ipAddress</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">ipAddress</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>IP address of server</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-in-maintenance.html">isInMaintenance</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">isInMaintenance</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>is this server in maintenance?</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="name.html">name</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">name</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>name of server</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="pop-name.html">popName</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">popName</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>name of pop this server is located in</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="scheduled-maintenance.html">scheduledMaintenance</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">scheduledMaintenance</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code>
+<p>timestamp of scheduled maintenance</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="describe-contents.html">describeContents</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">describeContents</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="write-to-parcel.html">writeToParcel</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">writeToParcel</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.model.VpnServer$writeToParcel(android.os.Parcel, kotlin.Int)/dest">dest</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Parcel.html"><span class="identifier">Parcel</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.model.VpnServer$writeToParcel(android.os.Parcel, kotlin.Int)/flags">flags</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-c-r-e-a-t-o-r.html">CREATOR</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">CREATOR</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/os/Parcelable/Creator.html"><span class="identifier">Creator</span></a><span class="symbol">&lt;</span><a href="./index.html"><span class="identifier">VpnServer</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

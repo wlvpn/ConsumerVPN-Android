@@ -1,0 +1,12 @@
+$dokka.format:html
+$dokka.linkExtension:html
+
+com.gentlebreeze.vpn.sdk
+com.gentlebreeze.vpn.sdk.callback
+com.gentlebreeze.vpn.sdk.config
+com.gentlebreeze.vpn.sdk.di
+com.gentlebreeze.vpn.sdk.mapper
+com.gentlebreeze.vpn.sdk.migration
+com.gentlebreeze.vpn.sdk.model
+com.gentlebreeze.vpn.sdk.sort
+com.gentlebreeze.vpn.sdk.store

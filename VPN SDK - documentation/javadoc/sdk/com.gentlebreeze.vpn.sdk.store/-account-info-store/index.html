@@ -1,0 +1,112 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AccountInfoStore - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk.store</a>&nbsp;/&nbsp;<a href="./index.html">AccountInfoStore</a><br/>
+<br/>
+<h1>AccountInfoStore</h1>
+<code><span class="keyword">class </span><span class="identifier">AccountInfoStore</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">AccountInfo</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">AccountInfoStore</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.AccountInfoStore$<init>(android.content.SharedPreferences)/sharedPreferences">sharedPreferences</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/SharedPreferences.html"><span class="identifier">SharedPreferences</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="account-email.html">accountEmail</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">accountEmail</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="account-status.html">accountStatus</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">accountStatus</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="account-type.html">accountType</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">accountType</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="is-remember-me.html">isRememberMe</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">isRememberMe</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="subscription-end.html">subscriptionEnd</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">subscriptionEnd</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="clear.html">clear</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">clear</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="store-account-email.html">storeAccountEmail</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">storeAccountEmail</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.AccountInfoStore$storeAccountEmail(kotlin.String)/email">email</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="store-account-status.html">storeAccountStatus</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">storeAccountStatus</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.AccountInfoStore$storeAccountStatus(kotlin.Int)/accountStatus">accountStatus</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="store-account-type.html">storeAccountType</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">storeAccountType</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.AccountInfoStore$storeAccountType(kotlin.Int)/accountType">accountType</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="store-remember-me.html">storeRememberMe</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">storeRememberMe</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.AccountInfoStore$storeRememberMe(kotlin.Boolean)/rememberMe">rememberMe</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="store-subscription-end.html">storeSubscriptionEnd</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">storeSubscriptionEnd</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.AccountInfoStore$storeSubscriptionEnd(kotlin.Long)/subcriptionEnd">subcriptionEnd</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

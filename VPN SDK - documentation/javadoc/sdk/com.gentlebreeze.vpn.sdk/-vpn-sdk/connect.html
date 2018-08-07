@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>VpnSdk.connect - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk</a>&nbsp;/&nbsp;<a href="index.html">VpnSdk</a>&nbsp;/&nbsp;<a href="./connect.html">connect</a><br/>
+<br/>
+<h1>connect</h1>
+<a name="com.gentlebreeze.vpn.sdk.VpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnServer, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)"></a>
+<code><span class="keyword">fun </span><span class="identifier">connect</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnServer, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/server">server</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-server/index.html"><span class="identifier">VpnServer</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnServer, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnServer, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html"><span class="identifier">VpnConnectionConfiguration</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Overrides <a href="../-i-vpn-sdk/connect.html">IVpnSdk.connect</a></p>
+<p>Attempt to connect to the given server.</p>
+<h3>Parameters</h3>
+<p><a name="server"></a>
+<code>server</code> - server to attempt to connect to</p>
+<p><a name="notification"></a>
+<code>notification</code> - vpn notification</p>
+<p><a name="configuration"></a>
+<code>configuration</code> - Container object containing server,
+    notification configuration, and credentials</p>
+<p><strong>Return</strong><br/>
+callback to establish the connection</p>
+<a name="com.gentlebreeze.vpn.sdk.VpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)"></a>
+<code><span class="keyword">fun </span><span class="identifier">connect</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/pop">pop</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-pop/index.html"><span class="identifier">VpnPop</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html"><span class="identifier">VpnConnectionConfiguration</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Overrides <a href="../-i-vpn-sdk/connect.html">IVpnSdk.connect</a></p>
+<p>Attempt to connect to the given server.</p>
+<h3>Parameters</h3>
+<p><a name="pop"></a>
+<code>pop</code> - pop to attempt to connect to</p>
+<p><a name="notification"></a>
+<code>notification</code> - vpn notification</p>
+<p><a name="configuration"></a>
+<code>configuration</code> - Container object containing server,
+    notification configuration, and credentials</p>
+<p><strong>Return</strong><br/>
+callback to establish the connection</p>
+<a name="com.gentlebreeze.vpn.sdk.VpnSdk$connect(kotlin.String, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)"></a>
+<code><span class="keyword">fun </span><span class="identifier">connect</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connect(kotlin.String, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/countryCode">countryCode</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connect(kotlin.String, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connect(kotlin.String, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html"><span class="identifier">VpnConnectionConfiguration</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Overrides <a href="../-i-vpn-sdk/connect.html">IVpnSdk.connect</a></p>
+<p>Attempt connect to the best server in a country</p>
+<h3>Parameters</h3>
+<p><a name="countryCode"></a>
+<code>countryCode</code> - String 2 letter country representation (e.g. US, UK)</p>
+<p><a name="notification"></a>
+<code>notification</code> - vpn notification</p>
+<p><a name="configuration"></a>
+<code>configuration</code> - Container object containing server,
+    notification configuration, and credentials</p>
+<a name="com.gentlebreeze.vpn.sdk.VpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)"></a>
+<code><span class="keyword">fun </span><span class="identifier">connect</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connect(com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html"><span class="identifier">VpnConnectionConfiguration</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Overrides <a href="../-i-vpn-sdk/connect.html">IVpnSdk.connect</a></p>
+<p>Attempt to connect to the best server relative to your geolocation
+with no preference for country or city</p>
+<h3>Parameters</h3>
+<p><a name="notification"></a>
+<code>notification</code> - vpn notification</p>
+<p><a name="configuration"></a>
+<code>configuration</code> - Container object containing server,
+    notification configuration, and credentials</p>
+</BODY>
+</HTML>

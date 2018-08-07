@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.gentlebreeze.vpn.sdk.callback - sdk</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">sdk</a>&nbsp;/&nbsp;<a href="./index.html">com.gentlebreeze.vpn.sdk.callback</a><br/>
+<br/>
+<h2>Package com.gentlebreeze.vpn.sdk.callback</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-callback/index.html">Callback</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Callback</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="-callback/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>Callback is a lightweight wrapper class built around an RxJava Observable.  Callback simplifies
+our handling of threading, data manipulation, and event buses by ensuring users of the SDK are not
+required to implement RxJava in their own codebase.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-i-callback/index.html">ICallback</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">ICallback</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Type Aliases</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-error-action.html">ErrorAction</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">ErrorAction</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="symbol">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-next-action.html">NextAction</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">NextAction</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="symbol">(</span><a href="-next-action.html#T"><span class="identifier">T</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
