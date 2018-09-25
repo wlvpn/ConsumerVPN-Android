@@ -128,7 +128,45 @@ dependencies {
 }
 ```
 
-### 2. Library Initialization
+### 2. Android Manifest Permissions
+
+The VPN-SDK adds the following required permissions automatically into your final
+application manifest:
+
+* **android.permission.ACCESS_NETWORK_STATE**: Allows the sdk to get access to 
+information about networks.
+* **android.permission.INTERNET**: Allows the SDK to execute API calls over the Internet.
+* **android.permission.ACCESS_WIFI_STATE**: Allows the SDK to get access to information about 
+Wi-Fi networks.
+
+```xml
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.myapp">
+
+    <uses-permission
+        android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission
+        android:name="android.permission.INTERNET" />
+
+    <uses-permission
+        android:name="android.permission.ACCESS_WIFI_STATE" />
+    ....
+
+    <application ...>
+        ......
+    </application>
+</manifest>
+``` 
+
+The final result merged application `manifest` could be seen at
+`app/build/intermediates/manifests/full/(debug|release)/AndroidManifest.xml`
+
+There is no need to remove any permission if you now have those set it up into your current 
+application `manifest`. The final result will not produce any repeated values.
+
+### 3. Library Initialization
 
 After adding the dependency, you can initialize the VPN-SDK in your application.
 The best place to initialize the library is as a static reference in your Application class
@@ -197,8 +235,6 @@ class MyApplication : Application() {
 ```
 
 ## Disclaimer
-
-This is not an official Google product. 
 
 [1]: https://gradle.org/install/
 [2]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
