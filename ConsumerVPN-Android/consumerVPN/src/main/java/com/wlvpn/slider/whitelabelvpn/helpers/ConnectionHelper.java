@@ -2,6 +2,7 @@ package com.wlvpn.slider.whitelabelvpn.helpers;
 
 
 import com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration;
+import com.gentlebreeze.vpn.sdk.model.VpnConnectionProtocolOptions;
 import com.gentlebreeze.vpn.sdk.model.VpnPop;
 import com.gentlebreeze.vpn.sdk.model.VpnPortOptions;
 import com.gentlebreeze.vpn.sdk.model.VpnProtocolOptions;
@@ -24,6 +25,9 @@ public class ConnectionHelper {
     private final VpnNotificationManager vpnNotificationManager;
     private final SettingsManager settingsManager;
     private final CredentialsManager credentialsManager;
+
+    //Only used if it's necessary for ipv6 networks
+    private static final boolean SHOULD_OVERRIDE_MOBILE_MTU = true;
 
     @Inject
     public ConnectionHelper(VpnNotificationManager vpnNotificationManager,
@@ -104,14 +108,17 @@ public class ConnectionHelper {
      */
     private VpnConnectionConfiguration getVpnConnectionConfiguration() {
         Credentials credentials = credentialsManager.getCredentials();
-        return new VpnConnectionConfiguration(
-                credentials.getUsername(),
-                credentials.getPassword(),
-                false, //Todo: Implement Scramble setting when scramble is enabled
-                settingsManager.getAutoReconnectPref(),
-                getPortPreference(),
-                getProtocolPreference()
-        );
+        VpnConnectionConfiguration.Builder vpnConfigBuilder =
+                new VpnConnectionConfiguration.Builder(
+                        credentials.getUsername(),
+                        credentials.getPassword())
+                        .scrambleOn(settingsManager.getScramblePref()).port(getPortPreference())
+                        .connectionProtocol(
+                                VpnConnectionProtocolOptions.OPENVPN) //Soon to fully support IKEv2
+                        .vpnProtocol(getProtocolPreference())
+                        .shouldOverrideMobileMtu(SHOULD_OVERRIDE_MOBILE_MTU);
+
+        return vpnConfigBuilder.build();
     }
 
     /**
