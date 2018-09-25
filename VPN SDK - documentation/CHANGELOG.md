@@ -1,5 +1,24 @@
 # CHANGELOG
 
+## v1.5.2
+
+## Feature
+
+New argument to override the MTU value when the user is on a mobile connection.
+
+For some IPv6 only networks is necessary to override the MTU value to 1280
+ to avoid issues with fragmentation, a new argument for 
+ VPNConnectionConfiguration was added  `.shouldOverrideMobileMtu(true);` to
+ add that behavior
+
+```Java 
+    VpnConnectionConfiguration.Builder(
+        credentials.getUsername(),
+        credentials.getPassword()).
+        .shouldOverrideMobileMtu(true);
+```
+
+
 ## v1.5.1
 
 ## Feature
