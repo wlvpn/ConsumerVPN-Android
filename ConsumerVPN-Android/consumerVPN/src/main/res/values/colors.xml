@@ -12,12 +12,11 @@
     <color name="windowBackground">@color/background</color>
     <color name="secondary_background">#1C1F22</color>
 
-    <!-- Divider -->
-    <color name="divider">#f4f4f4</color>
+    <!-- Banner -->
+    <color name="banner_background">#1F1F1F</color>
 
-    <!-- Gradients -->
-    <color name="background_gradient_start">@color/secondary_background</color>
-    <color name="background_gradient_end">@color/secondary_background</color>
+    <!-- Divider -->
+    <color name="divider">#994e575f</color>
 
     <!-- Text -->
     <color name="color_primary_text">@color/color_accent</color>
@@ -59,7 +58,7 @@
     <!-- Settings Row Button -->
     <color name="location_row_color">@color/secondary_background</color>
     <color name="location_row_pressed_color">#4e575f</color>
-    <color name="location_row_focused_color">@color/settings_row_pressed_color</color>
+    <color name="location_row_focused_color">@color/location_row_pressed_color</color>
 
     <!-- Controls -->
     <color name="control_color">#C1C1C1</color>

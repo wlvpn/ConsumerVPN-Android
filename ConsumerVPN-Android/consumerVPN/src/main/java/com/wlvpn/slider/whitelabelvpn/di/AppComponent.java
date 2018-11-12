@@ -1,11 +1,13 @@
 package com.wlvpn.slider.whitelabelvpn.di;
 
 import com.wlvpn.slider.whitelabelvpn.ConsumerVpnApplication;
+import com.wlvpn.slider.whitelabelvpn.activities.BaseActivity;
 import com.wlvpn.slider.whitelabelvpn.activities.CountryListActivity;
 import com.wlvpn.slider.whitelabelvpn.activities.LoginActivity;
 import com.wlvpn.slider.whitelabelvpn.activities.MainActivity;
 import com.wlvpn.slider.whitelabelvpn.activities.PopListActivity;
 import com.wlvpn.slider.whitelabelvpn.activities.SettingsActivity;
+import com.wlvpn.slider.whitelabelvpn.activities.SplashActivity;
 import com.wlvpn.slider.whitelabelvpn.layouts.ConnectedLayout;
 import com.wlvpn.slider.whitelabelvpn.layouts.ConnectingLayout;
 import com.wlvpn.slider.whitelabelvpn.layouts.SliderLayout;
@@ -25,6 +27,10 @@ public interface AppComponent {
     void inject(SwitchServerReceiver target);
 
     void inject(VpnConnectionReceiver target);
+
+    void inject(BaseActivity target);
+
+    void inject(SplashActivity target);
 
     void inject(LoginActivity target);
 

@@ -1,9 +1,11 @@
 package com.wlvpn.slider.whitelabelvpn.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +21,7 @@ import com.jakewharton.rxbinding.support.v7.widget.RxSearchView;
 import com.wlvpn.slider.whitelabelvpn.ConsumerVpnApplication;
 import com.wlvpn.slider.whitelabelvpn.R;
 import com.wlvpn.slider.whitelabelvpn.adapters.CountryListRecyclerAdapter;
+import com.wlvpn.slider.whitelabelvpn.adapters.DividerItemDecoration;
 import com.wlvpn.slider.whitelabelvpn.comparators.CountryComparator;
 import com.wlvpn.slider.whitelabelvpn.listener.CountryClickListener;
 import com.wlvpn.slider.whitelabelvpn.models.Country;
@@ -73,6 +76,13 @@ public class CountryListActivity
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+        DividerItemDecoration divider =
+                new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
+        Drawable drawable = ContextCompat.getDrawable(getBaseContext(), R.drawable.row_divider);
+        if (drawable != null) {
+            divider.setDrawable(drawable);
+            recyclerView.addItemDecoration(divider);
+        }
         recyclerView.setAdapter(adapter);
     }
 

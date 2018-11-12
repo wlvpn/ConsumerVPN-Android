@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.gentlebreeze.http.api.NetworkUnavailableException;
 import com.gentlebreeze.vpn.http.api.error.BaseErrorThrowable;
+import com.gentlebreeze.vpn.sdk.callback.ICallback;
+import com.gentlebreeze.vpn.sdk.model.VpnLoginResponse;
 import com.jakewharton.rxbinding.view.RxView;
 import com.wlvpn.slider.whitelabelvpn.ConsumerVpnApplication;
 import com.wlvpn.slider.whitelabelvpn.R;
@@ -37,6 +39,9 @@ import timber.log.Timber;
 public class LoginActivity
         extends BaseActivity {
 
+    @Inject
+    public CredentialsManager credentialsManager;
+
     private View progressContainer;
     private EditText usernameEditText;
     private EditText passwordEditText;
@@ -44,8 +49,7 @@ public class LoginActivity
     private TextView forgotUsernamePasswordButton;
     private Button signUpButton;
 
-    @Inject
-    public CredentialsManager credentialsManager;
+    private ICallback<VpnLoginResponse> loginCallback;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,8 +77,14 @@ public class LoginActivity
     @Override
     protected void onResume() {
         super.onResume();
-
         initListeners();
+    }
+
+    private void unsubscribeLogin() {
+        if (loginCallback != null) {
+            loginCallback.unsubscribe();
+            loginCallback = null;
+        }
     }
 
     private void initListeners() {
@@ -120,7 +130,7 @@ public class LoginActivity
         try {
             startActivity(new Intent(Intent.ACTION_VIEW).setData(uri));
         } catch (ActivityNotFoundException e) {
-            Timber.e(e.getMessage());
+            Timber.e(e);
         }
     }
 
@@ -135,12 +145,15 @@ public class LoginActivity
             showProgressDialog(true);
             hideKeyboard();
 
-            ConsumerVpnApplication.getVpnSdk().loginWithUsername(username, password)
+            loginCallback = ConsumerVpnApplication.getVpnSdk()
+                    .loginWithUsername(username, password)
                     .subscribe(vpnLoginResponse -> {
+                        unsubscribeLogin();
                         credentialsManager.setCredentials(new Credentials(username, password));
                         goToMainActivity();
                         return Unit.INSTANCE;
                     }, throwable -> {
+                        unsubscribeLogin();
                         showProgressDialog(false);
                         Timber.e(throwable, "Failed to login");
                         handleAuthError(throwable);

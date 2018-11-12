@@ -37,8 +37,10 @@ public class VpnNotificationManager {
     private static final String TAG = "VpnNotifications";
     private static final String VPN_NOTIFICATION_CONNECTION_CHANNEL = "VpnNotificationChannel";
     private static final String VPN_MAINTENANCE_CHANNEL = "VpnMaintenanceChannel";
+    private static final String VPN_NOTIFICATION_REVOKE = "VpnNotificationRevokeChannel";
     private static final int VPN_NOTIFICATION_CONNECTION_ID = 1;
     private static final int VPN_NOTIFICATION_SWITCH_ID = 2;
+    private static final int VPN_NOTIFICATION_REVOKE_ID = 3;
 
     private final Context context;
     private final Bitmap bitmapIconLarge;
@@ -46,7 +48,7 @@ public class VpnNotificationManager {
     private NotificationCompat.Builder notificationBuilder;
 
     @Inject
-    public VpnNotificationManager(Context context) {
+    VpnNotificationManager(Context context) {
         this.context = context;
         notificationManager = (android.app.NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         bitmapIconLarge = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_logo);
@@ -61,10 +63,22 @@ public class VpnNotificationManager {
                 R.string.notification_vpn_connection_channel_title,
                 NotificationManagerCompat.IMPORTANCE_LOW
         );
+        createNotificationChannel(
+                VPN_NOTIFICATION_REVOKE,
+                R.string.notification_vpn_connection_revoke_title,
+                NotificationManagerCompat.IMPORTANCE_DEFAULT
+        );
     }
 
     public VpnNotification getVpnNotificationConfiguration() {
-        return new VpnNotification(getBaseConnectionNotification().build(), VPN_NOTIFICATION_CONNECTION_ID);
+        return new VpnNotification(
+                getBaseConnectionNotification().build(),
+                VPN_NOTIFICATION_CONNECTION_ID);
+    }
+
+    public VpnNotification getVpnRevokeNotification() {
+        return new VpnNotification(getPermissionsRevokeNotification().build(),
+                VPN_NOTIFICATION_REVOKE_ID);
     }
 
     /**
@@ -76,7 +90,8 @@ public class VpnNotificationManager {
         CharSequence dateString = DateFormat.format("MM-dd hh:mm:ss", scheduledMaintenance);
         String title = context.getString(R.string.notification_scheduled_maintenance_title);
         String actionSwitch = context.getString(R.string.notification_scheduled_maintenance_switch_servers);
-        String content = context.getString(R.string.notification_scheduled_maintenance_content, dateString);
+        String content = context.getString(
+                R.string.notification_scheduled_maintenance_content, dateString);
 
         NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle()
                 .setBigContentTitle(title)
@@ -106,7 +121,7 @@ public class VpnNotificationManager {
     /**
      * Create a new instance of the connection notification.
      */
-    public NotificationCompat.Builder getBaseConnectionNotification() {
+    private NotificationCompat.Builder getBaseConnectionNotification() {
         final String disconnect = context.getString(R.string.notification_vpn_action_disconnect);
 
         return new NotificationCompat.Builder(context, VPN_NOTIFICATION_CONNECTION_CHANNEL)
@@ -119,6 +134,20 @@ public class VpnNotificationManager {
                 .setUsesChronometer(true)
                 .setShowWhen(true)
                 .addAction(0, disconnect, getPendingDisconnectIntent());
+    }
+
+    private NotificationCompat.Builder getPermissionsRevokeNotification() {
+        String title = context.getString(R.string.notification_vpn_connection_revoke_title);
+        String content = context.getString(R.string.notification_vpn_connection_revoke_content);
+
+        return new NotificationCompat.Builder(context, VPN_NOTIFICATION_CONNECTION_CHANNEL)
+                .setContentTitle(title)
+                .setContentText(content)
+                .setLocalOnly(false)
+                .setSmallIcon(R.drawable.ic_logo)
+                .setLargeIcon(bitmapIconLarge)
+                .setVisibility(VISIBILITY_SECRET)
+                .setContentIntent(getPendingOpenAppIntent());
     }
 
     /**
@@ -135,11 +164,9 @@ public class VpnNotificationManager {
      *
      * @param connectionTitleRes String res for the connection title
      * @param vpnConnectionInfo  connection info containing city and country
-     * @param vpnDataUsage       data usage with byte transferred information
      */
     public void updateConnectionNotification(@StringRes int connectionTitleRes,
-                                             VpnConnectionInfo vpnConnectionInfo,
-                                             VpnDataUsage vpnDataUsage) {
+                                             VpnConnectionInfo vpnConnectionInfo) {
         if (notificationBuilder == null) {
             notificationBuilder = getBaseConnectionNotification();
         }
@@ -151,7 +178,6 @@ public class VpnNotificationManager {
         );
 
         notificationBuilder.setContentTitle(notificationTitle)
-                .setContentText(getNotificationContent(vpnDataUsage))
                 .setWhen(ConsumerVpnApplication.getVpnSdk()
                         .getConnectedDate()
                         .getTime());

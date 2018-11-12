@@ -78,7 +78,30 @@
         </item>
     </style>
 
+    <!-- Login -->
+    <style name="WlVPNLoginInputIcon">
+        <item name="android:layout_width">@dimen/login_input_icon_width_height</item>
+        <item name="android:layout_height">@dimen/login_input_icon_width_height</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginStart">@dimen/login_start_end_margin</item>
+        <item name="android:layout_marginLeft">@dimen/login_start_end_margin</item>
+        <item name="android:layout_marginTop">@dimen/login_input_top_bottom_margin</item>
+    </style>
+
+    <style name="WLVPNLoginInput" parent="WLVPNEditTextStyle">
+        <item name="android:layout_width">@dimen/ui_zero</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginStart">@dimen/login_input_icon_separation</item>
+        <item name="android:layout_marginLeft">@dimen/login_input_icon_separation</item>
+        <item name="android:layout_marginTop">@dimen/login_input_top_bottom_margin</item>
+        <item name="android:layout_marginEnd">@dimen/login_start_end_margin</item>
+        <item name="android:layout_marginRight">@dimen/login_start_end_margin</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
+
     <!-- Text Themes -->
+
     <style name="WLVPNEditTextStyle" parent="Widget.AppCompat.EditText">
         <item name="colorControlNormal">@color/control_color</item>
         <item name="colorControlActivated">@color/control_highlight_color</item>
@@ -86,7 +109,6 @@
         <item name="android:textColorHint">@color/control_color</item>
         <item name="android:textColor">@color/color_secondary_text</item>
         <item name="android:textColorPrimary">@color/color_secondary_text</item>
-        <item name="android:paddingBottom">16dp</item>
     </style>
 
     <style name="WLVPNTextViewLarge" parent="@android:style/TextAppearance.Large">
