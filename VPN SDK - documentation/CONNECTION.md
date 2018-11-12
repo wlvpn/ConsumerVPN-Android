@@ -45,25 +45,29 @@ Class: [com.gentlebreeze.vpn.sdk.model.VpnPop][3]
 
 Class: [com.gentlebreeze.vpn.sdk.model.VpnServer][4]
 
-1. `ICallback<Boolean> connect(vpnNotification, vpnConnectionConfiguration)`
+1. `ICallback<Boolean> connect(vpnNotification, vpnRevokedNotification, vpnConnectionConfiguration)`
     - Simple vpn connection with a notification tile. Requires previous call of `fetchGeoInfo` 
     to work as a `Best Location` connection. See [IP Geolocation - fetchGeoInfo][6]
         - **`vpnNotification`**: `VpnNotification` Notification model builder helper to attached a persistent notification
+        - **`vpnRevokedNotification`**: `VpnNotification` Notification model builder to show a notification when the system revokes the permission for the VPN to run
         - **`vpnConnectionConfiguration`**: `VpnConnectionConfiguration` is a helper model object to set the desire configuration to run our vpn
-2. `ICallback<Boolean> connect(countryCode, vpnNotification, vpnConnectionConfiguration)`
+2. `ICallback<Boolean> connect(countryCode, vpnNotification, vpnRevokedNotification, vpnConnectionConfiguration)`
     - Connects to a VPN using the desire unique country code to restrict into a country location
         - **`countryCode`**: The unique identifier code for countries
         - **`vpnNotification`**: `VpnNotification` Notification model builder helper to attached a persistent notification
+        - **`vpnRevokedNotification`**: `VpnNotification` Notification model builder to show a notification when the system revokes the permission for the VPN to run
         - **`vpnConnectionConfiguration`**: `VpnConnectionConfiguration` is a helper model object to set the desire configuration to run our vpn                                 
-3. `ICallback<Boolean> connect(vpnPop, vpnNotification, vpnConnectionConfiguration)`
+3. `ICallback<Boolean> connect(vpnPop, vpnNotification, vpnRevokedNotification, vpnConnectionConfiguration)`
     - Connects to a VPN restricted to a desire city location using a VPN Pop
         - **`vpnPop`**: The desire city VPN Pop to make our connection
         - **`vpnNotification`**: `VpnNotification` Notification model builder helper to attached a persistent notification
+        - **`vpnRevokedNotification`**: `VpnNotification` Notification model builder to show a notification when the system revokes the permission for the VPN to run
         - **`vpnConnectionConfiguration`**: `VpnConnectionConfiguration` is a helper model object 
-4. `ICallback<Boolean> connect(vpnServer, vpnNotification, vpnConnectionConfiguration)`
+4. `ICallback<Boolean> connect(vpnServer, vpnNotification, vpnRevokedNotification, vpnConnectionConfiguration)`
     - Connects to a VPN restricted to an specific server
         - **`vpnServer`**: The desire VPN Server to make our connection
         - **`vpnNotification`**: `VpnNotification` Notification model builder helper to attached a persistent notification
+        - **`vpnRevokedNotification`**: `VpnNotification` Notification model builder to show a notification when the system revokes the permission for the VPN to run
         - **`vpnConnectionConfiguration`**: `VpnConnectionConfiguration` is a helper model object 
  5. `ICallback<Boolean> disconnect()`
     - Will disconnect a current vpn connection
@@ -106,7 +110,8 @@ public class MainActivity extends AppCompatActivity
     
     // Setup yor activity controls and interactions
     
-    public final static int NOTIFICATION_ID = 1;
+    public final static int NOTIFICATION_ID_VPN_STATUS = 1;
+    public final static int NOTIFICATION_ID_VPN_REVOKED = 2;
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -126,12 +131,16 @@ public class MainActivity extends AppCompatActivity
         try {
             if (MyApplication.getVpnSdk().isVpnServicePrepared()) {
 
-                VpnNotification notification = new VpnNotification(
-                        getBaseConnectionNotification().build(), NOTIFICATION_ID);
+                VpnNotification notificationVpnStatus = new VpnNotification(
+                        getBaseConnectionNotification().build(), NOTIFICATION_ID_VPN_STATUS);
+                
+                VpnNotification notificationVpnRevoked = new VpnNotification(
+                        getVpnRevokedNotification().build(), NOTIFICATION_ID_VPN_REVOKED);
 
                 MyApplication.getVpnSdk().connect(
                         vpnPop,
-                        notification,
+                        notificationVpnStatus,
+                        notificationVpnRevoked,
                         getVpnConnectionConfiguration()
                 ).subscribe(null, throwable -> {
                     // Handle any error on vpn connect failure
@@ -164,6 +173,20 @@ public class MainActivity extends AppCompatActivity
                 .setShowWhen(true)
                 .addAction(0, "Disconnect", getPendingDisconnectIntent());
     }
+    
+     public NotificationCompat.Builder getVpnRevokedNotification() {
+            
+            Bitmap bitmapIconLarge = BitmapFactory.decodeResource(
+                    getApplicationContext().getResources(), R.drawable.ic_logo);
+            
+            return new NotificationCompat.Builder(getApplicationContext(),
+                    "VpnNotificationChannel")
+                    .setOngoing(false)
+                    .setSmallIcon(R.drawable.ic_app_notification)
+                    .setLargeIcon(bitmapIconLarge)
+                    .setContentTitle("VPN Revoked")
+                    .setContentText("The system revoked the VPN permission");
+        }
     
     private VpnConnectionConfiguration getVpnConnectionConfiguration() {
         VpnAuthInfo vpnAuthInfo = MyApplication.getVpnSdk().getAuthInfo();
@@ -261,6 +284,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     .setShowWhen(true)
                     .addAction(0, "Disconnect", pendingDisconnectIntent)
         }
+     
+     val vpnRevokedNotificationBuilder: NotificationCompat.Builder
+             get() {
+                 val bitmapIconLarge = BitmapFactory.decodeResource(
+                         applicationContext.resources, R.drawable.ic_logo)
+     
+                 return NotificationCompat.Builder(applicationContext,
+                         "VpnNotificationChannel")
+                         .setSmallIcon(R.drawable.ic_app_notification)
+                         .setLargeIcon(bitmapIconLarge)
+                         .setContentTitle("VPN Revoked")
+                         .setContentText("The system revoked the VPN permission")
+             }    
+      
     
     val vpnConnectionConfiguration: VpnConnectionConfiguration
         get() {
@@ -317,11 +354,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             if (MyApplication.vpnSdk!!.isVpnServicePrepared()) {
 
                 val notification = VpnNotification(
-                        baseConnectionNotification.build(), NOTIFICATION_ID)
+                        baseConnectionNotification.build(), NOTIFICATION_ID_VPN_STATUS)
+                        
+                val notificationVpnRevoked = VpnNotification(
+                        vpnRevokedNotificationBuilder.build(), NOTIFICATION_ID_VPN_REVOKED)
 
                 MyApplication.vpnSdk!!.connect(
                         vpnPop,
                         notification,
+                        notificationVpnRevoked,
                         vpnConnectionConfiguration
                 ).subscribe(null, { throwable ->
                     // Handle any error on vpn connect failure
@@ -370,14 +411,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
     
     companion object {
-        val NOTIFICATION_ID = 1
+        val NOTIFICATION_ID_VPN_STATUS = 1
+        val NOTIFICATION_ID_VPN_REVOKED = 2
     }
 }
 ```
-
-## Disclaimer
-
-This is not an official Google product. 
 
 [1]: javadoc/sdk/com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html
 [2]: javadoc/sdk/com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html

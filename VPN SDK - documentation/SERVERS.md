@@ -59,6 +59,15 @@ To Initialize use `SortServerOption` and `SortOrder` values
     - This method will obtain all available servers from a certain pop sorted and ordered 
         - **`pop`**: `VpnPop` model object to filter it's servers
         - **`sortServer`**: `SortServer` object model to define how the list will be sorted and ordered
+5. `ICallback<List<VpnServer>> fetchAllServersByCountryCode(countryCode)`
+    - This method will obtain all available servers from a certain country
+        - **`countryCode`**: `String` Two letter ISO country code eg. (us, mx)
+6. `ICallback<List<VpnServer>> fetchAllServersByCountryCode(countryCode, sortServer)`
+    - This method will obtain all available servers from a certain country sorted and ordered
+        - **`countryCode`**: `String` Two letter ISO country code eg. (us, mx)
+        - **`sortServer`**: `SortServer` object model to define how the list will be sorted and ordered
+
+
 
 All callbacks returning will return:
 - **`OnNext`**: A List of `VpnServer`

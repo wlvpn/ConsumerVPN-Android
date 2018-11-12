@@ -1,8 +1,44 @@
 # CHANGELOG
 
+## v1.5.3 
+
+### Breaking Changes
+
+* Connections to the VPN now require a new argument `vpnRevokedNotification`.
+This notification will be shown whenever the system revokes the permission for the
+VPN to keep running.It is only shown when the VPN is connected and the system revokes
+necessary permissions
+    ```kotlin
+    ICallback<Boolean> connect(vpnNotification, vpnRevokedNotification, vpnConnectionConfiguration)
+    ```
+
+### Feature
+
+* Added blocking thread capabilities to `ICallback` class
+    ```kotlin
+    fun blockCurrentThread()
+    ```
+
+* The `VpnPop -> country` parameter will be stored in English
+instead of using the device `Locale`. To update the internal database use:
+    ```kotlin
+    fun updateServerList()
+    ```
+
+* Added two new fetch calls to retrieve all servers filtered by
+country code `fetchAllServersByCountryCode`.
+
+    ```kotlin
+    fun fetchAllServersByCountryCode(countryCode:String): ICallback<List<VpnServer>>
+
+    fun fetchAllServersByCountryCode(countryCode:String): ICallback<List<VpnServer>>
+    ```
+
+* The IDE will now show available docs in autocomplete window. eg. (Android Studio)
+
 ## v1.5.2
 
-## Feature
+### Feature
 
 New argument to override the MTU value when the user is on a mobile connection.
 
@@ -11,17 +47,17 @@ For some IPv6 only networks is necessary to override the MTU value to 1280
  VPNConnectionConfiguration was added  `.shouldOverrideMobileMtu(true);` to
  add that behavior
 
-```Java 
-    VpnConnectionConfiguration.Builder(
-        credentials.getUsername(),
-        credentials.getPassword()).
-        .shouldOverrideMobileMtu(true);
+```java
+VpnConnectionConfiguration.Builder(
+    credentials.getUsername(),
+    credentials.getPassword())
+    .shouldOverrideMobileMtu(true);
 ```
 
 
 ## v1.5.1
 
-## Feature
+### Feature
 
 The VPN initialization callback is now supported in Fragment's `startActivityForResult` 
 
@@ -30,7 +66,7 @@ Introduction of Split tunneling per application and discovery accessibility of t
 
 Introduction of Builder pattern for the VPN configuration
 
-    ```Java
+```java
     VpnConnectionConfiguration.Builder(
                         credentials.getUsername(),
                         credentials.getPassword())
@@ -40,7 +76,7 @@ Introduction of Builder pattern for the VPN configuration
                 .scrambleOn(false)
                 .port(VpnPortOptions.PORT_443)
                 .build();
-                ```
+```
                 
 ### Bug Fixes
 * Fixed empty Observable for logout.subscribe(), the callback is executed after the logout is made. 
@@ -58,7 +94,7 @@ three days prior expiration for renewal.
   
 ## v1.4
 
-##Feature
+### Feature
 
 Added in the long awaited Strongswan integration to the SDK. This will allow for connections
 using the IKEv2/IPSec protocols implemented by Strongswan. This feature can be activated with 
@@ -89,7 +125,7 @@ in the api to support the IKEv2 `remoteId` and `gateway` attributes.
 
 ## v1.3
 
-## Features
+### Features
 
 * Added in debug level configuration option to `VpnConnectionConfiguration` default is level 3 with an available
 range of 0 to 11 with 0 having no logging.
@@ -100,12 +136,12 @@ connected and disconnected behind the scenes.
 * Added in `fetchAvailableVpnPortOptions()` to get the available ports you can make for connections.
 * Fetch calls have been upgraded with sort options. This will add in ORDER BY statements to your queries.
 See the SortPop and SortServer objects for reference. They can be used like so:
-    ```
-    //NAME is table column, ASC is table row order
+    ```kotlin
+    // NAME is table column, ASC is table row order
     fetchAllServers(SortServer(SortServerOption.NAME, SortOrder.ASC))
     ```
 * Added in 3 new Auth helpers:
-    ```
+    ```kotlin
         // Is current stored access token still valid?
         fun isAccessTokenValid(): Boolean
         
@@ -116,7 +152,7 @@ See the SortPop and SortServer objects for reference. They can be used like so:
         fun refreshToken()
     ```
     
-## Bug Fixes
+### Bug Fixes
 
 * Login request will now properly pass along error when the login attempt has failed
 * Fixed an issue where configuration generation sometimes created duplicate options
@@ -129,17 +165,17 @@ See the SortPop and SortServer objects for reference. They can be used like so:
 
 * Added data usage record to the `listenToConnectState` method
 * Added in new method to retrieve information about the connected server:
-    ```
+    ```kotlin
     fetchConnectionInfo() : ICallback<VpnConnectionInfo>
     ```
 * Added in new connect overload method that allows you to connect without selecting
 a server or pop. SDK will use your geolocation to determine best server and pop.
-    ```
+    ```kotlin
     fun connect(notification: VpnNotification,
                              configuration: VpnConnectionConfiguration): ICallback<Boolean>
     ```
 * Added in a new connect overload method that allows you to connect by two letter country code
-    ```
+    ```kotlin
     fun connect(countryCode: String,
                              notification: VpnNotification,
                              configuration: VpnConnectionConfiguration): ICallback<Boolean>
@@ -150,7 +186,7 @@ a server or pop. SDK will use your geolocation to determine best server and pop.
 ### Features
 
 * Added the following fetch calls
-    ```
+    ```kotlin
     fun fetchServerByName(name: String): ICallback<VpnServer>
 
     fun fetchPopByName(name: String): ICallback<VpnPop>

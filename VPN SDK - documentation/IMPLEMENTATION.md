@@ -268,10 +268,6 @@ Helper to receive connection events in your application.
 
 See VPN-SDK'S [Connection listener implementation document][7]
 
-## Disclaimer
-
-This is not an official Google product. 
-
 [1]: SETUP.md
 [2]: LOGIN.md
 [3]: POPS.md

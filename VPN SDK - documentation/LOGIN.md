@@ -124,8 +124,4 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 }
 ```
 
-## Disclaimer
-
-This is not an official Google product. 
-
 [1]: Javadocs/myClass.html
