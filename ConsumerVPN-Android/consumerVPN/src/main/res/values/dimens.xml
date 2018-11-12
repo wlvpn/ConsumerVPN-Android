@@ -17,8 +17,8 @@
     <!-- Material Dimens -->
     <dimen name="default_elevation">4dp</dimen>
     <dimen name="text_view_subtitle_height">48dp</dimen>
-    <dimen name="item_row_height">72dp</dimen>
-    <dimen name="tabs_two_row_height">72dp</dimen>
+    <dimen name="item_row_height">64dp</dimen>
+    <dimen name="tabs_two_row_height">64dp</dimen>
     <dimen name="button_default_height">48dp</dimen>
     <dimen name="button_inset_horizontal_material">4dp</dimen>
     <dimen name="button_inset_vertical_material">6dp</dimen>
@@ -26,13 +26,27 @@
     <dimen name="button_padding_vertical_material">4dp</dimen>
     <dimen name="button_corner_material">2dp</dimen>
 
+    <!-- Login -->
+    <dimen name="login_input_icon_width_height">30dp</dimen>
+    <dimen name="login_input_icon_separation">16dp</dimen>
+    <dimen name="login_input_top_bottom_margin">16dp</dimen>
+    <dimen name="login_start_end_margin">16dp</dimen>
+    <dimen name="login_forgot_top_bottom_padding">16dp</dimen>
+    <dimen name="login_button_top_margin">8dp</dimen>
+
     <!-- Main Screen -->
     <dimen name="main_location_button_height">52dp</dimen>
-
+    <dimen name="main_dot_map_padding">16dp</dimen>
+    <dimen name="main_connected_layout_top_margin">8dp</dimen>
+    <dimen name="main_connected_path_view_width_height">56dp</dimen>
+    <dimen name="main_dot_map_margin_bottom">0dp</dimen>
+    <dimen name="main_slider_location_margin_bottom">32dp</dimen>
+    <dimen name="main_slider_tab_min_width">0dp</dimen>
 
     <!-- location item list -->
     <dimen name="location_list_item_width_height">40dp</dimen>
     <dimen name="location_list_item_icon_margin">16dp</dimen>
     <dimen name="location_list_item_text_left_margin">32dp</dimen>
     <dimen name="location_list_item_text_right_margin">16dp</dimen>
+
 </resources>

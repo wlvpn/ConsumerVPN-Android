@@ -9,7 +9,7 @@
         android:id="@+id/fragment_slider_title_encryption"
         android:layout_width="@dimen/ui_zero"
         android:layout_height="@dimen/text_view_subtitle_height"
-        android:layout_marginTop="@dimen/activity_small_spacing"
+        android:layout_marginTop="@dimen/main_connected_layout_top_margin"
         android:gravity="center"
         android:text="@string/slider_choose_encryption"
         android:textColor="@color/color_tertiary_text"
@@ -22,18 +22,16 @@
         android:id="@+id/fragment_slider_tablayout"
         android:layout_width="@dimen/ui_zero"
         android:layout_height="@dimen/tabs_two_row_height"
-        android:layout_marginEnd="@dimen/activity_normal_spacing"
-        android:layout_marginLeft="@dimen/activity_normal_spacing"
-        android:layout_marginRight="@dimen/activity_normal_spacing"
-        android:layout_marginStart="@dimen/activity_normal_spacing"
         android:clickable="false"
         android:nextFocusDown="@+id/fragment_slider_button_location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_slider_title_encryption"
         app:tabGravity="fill"
+        app:tabMinWidth="@dimen/main_slider_tab_min_width"
         app:tabIndicatorColor="@color/color_secondary_background"
         app:tabIndicatorHeight="4dp"
+        app:tabSelectedTextColor="@color/color_primary"
         app:tabMode="fixed" />
 
     <android.support.v7.widget.AppCompatImageView
@@ -42,15 +40,15 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:contentDescription="@string/content_description_dot_map"
-        android:paddingEnd="@dimen/activity_small_normal_spacing"
-        android:paddingLeft="@dimen/activity_small_normal_spacing"
-        android:paddingRight="@dimen/activity_small_normal_spacing"
-        android:paddingStart="@dimen/activity_small_normal_spacing"
+        android:paddingStart="@dimen/main_dot_map_padding"
+        android:paddingLeft="@dimen/main_dot_map_padding"
+        android:paddingEnd="@dimen/main_dot_map_padding"
+        android:paddingRight="@dimen/main_dot_map_padding"
         android:src="@drawable/bg_dotmap"
         app:layout_constraintBottom_toTopOf="@id/fragment_slider_button_location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_slider_tablayout" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_slider_tablayout" />
 
     <com.wlvpn.slider.whitelabelvpn.widget.SliderViewPager
         android:id="@+id/fragment_slider_pager"
@@ -58,26 +56,26 @@
         android:layout_height="@dimen/ui_zero"
         app:layout_constraintBottom_toTopOf="@id/fragment_slider_button_location"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_slider_tablayout" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_slider_tablayout" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/fragment_slider_button_location"
         style="@style/WLVPNButtonTertiary"
         android:layout_height="@dimen/main_location_button_height"
-        android:layout_above="@+id/fragment_slider_button_connect"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/activity_large_spacing"
         android:nextFocusUp="@+id/fragment_slider_tablayout"
-        android:paddingEnd="@dimen/activity_medium_spacing"
-        android:paddingLeft="@dimen/activity_medium_spacing"
-        android:paddingRight="@dimen/activity_medium_spacing"
         android:paddingStart="@dimen/activity_medium_spacing"
+        android:paddingLeft="@dimen/activity_medium_spacing"
+        android:paddingEnd="@dimen/activity_medium_spacing"
+        android:paddingRight="@dimen/activity_medium_spacing"
         android:textSize="@dimen/text_secondary_button"
         android:theme="@style/WLVPNAppTertiaryButtonTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/main_slider_location_margin_bottom"
         tools:text="Location" />
 
 </android.support.constraint.ConstraintLayout>

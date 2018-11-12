@@ -9,7 +9,7 @@
         android:id="@+id/activity_country_list_recycler"
         android:layout_width="@dimen/ui_zero"
         android:layout_height="@dimen/ui_zero"
-        android:background="@drawable/bg_primary_background"
+        android:background="@color/secondary_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

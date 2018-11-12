@@ -41,24 +41,11 @@ class FlagResource(context: Context) {
     }
 
     /**
-     * Retrieve the TV dimen flag for the respective country code.
-     *
-     * @param country country identifier eg. us
-     * @return the country flag resource or 0
-     */
-    @DrawableRes
-    fun forCountryTv(country: String): Int {
-        val countryCodeMapped = cleanCountry(country)
-        val resName = "_flag_tv_$countryCodeMapped"
-        return getResId(resName)
-    }
-
-    /**
      * Clean a country name and apply renaming.
      */
-    internal fun cleanCountry(country: String): String {
+    private fun cleanCountry(country: String): String {
         val countryCodeLC = country.toLowerCase(Locale.ENGLISH)
-        return renames.getOrElse(countryCodeLC, { countryCodeLC })
+        return renames.getOrElse(countryCodeLC) { countryCodeLC }
     }
 
     @DrawableRes

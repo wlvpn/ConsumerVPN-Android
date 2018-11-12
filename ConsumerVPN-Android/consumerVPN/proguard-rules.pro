@@ -1,34 +1,100 @@
+# Internal
+# Models
+-keep class com.wlvpn.slider.whitelabelvpn.models.** { *; }
+-keepclassmembers class com.wlvpn.slider.whitelabelvpn.models.** { *; }
+
+
+# Crashlytics
+-keepattributes *Annotation*
+-keepattributes SourceFile, LineNumberTable, Signature, InnerClasses
+-keep class com.crashlytics.** { *; }
+-dontwarn com.crashlytics.**
+
+#android http
+-dontnote android.net.http.**
+
+#androidsvg
+# SVGImageView
+-keep class com.caverock.androidsvg.**
+-dontwarn com.caverock.androidsvg.**
+-dontwarn com.caverock.androidsvg.SVGImageView
+
+#Apache
+-keep class org.apache.harmony.xnet.provider.jsse.**
+
+# RX Java
+-dontwarn rx.internal.**
+-keep class rx.schedulers.Schedulers {
+    public static <methods>;
+}
+-keep class rx.schedulers.ImmediateScheduler {
+    public <methods>;
+}
+-keep class rx.schedulers.TestScheduler {
+    public <methods>;
+}
+-keep class rx.schedulers.Schedulers {
+    public static ** test();
+}
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+    long producerIndex;
+    long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+
+# Google deps
+-keep class android.support.v7.widget.** { *; }
+-keep class android.support.design.widget.** { *; }
+-dontwarn com.google.common.**
+
+# SLF4J
+-dontwarn org.slf4j.**
+
+#Fabric
+-dontnote io.fabric.sdk.**
+
+##Jackson
+-dontnote com.fasterxml.jackson.**
+
+#Jacoco
+-dontwarn org.jacoco.agent.rt.internal_773e439.**
+
+# LoganSquare
+-keep class com.bluelinelabs.logansquare.** { *; }
+-keep @com.bluelinelabs.logansquare.annotation.JsonObject class *
+-keep class **$$JsonObjectMapper { *; }
+-dontwarn com.bluelinelabs.logansquare.processor.**
+
+# AutoValue
+-dontwarn javax.lang.**
+-dontwarn javax.tools.**
+-dontwarn javax.annotation.**
+-dontwarn autovalue.shaded.com.**
+-dontwarn com.google.auto.value.**
+
+#okHttp
+-keep class okhttp3.internal.platform.** { *; }
+-dontwarn okhttp3.internal.platform.*
+-dontwarn okio.**
+
+# Kotlin
+-dontwarn kotlin.**
+-dontnote kotlin.**
+
+
+
 # Add project specific ProGuard rules here.
 # By default, the flags in this file are appended to flags specified
 # in /Users/hassan.nazari/Library/Android/sdk/tools/proguard/proguard-android.txt
 # You can edit the include path and order by changing the proguardFiles
 # directive in build.gradle.
 #
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
 
-# Add any project specific keep options here:
-
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
-
-# Keep Butterknife
--keep class butterknife.** { *; }
--keep class **$$ViewBinder { *; }
-
--keepclasseswithmembernames class * {
-    @butterknife.* <fields>;
-}
-
--keepclasseswithmembernames class * {
-    @butterknife.* <methods>;
-}
-
--keepattributes SourceFile, LineNumberTable, Signature, InnerClasses
 -keep class org.apache.http.** { *; }
 -keep class android.net.compatibility.** { *; }
 -keep class android.net.http.** { *; }
@@ -60,15 +126,6 @@
     @retrofit.http.* <methods>;
 }
 
-# Keep Picasso
--keep class com.squareup.picasso.** { *; }
--keepclasseswithmembers class * {
-    @com.squareup.picasso.** *;
-}
--keepclassmembers class * {
-    @com.squareup.picasso.** *;
-}
-
 # Fix the following warning:
 #    "Ignoring InnerClasses attribute for an anonymous inner class %CLASSNAME% that doesn't come
 #     with an associated EnclosingMethod attribute."
@@ -77,21 +134,17 @@
 
 # Ignore warnings
 -dontwarn org.apache.http.**
--dontwarn android.webkit.**
 -dontwarn android.support.v4.app.**
--dontwarn butterknife.internal.**
 -dontwarn com.squareup.okhttp.**
 -dontwarn okio.**
 -dontwarn retrofit.**
 
-# Models
--keep class com.wlvpn.slider.whitelabelvpn.models.** { *; }
--keepclassmembers class com.wlvpn.slider.whitelabelvpn.models.** { *; }
 
 # LoganSquare
 -keep class com.bluelinelabs.logansquare.** { *; }
 -keep @com.bluelinelabs.logansquare.annotation.JsonObject class *
 -keep class **$$JsonObjectMapper { *; }
+-dontwarn com.bluelinelabs.logansquare.processor.**
 
 # AutoValue
 -dontwarn javax.lang.**
@@ -103,31 +156,4 @@
 
 # Kotlin
 -dontwarn kotlin.**
-
-# SVGImageView
--dontwarn com.caverock.androidsvg.SVGImageView
-
-# RX Java
--dontwarn rx.internal.**
--keep class rx.schedulers.Schedulers {
-    public static <methods>;
-}
--keep class rx.schedulers.ImmediateScheduler {
-    public <methods>;
-}
--keep class rx.schedulers.TestScheduler {
-    public <methods>;
-}
--keep class rx.schedulers.Schedulers {
-    public static ** test();
-}
--keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
-    long producerIndex;
-    long consumerIndex;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode producerNode;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode consumerNode;
-}
+-dontnote kotlin.**

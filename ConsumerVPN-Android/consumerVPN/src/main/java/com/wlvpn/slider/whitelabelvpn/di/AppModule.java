@@ -7,79 +7,60 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.preference.PreferenceManager;
 
-import com.gentlebreeze.db.sqlite.DatabaseImpl;
-import com.gentlebreeze.db.sqlite.GetDatabase;
-import com.gentlebreeze.db.sqlite.IDatabase;
-import com.gentlebreeze.db.sqlite.IMigrationEvent;
-import com.gentlebreeze.db.sqlite.MigrationManager;
+import com.evernote.android.job.JobManager;
 import com.gentlebreeze.http.api.ApiAuthRequest;
 import com.gentlebreeze.http.api.AuthRequestExecutorFunction;
 import com.gentlebreeze.http.api.ResponseFunction;
 import com.gentlebreeze.http.connectivity.ConnectivityNetworkStateProvider;
 import com.gentlebreeze.http.connectivity.INetworkStateProvider;
-import com.gentlebreeze.vpn.db.sqlite.tables.FavoriteTable;
-import com.gentlebreeze.vpn.db.sqlite.tables.PingTable;
-import com.gentlebreeze.vpn.db.sqlite.tables.PopTable;
-import com.gentlebreeze.vpn.db.sqlite.tables.ProtocolTable;
-import com.gentlebreeze.vpn.db.sqlite.tables.ServerProtocolTable;
-import com.gentlebreeze.vpn.db.sqlite.tables.ServerStatusTable;
-import com.gentlebreeze.vpn.db.sqlite.tables.ServerTable;
-import com.gentlebreeze.vpn.http.interactor.update.UpdateDatabase;
 import com.wlvpn.slider.whitelabelvpn.BuildConfig;
-import com.wlvpn.slider.whitelabelvpn.ConsumerVpnApplication;
 import com.wlvpn.slider.whitelabelvpn.R;
 import com.wlvpn.slider.whitelabelvpn.adapters.EncryptionPagerAdapter;
 import com.wlvpn.slider.whitelabelvpn.auth.CredentialsManager;
 import com.wlvpn.slider.whitelabelvpn.helpers.ConnectionHelper;
 import com.wlvpn.slider.whitelabelvpn.holders.EncryptionPagerHolder;
+import com.wlvpn.slider.whitelabelvpn.jobs.TokenRefreshJobCreator;
 import com.wlvpn.slider.whitelabelvpn.managers.AccountManager;
+import com.wlvpn.slider.whitelabelvpn.managers.ConnectableManager;
 import com.wlvpn.slider.whitelabelvpn.managers.NavigationManager;
 import com.wlvpn.slider.whitelabelvpn.managers.SettingsManager;
 import com.wlvpn.slider.whitelabelvpn.managers.VpnNotificationManager;
 import com.wlvpn.slider.whitelabelvpn.settings.CipherPref;
+import com.wlvpn.slider.whitelabelvpn.utilities.DeviceUtils;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.OkHttpClient;
 
 @Module
 public class AppModule {
 
-    private Application application;
+    private final Application application;
 
-    public void setApplication(final Application application) {
+    public static final String IS_DEVICE_TV_PROPERTY = "IS_DEVICE_TV_PROPERTY";
+
+    public AppModule(Application application) {
         this.application = application;
     }
 
     @Provides
-    public Context provideContext() {
+    Context provideContext() {
         return application;
     }
 
     @Singleton
     @Provides
-    public SharedPreferences provideSharedPreferences() {
+    SharedPreferences provideSharedPreferences() {
         return PreferenceManager.getDefaultSharedPreferences(application);
     }
 
     @Provides
-    public OkHttpClient getOkHttp() {
-        return new OkHttpClient.Builder()
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .readTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(15, TimeUnit.SECONDS)
-                .build();
-    }
-
-    @Provides
-    public CredentialsManager provideAuthManager(Context context) {
+    CredentialsManager provideAuthManager(Context context) {
         return new CredentialsManager(context);
     }
 
@@ -93,39 +74,6 @@ public class AppModule {
     @Singleton
     NavigationManager provideNavigationProvider() {
         return new NavigationManager();
-    }
-
-    @Provides
-    UpdateDatabase provideUpdateDatabase(UpdateDatabase updateDatabase) {
-        return updateDatabase;
-    }
-
-    @Provides
-    @Singleton
-    IDatabase provideDatabase() {
-        DatabaseImpl database = new DatabaseImpl(
-                ConsumerVpnApplication.DB_NAME,
-                ConsumerVpnApplication.DB_VERSION);
-        database.addTable(new ServerTable());
-        database.addTable(new PopTable());
-        database.addTable(new ProtocolTable());
-        database.addTable(new ServerProtocolTable());
-        database.addTable(new FavoriteTable());
-        database.addTable(new ServerStatusTable());
-        database.addTable(new PingTable());
-        return database;
-    }
-
-    @Provides
-    @Singleton
-    GetDatabase provideGetDatabase(Context context, IDatabase database, MigrationManager migrationManager) {
-        return new GetDatabase(context, database, migrationManager);
-    }
-
-    @Provides
-    MigrationManager provideMigrationManager() {
-        LinkedList<IMigrationEvent> migrationList = new LinkedList<>();
-        return new MigrationManager(migrationList);
     }
 
     @Provides
@@ -164,7 +112,7 @@ public class AppModule {
 
     @Singleton
     @Provides
-    List<EncryptionPagerHolder> providesEncrryptionTabs(SettingsManager settingsManager) {
+    List<EncryptionPagerHolder> providesEncryptionTabs(SettingsManager settingsManager) {
         List<EncryptionPagerHolder> tabsList = new ArrayList<>();
 
         if (BuildConfig.CONNECTION_TABS.get(0)) {
@@ -199,5 +147,32 @@ public class AppModule {
     @Provides
     EncryptionPagerAdapter providesEncryptionAdapter(List<EncryptionPagerHolder> tabsList) {
         return new EncryptionPagerAdapter(tabsList);
+    }
+
+    @Provides
+    @Singleton
+    JobManager provideJobManager(Context context) {
+        return JobManager.create(context);
+    }
+
+    @Provides
+    TokenRefreshJobCreator tokenRefreshJobCreator(JobManager jobManager,
+                                                  CredentialsManager credentialsManager,
+                                                  ConnectableManager connectableManager,
+                                                  SettingsManager settingsManager,
+                                                  AccountManager accountManager) {
+        return new TokenRefreshJobCreator(
+                jobManager,
+                credentialsManager,
+                connectableManager,
+                settingsManager,
+                accountManager);
+    }
+
+    @Provides
+    @Singleton
+    @Named(IS_DEVICE_TV_PROPERTY)
+    boolean providesIsDeviceTv(Context context) {
+        return DeviceUtils.isTv(context);
     }
 }

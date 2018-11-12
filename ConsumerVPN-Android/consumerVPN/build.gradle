@@ -1,26 +1,27 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply from: '../config/quality.gradle'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 1
+        versionCode Integer.valueOf(System.getenv("CI_JOB_ID") ?: "0")
         versionName version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField 'String', 'CLIENT', "\"Android-${versionName}b${versionCode}\""
         buildConfigField 'String', 'BASE_HOSTNAME', '"wlvpn.com"'
         buildConfigField 'String', 'AUTH_SUFFIX', '""'
-        buildConfigField 'String', 'PROTOCOL_LIST_API', '"/protocols"'
-        buildConfigField 'String', 'LOGIN_API', '"/login"'
-        buildConfigField 'String', 'REFRESH_API', '"/refresh"'
-        buildConfigField 'String', 'SERVER_LIST_API', '"/servers"'
-        buildConfigField 'String', 'IP_GEO', '"https://ipgeo.wlvpn.com/v2?apikey=2be8ad421fbf11e4925c87fe8e914288"'
+        buildConfigField 'String', 'PROTOCOL_LIST_API', '"protocols"'
+        buildConfigField 'String', 'LOGIN_API', '"login"'
+        buildConfigField 'String', 'REFRESH_API', '"login"'
+        buildConfigField 'String', 'SERVER_LIST_API', '"servers"'
+        buildConfigField 'String', 'IP_GEO', '"https://ipgeo.wlvpn.com/v2?apikey=YOUR_API_KEY"'
         buildConfigField 'String', 'CONFIGURATION_URL', '""'
         buildConfigField 'String', 'CERTIFICATE_URL', '""'
 
@@ -57,12 +58,15 @@ android {
     buildTypes {
         debug {
             buildConfigField 'String', 'ENDPOINT', '"https://api.wlvpn.com/v3%s"'
+            debuggable true
         }
 
         release {
+            debuggable false
+            shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField 'String', 'ENDPOINT', '"https://api.wlvpn.com/v3%s"'
+            buildConfigField 'String', 'ENDPOINT', '"https://api.wlvpn.com/v3/%s"'
             signingConfig null
         }
     }
@@ -84,18 +88,17 @@ dependencies {
     def androidConstraint = "1.1.3"
     def androidMultiDex = "1.0.3"
     def dagger = "2.11"
-    def rxjava = "1.3.2"
+    def rxjava = "1.3.8"
     def rxAndroid = "1.2.1"
     def timber = "4.7.1"
-    def okhttp = "3.9.0"
+    def okhttp = "3.11.0"
     def commonsIO = "2.5"
-    def loganSquare = "1.3.6"
     def rxBinding = "0.4.0"
     def autoValue = "1.2"
     def androidJob = "1.2.6"
     def pathView = "1.0.8@aar"
     def calligraphy = "2.3.0"
-    def vpnSdk = "1.5.2.27766@aar"
+    def vpnSdk = "1.5.3.30370@aar"
 
     //Testing
     testImplementation "junit:junit:$junit"
@@ -106,13 +109,16 @@ dependencies {
         transitive = true
     }
 
+    //Leak Canary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
+
     //Android
     implementation "com.android.support:support-annotations:$androidSupportLibs"
     implementation "com.android.support:design:$androidSupportLibs"
     implementation "com.android.support:appcompat-v7:$androidSupportLibs"
     implementation "com.android.support:customtabs:$androidSupportLibs"
     implementation "com.android.support:recyclerview-v7:$androidSupportLibs"
-    implementation "com.android.support:percent:$androidSupportLibs"
     implementation "com.android.support:multidex:$androidMultiDex"
     implementation "com.android.support.constraint:constraint-layout:$androidConstraint"
 
@@ -124,20 +130,14 @@ dependencies {
     implementation "io.reactivex:rxjava:$rxjava"
     implementation "io.reactivex:rxandroid:$rxAndroid"
     implementation "com.google.dagger:dagger:$dagger"
-    implementation "com.bluelinelabs:logansquare:$loganSquare"
     implementation "com.jakewharton.rxbinding:rxbinding:$rxBinding"
     implementation "com.jakewharton.rxbinding:rxbinding-appcompat-v7:$rxBinding"
     implementation "com.evernote:android-job:$androidJob"
     implementation "com.eftimoff:android-pathview:$pathView"
     implementation "uk.co.chrisjenx:calligraphy:$calligraphy"
-    implementation "com.google.auto.value:auto-value:$autoValue"
 
     //Annotation processing
-    annotationProcessor "com.google.auto.value:auto-value:$autoValue"
-    kapt "com.google.auto.value:auto-value:$autoValue"
     kapt "com.google.dagger:dagger-compiler:$dagger"
-    kapt "com.bluelinelabs:logansquare-compiler:$loganSquare"
 
     implementation project(':flags')
-
 }

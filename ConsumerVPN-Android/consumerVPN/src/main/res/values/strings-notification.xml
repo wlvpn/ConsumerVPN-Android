@@ -7,6 +7,10 @@
     <string name="notification_vpn_connected_title">Connected to %1$s, %2$s</string>
     <string name="notification_vpn_action_disconnect">Disconnect</string>
 
+    <string name="notification_vpn_connection_revoke_channel_title">VPN Permission Revoke</string>
+    <string name="notification_vpn_connection_revoke_title">VPN Permissions Revoked</string>
+    <string name="notification_vpn_connection_revoke_content">The app permissions to connect the VPN where revoke by another app</string>
+
     <string name="notification_insecure_wifi_title">Insecure Network</string>
     <string name="notification_insecure_wifi_content">Connected Wi-Fi network may be insecure. Protect your connection with %1$s</string>
 
