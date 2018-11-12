@@ -1,5 +1,6 @@
 package com.wlvpn.slider.whitelabelvpn.activities;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -115,8 +116,11 @@ public class PopListActivity
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         DividerItemDecoration divider =
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
-        divider.setDrawable(ContextCompat.getDrawable(getBaseContext(), R.drawable.row_divider));
-        recyclerView.addItemDecoration(divider);
+        Drawable drawable = ContextCompat.getDrawable(getBaseContext(), R.drawable.row_divider);
+        if (drawable != null) {
+            divider.setDrawable(drawable);
+            recyclerView.addItemDecoration(divider);
+        }
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
     }

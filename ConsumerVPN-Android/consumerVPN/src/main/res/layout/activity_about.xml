@@ -41,6 +41,7 @@
         android:clickable="true"
         android:linksClickable="true"
         android:text="@string/app_homepage"
-        android:textColorLink="@color/color_primary_text" />
+        android:textColorLink="@color/color_primary_text"
+        android:focusable="true" />
 
 </LinearLayout>

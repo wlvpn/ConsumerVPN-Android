@@ -4,28 +4,28 @@
     <!-- Pressed -->
     <item android:state_pressed="true">
         <shape>
-            <solid android:color="@color/button_settings_selected_color" />
+            <solid android:color="@color/location_row_pressed_color" />
         </shape>
     </item>
 
     <!-- Focused -->
     <item android:state_focused="true">
         <shape>
-            <solid android:color="@color/button_settings_selected_color" />
+            <solid android:color="@color/location_row_focused_color" />
         </shape>
     </item>
 
     <!-- Hovered -->
     <item android:state_hovered="true">
         <shape>
-            <solid android:color="@color/button_settings_selected_color" />
+            <solid android:color="@color/location_row_pressed_color" />
         </shape>
     </item>
 
     <!-- Normal -->
     <item>
         <shape>
-            <solid android:color="@android:color/transparent" />
+            <solid android:color="@color/location_row_color" />
         </shape>
     </item>
 

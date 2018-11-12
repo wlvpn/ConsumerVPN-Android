@@ -8,6 +8,7 @@ import android.support.multidex.MultiDex;
 import com.gentlebreeze.vpn.sdk.IVpnSdk;
 import com.gentlebreeze.vpn.sdk.VpnSdk;
 import com.gentlebreeze.vpn.sdk.config.SdkConfig;
+import com.squareup.leakcanary.LeakCanary;
 import com.wlvpn.slider.whitelabelvpn.di.AppComponent;
 import com.wlvpn.slider.whitelabelvpn.di.AppModule;
 import com.wlvpn.slider.whitelabelvpn.di.DaggerAppComponent;
@@ -20,15 +21,9 @@ public class ConsumerVpnApplication extends Application {
 
     private static IVpnSdk vpnSdk;
 
-    public static final String DB_NAME = "wlvpn.db";
-    public static final int DB_VERSION = 1;
+    private static AppModule APP_MODULE;
 
-    @SuppressWarnings("all")//don't tell me what to do
-    private static final AppModule APP_MODULE = new AppModule();
-
-    private static final AppComponent COMPONENT = DaggerAppComponent.builder()
-            .appModule(APP_MODULE)
-            .build();
+    private static AppComponent COMPONENT;
 
     public static AppComponent component() {
         return COMPONENT;
@@ -37,6 +32,12 @@ public class ConsumerVpnApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+
+        LeakCanary.install(this);
 
         if (BuildConfig.DEBUG) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -49,10 +50,12 @@ public class ConsumerVpnApplication extends Application {
                     .penaltyLog()
                     .build());
         }
-        AppModule appModule = new AppModule();
-        appModule.setApplication(this);
 
-        APP_MODULE.setApplication(this);
+        APP_MODULE = new AppModule(this);
+
+        COMPONENT = DaggerAppComponent.builder()
+                .appModule(APP_MODULE)
+                .build();
 
         COMPONENT.inject(this);
 

@@ -19,16 +19,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.evernote.android.job.JobManager;
+import com.gentlebreeze.vpn.http.api.error.LoginErrorThrowable;
 import com.gentlebreeze.vpn.sdk.callback.ICallback;
 import com.gentlebreeze.vpn.sdk.model.VpnConnectionInfo;
-import com.gentlebreeze.vpn.sdk.model.VpnDataUsage;
 import com.gentlebreeze.vpn.sdk.model.VpnGeoData;
 import com.gentlebreeze.vpn.sdk.model.VpnState;
 import com.jakewharton.rxbinding.view.RxView;
 import com.wlvpn.slider.whitelabelvpn.ConsumerVpnApplication;
 import com.wlvpn.slider.whitelabelvpn.R;
+import com.wlvpn.slider.whitelabelvpn.auth.Credentials;
+import com.wlvpn.slider.whitelabelvpn.auth.CredentialsManager;
 import com.wlvpn.slider.whitelabelvpn.helpers.ConnectionHelper;
 import com.wlvpn.slider.whitelabelvpn.helpers.PreferencesHelper;
+import com.wlvpn.slider.whitelabelvpn.jobs.TokenRefreshJob;
+import com.wlvpn.slider.whitelabelvpn.jobs.TokenRefreshJobCreator;
 import com.wlvpn.slider.whitelabelvpn.layouts.ConnectedLayout;
 import com.wlvpn.slider.whitelabelvpn.layouts.ConnectingLayout;
 import com.wlvpn.slider.whitelabelvpn.layouts.SliderLayout;
@@ -37,6 +42,7 @@ import com.wlvpn.slider.whitelabelvpn.managers.ConnectableManager;
 import com.wlvpn.slider.whitelabelvpn.managers.NavigationManager;
 import com.wlvpn.slider.whitelabelvpn.managers.SettingsManager;
 import com.wlvpn.slider.whitelabelvpn.managers.VpnNotificationManager;
+import com.wlvpn.slider.whitelabelvpn.models.ApiErrorCodes;
 import com.wlvpn.slider.whitelabelvpn.settings.ConnectionStartupPref;
 import com.wlvpn.slider.whitelabelvpn.startup.Startup;
 import com.wlvpn.slider.whitelabelvpn.utilities.AnimationUtil;
@@ -56,27 +62,33 @@ public class MainActivity extends BaseActivity {
     private static final int VPN_PREPARE = 1000;
 
     @Inject
-    public ConnectionHelper connectionHelper;
+    ConnectionHelper connectionHelper;
 
     @Inject
-    public SettingsManager settingsManager;
+    SettingsManager settingsManager;
 
     @Inject
-    public AccountManager accountManager;
+    AccountManager accountManager;
 
     @Inject
-    public VpnNotificationManager vpnNotificationManager;
+    VpnNotificationManager vpnNotificationManager;
 
     @Inject
-    public NavigationManager navigationManager;
+    NavigationManager navigationManager;
 
     @Inject
-    public ConnectableManager connectableManager;
+    ConnectableManager connectableManager;
+
+    @Inject
+    CredentialsManager credentialsManager;
+
+    @Inject
+    TokenRefreshJobCreator tokenRefreshJobCreator;
+
+    @Inject
+    JobManager jobManager;
 
     private ICallback<VpnState> callbackState;
-    private ICallback<VpnDataUsage> dataUsageSubscription;
-    private Subscription navigationSubscription;
-
     private ViewGroup mainContainer;
     private Button connectButton;
 
@@ -92,6 +104,11 @@ public class MainActivity extends BaseActivity {
         connectButton = findViewById(R.id.button_connect);
 
         if (accountManager.isUserLoggedIn()) {
+
+            jobManager.addJobCreator(tokenRefreshJobCreator);
+            TokenRefreshJob.schedule(jobManager);
+            refreshToken();
+
             if (ConsumerVpnApplication.getVpnSdk().isConnected()) {
                 presentConnected();
             } else if (isBootLoaded()) {
@@ -116,6 +133,53 @@ public class MainActivity extends BaseActivity {
         initListeners();
     }
 
+    private void refreshToken() {
+        if (!ConsumerVpnApplication.getVpnSdk().isAccessTokenValid()) {
+            ConsumerVpnApplication.getVpnSdk()
+                    .refreshToken()
+                    .subscribe(
+                            vpnLoginResponse -> {
+                                tokenFailLogin();
+                                return Unit.INSTANCE;
+                            },
+                            throwable -> {
+                                Timber.e(throwable, "Error while trying to refresh Token");
+                                tokenFailLogin();
+                                return Unit.INSTANCE;
+                            });
+        }
+    }
+
+    private void tokenFailLogin() {
+        Credentials credentials = credentialsManager.getCredentials();
+        ConsumerVpnApplication.getVpnSdk()
+                .loginWithUsername(credentials.getUsername(), credentials.getPassword())
+                .subscribe(vpnLoginResponse ->
+                                Unit.INSTANCE,
+                        throwable -> {
+                            Timber.e(throwable,
+                                    "The login failed while trying to refresh token");
+                            LoginErrorThrowable loginThrowable =
+                                    (LoginErrorThrowable) throwable;
+                            // When login fails that means user updated
+                            // it's credentials on web the user will be logged out
+                            if (loginThrowable.getResponseCode() ==
+                                    ApiErrorCodes.INVALID_CREDENTIALS) {
+
+                                if (ConsumerVpnApplication.getVpnSdk().isConnected()) {
+                                    ConsumerVpnApplication.getVpnSdk().disconnect();
+                                }
+
+                                Toast.makeText(getApplicationContext(),
+                                        "Your Credentials are no longer valid for ConsumerVPN",
+                                        Toast.LENGTH_LONG).show();
+
+                                logout();
+                            }
+                            return null;
+                        });
+    }
+
     public void initListeners() {
         getMainSubscription().add(RxView.clicks(connectButton)
                 .throttleFirst(CLICK_DELAY, TimeUnit.MILLISECONDS)
@@ -138,8 +202,6 @@ public class MainActivity extends BaseActivity {
     public void onPause() {
         super.onPause();
         callbackState.unsubscribe();
-
-        unregisterDataUsage();
     }
 
     @Override
@@ -203,19 +265,6 @@ public class MainActivity extends BaseActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish(); //Avoid adding main activity to back trace on login activity
-    }
-
-    /**
-     * Vpn service not supported dialog
-     */
-    public void showVpnServiceNotSupportedDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.WLVPNAlertDialogTheme);
-        builder.setMessage(R.string.vpnservice_is_not_supported_on_this_firmware)
-                .setPositiveButton(R.string.disconnect, (dialog, which) -> finish()).create().show();
-    }
-
-    public void shouldStartActivityForResult(Intent intent, int result) {
-        startActivityForResult(intent, result);
     }
 
     public void shouldLaunchActivityWithUri(Uri uri) {
@@ -287,12 +336,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void unregisterDataUsage() {
-        if (dataUsageSubscription != null) {
-            dataUsageSubscription.unsubscribe();
-        }
-    }
-
     private ICallback<VpnState> registerVpnStateListener() {
         return ConsumerVpnApplication.getVpnSdk().listenToConnectState()
                 .onNext(vpnState -> {
@@ -336,7 +379,7 @@ public class MainActivity extends BaseActivity {
         return navigationManager.getLocationObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(location -> presentView(location));
+                .subscribe(this::presentView);
     }
 
     /**
@@ -349,11 +392,17 @@ public class MainActivity extends BaseActivity {
     private void updateNotification(VpnState vpnState) {
         switch (vpnState.getConnectionState()) {
             case VpnState.CONNECTED:
-                dataUsageSubscription = registerDataUsageListener(R.string.notification_vpn_connected_title);
+
+                VpnConnectionInfo vpnConnectionInfo
+                        = ConsumerVpnApplication.getVpnSdk().getConnectionInfo();
+
+                vpnNotificationManager.updateConnectionNotification(
+                        R.string.notification_vpn_connected_title,
+                        vpnConnectionInfo
+                );
                 break;
             default:
                 vpnNotificationManager.cancelNotifications();
-                unregisterDataUsage();
         }
     }
 
@@ -380,6 +429,10 @@ public class MainActivity extends BaseActivity {
     }
 
     public void logout() {
+        if (ConsumerVpnApplication.getVpnSdk().isConnected()) {
+            ConsumerVpnApplication.getVpnSdk().disconnect();
+        }
+
         accountManager.logout();
         settingsManager.clear();
         connectableManager.clear();
@@ -525,23 +578,6 @@ public class MainActivity extends BaseActivity {
         return (dialog, whichButton) -> presentSlider();
     }
 
-    private ICallback<VpnDataUsage> registerDataUsageListener(final @StringRes int notificationTitleRes) {
-        return ConsumerVpnApplication.getVpnSdk().listenToConnectionData()
-                .subscribe(vpnDataUsage -> {
-                    VpnConnectionInfo vpnConnectionInfo
-                            = ConsumerVpnApplication.getVpnSdk().getConnectionInfo();
-                    vpnNotificationManager.updateConnectionNotification(
-                            notificationTitleRes,
-                            vpnConnectionInfo,
-                            vpnDataUsage
-                    );
-                    return Unit.INSTANCE;
-                }, throwable -> {
-                    Timber.e(throwable, "Failed to get data usage");
-                    return Unit.INSTANCE;
-                });
-    }
-
     public void setConnectButtonColor(@DrawableRes int backgroundId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             connectButton.setBackground(
@@ -565,4 +601,5 @@ public class MainActivity extends BaseActivity {
         connectButton.setFocusable(false);
         connectButton.setEnabled(false);
     }
+
 }

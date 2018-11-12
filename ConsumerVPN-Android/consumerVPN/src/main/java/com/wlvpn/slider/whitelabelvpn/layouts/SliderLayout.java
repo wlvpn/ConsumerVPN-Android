@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import kotlin.Unit;
@@ -39,6 +40,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import timber.log.Timber;
 
 import static com.wlvpn.slider.whitelabelvpn.activities.BaseActivity.CLICK_DELAY;
+import static com.wlvpn.slider.whitelabelvpn.di.AppModule.IS_DEVICE_TV_PROPERTY;
 
 public class SliderLayout extends ConstraintLayout {
 
@@ -54,6 +56,10 @@ public class SliderLayout extends ConstraintLayout {
 
     @Inject
     public ConnectableManager connectableManager;
+
+    @Inject
+    @Named(IS_DEVICE_TV_PROPERTY)
+    boolean isTv;
 
 
     private ICallback<VpnState> callbackState;
@@ -84,6 +90,19 @@ public class SliderLayout extends ConstraintLayout {
         initListeners();
 
         viewPager.setAdapter(pagerAdapter);
+
+        if (isTv) {
+            tabLayout.requestFocus();
+            // Since removing the focus on the view doesn't work the easiest way
+            // is to move the focus manually to the next view
+            // This only applies when going from the TabLayout to pager, locations
+            // button moves the focus correctly
+            viewPager.setOnFocusChangeListener((view, hasFocus) -> {
+                if (hasFocus) {
+                    locations.requestFocus();
+                }
+            });
+        }
         setupTabLayout(pagerItems);
 
         setupEncryptionPager();
