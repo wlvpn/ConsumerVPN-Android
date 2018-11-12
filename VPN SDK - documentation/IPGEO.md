@@ -100,8 +100,4 @@ class IPGeoActivity : AppCompatActivity() {
 }
 ```
 
-## Disclaimer
-
-This is not an official Google product. 
-
 [1]: ../docs/javadoc/sdk/com.gentlebreeze.vpn.sdk.model/-vpn-geo-data/index.html

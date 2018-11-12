@@ -81,10 +81,6 @@ For detailed explanation and examples, see VPN-SDK's [Implementation][2]
 
 For all detailed documentation, see [Javadoc][3]
 
-## Disclaimer
-
-This is not an official Google product. 
-
 [1]: SETUP.md
 [2]: IMPLEMENTATION.md
 [3]: ../docs/javadoc/sdk/index.html

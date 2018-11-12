@@ -10,6 +10,7 @@ Before you begin using VPN-SDK, you must setup your project following the next i
 - Java 8 (Optional)
 - Local Gradle (Optional)
 - API Token Access
+- Package Cloud Access Token
 - Android API level 15+ (4.0.3)
 - Android Build Tools 25.0+
 - Project Gradle plugin version 3x
@@ -36,9 +37,9 @@ android {
 
 To download and install Java 8, see Java's [JDK 8 Downloads][2].
 
-### API token to access 
+### Package Cloud access token 
 
-To start out, you will need an API token to access the VPN-SDK package repository.
+To start out, you will need an Package Cloud key token to access the VPN-SDK package repository.
 You can retrieve this from one of the admins of the maven repository. 
 
 #### Add the global API token in your gradle.properties file
