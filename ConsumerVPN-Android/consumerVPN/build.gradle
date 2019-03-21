@@ -9,7 +9,7 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode Integer.valueOf(System.getenv("CI_JOB_ID") ?: "0")
+        versionCode Integer.valueOf(System.getenv("CI_JOB_ID") ?: "1")
         versionName version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -86,18 +86,19 @@ dependencies {
     def androidSupportLibs = "27.1.1"
     def androidConstraint = "1.1.3"
     def androidMultiDex = "1.0.3"
-    def dagger = "2.11"
-    def rxjava = "1.3.8"
+    def dagger = "2.21"
+    def rxJava = "1.3.8"
     def rxAndroid = "1.2.1"
     def timber = "4.7.1"
-    def okhttp = "3.11.0"
     def commonsIO = "2.5"
     def rxBinding = "0.4.0"
-    def autoValue = "1.2"
     def androidJob = "1.2.6"
     def pathView = "1.0.8@aar"
     def calligraphy = "2.3.0"
-    def vpnSdk = "1.5.3.30370@aar"
+    def vpnSdk = "1.5.3.39705@aar"
+    def leakCanary = "1.6.3"
+    def autoValue = "1.6.2"
+    def loganSquare = "1.3.7"
 
     //Testing
     testImplementation "junit:junit:$junit"
@@ -109,8 +110,9 @@ dependencies {
     }
 
     //Leak Canary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanary"
+    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$leakCanary"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanary"
 
     //Android
     implementation "com.android.support:support-annotations:$androidSupportLibs"
@@ -123,10 +125,9 @@ dependencies {
 
     //External
     implementation "com.jakewharton.timber:timber:$timber"
-    implementation "com.squareup.okhttp3:okhttp:$okhttp"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "commons-io:commons-io:$commonsIO"
-    implementation "io.reactivex:rxjava:$rxjava"
+    implementation "io.reactivex:rxjava:$rxJava"
     implementation "io.reactivex:rxandroid:$rxAndroid"
     implementation "com.google.dagger:dagger:$dagger"
     implementation "com.jakewharton.rxbinding:rxbinding:$rxBinding"
@@ -137,6 +138,10 @@ dependencies {
 
     //Annotation processing
     kapt "com.google.dagger:dagger-compiler:$dagger"
+
+    //Annotation processing
+    annotationProcessor "com.bluelinelabs:logansquare-compiler:$loganSquare"
+    annotationProcessor "com.google.auto.value:auto-value:$autoValue"
 
     implementation project(':flags')
 }

@@ -92,4 +92,11 @@
     <!-- Alpha values -->
     <color name="transparent">#00000000</color>
     <color name="dark_80">#CC000000</color>
+
+    <!-- Fragment Dialog AppCompat Light -->
+    <color name="dialog_primary">@color/color_primary</color>
+    <color name="dialog_primary_dark">@color/color_primary_dark</color>
+    <color name="dialog_accent">@color/color_accent</color>
+    <color name="dialog_window_background">@android:color/transparent</color>
+    <color name="dialog_background">@android:color/transparent</color>
 </resources>

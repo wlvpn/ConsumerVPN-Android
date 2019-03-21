@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.preference.PreferenceManager;
 
-import com.evernote.android.job.JobManager;
 import com.gentlebreeze.http.api.ApiAuthRequest;
 import com.gentlebreeze.http.api.AuthRequestExecutorFunction;
 import com.gentlebreeze.http.api.ResponseFunction;
@@ -19,7 +18,7 @@ import com.wlvpn.slider.whitelabelvpn.adapters.EncryptionPagerAdapter;
 import com.wlvpn.slider.whitelabelvpn.auth.CredentialsManager;
 import com.wlvpn.slider.whitelabelvpn.helpers.ConnectionHelper;
 import com.wlvpn.slider.whitelabelvpn.holders.EncryptionPagerHolder;
-import com.wlvpn.slider.whitelabelvpn.jobs.TokenRefreshJobCreator;
+import com.wlvpn.slider.whitelabelvpn.jobs.ConsumerVpnJobCreator;
 import com.wlvpn.slider.whitelabelvpn.managers.AccountManager;
 import com.wlvpn.slider.whitelabelvpn.managers.ConnectableManager;
 import com.wlvpn.slider.whitelabelvpn.managers.NavigationManager;
@@ -150,19 +149,12 @@ public class AppModule {
     }
 
     @Provides
-    @Singleton
-    JobManager provideJobManager(Context context) {
-        return JobManager.create(context);
-    }
+    ConsumerVpnJobCreator providesJobCreator(CredentialsManager credentialsManager,
+                                             ConnectableManager connectableManager,
+                                             SettingsManager settingsManager,
+                                             AccountManager accountManager) {
 
-    @Provides
-    TokenRefreshJobCreator tokenRefreshJobCreator(JobManager jobManager,
-                                                  CredentialsManager credentialsManager,
-                                                  ConnectableManager connectableManager,
-                                                  SettingsManager settingsManager,
-                                                  AccountManager accountManager) {
-        return new TokenRefreshJobCreator(
-                jobManager,
+        return new ConsumerVpnJobCreator(
                 credentialsManager,
                 connectableManager,
                 settingsManager,

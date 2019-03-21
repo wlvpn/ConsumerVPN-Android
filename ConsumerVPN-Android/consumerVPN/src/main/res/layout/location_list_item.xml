@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/ConsumerVPNLocationItem"
+    style="@style/WLVPNLocationItem"
     android:layout_height="@dimen/item_row_height">
 
     <com.wlvpn.slider.whitelabelvpn.widget.CircleImageView

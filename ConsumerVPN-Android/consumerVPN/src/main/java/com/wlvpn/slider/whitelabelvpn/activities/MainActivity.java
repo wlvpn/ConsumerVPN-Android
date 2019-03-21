@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.evernote.android.job.JobManager;
 import com.gentlebreeze.vpn.http.api.error.LoginErrorThrowable;
 import com.gentlebreeze.vpn.sdk.callback.ICallback;
 import com.gentlebreeze.vpn.sdk.model.VpnConnectionInfo;
@@ -30,10 +29,11 @@ import com.wlvpn.slider.whitelabelvpn.ConsumerVpnApplication;
 import com.wlvpn.slider.whitelabelvpn.R;
 import com.wlvpn.slider.whitelabelvpn.auth.Credentials;
 import com.wlvpn.slider.whitelabelvpn.auth.CredentialsManager;
+import com.wlvpn.slider.whitelabelvpn.fragments.VpnPermissionDenialDialogFragment;
 import com.wlvpn.slider.whitelabelvpn.helpers.ConnectionHelper;
 import com.wlvpn.slider.whitelabelvpn.helpers.PreferencesHelper;
+import com.wlvpn.slider.whitelabelvpn.jobs.ServersRefreshJob;
 import com.wlvpn.slider.whitelabelvpn.jobs.TokenRefreshJob;
-import com.wlvpn.slider.whitelabelvpn.jobs.TokenRefreshJobCreator;
 import com.wlvpn.slider.whitelabelvpn.layouts.ConnectedLayout;
 import com.wlvpn.slider.whitelabelvpn.layouts.ConnectingLayout;
 import com.wlvpn.slider.whitelabelvpn.layouts.SliderLayout;
@@ -59,7 +59,10 @@ import timber.log.Timber;
 
 public class MainActivity extends BaseActivity {
 
-    private static final int VPN_PREPARE = 1000;
+    public static final int VPN_PREPARE = 1000;
+
+    private static final String VPN_PREPARE_PERMISSION_DENIED =
+            MainActivity.class.getCanonicalName() + "VPN_PREPARE_PERMISSION_DENIED";
 
     @Inject
     ConnectionHelper connectionHelper;
@@ -82,15 +85,17 @@ public class MainActivity extends BaseActivity {
     @Inject
     CredentialsManager credentialsManager;
 
-    @Inject
-    TokenRefreshJobCreator tokenRefreshJobCreator;
-
-    @Inject
-    JobManager jobManager;
-
     private ICallback<VpnState> callbackState;
     private ViewGroup mainContainer;
     private Button connectButton;
+    private boolean isVpnPermissionDenied;
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(VPN_PREPARE_PERMISSION_DENIED, isVpnPermissionDenied);
+
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -105,8 +110,9 @@ public class MainActivity extends BaseActivity {
 
         if (accountManager.isUserLoggedIn()) {
 
-            jobManager.addJobCreator(tokenRefreshJobCreator);
-            TokenRefreshJob.schedule(jobManager);
+            TokenRefreshJob.schedule();
+            ServersRefreshJob.schedule();
+
             refreshToken();
 
             if (ConsumerVpnApplication.getVpnSdk().isConnected()) {
@@ -116,6 +122,12 @@ public class MainActivity extends BaseActivity {
             } else {
                 presentSlider();
             }
+
+            if (savedInstanceState != null) {
+                isVpnPermissionDenied = savedInstanceState.getBoolean(
+                        VPN_PREPARE_PERMISSION_DENIED, false);
+            }
+
         } else {
             presentLoginView();
         }
@@ -127,35 +139,107 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
+
         callbackState = registerVpnStateListener();
         getMainSubscription().add(registerNavigationListener());
 
         initListeners();
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        // Check if the dialog exists, if exists it will be recover from the fragment manager
+        VpnPermissionDenialDialogFragment vpnPermissionDenialDialog =
+                (VpnPermissionDenialDialogFragment) getSupportFragmentManager()
+                        .findFragmentByTag(VpnPermissionDenialDialogFragment.TAG);
+
+        if (isVpnPermissionDenied) {
+
+            if (vpnPermissionDenialDialog == null) {
+                vpnPermissionDenialDialog = VpnPermissionDenialDialogFragment.newInstance();
+
+                vpnPermissionDenialDialog.show(
+                        getSupportFragmentManager(),
+                        VpnPermissionDenialDialogFragment.TAG);
+            }
+
+            vpnPermissionDenialDialog.setDialogFragmentCallBack(this::startVpnConnection);
+        } else if (vpnPermissionDenialDialog != null) {
+            vpnPermissionDenialDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        callbackState.unsubscribe();
+        callbackState = null;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (requestCode) {
+            case VPN_PREPARE:
+                if (resultCode == RESULT_OK) {
+                    isVpnPermissionDenied = false;
+                    startVpnConnectionTask();
+                } else {
+                    isVpnPermissionDenied = true;
+                    disconnectVpn();
+                }
+                break;
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.activity_main_si_about:
+                launchAboutActivity();
+                break;
+            case R.id.activity_main_si_settings:
+                launchSettingsActivity();
+                break;
+            case R.id.activity_main_si_logout:
+                showLogoutAlert();
+                break;
+        }
+        return true;
+    }
+
     private void refreshToken() {
         if (!ConsumerVpnApplication.getVpnSdk().isAccessTokenValid()) {
             ConsumerVpnApplication.getVpnSdk()
                     .refreshToken()
-                    .subscribe(
-                            vpnLoginResponse -> {
-                                tokenFailLogin();
-                                return Unit.INSTANCE;
-                            },
-                            throwable -> {
-                                Timber.e(throwable, "Error while trying to refresh Token");
-                                tokenFailLogin();
-                                return Unit.INSTANCE;
-                            });
+                    .subscribe(vpnLoginResponse -> {
+                        tokenFailLogin();
+                        return Unit.INSTANCE;
+                    }, throwable -> {
+                        Timber.e(throwable, "Error while trying to refresh Token");
+                        tokenFailLogin();
+                        return Unit.INSTANCE;
+                    });
         }
     }
 
     private void tokenFailLogin() {
         Credentials credentials = credentialsManager.getCredentials();
+
         ConsumerVpnApplication.getVpnSdk()
                 .loginWithUsername(credentials.getUsername(), credentials.getPassword())
-                .subscribe(vpnLoginResponse ->
-                                Unit.INSTANCE,
+                .subscribe(vpnLoginResponse -> Unit.INSTANCE,
                         throwable -> {
                             Timber.e(throwable,
                                     "The login failed while trying to refresh token");
@@ -176,7 +260,7 @@ public class MainActivity extends BaseActivity {
 
                                 logout();
                             }
-                            return null;
+                            return Unit.INSTANCE;
                         });
     }
 
@@ -198,47 +282,6 @@ public class MainActivity extends BaseActivity {
                 }));
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        callbackState.unsubscribe();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK && requestCode == VPN_PREPARE) {
-            startVpnConnectionTask();
-        } else {
-            //Canceled
-            disconnectVpn();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.activity_main_si_about:
-                launchAboutActivity();
-                break;
-            case R.id.activity_main_si_settings:
-                launchSettingsActivity();
-                break;
-            case R.id.activity_main_si_logout:
-                showLogoutAlert();
-                break;
-        }
-        return true;
-    }
-
     public boolean isBootLoaded() {
         return getIntent().getBooleanExtra(Startup.FLAG_INITIAL_BOOT, false);
     }
@@ -247,18 +290,17 @@ public class MainActivity extends BaseActivity {
         Toast.makeText(getApplicationContext(), R.string.login_failed, Toast.LENGTH_LONG).show();
     }
 
-    public void showNoTunDialog(
-            DialogInterface.OnClickListener positiveClickListener,
-            DialogInterface.OnClickListener negativeClickListener) {
+    public void showNoTunDialog(DialogInterface.OnClickListener positiveClickListener,
+                                DialogInterface.OnClickListener negativeClickListener) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.WLVPNAlertDialogTheme);
-        final AlertDialog dialog = builder.setTitle(R.string.no_tun_module_found)
-                .setMessage(R.string.no_tun_module_found_message)
+        new AlertDialog.Builder(this, R.style.WLVPNAlertDialogTheme)
+                .setTitle(R.string.no_tun_module_found)
+                .setMessage(getString(R.string.no_tun_module_found_message,
+                        getString(R.string.app_name)))
                 .setPositiveButton(R.string.no_tun_module_found_install_button, positiveClickListener)
                 .setNegativeButton(R.string.no_tun_module_found_cancel_button, negativeClickListener)
-                .create();
-
-        dialog.show();
+                .create()
+                .show();
     }
 
     public void presentLoginView() {
@@ -324,9 +366,13 @@ public class MainActivity extends BaseActivity {
         mainContainer.addView(nextView, 0);
 
         if (currentView != null) {
-            AnimationUtil.fadeInView(nextView, 500, null);
+            AnimationUtil.fadeInView(nextView,
+                    getResources().getInteger(R.integer.fade_in_time),
+                    null);
 
-            AnimationUtil.fadeOutView(currentView, 400,
+            AnimationUtil.fadeOutView(
+                    currentView,
+                    getResources().getInteger(R.integer.fade_out_time),
                     new AnimationUtil.AnimationListener() {
                         @Override
                         public void onAnimationEnd(View view) {
@@ -345,14 +391,12 @@ public class MainActivity extends BaseActivity {
                     switch (connectionState) {
                         case VpnState.DISCONNECTED:
                             presentSlider();
-                            if (state.contains("auth-failure")
-                                    && state.equals("EXITING")) {
+                            if (state.contains("auth-failure")) {
                                 showLoginFailedToast();
                             } else if (state.equals("NO_TUN")) {
                                 showNoTunDialog(
                                         getPositiveNoTunDialogListener(),
-                                        getNegativeNoTunDialogListener()
-                                );
+                                        getNegativeNoTunDialogListener());
                             }
                             break;
                         case VpnState.CONNECTED:
@@ -459,7 +503,9 @@ public class MainActivity extends BaseActivity {
      */
     private void bootStart() {
         ConnectionStartupPref startupPref = settingsManager.getConnectionStartupPref();
+
         VpnGeoData geoInfo = ConsumerVpnApplication.getVpnSdk().getGeoInfo();
+
         switch (startupPref.getConnectionStartUpPref()) {
             case ConnectionStartupPref.CONNECT_TO_LAST_CONNECTED:
                 String host = connectableManager.getSelectedHost();
@@ -563,7 +609,8 @@ public class MainActivity extends BaseActivity {
         return (dialog, whichButton) -> {
             try {
                 shouldLaunchActivityWithUri(PreferencesHelper.getTunKoMarketURL());
-            } catch (ActivityNotFoundException anfe) {
+            } catch (ActivityNotFoundException ex) {
+                Timber.e(ex);
                 shouldLaunchActivityWithUri(PreferencesHelper.getTunKoMarketWebsiteUrl());
             }
         };

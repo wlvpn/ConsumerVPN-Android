@@ -86,12 +86,9 @@
         <item name="android:background">@drawable/settings_row</item>
     </style>
 
-
-    <style name="ConsumerVPNLocationItem">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/item_row_height</item>
-        <item name="android:background">@drawable/location_row</item>
-        <item name="android:clickable">true</item>
-        <item name="android:focusable">true</item>
+    <style name="WLVPNDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/dialog_accent</item>
+        <item name="colorPrimary">@color/dialog_primary</item>
+        <item name="colorPrimaryDark">@color/dialog_primary_dark</item>
     </style>
 </resources>
