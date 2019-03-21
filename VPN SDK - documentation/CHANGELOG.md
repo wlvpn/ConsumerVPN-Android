@@ -4,6 +4,55 @@
 
 ### Breaking Changes
 
+* [Dagger v2.21][Dagger] is required for this version to work correctly
+
+* Added a new logTag, this new tag is used to override the Log output with any desired suffix
+
+```kotlin
+
+    //Example using a builder
+     SdkConfig = SdkConfig.Builder(
+            BuildConfig.ACCOUNT_NAME,
+            BuildConfig.API_KEY,
+            BuildConfig.AUTH_SUFFIX)
+            .client(BuildConfig.CLIENT)
+            .apiHost(application.getString(R.string.endpoint_main_api))
+            .ipGeoUrl(BuildConfig.IP_GEO)
+            .apiLoginEndpoint(BuildConfig.LOGIN_API)
+            .apiTokenRefreshEndpoint(BuildConfig.REFRESH_API)
+            .apiProtocolListEndpoint(BuildConfig.PROTOCOL_LIST_API)
+            .apiServerListEndpoint(BuildConfig.SERVER_LIST_API)
+            .logTag(MY_LOG_TAG)
+            .build()
+
+    //Example using the default constructor
+    SdkConfig(
+              val accountName: String,
+              override val apiKey: String,
+              val authSuffix: String = accountName,
+              override val client: String = BuildConfig.CLIENT,
+              override val apiHost: String = BuildConfig.ENDPOINT,
+              override val ipGeoUrl: String = BuildConfig.IP_GEO,
+              override val apiLoginEndpoint: String = BuildConfig.LOGIN_API,
+              override val apiTokenRefreshEndpoint: String = BuildConfig.TOKEN_REFRESH_API,
+              override val apiProtocolListEndpoint: String = BuildConfig.PROTOCOL_LIST_API,
+              override val apiServerListEndpoint: String = BuildConfig.SERVER_LIST_API,
+              val logTag: String
+```
+      
+
+* `fetchAvailableVpnPortOptions(vpnProtocolOptions, scrambleEnabled)` was deprecated
+use instead `fetchAvailableVpnPortOptions(vpnProtocolOptions, vpnConnectionProtocolOptions, scrambleEnabled)`
+
+* Permissions will no longer be requested automatically
+    ```xml
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    ```
+
+* Update servers will no longer update protocols only servers
+
 * Connections to the VPN now require a new argument `vpnRevokedNotification`.
 This notification will be shown whenever the system revokes the permission for the
 VPN to keep running.It is only shown when the VPN is connected and the system revokes
@@ -12,7 +61,82 @@ necessary permissions
     ICallback<Boolean> connect(vpnNotification, vpnRevokedNotification, vpnConnectionConfiguration)
     ```
 
+### Bug fixes
+
+* Fix for the Vpn detailed state description not showing
+while listening for the disconnected state
+
+* OpenVpn ports will now fetch ports where the cipher is not null using the new function
+`fetchAvailableVpnPortOptions(vpnProtocolOptions, vpnConnectionProtocolOptions, scrambleEnabled)`
+
+* Fixed VPN notification dismissal after several network changes
+
+* Fixed Pops sorting functionality for search queries, now it prioritize strings starting with the query
+Added the following methods for query search sorting:
+
+```kotlin
+    //Fetch a list of all pops sorted by query in specific order, first by city
+    fetchPopsFirstByCityQuery(query: String, sortPop: SortPop)
+
+    //Fetch a list of all pops sorted by query in specific order, first by country
+    fetchPopsFirstByCountryQuery(query: String, sortPop: SortPop)
+
+    //Fetch a list of all pops by country query, sorted and filtered by city query in specific order
+    fetchPopsByCountryCodeFilterByCityQuery(countryCode: String, query: String, sortPop: SortPop)
+
+    Fetch a list of all pops sorted by country query in specific order
+    fetchPopsByCountryQuery(query: String)
+
+    Fetch a list of all pops filtered by country code, sorted by city query in specific order
+    fetchPopsByCityQuery(countryCode: String, query: String)
+```
+
 ### Feature
+
+* Added a listener for connection state for centralized operations.
+Allows to execute custom centralized operations
+that react to the VPN connection states. For example, it can be used to notify Widgets,
+Quick Tiles Settings or Services. Important: Only use centralized single operations
+otherwise is better to use `listenToConnectState()`
+    ```kotlin
+        listenToCentralizedConnectionState(vpnStateConnectionCallback)
+    ```
+
+* Added fetch available ports with connection settings.
+Replaces `fetchAvailableVpnPortOptions(vpnProtocolOptions, scrambleEnabled)`
+    ``` kotlin
+        fetchAvailableVpnPortOptions(vpnProtocolOptions, vpnConnectionProtocolOptions, scrambleEnabled)
+    ```
+
+* Deprecated `connect(VpnPop)` in replacement of only `connectToNearest(VpnPop)`.
+
+* Deprecated `connect(countryCode)` in replacement of only `connectToNearest(notification)`. Balancing is
+    performed according to saved location in configuration object
+
+* Deprecated `connect(notification)` in replacement of only `connectToNearest(notification)`.
+
+* Added `connectToNearest(VpnPop)` to perform a default server balance, closest to farthest, no country limit
+
+* Added `connectToNearest(notification)` to perform a default server balance, closest to farthest, no country limit
+
+* Added `connectToNearestRestrictedByCountry(VpnPop)` to perform server balance limited to a given country
+
+* Added `connectToNearestRestrictedByCountry(countryCode)` to perform server balance limited to a given country
+
+* Added `connectToNearestRestrictedByCountry(notification)` to perform server balance limited to a given country
+
+
+* Added update protocol and servers call. Replaces `updateServerList`
+
+    ```kotlin
+        fun updateServerProtocolList()
+    ```
+
+* Added update protocol list
+
+    ```kotlin
+        fun updateProtocolList()
+    ```
 
 * Added blocking thread capabilities to `ICallback` class
     ```kotlin
@@ -208,3 +332,5 @@ a server or pop. SDK will use your geolocation to determine best server and pop.
 * Fixed bug where `fetchAllServers()` and `fetchAllServersByPop()` would only return 1 result
 * Fixed the Callback subscribe method so the callbacks are optional in both java and kotlin
 * The SDK `init()` method no longer requires calling the companion object when implementing in java
+
+[Dagger]: https://github.com/google/dagger

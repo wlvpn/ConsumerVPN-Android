@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>VpnSdk.connectToNearestRestrictedByCountry - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk</a>&nbsp;/&nbsp;<a href="index.html">VpnSdk</a>&nbsp;/&nbsp;<a href="./connect-to-nearest-restricted-by-country.html">connectToNearestRestrictedByCountry</a><br/>
+<br/>
+<h1>connectToNearestRestrictedByCountry</h1>
+<a name="com.gentlebreeze.vpn.sdk.VpnSdk$connectToNearestRestrictedByCountry(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)"></a>
+<code><span class="keyword">fun </span><span class="identifier">connectToNearestRestrictedByCountry</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connectToNearestRestrictedByCountry(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/pop">pop</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-pop/index.html"><span class="identifier">VpnPop</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connectToNearestRestrictedByCountry(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connectToNearestRestrictedByCountry(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/vpnRevokedNotification">vpnRevokedNotification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connectToNearestRestrictedByCountry(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html"><span class="identifier">VpnConnectionConfiguration</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Overrides <a href="../-i-vpn-sdk/connect-to-nearest-restricted-by-country.html">IVpnSdk.connectToNearestRestrictedByCountry</a></p>
+<p>Attempt to connect to a server from a given VpnPop if any available,
+after performing a load balance considering maintenance, server capacity and distance
+one will be taken as the best suited for the connection.
+If there is no candidate servers available in the specified VpnPop,
+the nearest one from other VpnPop will be used, expanding the tolerance distance,
+by checking the nearest ones, but never outside the specified VpnPop's country.</p>
+<h3>Parameters</h3>
+<p><a name="pop"></a>
+<code>pop</code> - pop to attempt to connect to</p>
+<p><a name="notification"></a>
+<code>notification</code> - vpn notification</p>
+<p><a name="configuration"></a>
+<code>configuration</code> - Container object containing server,
+    notification configuration, and credentials</p>
+<p><strong>Return</strong><br/>
+callback to establish the connection</p>
+<a name="com.gentlebreeze.vpn.sdk.VpnSdk$connectToNearestRestrictedByCountry(kotlin.String, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)"></a>
+<code><span class="keyword">fun </span><span class="identifier">connectToNearestRestrictedByCountry</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connectToNearestRestrictedByCountry(kotlin.String, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/countryCode">countryCode</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connectToNearestRestrictedByCountry(kotlin.String, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connectToNearestRestrictedByCountry(kotlin.String, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/vpnRevokedNotification">vpnRevokedNotification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connectToNearestRestrictedByCountry(kotlin.String, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html"><span class="identifier">VpnConnectionConfiguration</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Overrides <a href="../-i-vpn-sdk/connect-to-nearest-restricted-by-country.html">IVpnSdk.connectToNearestRestrictedByCountry</a></p>
+<p>Attempt to connect to a server from a given country code if any available,
+after performing a load balance considering maintenance, server capacity and distance
+one will be taken as the best suited for the connection. The nearest VpnPop will be used,
+expanding the tolerance distance, but never outside the specified country.</p>
+<h3>Parameters</h3>
+<p><a name="countryCode"></a>
+<code>countryCode</code> - Two letter ISO country code representation (e.g. US, UK)</p>
+<p><a name="notification"></a>
+<code>notification</code> - vpn notification</p>
+<p><a name="configuration"></a>
+<code>configuration</code> - Container object containing server,
+    notification configuration, and credentials</p>
+<a name="com.gentlebreeze.vpn.sdk.VpnSdk$connectToNearestRestrictedByCountry(com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)"></a>
+<code><span class="keyword">fun </span><span class="identifier">connectToNearestRestrictedByCountry</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connectToNearestRestrictedByCountry(com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connectToNearestRestrictedByCountry(com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/vpnRevokedNotification">vpnRevokedNotification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$connectToNearestRestrictedByCountry(com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html"><span class="identifier">VpnConnectionConfiguration</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Overrides <a href="../-i-vpn-sdk/connect-to-nearest-restricted-by-country.html">IVpnSdk.connectToNearestRestrictedByCountry</a></p>
+<p>Attempt to connect to the best server relative to your geolocation
+with no preference for city, expanding selection no more than
+the country defined by geolocation from the configuration</p>
+<h3>Parameters</h3>
+<p><a name="notification"></a>
+<code>notification</code> - vpn notification</p>
+<p><a name="configuration"></a>
+<code>configuration</code> - Container object containing server,
+    notification configuration, and credentials</p>
+</BODY>
+</HTML>
