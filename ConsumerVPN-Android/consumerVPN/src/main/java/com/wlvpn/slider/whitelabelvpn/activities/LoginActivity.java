@@ -131,6 +131,7 @@ public class LoginActivity
             startActivity(new Intent(Intent.ACTION_VIEW).setData(uri));
         } catch (ActivityNotFoundException e) {
             Timber.e(e);
+            displayMessage(R.string.links_not_supported_message);
         }
     }
 

@@ -3,7 +3,6 @@ package com.wlvpn.slider.whitelabelvpn.jobs;
 import android.support.annotation.NonNull;
 
 import com.evernote.android.job.Job;
-import com.evernote.android.job.JobManager;
 import com.evernote.android.job.JobRequest;
 import com.gentlebreeze.vpn.http.api.error.LoginErrorThrowable;
 import com.wlvpn.slider.whitelabelvpn.BuildConfig;
@@ -23,37 +22,20 @@ import timber.log.Timber;
  */
 public class TokenRefreshJob extends Job {
 
-    private final CredentialsManager credentialsManager;
-    private final AccountManager accountManager;
-    private final SettingsManager settingsManager;
-    private final ConnectableManager connectableManager;
-
     /**
      * Job ID
      */
     static final String JOB_ID = "TokenRefreshJob";
 
-    /**
-     * 30 seconds to 15 min in milliseconds for debug
-     */
-    private static final long THIRTY_SECONDS_IN_MILLISECONDS = 30000L;
-    private static final long FIFTEEN_MINUTE_IN_MILLISECONDS =
-            THIRTY_SECONDS_IN_MILLISECONDS * 30L;
+    private final CredentialsManager credentialsManager;
+    private final AccountManager accountManager;
+    private final SettingsManager settingsManager;
+    private final ConnectableManager connectableManager;
 
-    /**
-     * 1 hours - 24 hours in milliseconds
-     */
-    private static final long ONE_HOUR_IN_MILLISECONDS = 3600000L;
-    private static final long TWENTY_FOUR_HOURS_IN_MILLISECONDS = ONE_HOUR_IN_MILLISECONDS * 24L;
-
-    private final JobManager jobManager;
-
-    TokenRefreshJob(JobManager jobManager,
-                    CredentialsManager credentialsManager,
+    TokenRefreshJob(CredentialsManager credentialsManager,
                     AccountManager accountManager,
                     SettingsManager settingsManager,
                     ConnectableManager connectableManager) {
-        this.jobManager = jobManager;
         this.credentialsManager = credentialsManager;
         this.accountManager = accountManager;
         this.settingsManager = settingsManager;
@@ -61,37 +43,25 @@ public class TokenRefreshJob extends Job {
     }
 
     /**
-     * Schedule the job.
-     *
-     * @param jobManager schedule manager
+     * Schedules the job.
      */
-    public static void schedule(@NonNull JobManager jobManager) {
-        schedule(jobManager, true);
-    }
-
-    /**
-     * Schedule the job.
-     *
-     * @param jobManager    schedule manager
-     * @param updateCurrent if the current job should be replaced
-     */
-    private static void schedule(@NonNull JobManager jobManager,
-                                 boolean updateCurrent) {
+    public static void schedule() {
         //For debug builds use reduced timers and more accepting connection type
         long start = BuildConfig.DEBUG ?
-                FIFTEEN_MINUTE_IN_MILLISECONDS
-                : TWENTY_FOUR_HOURS_IN_MILLISECONDS;
+                ConsumerVpnJobCreator.FIFTEEN_MINUTE_IN_MILLISECONDS
+                : ConsumerVpnJobCreator.TWENTY_FOUR_HOURS_IN_MILLISECONDS;
 
         JobRequest.NetworkType networkType = BuildConfig.DEBUG ?
                 JobRequest.NetworkType.CONNECTED
                 : JobRequest.NetworkType.UNMETERED;
 
-        jobManager.schedule(new JobRequest.Builder(JOB_ID)
+        new JobRequest.Builder(JOB_ID)
                 .setRequiredNetworkType(networkType)
                 .setRequirementsEnforced(true)
                 .setPeriodic(start)
-                .setUpdateCurrent(updateCurrent)
-                .build());
+                .setUpdateCurrent(true)
+                .build()
+                .schedule();
     }
 
     @NonNull

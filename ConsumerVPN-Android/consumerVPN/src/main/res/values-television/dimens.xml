@@ -2,8 +2,8 @@
 <resources>
     <!-- Login -->
     <dimen name="login_start_end_margin">272dp</dimen>
-    <dimen name="login_input_top_bottom_margin">24dp</dimen>
-    <dimen name="login_forgot_top_bottom_padding">24dp</dimen>
+    <dimen name="login_input_top_bottom_margin">20dp</dimen>
+    <dimen name="login_forgot_top_bottom_padding">20dp</dimen>
     <dimen name="main_slider_location_margin_bottom">16dp</dimen>
     <dimen name="main_slider_tab_min_width">144dp</dimen>
 

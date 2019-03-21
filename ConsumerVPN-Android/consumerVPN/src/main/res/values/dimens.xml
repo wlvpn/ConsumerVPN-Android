@@ -32,7 +32,6 @@
     <dimen name="login_input_top_bottom_margin">16dp</dimen>
     <dimen name="login_start_end_margin">16dp</dimen>
     <dimen name="login_forgot_top_bottom_padding">16dp</dimen>
-    <dimen name="login_button_top_margin">8dp</dimen>
 
     <!-- Main Screen -->
     <dimen name="main_location_button_height">52dp</dimen>

@@ -25,15 +25,6 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
-
-    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu">
-        <item name="android:colorBackground">@color/popup_menu_background</item>
-        <item name="android:textColor">@color/popup_menu_text_color</item>
-    </style>
-
     <!-- Connected -->
     <style name="ConnectedImageView">
         <item name="android:layout_width">30dp</item>
@@ -134,10 +125,6 @@
         <item name="android:textColor">@color/color_primary_text</item>
     </style>
 
-    <style name="WLVPNLatencyTextView" parent="@android:style/TextAppearance.Medium">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
 
     <!-- Button Styles && Themes -->
     <style name="WLVPNButton" parent="Widget.AppCompat.Button.Colored">
@@ -218,12 +205,21 @@
         <item name="android:layoutDirection" tools:targetApi="jelly_bean_mr1">rtl</item>
     </style>
 
-    <style name="ConsumerVPNLocationItem">
+    <style name="WLVPNLocationItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/item_row_height</item>
         <item name="android:background">@drawable/location_row</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
+    </style>
+
+    <style name="WLVPNDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/dialog_accent</item>
+        <item name="colorPrimary">@color/dialog_primary</item>
+        <item name="colorPrimaryDark">@color/dialog_primary_dark</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 </resources>
 
