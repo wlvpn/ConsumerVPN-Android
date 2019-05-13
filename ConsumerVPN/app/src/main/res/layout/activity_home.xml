@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.features.home.HomeActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/home_servers_row_flag_elevation">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title="@string/app_name" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            style="@style/TabsLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMaxWidth="@dimen/ui_zero" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <include
+        android:id="@+id/progressContainerHome"
+        layout="@layout/view_loading_progress_overlay"
+        android:visibility="gone" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

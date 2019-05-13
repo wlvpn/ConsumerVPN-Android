@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- region  Material Design Defaults -->
+    <!--  Spacing -->
+    <dimen name="ui_zero">0dp</dimen>
+    <dimen name="spacing_xxsmall">4dp</dimen>
+    <dimen name="spacing_xsmall">8dp</dimen>
+    <dimen name="spacing_small">12dp</dimen>
+    <dimen name="spacing_normal">16dp</dimen>
+    <dimen name="spacing_medium">24dp</dimen>
+    <dimen name="spacing_large">32dp</dimen>
+    <dimen name="spacing_xlarge">40dp</dimen>
+    <dimen name="spacing_xxlarge">48dp</dimen>
+    <dimen name="spacing_xxxlarge">52dp</dimen>
+    <dimen name="spacing_xxxxlarge">56dp</dimen>
+    <dimen name="spacing_wide">64dp</dimen>
+    <dimen name="spacing_xwide">72dp</dimen>
+    <dimen name="spacing_xxwide">80dp</dimen>
+    <!-- Buttons -->
+    <dimen name="button_default_height">@dimen/spacing_xxlarge</dimen>
+    <dimen name="button_large_height">@dimen/spacing_xxxlarge</dimen>
+    <dimen name="button_minimum_clickable_height">48dp</dimen>
+    <!-- Elevation -->
+    <dimen name="default_elevation">@dimen/spacing_xxsmall</dimen>
+    <dimen name="default_divider_height">1dp</dimen>
+    <!-- endregion -->
+
+    <!-- region Base views -->
+    <dimen name="vector_ic_size">@dimen/spacing_medium</dimen>
+
+    <!-- Text sizes -->
+
+    <dimen name="textSmall">12sp</dimen>
+    <dimen name="textRegular">14sp</dimen>
+    <dimen name="textMedium">16sp</dimen>
+    <dimen name="textMediumLarge">18sp</dimen>
+    <dimen name="textLarge">20sp</dimen>
+
+    <!-- Primary button -->
+    <dimen name="primary_button_min_width">260dp</dimen>
+
+    <!-- Edit text -->
+    <dimen name="edit_text_button_min_width">320dp</dimen>
+    <!-- endregion Base views -->
+
+    <!-- region view dimensions -->
+    <!-- Splash -->
+    <dimen name="bg_splash_gradient_radius">450dp</dimen>
+
+    <!-- Loading -->
+    <dimen name="loading_container_elevation">32dp</dimen>
+
+    <!-- Login -->
+    <dimen name="login_img_logo_margin_top">@dimen/spacing_xsmall</dimen>
+    <dimen name="login_edit_password_margin_top">@dimen/spacing_normal</dimen>
+    <dimen name="login_btn_forgot_password_margin_top">@dimen/spacing_xsmall</dimen>
+    <dimen name="login_btn_login_margin_top">@dimen/spacing_xsmall</dimen>
+    <dimen name="login_txt_bottom_title_margin_top">@dimen/spacing_xsmall</dimen>
+    <dimen name="login_btn_sign_up_margin_start">@dimen/spacing_xsmall</dimen>
+    <dimen name="login_btn_sign_up_margin_bottom">@dimen/spacing_xsmall</dimen>
+    <dimen name="login_textinput_user_drawable_padding">@dimen/spacing_small</dimen>
+    <dimen name="login_textinput_password_drawable_padding">@dimen/spacing_small</dimen>
+    <dimen name="login_textinput_password_margin_top">@dimen/spacing_normal</dimen>
+    <dimen name="login_bg_shapes_max_height">280dp</dimen>
+    <!-- endregion view dimensions -->
+
+    <!-- region Home -->
+    <!-- Connection Tab -->
+    <dimen name="home_connection_button_padding_start_end">@dimen/spacing_xxwide</dimen>
+    <dimen name="home_connection_button_margin_bottom">@dimen/spacing_xxlarge</dimen>
+    <dimen name="home_connection_drawable_padding">@dimen/spacing_xsmall</dimen>
+    <dimen name="home_connection_location_text_view_margin_top">@dimen/spacing_xsmall</dimen>
+    <dimen name="home_connection_connecting_anim_width_height">136dp</dimen>
+    <dimen name="home_connection_connecting_dot_map_margin_start_end">@dimen/spacing_xxlarge</dimen>
+    <dimen name="home_connection_button_width">192dp</dimen>
+    <dimen name="home_connection_text_view_location_text_size">@dimen/textMedium</dimen>
+    <dimen name="home_connection_image_view_dot_map_margin_bottom">128dp</dimen>
+    <dimen name="home_connection_icon_location_margin_top">@dimen/spacing_large</dimen>
+    <dimen name="home_connection_linear_location_margin_start">@dimen/spacing_small</dimen>
+    <dimen name="home_connection_text_view_visible_margin_top">@dimen/spacing_small</dimen>
+    <dimen name="home_connection_linear_location_margin_end">@dimen/spacing_xsmall</dimen>
+    <dimen name="home_connection_image_view_dot_map_width_max">384dp</dimen>
+
+    <!-- Servers Tab -->
+    <dimen name="home_servers_recycler_padding_top_bottom">@dimen/spacing_xsmall</dimen>
+    <dimen name="home_servers_row_padding_start_end">@dimen/spacing_medium</dimen>
+    <dimen name="home_servers_row_height">@dimen/spacing_wide</dimen>
+    <dimen name="home_servers_row_flag_size">@dimen/spacing_xxlarge</dimen>
+    <dimen name="home_servers_row_flag_elevation">@dimen/default_elevation</dimen>
+    <dimen name="home_servers_row_space_after_flag">@dimen/spacing_medium</dimen>
+    <!-- Expandable servers tab -->
+    <dimen name="home_servers_row_fastest_padding_top">@dimen/spacing_xxsmall</dimen>
+    <dimen name="home_servers_row_circle_image_view_icon_padding">@dimen/spacing_xxsmall</dimen>
+    <dimen name="home_servers_row_circle_image_view_width_height">@dimen/spacing_xlarge</dimen>
+    <dimen name="home_servers_row_circle_image_view_margin_start">@dimen/spacing_normal</dimen>
+    <dimen name="home_servers_row_circle_image_view_margin_top_bottom">@dimen/spacing_xsmall</dimen>
+    <dimen name="home_servers_row_divider_height">@dimen/default_divider_height</dimen>
+    <dimen name="home_servers_row_divider_margin_start">@dimen/spacing_xwide</dimen>
+    <dimen name="home_servers_row_country_city_text_button_padding_start_end">@dimen/spacing_normal</dimen>
+    <dimen name="home_servers_row_country_text_margin_start_end">@dimen/spacing_normal</dimen>
+    <dimen name="home_servers_row_city_margin_start">@dimen/spacing_xwide</dimen>
+    <dimen name="home_servers_row_city_margin_end">@dimen/spacing_normal</dimen>
+    <dimen name="home_servers_row_city_height">@dimen/spacing_xxxlarge</dimen>
+    <!-- endregion -->
+
+</resources>

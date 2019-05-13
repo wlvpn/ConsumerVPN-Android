@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <integer name="fade_in_time">500</integer>
-    <integer name="fade_out_time">400</integer>
-</resources>

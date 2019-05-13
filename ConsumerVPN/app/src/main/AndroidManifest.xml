@@ -1,0 +1,84 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.wlvpn.consumervpn"
+          tools:ignore="ImpliedTouchscreenHardware,MissingLeanbackLauncher,MissingLeanbackSupport">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+    <application
+            android:name=".presentation.ConsumerApplication"
+            android:allowBackup="false"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
+
+        <activity
+                android:name=".presentation.features.splash.SplashActivity"
+                android:noHistory="true"
+                android:theme="@style/AppTheme.SplashTheme">
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+
+            </intent-filter>
+
+        </activity>
+
+        <activity
+                android:name=".presentation.features.home.HomeActivity"
+                android:theme="@style/AppTheme.HomeTheme"/>
+
+        <activity android:name=".presentation.features.login.LoginActivity"/>
+
+        <activity
+                android:name=".presentation.features.settings.SettingsActivity"
+                android:parentActivityName=".presentation.features.home.HomeActivity"
+                android:theme="@style/AppTheme.Settings">
+
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".presentation.features.home.HomeActivity"/>
+
+        </activity>
+
+        <activity
+                android:name=".presentation.features.about.AboutActivity"
+                android:theme="@style/AppTheme.About"
+                android:parentActivityName=".presentation.features.settings.SettingsActivity"
+                android:label="@string/title_activity_about">
+        </activity>
+
+
+        <receiver
+                android:name="com.wlvpn.consumervpn.data.receivers.VpnReceiver"
+                android:exported="false">
+
+            <intent-filter>
+
+                <action android:name="com.wlvpn.consumervpn.presentation.ACTION_DISCONNECT"/>
+            </intent-filter>
+
+        </receiver>
+
+        <receiver
+            android:enabled="true"
+            android:name=".data.receivers.StartupReceiver"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>

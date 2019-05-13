@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cityName"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/home_servers_row_city_height"
+    android:background="@drawable/bg_row_servers_city_ripple"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical|start"
+    android:paddingStart="@dimen/home_servers_row_city_margin_start"
+    android:paddingEnd="@dimen/home_servers_row_city_margin_end"
+    android:textSize="@dimen/textMedium"
+    tools:text="Manchester City" />

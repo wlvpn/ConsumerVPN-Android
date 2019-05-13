@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <plurals name="pop_status">
-        <item quantity="one">%1$d server | %2$s%% load</item>
-        <item quantity="other">%1$d servers | %2$s%% load</item>
-    </plurals>
-</resources>

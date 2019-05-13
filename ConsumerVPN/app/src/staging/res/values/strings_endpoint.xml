@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Warning!!, never use this endpoint in production -->
+    <string name="endpoint_main_api">https://api-staging.wlvpn.com/v3/%s</string>
+</resources>

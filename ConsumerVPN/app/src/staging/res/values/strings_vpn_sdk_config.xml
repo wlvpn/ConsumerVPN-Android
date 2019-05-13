@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Account configuration strings-->
+    <string name="api_key" translatable="false">35e8512a6c0fd193513f0e89c76473a2182e2c77eec12742b1c088961a85</string>
+</resources>

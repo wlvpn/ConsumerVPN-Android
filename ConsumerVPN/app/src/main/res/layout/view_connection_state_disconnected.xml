@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.features.home.HomeActivity">
+
+    <TextView
+        android:id="@+id/text_view_location_selected"
+        style="@style/TextMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_tab_location_selected"
+        app:layout_constraintBottom_toTopOf="@id/text_view_location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/text_view_location"
+        style="@style/TextMediumLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/home_connection_location_text_view_margin_top"
+        android:drawableStart="@drawable/ic_location"
+        android:drawablePadding="@dimen/home_connection_drawable_padding"
+        android:text="@string/home_connection_location_best_available"
+        android:textColor="@color/color_accent"
+        app:layout_constraintBottom_toTopOf="@id/button_connect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_location_selected"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Dallas, United States" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_connect"
+        style="@style/PrimaryButtonStyle"
+        android:layout_width="@dimen/home_connection_button_width"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/home_connection_button_margin_bottom"
+        android:text="@string/home_tab_connect_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

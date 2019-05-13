@@ -1,0 +1,217 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply from: "../config/quality.gradle"
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.wlvpn.consumervpn"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField 'String', 'CLIENT', "\"Android-${versionName}b${versionCode}\""
+
+        // Store Values
+        buildConfigField 'String', 'GOOGLE_PLAY_STORE_URL', '"http://play.google.com/store/apps/details?id="'
+        buildConfigField 'String', 'AMAZON_STORE_URL', '"amzn://apps/android?p="'
+
+        buildConfigField 'String', 'FLAGS_HOSTNAME', '"https://static.wlvpn.com/flags/"'
+
+    }
+
+    // These keys are intended for tests environments only, the release keys should not live in the gradle file
+    signingConfigs {
+
+        debug {
+            storeFile rootProject.file("config/keystores/debug-consumer.jks")
+            keyAlias "consumervpn-v2"
+            keyPassword '5MLdn3mB7pCFJ7'
+            storePassword '5MLdn3mB7pCFJ7'
+        }
+
+        staging {
+            storeFile rootProject.file("config/keystores/staging-consumer.jks")
+            keyAlias "consumervpn-v2"
+            keyPassword "hy4f8dhETrnjME"
+            storePassword "hy4f8dhETrnjME"
+        }
+
+    }
+
+    buildTypes {
+
+        debug {
+            debuggable true
+            zipAlignEnabled false
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.debug
+            versionNameSuffix '-debug'
+            applicationIdSuffix '.debug'
+        }
+
+        // Environment only for tests.
+        // You may want to add a beta build type for a pre-release build
+        staging {
+            debuggable true
+            zipAlignEnabled false
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.staging
+            versionNameSuffix '-staging'
+            applicationIdSuffix '.staging'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            debuggable false
+            zipAlignEnabled true
+            minifyEnabled true
+            shrinkResources true
+            signingConfig null
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    flavorDimensions "platform"
+    productFlavors {
+        mobile {
+
+            dimension "platform"
+        }
+        tv {
+            dimension "platform"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    lintOptions {
+        ignore 'InvalidPackage'
+    }
+
+}
+
+dependencies {
+
+    def versions = [
+            os           : [
+                    support         : "1.0.0",
+                    lifecycle       : "2.0.0",
+                    constraintLayout: "1.1.3",
+                    material        : "1.1.0-alpha05",
+                    appCompat       : "1.1.0-alpha04"
+            ],
+            rxJava       : "2.2.5",
+            rxAndroid    : "2.1.1",
+            rxKotlin     : "2.3.0",
+            rxBinding    : "3.0.0-alpha2",
+            gson         : "2.8.5",
+            dagger       : "2.21",
+            retrofit     : "2.5.0",
+            leakCanary   : "1.6.3",
+            fresco       : "1.13.0",
+            vpnSdk       : "1.5.3.40027@aar",
+            nativeEncrypt: "1.0.036399@aar",
+            timber       : "4.7.1",
+            autoValue    : "1.6.2",
+            loganSquare  : "1.3.7",
+            evernoteJobs : "1.2.6",
+            test         : [
+                    junit  : "4.12",
+                    mockito: "2.24.0"
+            ]
+    ]
+
+    //region OS
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$versions.os.lifecycle"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.os.constraintLayout"
+    implementation "androidx.appcompat:appcompat:$versions.os.appCompat"
+    implementation "androidx.annotation:annotation:$versions.os.support"
+    implementation "androidx.browser:browser:$versions.os.support"
+    implementation "androidx.recyclerview:recyclerview:$versions.os.support"
+    implementation "androidx.cardview:cardview:$versions.os.support"
+    implementation "androidx.leanback:leanback:$versions.os.support"
+    implementation "androidx.leanback:leanback-preference:$versions.os.support"
+    implementation "androidx.cardview:cardview:$versions.os.support"
+    implementation "androidx.gridlayout:gridlayout:$versions.os.support"
+    implementation "com.google.android.material:material:$versions.os.material"
+    //endregion OS
+
+    // region Libs
+
+    // Rx Bindings
+    implementation "com.jakewharton.rxbinding3:rxbinding:$versions.rxBinding"
+    implementation "com.jakewharton.rxbinding3:rxbinding-material:$versions.rxBinding"
+    implementation "com.jakewharton.rxbinding3:rxbinding-appcompat:$versions.rxBinding"
+
+    // Gson
+    implementation "com.google.code.gson:gson:$versions.gson"
+
+    // Native EncrKeyption
+    implementation "com.stackpath.nativencrkeyption:nativencrkeyption:$versions.nativeEncrypt"
+
+    // Timber
+    implementation "com.jakewharton.timber:timber:$versions.timber"
+
+    // VPN Sdk
+    implementation("com.gentlebreeze.vpn.sdk:sdk:$versions.vpnSdk") {
+        transitive = true
+    }
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$versions.rxJava"
+    implementation "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
+
+    // RxKotlin
+    implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxKotlin"
+
+    // Dagger2
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+
+    // Evernote Jobs
+    implementation "com.evernote:android-job:$versions.evernoteJobs"
+
+    //Leak Canary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary"
+    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$versions.leakCanary"
+    stagingImplementation "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary"
+    stagingImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$versions.leakCanary"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakCanary"
+
+    //Fresco
+    implementation "com.facebook.fresco:fresco:$versions.fresco"
+
+    //Annotation processing
+    annotationProcessor "com.bluelinelabs:logansquare-compiler:$versions.loganSquare"
+    annotationProcessor "com.google.auto.value:auto-value:$versions.autoValue"
+
+    //endregion Libs
+
+    //region Test libs
+    testImplementation "org.mockito:mockito-core:$versions.test.mockito"
+    testImplementation "junit:junit:$versions.test.junit"
+    //endregion Test libs
+
+}

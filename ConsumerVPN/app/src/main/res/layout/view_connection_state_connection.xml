@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.features.home.HomeActivity">
+
+    <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_connected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:constraint_referenced_ids="image_view_map, image_view_ic_public, image_view_ic_location, linear_location_ip_container"/>
+
+    <ImageView
+            android:id="@+id/image_view_map"
+            android:layout_width="@dimen/ui_zero"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_connection_connecting_dot_map_margin_start_end"
+            android:layout_marginEnd="@dimen/home_connection_connecting_dot_map_margin_start_end"
+            android:layout_marginBottom="@dimen/home_connection_image_view_dot_map_margin_bottom"
+            android:adjustViewBounds="true"
+            android:src="@drawable/bg_dotmap"
+            app:layout_constraintBottom_toTopOf="@id/button_disconnect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="@dimen/home_connection_image_view_dot_map_width_max"
+            tools:ignore="ContentDescription"/>
+
+    <com.wlvpn.consumervpn.presentation.features.widget.ConnectionStateView
+            android:id="@+id/view_connection_state"
+            android:layout_width="@dimen/home_connection_connecting_anim_width_height"
+            android:layout_height="@dimen/home_connection_connecting_anim_width_height"
+            app:layout_constraintBottom_toBottomOf="@id/image_view_map"
+            app:layout_constraintEnd_toEndOf="@id/image_view_map"
+            app:layout_constraintStart_toStartOf="@id/image_view_map"
+            app:layout_constraintTop_toTopOf="@id/image_view_map"/>
+
+    <ImageView
+            android:id="@+id/image_view_ic_public"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_public"
+            app:layout_constraintBottom_toTopOf="@id/image_view_ic_location"
+            app:layout_constraintEnd_toStartOf="@id/linear_location_ip_container"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_connection_state"
+            app:layout_constraintVertical_chainStyle="packed"/>
+
+    <ImageView
+            android:id="@+id/image_view_ic_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/home_connection_icon_location_margin_top"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_location"
+            app:layout_constraintBottom_toTopOf="@id/button_disconnect"
+            app:layout_constraintStart_toStartOf="@id/image_view_ic_public"
+            app:layout_constraintTop_toBottomOf="@id/image_view_ic_public"
+            app:layout_constraintVertical_chainStyle="packed"/>
+
+    <LinearLayout
+            android:id="@+id/linear_location_ip_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_connection_linear_location_margin_start"
+            android:layout_marginEnd="@dimen/home_connection_linear_location_margin_end"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/button_disconnect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_view_ic_public"
+            app:layout_constraintTop_toBottomOf="@id/view_connection_state">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_connection_public_ip"
+                android:textSize="@dimen/home_connection_text_view_location_text_size"/>
+
+        <TextView
+                android:id="@+id/text_view_ip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
+                android:textColor="@color/color_accent"
+                android:textSize="@dimen/home_connection_text_view_location_text_size"
+                tools:text="254.254.242.254"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/home_connection_text_view_visible_margin_top"
+                android:text="@string/home_connection_visible_location"
+                android:textSize="@dimen/home_connection_text_view_location_text_size"/>
+
+        <TextView
+                android:id="@+id/text_view_connected_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
+                android:textColor="@color/color_accent"
+                android:textSize="@dimen/home_connection_text_view_location_text_size"
+                tools:text="Dallas, United States"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_disconnect"
+            style="@style/DisconnectButtonStyle"
+            android:layout_width="@dimen/home_connection_button_width"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/home_connection_button_margin_bottom"
+            android:text="@string/home_tab_disconnect_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
