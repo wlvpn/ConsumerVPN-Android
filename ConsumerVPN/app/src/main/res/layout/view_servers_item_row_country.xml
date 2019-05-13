@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/countryRow"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/countryFlagImageView"
+        android:layout_width="@dimen/home_servers_row_circle_image_view_width_height"
+        android:layout_height="@dimen/home_servers_row_circle_image_view_width_height"
+        android:layout_marginStart="@dimen/home_servers_row_circle_image_view_margin_start"
+        android:layout_marginTop="@dimen/home_servers_row_circle_image_view_margin_top_bottom"
+        android:layout_marginEnd="@dimen/ui_zero"
+        android:layout_marginBottom="@dimen/home_servers_row_circle_image_view_margin_top_bottom"
+        android:elevation="@dimen/home_servers_row_flag_elevation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        fresco:failureImage="@mipmap/ic_launcher"
+        fresco:placeholderImage="@color/color_flag_placeholder"
+        fresco:roundAsCircle="true" />
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="@dimen/ui_zero"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/home_servers_row_country_text_margin_start_end"
+        android:layout_marginEnd="@dimen/home_servers_row_country_text_margin_start_end"
+        android:ellipsize="end"
+        android:lines="1"
+        android:maxLines="1"
+        android:textSize="@dimen/textMedium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/citiesButton"
+        app:layout_constraintStart_toEndOf="@id/countryFlagImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="United States" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/citiesButton"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/spacing_xlarge"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="center"
+        android:paddingStart="@dimen/home_servers_row_country_city_text_button_padding_start_end"
+        android:paddingEnd="@dimen/home_servers_row_country_city_text_button_padding_start_end"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textRegular"
+        app:backgroundTint="@color/steel_gray_40"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/nameTextView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="4 cities" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

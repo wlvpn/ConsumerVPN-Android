@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_height="400dp"
+    tools:layout_width="400dp">
+
+    <ImageView
+        android:id="@+id/rotating_circle_slice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/anim_connection_rotate" />
+
+    <TextView
+        android:id="@+id/connection_state_text"
+        style="@style/TextRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/home_tab_connect_connection_state_connecting"
+        android:textColor="@color/color_accent" />
+
+</FrameLayout>

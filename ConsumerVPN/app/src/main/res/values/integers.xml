@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="bg_linear_gradient_angle">135</integer>
+    <fraction name="bg_linear_gradient_y">0.45</fraction>
+
+</resources>

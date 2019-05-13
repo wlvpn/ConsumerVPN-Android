@@ -1,0 +1,54 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="android:colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="android:colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="android:colorAccent">@color/color_accent</item>
+        <item name="android:textColorPrimary">@color/text_color_primary</item>
+        <item name="android:windowBackground">@color/color_primary_dark</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:ambientShadowAlpha">0.5</item>
+        <item name="android:spotShadowAlpha">0.5</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView</item>
+        <item name="alertDialogTheme">@style/MaterialDialog.Light</item>
+        <item name="android:alertDialogTheme">@style/MaterialDialog.Light</item>
+        <item name="android:colorEdgeEffect">@color/color_accent_dark</item>
+    </style>
+
+    <style name="AppTheme.SplashTheme">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+    </style>
+
+    <style name="AppTheme.HomeTheme" />
+
+    <style name="AppTheme.Settings"/>
+
+    <style name="AppTheme.About">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
+    </style>
+
+    <style name="DropDownListView" parent="@android:style/Widget.Holo.ListView.DropDown">
+        <item name="android:background">@color/white</item>
+        <item name="android:divider">@color/transparent</item>
+        <item name="android:listSelector">@drawable/bg_actionbar_item</item>
+    </style>
+
+    <style name="MaterialDialog.Light" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyle.Light</item>
+        <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyle.Light</item>
+        <item name="android:colorAccent">@color/color_accent</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/DialogButtonStyle.Light</item>
+        <item name="android:buttonBarNeutralButtonStyle">@style/DialogButtonStyle.Light</item>
+    </style>
+
+    <style name="DialogButtonStyle.Light" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/dialog_button_text_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>

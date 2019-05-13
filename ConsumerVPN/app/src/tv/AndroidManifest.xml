@@ -1,0 +1,33 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.wlvpn.consumervpn">
+
+    <uses-feature
+            android:name="android.hardware.touchscreen"
+            android:required="false"/>
+
+    <uses-feature
+            android:name="android.software.leanback"
+            android:required="false"/>
+
+    <uses-sdk tools:overrideLibrary="android.support.v17.leanback"/>
+
+    <application
+            android:name=".presentation.ConsumerApplication"
+            android:banner="@mipmap/tv_banner"
+        android:allowBackup="false"
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
+
+        <activity android:name=".presentation.features.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+    </application>
+</manifest>

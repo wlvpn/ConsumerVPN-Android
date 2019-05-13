@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- region Home -->
+    <!-- Connection Tab -->
+    <dimen name="home_connection_button_margin_bottom">@dimen/ui_zero</dimen>
+    <dimen name="home_connection_connecting_anim_width_height">120dp</dimen>
+    <dimen name="home_connection_icon_location_margin_top">14dp</dimen>
+    <dimen name="home_connection_text_view_location_text_size">@dimen/textSmall</dimen>
+    <dimen name="home_connection_text_view_visible_margin_top">@dimen/spacing_xsmall</dimen>
+    <dimen name="home_connection_image_view_dot_map_margin_bottom">@dimen/spacing_xxxlarge</dimen>
+    <dimen name="home_connection_image_view_dot_map_width_max">272dp</dimen>
+    <!-- endregion -->
+</resources>

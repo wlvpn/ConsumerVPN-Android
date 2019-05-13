@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="fragment_dialog_warn_maintenance_title">Server Maintenance</string>
-    <string name="fragment_dialog_warn_maintenance_message">The selected server is scheduled for maintenance soon which will cause service interruption. We recommend selecting another server.</string>
-    <string name="fragment_dialog_warn_connect">Connect</string>
-</resources>

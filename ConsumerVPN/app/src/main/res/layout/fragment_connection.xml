@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.features.home.HomeActivity">
+
+    <include
+        android:id="@+id/disconnected_state_layout"
+        layout="@layout/view_connection_state_disconnected"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <include
+        android:id="@+id/connection_state_layout"
+        layout="@layout/view_connection_state_connection"
+        android:visibility="gone"
+        tools:visibility="gone" />
+
+</FrameLayout>
