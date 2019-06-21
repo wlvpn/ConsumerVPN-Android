@@ -3,6 +3,19 @@
 ConsumerVPN is a White Label VPN Application intended to make easy to create
 new vpn applications for Android platforms
 
+## Before start
+To compile this project account information has to be provided by an
+account manager, if you are interested on 
+using this project please reach out to partners@wlvpn.com 
+
+The Information needed to start:
+- PackageCloud token
+- Account Name
+- Auth Suffix
+- API Key  
+- IPGEO URL 
+- Test Username and password
+ 
 ## Getting Started
 
 ### Prerequisites
@@ -12,7 +25,7 @@ new vpn applications for Android platforms
 3. Android NDK 16 or superior
 4. Android Support library 28
 6. Build Tools 28
-5. Kotlin Plugin 1.3.31
+5. Kotlin Plugin 1.3.31 
 
 Note: You can always try to upgrade the internal libraries. 
 For most cases they should work just fine
@@ -22,40 +35,52 @@ For most cases they should work just fine
 
 A key is needed and should be provided by your account manager
 
-Set the package cloud key obtained in the root project `build.gradle` file
+Set the package cloud key obtained in the root project `build.gradle` (consumervpn2-android/build.gradle) file
 
 ```groovy
-    allprojects {
-        version = property("android.versionName")
-        group = property('pom.groupId')
+    buildscript {
+        ext.kotlin_version = '1.3.31'
+        ext.packagecloud_token = "YOUR_PACKAGE_CLOUD_TOKEN"
+    
         repositories {
-            mavenLocal()
+            google()
             jcenter()
-            maven { url 'https://maven.google.com' }
+        }
+    
+        dependencies {
+            classpath 'com.android.tools.build:gradle:3.4.1'
+            classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        }
+    }
+    
+    allprojects {
+        repositories {
+            google()
+            jcenter()
             maven {
-                url "https://packagecloud.io/priv/MY_PACKAGE_CLOUD_API_KEY/cloak/android-vpn-sdk/maven2"
+                url "https://packagecloud.io/priv/${packagecloud_token}/cloak/android-vpn-sdk/maven2"
             }
         }
     }
 ```
+
 ### VPN SDK Keys set up
 
 All VPN SDK keys are available at `strings_vpn_sdk_config.xml`, those should be provided by your account manager
-    
     1. account_name -  Name of the account
     2. auth_suffix - Suffix of the account, normally used for VPN authentication (if no auth_suffix was provided, use account_name)
     3. api_key - Key that grants access to the specific account.  
+    4. ip_geo_url - URL for the IPGeo endpoint associated with the account
 
 ### Custom APIs
 These should only be modified if the vpn `API's` are hosted in a different domain than the default ones 
-
     ```xml
     <string name="protocol_list_api" translatable="false">protocols</string>
     <string name="login_api" translatable="false">login</string>
     <string name="token_refresh_api" translatable="false">login</string>
     <string name="server_list_api" translatable="false">servers</string>
-    <string name="ip_geo_url" translatable="false">IP_GEO</string>
     ```
+    
 ### Custom URLs
 The client must provide 
 1. Support URL - Support related URL.

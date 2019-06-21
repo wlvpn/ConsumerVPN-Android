@@ -16,26 +16,9 @@ sealed class Settings {
         enum class StartupConnectOption { LAST_SERVER, FASTEST_SERVER, FASTEST_IN_LOCATION, NONE }
     }
 
-    /*
-    * TODO: We might want to refactor this to `ServerToConnect` having optionals is misleading
-    *   we can set ServerToConnect as a sealed class with Connection option childrens:
-    *                           ServerToConnect
-    *                                 |
-    *                                /|\
-    *          _____________________/ | \_____________________________
-    *          |                      |                              |
-    *          |                      |                              |
-    *   FastestServer       FastestInLocation(Location)     SpecificHost(Server)
-    */
     data class ConnectionRequest(
         //Default to no server
         var server: Server? = null,
-        //Default to no server
-        var location: ServerLocation? = null,
-        //Default to Fastest
-        var connectionOption: ConnectOption = ConnectOption.FASTEST_SERVER
-    ) : Settings() {
-        enum class ConnectOption { FASTEST_SERVER, FASTEST_IN_LOCATION, WITH_SERVER }
-    }
-
+        var location: ServerLocation
+    ) : Settings()
 }

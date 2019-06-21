@@ -23,7 +23,7 @@ interface ExternalVpnConnectionGateway {
 
     fun connectWithConnectionRequestSettings(
         general: Settings.GeneralConnection,
-        connection: Settings.ConnectionRequest,
+        connectionRequest: Settings.ConnectionRequest,
         credentials: Credentials
     ): Completable
 

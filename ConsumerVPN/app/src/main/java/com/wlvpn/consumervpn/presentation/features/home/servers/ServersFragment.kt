@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.jakewharton.rxbinding3.appcompat.queryTextChanges
 import com.wlvpn.consumervpn.R
+import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
+import com.wlvpn.consumervpn.data.model.CountryServerLocation
 import com.wlvpn.consumervpn.domain.model.ServerLocation
 import com.wlvpn.consumervpn.presentation.di.Injector
 import com.wlvpn.consumervpn.presentation.features.connection.DisconnectDialogFragment
@@ -181,8 +183,18 @@ class ServersFragment :
     override fun showDisconnectDialog(location: ServerLocation) {
         activity?.let { fragmentActivity ->
 
+            val city = when (location) {
+                is CityAndCountryServerLocation -> location.city
+                else -> ""
+            }
+            val country = when(location) {
+                is CityAndCountryServerLocation -> location.country
+                is CountryServerLocation -> location.country
+                else -> ""
+            }
+
             val dialogFragment = DisconnectDialogFragment
-                .newInstance(location.city, location.country)
+                .newInstance(city, country)
 
             dialogFragment.onResultCallback = this
             dialogFragment.show(

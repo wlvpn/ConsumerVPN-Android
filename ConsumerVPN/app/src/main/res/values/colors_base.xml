@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Material Design Colors
+        If you want to find the right dark and light tones to comply with material design
+        is recommended to use this tool
+        https://material.io/tools/color/
+    -->
+
     <color name="color_primary">@color/blue_gray</color>
     <color name="color_primary_dark">@color/dark_gray</color>
     <color name="color_primary_light">@color/steel_gray</color>
     <color name="color_accent">@color/main_blue</color>
     <color name="color_accent_dark">@color/dark_blue</color>
     <color name="text_color_primary">@color/white</color>
+    <color name="text_color_secondary">@color/white</color>
     <color name="text_color_gray">@color/white_60</color>
     <color name="text_color_dark">@color/steel_gray</color>
+    <color name="window_background">@color/color_primary_dark</color>
+    <color name="color_edge_effect">@color/color_accent_dark</color>
 
 </resources>

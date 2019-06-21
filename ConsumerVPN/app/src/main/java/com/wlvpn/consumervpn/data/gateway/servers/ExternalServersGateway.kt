@@ -10,6 +10,8 @@ import com.gentlebreeze.vpn.sdk.sort.SortPopOption
 import com.wlvpn.consumervpn.data.exception.map.NetworkThrowableMapper
 import com.wlvpn.consumervpn.data.exception.map.ThrowableMapper
 import com.wlvpn.consumervpn.data.job.ServersRefreshJob
+import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
+import com.wlvpn.consumervpn.data.model.CountryServerLocation
 import com.wlvpn.consumervpn.data.toDomainServerLocation
 import com.wlvpn.consumervpn.data.util.onErrorMapThrowable
 import com.wlvpn.consumervpn.data.util.toSingle
@@ -85,8 +87,11 @@ class ExternalServersGateway(
                 else Maybe.just(it)
             }
 
-    override fun fetchServersByLocation(location: ServerLocation): Maybe<List<Server>> =
-        vpnSdk.fetchPopByCountryCodeAndCity(location.countryCode, location.city ?: "")
+    override fun fetchServersByLocation(location: ServerLocation): Maybe<List<Server>> {
+        val city = if (location as? CityAndCountryServerLocation != null) location.city else ""
+        val countryCode = if (location as? CountryServerLocation != null) location.countryCode else ""
+
+        return vpnSdk.fetchPopByCountryCodeAndCity(countryCode, city)
             .toSingle()
             .onErrorMapThrowable { mapThrowable(it) }
             .flatMapObservable { vpnPop ->
@@ -103,6 +108,7 @@ class ExternalServersGateway(
                 if (it.isEmpty()) Maybe.empty()
                 else Maybe.just(it)
             }
+    }
 
     override fun fetchServersByCountry(countryCode: String): Maybe<List<Server>> =
         vpnSdk.fetchAllPopsByCountryCode(countryCode)
@@ -202,11 +208,7 @@ class ExternalServersGateway(
     private fun vpnPopAndServerToDomainServer(vpnPop: VpnPop, vpnServer: VpnServer): Server {
         return Server(
             ServerHost(vpnServer.name, vpnServer.ipAddress),
-            ServerLocation(
-                vpnPop.city,
-                vpnPop.country,
-                vpnPop.countryCode
-            ),
+            vpnPop.toDomainServerLocation(),
             vpnServer.isInMaintenance,
             vpnServer.scheduledMaintenance,
             vpnServer.capacity

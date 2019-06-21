@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+    Overrides google drawable-v21/preference_list_divider_material.xml
+    Will replace color for SettingsPreference Fragment Category Divider
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:tint="@color/settings_category_divider_color">
+    <solid android:color="#1f000000" />
+    <size
+        android:height="1dp"
+        android:width="1dp" />
+</shape>

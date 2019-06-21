@@ -1,89 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <!-- Material Design Colors
         If you want to find the right dark and light tones to comply with material design
         is recommended to use this tool
         https://material.io/tools/color/
     -->
 
-    <!-- region pallets-->
-    <!--
-        If you want to add new colors to this pallet and you don't know how to name them, use these tools:
-        http://chir.ag/projects/name-that-color/
-        https://www.color-blindness.com/color-name-hue/
+    <!-- Servers Fragment Colors -->
+    <color name="server_city_text_color">@color/color_accent</color>
+    <color name="server_country_text_color">@color/text_color_primary</color>
+    <color name="server_country_selected_text_color">@color/color_accent</color>
+    <color name="server_location_text_color">@color/text_color_primary</color>
+    <color name="server_location_selected_text_color">@color/color_accent</color>
+    <color name="server_row_bg_state_selected_color">@color/black_ebony</color>
+    <color name="server_row_city_ripple_color">@color/white</color>
+    <color name="server_row_city_ripple_drawable_main_color">@color/white_8</color>
+    <color name="server_row_bg_selected_color">@color/black_midnight_express</color>
+    <color name="server_row_country_bg_color">@color/color_primary_dark</color>
 
-        These websites provide a name to any HEX color.
-    -->
-    <color name="white">#ffffff</color>
-    <color name="white_80">#CCffffff</color>
-    <color name="white_60">#99ffffff</color>
-    <color name="white_40">#66ffffff</color>
-    <color name="white_20">#33ffffff</color>
-    <color name="white_10">#1Affffff</color>
-    <color name="white_8">#14ffffff</color>
-    <color name="white_5">#0Dffffff</color>
-    <color name="black">#000000</color>
-    <color name="black_80">#CC000000</color>
-    <color name="black_60">#99000000</color>
-    <color name="black_40">#66000000</color>
-    <color name="black_20">#33000000</color>
-    <color name="transparent">#00000000</color>
+    <!-- Connect Server Colors -->
+    <color name="connect_state_connection_ip_location_text_color">@color/color_accent</color>
+    <color name="connect_state_disconnected_location_text_color">@color/color_accent</color>
 
-    <color name="main_blue">#4A90E2</color>
-    <color name="main_blue_15">#264A90E2</color>
-    <color name="dark_blue">#0063b0</color>
-    <color name="clear_red">#D0021B</color>
-    <color name="clear_dark_red">#960000</color>
-    <color name="error_red">#db493d</color>
-
-    <color name="black_ebony">#0A0D16</color>
-    <color name="black_pearl">#090A0E</color>
-    <color name="black_vulcan">#141720</color>
-
-    <color name="black_rock">#2A2D37</color>
-    <color name="black_charade">#222530</color>
-
-    <color name="steel_gray">#3E414B</color>
-    <color name="dark_gray">#171A21</color>
-    <color name="steel_gray_40">#663E414B</color>
-    <color name="blue_gray">#1F232F</color>
-    <color name="blue_gray_transparent">#E71F232F</color>
-    <color name="black_midnight_express">#10121E</color>
-    <!-- endregion pallets-->
-
-    <!--region server list colors-->
-    <color name="text_color_city">@color/color_accent</color>
-    <color name="text_color_country_selected">@color/color_accent_dark</color>
-    <color name="text_color_location_selected">@color/color_accent</color>
-    <color name="text_color_location">@color/text_color_primary</color>
-    <!--endregion server list colors-->
-
+    <!-- Gradients -->
     <color name="bg_linear_gradient_start">@color/black_vulcan</color>
     <color name="bg_linear_gradient_center">@color/steel_gray</color>
     <color name="bg_linear_gradient_end">@color/black_pearl</color>
-
     <color name="bg_radial_gradient_start">@color/steel_gray</color>
     <color name="bg_radial_gradient_end">@color/dark_gray</color>
 
-    <color name="progress_background_color">@color/blue_gray_transparent</color>
+    <!-- Buttons -->
+    <color name="disconnect_button_color">@color/clear_red</color>
+    <color name="disconnect_button_text_color">@color/white</color>
+    <color name="disconnect_button_ripple_color">@color/clear_dark_red</color>
+    <color name="primary_button_color">@color/color_accent</color>
+    <color name="primary_button_text_color">@color/white</color>
+    <color name="primary_button_ripple_color">@color/color_accent_dark</color>
+    <color name="material_button_text_color">@color/white</color>
+    <color name="material_button_ripple_color">@color/white_40</color>
+    <color name="servers_button_color">@color/steel_gray_40</color>
+    <color name="servers_button_text_color">@color/white</color>
+    <color name="servers_button_ripple_color">@color/color_primary_dark</color>
 
-    <color name="bg_shape_2_color">@color/black_rock</color>
-    <color name="bg_shape_1_color">@color/black_charade</color>
+    <!-- EditText -->
+    <color name="edit_text_bg_tint_color">@color/white</color>
+    <color name="edit_text_text_color">@color/white</color>
+    <color name="edit_text_text_hint_color">@color/white</color>
+    <color name="edit_text_text_highlight_color">@color/white</color>
+    <color name="text_input_layout_box_stroke_color">@color/white_80</color>
+    <color name="text_input_layout_hint_color">@color/white_40</color>
+    <color name="text_input_layout_error_color">@color/error_red</color>
+    <color name="text_input_layout_text_color">@color/text_color_primary</color>
 
-    <color name="bg_settings_category">@color/color_primary</color>
+    <!-- Tabs -->
+    <color name="tab_indicator_color">@color/color_accent</color>>
+    <color name="tab_text_color">@color/white_60</color>
+    <color name="tab_selected_text_color">@color/white</color>
+    <color name="tab_ripple_color">@color/color_primary_light</color>
 
-    <color name="bg_toolbar">@color/color_primary</color>
+    <!-- Connect Animation -->
+    <color name="connect_anim_complete_color">@color/color_accent</color>
+    <color name="connect_anim_vector_circle_shape_color">@color/color_accent</color>
+    <color name="connect_anim_vector_circle_slice_color">@color/color_accent</color>
 
+    <!-- Progress loading -->
+    <color name="progress_bg_color">@color/blue_gray_transparent</color>
+
+    <!-- Shapes -->
+    <color name="triangles_bg_shape_2_color">@color/black_rock</color>
+    <color name="triangles_bg_shape_1_color">@color/black_charade</color>
+
+    <!-- Action Bar -->
+    <color name="actionbar_item_pressed_color">@color/color_accent</color>
+    <color name="actionbar_item_hovered_color">@color/white_80</color>
+    <color name="actionbar_ic_vector_color">@color/white</color>
+    <color name="actionbar_bg_color">@color/color_primary</color>
+    <color name="actionbar_text_color">@color/text_color_primary</color>
+    <color name="actionbar_ripple_highlight">@color/white_20</color>
+
+    <!-- Settings -->
+    <color name="settings_category_divider_color">@color/white</color>
+
+    <!-- Vector -->
     <color name="ic_fill_color">@color/white</color>
+    <color name="ic_fill_accent_color">@color/color_accent</color>
 
-    <color name="color_flag_placeholder">@color/color_accent</color>
-
+    <!-- Default Values -->
+    <color name="flag_placeholder_color">@color/color_accent</color>
     <color name="dialog_button_text_color">@color/color_accent</color>
 
-    <color name="bg_selected_server_row">@color/black_midnight_express</color>
-    <color name="bg_normal_server_country_row">@color/color_primary_dark</color>
-
-
+    <!-- Overrides Text Input Layout Line Box Color -->
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/white</color>
 
 </resources>

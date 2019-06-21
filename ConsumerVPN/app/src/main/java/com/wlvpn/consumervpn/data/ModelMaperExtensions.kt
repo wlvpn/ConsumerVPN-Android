@@ -4,10 +4,9 @@ import com.gentlebreeze.vpn.sdk.model.VpnPop
 import com.gentlebreeze.vpn.sdk.model.VpnPortOptions
 import com.gentlebreeze.vpn.sdk.model.VpnProtocolOptions
 import com.gentlebreeze.vpn.sdk.model.VpnServer
-import com.wlvpn.consumervpn.domain.model.Port
-import com.wlvpn.consumervpn.domain.model.Protocol
-import com.wlvpn.consumervpn.domain.model.Server
-import com.wlvpn.consumervpn.domain.model.ServerLocation
+import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
+import com.wlvpn.consumervpn.data.model.CountryServerLocation
+import com.wlvpn.consumervpn.domain.model.*
 
 internal fun Protocol.toVpnProtocol(): VpnProtocolOptions =
         when (this) {
@@ -18,7 +17,7 @@ internal fun Protocol.toVpnProtocol(): VpnProtocolOptions =
 internal fun Server.toVpnServer(): VpnServer {
     return VpnServer(
         "",
-        location.city ?: "",
+        if (location is CityAndCountryServerLocation) location.city else "",
         host.ipAddress,
         isInMaintenance,
         scheduledMaintenance,
@@ -29,5 +28,6 @@ internal fun Server.toVpnServer(): VpnServer {
 internal fun Port.toVpnPort(): VpnPortOptions = VpnPortOptions(portNumber)
 
 internal fun VpnPop.toDomainServerLocation() : ServerLocation {
-    return ServerLocation(city, country, countryCode)
+    return if (city.isNotEmpty()) { CityAndCountryServerLocation(city, country, countryCode) }
+    else CountryServerLocation(country, countryCode)
 }

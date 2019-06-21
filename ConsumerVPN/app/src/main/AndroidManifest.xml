@@ -53,7 +53,7 @@
                 android:name=".presentation.features.about.AboutActivity"
                 android:theme="@style/AppTheme.About"
                 android:parentActivityName=".presentation.features.settings.SettingsActivity"
-                android:label="@string/title_activity_about">
+            android:label="@string/about_activity_title">
         </activity>
 
 

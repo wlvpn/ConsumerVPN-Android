@@ -2,6 +2,6 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="?android:colorControlHighlight">
 
-    <item android:drawable="@color/bg_normal_server_country_row" />
+    <item android:drawable="@color/server_row_country_bg_color" />
 
 </ripple>

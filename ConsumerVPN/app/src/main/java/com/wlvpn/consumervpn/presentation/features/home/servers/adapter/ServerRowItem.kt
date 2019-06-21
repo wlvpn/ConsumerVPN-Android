@@ -1,6 +1,7 @@
 package com.wlvpn.consumervpn.presentation.features.home.servers.adapter
 
-import com.wlvpn.consumervpn.domain.model.ServerLocation
+import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
+import com.wlvpn.consumervpn.data.model.CountryServerLocation
 
 sealed class ServerRowItem {
     open var isSelected: Boolean = false
@@ -33,7 +34,7 @@ data class ServerCountryRow(
     override var isSelected: Boolean,
     override var isExpanded: Boolean,
     var cityCount: Int,
-    val location: ServerLocation
+    val location: CountryServerLocation
 ) : ServerRowItem() {
 
     override val id: Int
@@ -43,7 +44,7 @@ data class ServerCountryRow(
 data class ServerCityRow(
     override var isSelected: Boolean,
     override var isExpanded: Boolean,
-    val location: ServerLocation
+    val location: CityAndCountryServerLocation
 ) : ServerRowItem() {
 
     override val id: Int

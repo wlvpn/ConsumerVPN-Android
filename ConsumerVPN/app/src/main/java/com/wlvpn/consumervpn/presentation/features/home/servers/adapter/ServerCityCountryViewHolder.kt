@@ -44,8 +44,8 @@ class ServerCityCountryViewHolder(
 
         if (item.isSelected) {
             background = ContextCompat.getDrawable(itemView.context, R.drawable.bg_row_servers_selected_ripple)
-            textColorCity = ContextCompat.getColor(itemView.context, R.color.text_color_location_selected)
-            textColorCountry = ContextCompat.getColor(itemView.context, R.color.text_color_country_selected)
+            textColorCity = ContextCompat.getColor(itemView.context, R.color.server_location_selected_text_color)
+            textColorCountry = ContextCompat.getColor(itemView.context, R.color.server_country_selected_text_color)
             typeFaceCity = ResourcesCompat.getFont(itemView.context, R.font.roboto_bold)
             typeFaceCountry = ResourcesCompat.getFont(itemView.context, R.font.roboto_regular)
             ViewCompat.setElevation(
@@ -54,7 +54,7 @@ class ServerCityCountryViewHolder(
             )
         } else {
             background = ContextCompat.getDrawable(itemView.context, R.drawable.bg_row_servers_ripple)
-            textColorCity = ContextCompat.getColor(itemView.context, R.color.text_color_location)
+            textColorCity = ContextCompat.getColor(itemView.context, R.color.server_location_text_color)
             textColorCountry = ContextCompat.getColor(itemView.context, R.color.white_60)
             typeFaceCity = ResourcesCompat.getFont(itemView.context, R.font.roboto_regular)
             typeFaceCountry = ResourcesCompat.getFont(itemView.context, R.font.roboto_light)

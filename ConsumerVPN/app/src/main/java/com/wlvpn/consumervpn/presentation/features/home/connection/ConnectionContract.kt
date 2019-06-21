@@ -1,7 +1,5 @@
 package com.wlvpn.consumervpn.presentation.features.home.connection
 
-import com.wlvpn.consumervpn.domain.model.Server
-import com.wlvpn.consumervpn.domain.model.ServerLocation
 import com.wlvpn.consumervpn.presentation.features.BaseContract
 
 interface ConnectionContract {
@@ -40,9 +38,11 @@ interface ConnectionContract {
 
         fun showErrorMessage(message: String)
 
-        fun setDisconnectedLocation(location: ServerLocation)
+        fun setDisconnectedLocation(countryName: String, cityName: String)
 
-        fun showConnectedServer(server: Server)
+        fun showConnectedServer(hostIpAddress: String, countryName: String)
+
+        fun showConnectedServer(hostIpAddress: String, countryName: String, cityName: String)
 
         fun setDisconnectedToFastest()
 

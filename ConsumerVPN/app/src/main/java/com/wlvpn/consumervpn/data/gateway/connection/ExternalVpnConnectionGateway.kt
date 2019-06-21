@@ -3,6 +3,8 @@ package com.wlvpn.consumervpn.data.gateway.connection
 import com.gentlebreeze.vpn.sdk.IVpnSdk
 import com.gentlebreeze.vpn.sdk.model.*
 import com.wlvpn.consumervpn.BuildConfig
+import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
+import com.wlvpn.consumervpn.data.model.CountryServerLocation
 import com.wlvpn.consumervpn.data.exception.map.NetworkThrowableMapper
 import com.wlvpn.consumervpn.data.exception.map.ThrowableMapper
 import com.wlvpn.consumervpn.data.gateway.connection.exception.NoServersFoundForSelectionException
@@ -15,8 +17,6 @@ import com.wlvpn.consumervpn.data.util.toObservable
 import com.wlvpn.consumervpn.data.util.toSingle
 import com.wlvpn.consumervpn.domain.gateway.ExternalVpnConnectionGateway
 import com.wlvpn.consumervpn.domain.model.*
-import com.wlvpn.consumervpn.domain.model.Settings.ConnectionRequest.ConnectOption
-import com.wlvpn.consumervpn.domain.service.settings.exception.LocationNotSelectedException
 import com.wlvpn.consumervpn.presentation.notification.vpn.VpnNotificationFactory
 import io.reactivex.Completable
 import io.reactivex.Maybe
@@ -101,7 +101,7 @@ class ExternalVpnConnectionGateway(
                     connectionInfo.ipAddress
                 )
 
-                val serverLocation = ServerLocation(
+                val serverLocation = CityAndCountryServerLocation(
                     connectionInfo.city,
                     connectionInfo.country,
                     connectionInfo.countryCode
@@ -113,19 +113,20 @@ class ExternalVpnConnectionGateway(
 
     override fun connectWithConnectionRequestSettings(
         general: Settings.GeneralConnection,
-        connection: Settings.ConnectionRequest,
+        connectionRequest: Settings.ConnectionRequest,
         credentials: Credentials
     ): Completable = Completable.defer {
         val connectionConfig = buildVpnConnectionConfig(credentials, general)
 
         //TODO we need to move this logic to domain, for now this can live here
-        when (connection.connectionOption) {
-            ConnectOption.FASTEST_SERVER ->
-                connectToFastestServer(connectionConfig)
-            ConnectOption.FASTEST_IN_LOCATION ->
-                connectWithLocation(connection.location, connectionConfig)
-            ConnectOption.WITH_SERVER ->
-                connectWithServer(connection.server, connectionConfig)
+        connectionRequest.server?.let {
+            connectWithServer(it, connectionConfig)
+        } ?: run {
+            when (connectionRequest.location) {
+                is CityAndCountryServerLocation, is CountryServerLocation ->
+                    connectWithLocation(connectionRequest.location, connectionConfig)
+                else -> connectToFastestServer(connectionConfig)
+            }
         }
     }.onErrorResumeNext {
         Completable.error(mapThrowable(it))
@@ -162,23 +163,20 @@ class ExternalVpnConnectionGateway(
     }
 
     private fun connectWithLocation(
-        location: ServerLocation?,
+        location: ServerLocation,
         connectionConfig: VpnConnectionConfiguration
     ): Completable = Completable.defer {
 
-        if (location == null) {
-            Completable.error(LocationNotSelectedException())
-        } else {
-            val city = location.city
-
-            //Get city pop and connect to it, otherwise, default with country
-            if (city != null) {
-                vpnSdk.fetchPopByCountryCodeAndCity(location.countryCode, city)
+        //Get city pop and connect to it, otherwise, default with country
+        when (location) {
+            is CityAndCountryServerLocation -> {
+                vpnSdk.fetchPopByCountryCodeAndCity(location.countryCode, location.city)
                     .toSingle()
                     .flatMapCompletable {
                         connectWitVpnPop(it, connectionConfig)
                     }
-            } else {
+            }
+            is CountryServerLocation -> {
                 vpnSdk.fetchPopsByCountryQuery(location.country)
                     .toSingle()
                     .flattenAsObservable { it }
@@ -187,8 +185,9 @@ class ExternalVpnConnectionGateway(
                     .flatMapCompletable {
                         connectWitVpnPop(it, connectionConfig)
                     }
-            }.onErrorMapThrowable { mapThrowable(it) }
-        }
+            }
+            else -> connectToFastestServer(connectionConfig)
+        }.onErrorMapThrowable { mapThrowable(it) }
     }
 
     private fun connectWitVpnPop(
@@ -257,6 +256,3 @@ class ExternalVpnConnectionGateway(
             }
     }
 }
-
-
-

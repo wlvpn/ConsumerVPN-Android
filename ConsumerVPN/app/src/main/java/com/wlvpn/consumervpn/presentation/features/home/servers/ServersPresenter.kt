@@ -1,5 +1,7 @@
 package com.wlvpn.consumervpn.presentation.features.home.servers
 
+import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
+import com.wlvpn.consumervpn.data.model.CountryServerLocation
 import com.wlvpn.consumervpn.domain.model.ServerLocation
 import com.wlvpn.consumervpn.domain.model.Settings
 import com.wlvpn.consumervpn.domain.service.servers.ServersService
@@ -127,8 +129,7 @@ class ServersPresenter(
         disposeSettingsDisposables()
 
         settingsDisposable = settingsService.updateSelectedLocation(
-            ServerLocation(
-                null,
+            CountryServerLocation(
                 itemFastestCountry.location.country,
                 itemFastestCountry.location.countryCode
             )
@@ -148,7 +149,7 @@ class ServersPresenter(
         disposeSettingsDisposables()
 
         settingsDisposable = settingsService.updateSelectedLocation(
-            ServerLocation(
+            CityAndCountryServerLocation(
                 itemCity.location.city,
                 itemCity.location.country,
                 itemCity.location.countryCode
@@ -309,37 +310,26 @@ class ServersPresenter(
     }
 
     private fun setupSelectedRow(connectionSettings: Settings.ConnectionRequest): ServerRowItem {
-        var selectedItem: ServerRowItem =
-            ServerFastestRow(
-                isSelected = true,
-                isExpanded = false
-            )
+        return when (val location = connectionSettings.location) {
 
-        when (connectionSettings.connectionOption) {
+            is CityAndCountryServerLocation ->
+                ServerCityRow(
+                    true, false,
+                    location
+                )
 
-            Settings.ConnectionRequest.ConnectOption.FASTEST_SERVER -> { /* Do nothing is already been setup */
-            }
+            is CountryServerLocation ->
+                ServerCountryRow(
+                    true, false,
+                    0, location
+                )
 
-            Settings.ConnectionRequest.ConnectOption.FASTEST_IN_LOCATION -> {
-                connectionSettings.location?.let { location ->
-
-                    selectedItem = location.city?.let {
-                        ServerCityRow(
-                            true, false,
-                            connectionSettings.location as ServerLocation
-                        )
-                    } ?: run {
-                        ServerCountryRow(
-                            true, false,
-                            0, connectionSettings.location as ServerLocation
-                        )
-                    }
-                }
-            }
-
-            else -> throw NotImplementedError()
+            else ->
+                ServerFastestRow(
+                    isSelected = true,
+                    isExpanded = false
+                )
         }
-        return selectedItem
     }
 
     private fun setupInitialItemsAndSelected(
@@ -363,67 +353,61 @@ class ServersPresenter(
 
         for (server in serverList) {
 
-            if (!itemCityMap.containsKey(server.countryCode)) {
+            (server as? CityAndCountryServerLocation)?.let {
+                if (!itemCityMap.containsKey(server.countryCode)) {
 
-                // Save number of cities on previous country
-                if (countryItemList.size > 0) {
-                    countryItemList[countryItemList.size - 1].cityCount =
-                        itemCityMap[currentCountryCode]?.size!!
+                    // Save number of cities on previous country
+                    if (countryItemList.size > 0) {
+                        countryItemList[countryItemList.size - 1].cityCount =
+                            itemCityMap[currentCountryCode]?.size!!
+                    }
+
+                    itemCityMap[server.countryCode] = ArrayList()
+
+                    val countryItem = ServerCountryRow(
+                        false,
+                        false,
+                        0,
+                        CountryServerLocation(server.country, server.countryCode)
+                    )
+
+                    currentCountryCode = countryItem.location.countryCode
+
+                    if (!isSelectedPicked
+                        && itemSelected is ServerCountryRow
+                        && server.countryCode == itemSelected.location.countryCode
+                    ) {
+                        isSelectedPicked = true
+                        countryItem.isSelected = true
+                    }
+
+                    // Store country item
+                    countryItemList.add(countryItem)
+                    allItemList.add(countryItem)
                 }
 
-                itemCityMap[server.countryCode] = ArrayList()
-
-                val countryItem = ServerCountryRow(
+                // Save city in city map and all item listType
+                val cityItem = ServerCityRow(
                     false,
                     false,
-                    0,
-                    ServerLocation(
-                        null,
-                        server.country,
-                        server.countryCode
-                    )
+                    server
                 )
-
-                currentCountryCode = countryItem.location.countryCode
 
                 if (!isSelectedPicked
-                    && itemSelected is ServerCountryRow
+                    && itemSelected is ServerCityRow
                     && server.countryCode == itemSelected.location.countryCode
+                    && server.city == itemSelected.location.city
                 ) {
                     isSelectedPicked = true
-                    countryItem.isSelected = true
+                    cityItem.isSelected = true
                 }
 
-                // Store country item
-                countryItemList.add(countryItem)
-                allItemList.add(countryItem)
-            }
-
-            // Save city in city map and all item listType
-            val cityItem = ServerCityRow(
-                false,
-                false,
-                ServerLocation(
-                    server.city,
-                    server.country,
-                    server.countryCode
+                // Store city item
+                allItemList.add(cityItem)
+                itemCityMap[server.countryCode]?.add(
+                    cityItem
                 )
-            )
-
-            if (!isSelectedPicked
-                && itemSelected is ServerCityRow
-                && server.countryCode == itemSelected.location.countryCode
-                && server.city == itemSelected.location.city
-            ) {
-                isSelectedPicked = true
-                cityItem.isSelected = true
             }
-
-            // Store city item
-            allItemList.add(cityItem)
-            itemCityMap[server.countryCode]?.add(
-                cityItem
-            )
         }
 
         // Add city count to last item in country listType
@@ -486,7 +470,7 @@ class ServersPresenter(
 
             for (item in allItemList) {
                 if (item is ServerCityRow
-                    && item.location.city!!.contains(cityFilterName, true)
+                    && item.location.city.contains(cityFilterName, true)
                 ) {
                     newList.add(item)
                 }
@@ -494,8 +478,8 @@ class ServersPresenter(
 
             // Will show first results that starts with the search term
             val comparator = Comparator<ServerCityRow> { first, second ->
-                val firstStarts = first.location.city!!.startsWith(cityFilterName, true)
-                val secondStarts = second.location.city!!.startsWith(cityFilterName, true)
+                val firstStarts = first.location.city.startsWith(cityFilterName, true)
+                val secondStarts = second.location.city.startsWith(cityFilterName, true)
                 if (firstStarts && !secondStarts) {
                     -1
                 } else if (secondStarts && !firstStarts) {
@@ -521,31 +505,26 @@ class ServersPresenter(
             disposables.add(
                 vpnService.getConnectedServer()
                     .flatMap { connectedServer ->
+
+                        val selectedServerRowCountryCode = when (selectedServer) {
+                            is ServerCountryRow -> selectedServer.location.countryCode
+                            is ServerCityRow -> selectedServer.location.countryCode
+                            else -> ""
+                        }
+                        val selectedServerRowCity = when (selectedServer) {
+                            is ServerCityRow -> selectedServer.location.city
+                            else -> ""
+                        }
+
                         // Determine if we must show the connect dialog or the disconnection one
                         // By default we show the disconnect dialog
-                        var shouldConnectToVpn = false
-                        when (selectedServer) {
-                            // Since fastest connection could change through time always show the dialog
-                            is ServerFastestRow -> {
-                                shouldConnectToVpn = true
+                        val shouldConnectToVpn = when (val connectedLocation = connectedServer.location) {
+                            is CountryServerLocation -> connectedLocation.countryCode != selectedServerRowCountryCode
+                            is CityAndCountryServerLocation -> {
+                                (connectedLocation.country != selectedServerRowCountryCode
+                                        || connectedLocation.city != selectedServerRowCity)
                             }
-
-                            is ServerCountryRow -> {
-                                // when the connection location country is different show the connect dialog
-                                if (selectedServer.location.countryCode != connectedServer.location.countryCode) {
-                                    shouldConnectToVpn = true
-                                }
-                            }
-
-                            is ServerCityRow -> {
-                                // when the connection location country and the city is different
-                                // show the connect dialog
-                                if (selectedServer.location.countryCode != connectedServer.location.countryCode
-                                    || selectedServer.location.city != connectedServer.location.city
-                                ) {
-                                    shouldConnectToVpn = true
-                                }
-                            }
+                            else -> true
                         }
                         Single.just(shouldConnectToVpn)
                     }

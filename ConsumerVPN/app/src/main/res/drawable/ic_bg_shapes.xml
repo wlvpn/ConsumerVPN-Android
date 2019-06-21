@@ -33,7 +33,7 @@
         android:fillColor="#44000000"
         android:pathData="M0 40.749l438.196 416.77h-40.967L-0.084 48.749" />
     <path
-        android:fillColor="@color/bg_shape_2_color"
+        android:fillColor="@color/triangles_bg_shape_2_color"
         android:pathData="M-0.027 40.749l620.001 588.499-620.001 0.001z" />
     <!--triangle 2-->
     <path
@@ -61,7 +61,7 @@
         android:fillColor="#40000000"
         android:pathData="M841.974 520.895l-93.875 46.562h26.625l67.25-34.75z" />
     <path
-        android:fillColor="@color/bg_shape_1_color"
+        android:fillColor="@color/triangles_bg_shape_1_color"
         android:pathData="M841.974 523.916l-159.75 79h159.75z" />
     <!--triangle 3-->
     <path
@@ -89,6 +89,6 @@
         android:fillColor="#44000000"
         android:pathData="M-0.026 274.749l831 317.5h11v-9.75l-842-330.75" />
     <path
-        android:fillColor="@color/bg_shape_1_color"
+        android:fillColor="@color/triangles_bg_shape_1_color"
         android:pathData="M841.974 585.226l-842-330.932v348.955h842z" />
 </vector>

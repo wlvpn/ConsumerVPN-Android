@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         fresco:failureImage="@mipmap/ic_launcher"
-        fresco:placeholderImage="@color/color_flag_placeholder"
+        fresco:placeholderImage="@color/flag_placeholder_color"
         fresco:roundAsCircle="true" />
 
     <TextView
@@ -44,20 +44,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/citiesButton"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        style="@style/ServersButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/spacing_xlarge"
         android:layout_marginEnd="@dimen/spacing_normal"
-        android:clickable="true"
-        android:focusable="true"
-        android:fontFamily="@font/roboto_bold"
-        android:gravity="center"
         android:paddingStart="@dimen/home_servers_row_country_city_text_button_padding_start_end"
         android:paddingEnd="@dimen/home_servers_row_country_city_text_button_padding_start_end"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="@dimen/textRegular"
-        app:backgroundTint="@color/steel_gray_40"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/nameTextView"

@@ -37,7 +37,7 @@ class ServerFastestViewHolder(
 
         if (item.isSelected) {
             background = ContextCompat.getDrawable(itemView.context, R.drawable.bg_row_servers_selected_ripple)
-            textColor = ContextCompat.getColor(itemView.context, R.color.text_color_location_selected)
+            textColor = ContextCompat.getColor(itemView.context, R.color.server_location_selected_text_color)
             typeFace = ResourcesCompat.getFont(itemView.context, R.font.roboto_bold)
             ViewCompat.setElevation(
                 itemView,
@@ -45,7 +45,7 @@ class ServerFastestViewHolder(
             )
         } else {
             background = ContextCompat.getDrawable(itemView.context, R.drawable.bg_row_servers_ripple)
-            textColor = ContextCompat.getColor(itemView.context, R.color.text_color_location)
+            textColor = ContextCompat.getColor(itemView.context, R.color.server_location_text_color)
             typeFace = ResourcesCompat.getFont(itemView.context, R.font.roboto_regular)
             ViewCompat.setElevation(itemView, 0f)
         }

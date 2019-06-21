@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:innerRadius="0dp"
+    android:innerRadius="@dimen/ui_zero"
     android:shape="ring"
     android:thicknessRatio="2"
     android:dither="true"
@@ -9,5 +9,5 @@
 
     <stroke
         android:width="2dp"
-        android:color="@color/main_blue" />
+        android:color="@color/connect_anim_vector_circle_shape_color" />
 </shape>

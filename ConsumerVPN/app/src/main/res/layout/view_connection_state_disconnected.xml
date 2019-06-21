@@ -27,7 +27,7 @@
         android:drawableStart="@drawable/ic_location"
         android:drawablePadding="@dimen/home_connection_drawable_padding"
         android:text="@string/home_connection_location_best_available"
-        android:textColor="@color/color_accent"
+        android:textColor="@color/connect_state_disconnected_location_text_color"
         app:layout_constraintBottom_toTopOf="@id/button_connect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

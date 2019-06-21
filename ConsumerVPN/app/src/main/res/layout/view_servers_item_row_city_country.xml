@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         fresco:failureImage="@mipmap/ic_launcher"
-        fresco:placeholderImage="@color/color_flag_placeholder"
+        fresco:placeholderImage="@color/flag_placeholder_color"
         fresco:roundAsCircle="true" />
 
     <TextView

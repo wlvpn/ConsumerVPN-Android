@@ -1,11 +1,8 @@
 package com.wlvpn.consumervpn.domain.service.settings
 
+import com.wlvpn.consumervpn.data.model.FastestServerLocation
 import com.wlvpn.consumervpn.domain.gateway.ExternalSettingsGateway
-import com.wlvpn.consumervpn.domain.model.Port
-import com.wlvpn.consumervpn.domain.model.Server
-import com.wlvpn.consumervpn.domain.model.ServerLocation
-import com.wlvpn.consumervpn.domain.model.Settings
-import com.wlvpn.consumervpn.domain.model.Settings.ConnectionRequest.ConnectOption
+import com.wlvpn.consumervpn.domain.model.*
 import com.wlvpn.consumervpn.domain.repository.ConnectionRequestSettingsRepository
 import com.wlvpn.consumervpn.domain.repository.GeneralConnectionSettingsRepository
 import com.wlvpn.consumervpn.domain.service.settings.exception.LocationNotSelectedException
@@ -38,8 +35,7 @@ class DefaultSettingsService(
 
     override fun getConnectionRequestSettings(): Single<Settings.ConnectionRequest> =
             connectionSettingsRepository.getConnectionRequestSettings()
-                    //Add a default value to convert it to a single
-                .toSingle(Settings.ConnectionRequest())
+                .toSingle()
 
 
     override fun updateGeneralSettings(
@@ -69,8 +65,7 @@ class DefaultSettingsService(
     ): Completable = Completable.defer {
 
         val connectionRequest = Settings.ConnectionRequest(
-            location = serverLocation,
-            connectionOption = ConnectOption.FASTEST_IN_LOCATION
+            location = serverLocation
         )
 
         connectionSettingsRepository.setConnectionRequestSettings(connectionRequest)
@@ -80,17 +75,14 @@ class DefaultSettingsService(
         Completable.defer {
             val connectionRequest = Settings.ConnectionRequest(
                 server = server,
-                connectionOption = ConnectOption.WITH_SERVER
+                location = server.location
             )
 
             connectionSettingsRepository.setConnectionRequestSettings(connectionRequest)
         }
 
     override fun updateSelectedFastestAvailable(): Completable = Completable.defer {
-        val connectionRequest = Settings.ConnectionRequest(
-            connectionOption = ConnectOption.FASTEST_SERVER
-        )
-
+        val connectionRequest = Settings.ConnectionRequest(location = FastestServerLocation())
         connectionSettingsRepository.setConnectionRequestSettings(connectionRequest)
     }
 
