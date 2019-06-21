@@ -82,6 +82,9 @@
     <dimen name="home_connection_linear_location_margin_end">@dimen/spacing_xsmall</dimen>
     <dimen name="home_connection_image_view_dot_map_width_max">384dp</dimen>
 
+    <!-- Connection Animation -->
+    <dimen name="connection_anim_ic_vector_circle_width_height">162dp</dimen>
+
     <!-- Servers Tab -->
     <dimen name="home_servers_recycler_padding_top_bottom">@dimen/spacing_xsmall</dimen>
     <dimen name="home_servers_row_padding_start_end">@dimen/spacing_medium</dimen>

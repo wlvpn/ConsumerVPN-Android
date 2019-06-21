@@ -27,57 +27,75 @@
     </style>
 
     <!--region buttons-->
-    <style name="MaterialButtonStyle" parent="Widget.MaterialComponents.Button">
-        <item name="android:textColor">@color/white</item>
-        <item name="rippleColor">@color/white_40</item>
-    </style>
-
     <style name="MaterialTextButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="android:textColor">@color/white</item>
-        <item name="rippleColor">@color/white_40</item>
+        <item name="rippleColor">@color/material_button_ripple_color</item>
+        <item name="android:textColor">@color/material_button_text_color</item>
     </style>
 
-    <style name="PrimaryButtonStyle" parent="MaterialButtonStyle">
-        <item name="android:backgroundTint">@color/color_accent</item>
-        <item name="android:textColor">@color/text_color_primary</item>
-        <item name="rippleColor">@color/dark_blue</item>
+    <style name="PrimaryButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/primary_button_color</item>
+        <item name="rippleColor">@color/primary_button_ripple_color</item>
+        <item name="android:textColor">@color/primary_button_text_color</item>
     </style>
 
-    <style name="DisconnectButtonStyle" parent="MaterialButtonStyle">
-        <item name="android:backgroundTint">@color/clear_red</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="rippleColor">@color/clear_dark_red</item>
+    <style name="DisconnectButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/disconnect_button_color</item>
+        <item name="rippleColor">@color/disconnect_button_ripple_color</item>
+        <item name="android:textColor">@color/disconnect_button_text_color</item>
     </style>
 
     <style name="MaterialTextButtonStyle.Bold">
         <item name="android:fontFamily">@font/roboto_bold</item>
     </style>
+
+    <style name="ServersButtonStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/servers_button_text_color</item>
+        <item name="android:textSize">@dimen/textRegular</item>
+        <item name="backgroundTint">@color/servers_button_color</item>
+        <item name="rippleColor">@color/servers_button_ripple_color</item>
+    </style>
     <!--endregion buttons-->
 
     <!--region EditText-->
     <style name="EditTextStyle" parent="TextMedium">
-        <item name="android:backgroundTint">@color/white</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textColorHint">@color/white</item>
-        <item name="android:textColorHighlight">@color/white</item>
+        <item name="android:backgroundTint">@color/edit_text_bg_tint_color</item>
+        <item name="android:textColor">@color/edit_text_text_color</item>
+        <item name="android:textColorHint">@color/edit_text_text_hint_color</item>
+        <item name="android:textColorHighlight">@color/edit_text_text_highlight_color</item>
     </style>
 
     <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="boxStrokeColor">@color/white_80</item>
-        <item name="hintTextColor">@color/white_40</item>
-        <item name="errorTextColor">@color/error_red</item>
-        <item name="android:textColor">@color/text_color_primary</item>
+        <item name="boxStrokeColor">@color/text_input_layout_box_stroke_color</item>
+        <item name="hintTextColor">@color/text_input_layout_hint_color</item>
+        <item name="errorTextColor">@color/text_input_layout_error_color</item>
+        <item name="android:textColor">@color/text_input_layout_text_color</item>
     </style>
     <!--endregion EditText-->
 
     <!--region tabs-->
     <style name="TabsLayoutStyle" parent="Widget.MaterialComponents.TabLayout.Colored">
-        <item name="tabIndicatorColor">?attr/colorAccent</item>
-        <item name="tabTextColor">@color/white_60</item>
-        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabIndicatorColor">@color/tab_indicator_color</item>
+        <item name="tabTextColor">@color/tab_text_color</item>
+        <item name="tabSelectedTextColor">@color/tab_selected_text_color</item>
+        <item name="tabRippleColor">@color/tab_ripple_color</item>
         <item name="tabGravity">fill</item>
         <item name="tabMode">fixed</item>
-        <item name="tabRippleColor">@color/color_primary_light</item>
+    </style>
+
+    <!-- Toolbar -->
+    <style name="ToolbarStyle">
+        <item name="android:background">@color/actionbar_bg_color</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="android:theme">@style/AppTheme.ToolbarTheme</item>
+    </style>
+
+    <style name="AppTheme.ToolbarTheme">
+        <item name="android:textColorPrimary">@color/actionbar_text_color</item>
+        <item name="colorControlHighlight">@color/actionbar_ripple_highlight</item>
+        <item name="android:colorControlHighlight">@color/actionbar_ripple_highlight</item>
     </style>
 
 </resources>

@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/progress_background_color"
+    android:background="@color/progress_bg_color"
     android:clickable="true"
     android:focusable="true"
     android:translationZ="@dimen/loading_container_elevation">

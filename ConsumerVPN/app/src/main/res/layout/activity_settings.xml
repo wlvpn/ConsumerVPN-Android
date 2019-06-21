@@ -11,11 +11,10 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
+            style="@style/ToolbarStyle"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/bg_toolbar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="Settings" />
+            app:title="@string/settings_activity_title" />
 
         <FrameLayout
             android:id="@+id/container"

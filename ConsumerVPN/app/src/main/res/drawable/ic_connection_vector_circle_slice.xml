@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="162dp"
-    android:height="162dp"
+    android:width="@dimen/connection_anim_ic_vector_circle_width_height"
+    android:height="@dimen/connection_anim_ic_vector_circle_width_height"
     android:viewportWidth="162"
     android:viewportHeight="162">
     <path
         android:pathData="M144 80.5c0 6.849-1.084 13.447-3.093 19.627-4.134 12.732-12.18 23.699-22.721 31.485C107.644 139.398 94.609 144 80.498 144c-13.95 0-26.848-4.5-37.328-12.126-10.716-7.801-18.9-18.871-23.08-31.747C18.084 93.947 17 87.35 17 80.5c0-6.849 1.084-13.447 3.09-19.627C24.224 48.14 32.272 37.17 42.811 29.388 53.353 21.602 66.388 17 80.498 17c13.951 0 26.852 4.5 37.328 12.123 10.717 7.801 18.9 18.874 23.08 31.75C142.917 67.053 144 73.65 144 80.5z"
         android:strokeWidth="1.5"
-        android:strokeColor="@color/color_accent" />
+        android:strokeColor="@color/connect_anim_vector_circle_slice_color" />
     <group
         android:name="rotationGroup"
         android:pivotX="80.0"
@@ -17,7 +17,7 @@
             android:name="v"
             android:pathData="M78.5798817 1.89349112C96.0685643 1.89349112 112.243363 7.52182186 125.37901 17.0657899C138.817614 26.8294157 149.076749 40.6869518 154.319527 56.8047337"
             android:strokeWidth="5.481"
-            android:strokeColor="@color/color_accent"
+            android:strokeColor="@color/connect_anim_vector_circle_slice_color"
             android:strokeLineCap="round" />
     </group>
 </vector>

@@ -2,6 +2,7 @@ package com.wlvpn.consumervpn.data.repository
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.wlvpn.consumervpn.data.model.FastestServerLocation
 import com.wlvpn.consumervpn.domain.model.Settings
 import com.wlvpn.consumervpn.domain.repository.ConnectionRequestSettingsRepository
 import io.reactivex.Completable
@@ -24,18 +25,17 @@ class SharedPrefsConnectionRequestSettingsRepository(
             val serializedSettings =
                 privateSharedPreferences.getString(connectionRequestKey, "")
 
-            if (!serializedSettings.isNullOrEmpty()) {
-                //Deserialize and emit
-                it.onSuccess(
-                    gson.fromJson(
-                        serializedSettings,
-                        Settings.ConnectionRequest::class.java
-                    )
+            val connectionRequest = if (!serializedSettings.isNullOrEmpty()) {
+                //Deserialize
+                gson.fromJson(
+                    serializedSettings,
+                    Settings.ConnectionRequest::class.java
                 )
-            }
+            } else { Settings.ConnectionRequest(location = FastestServerLocation()) }
+
+            it.onSuccess(connectionRequest)
             it.onComplete()
         }
-
 
     override fun setConnectionRequestSettings(
         connectionRequest: Settings.ConnectionRequest

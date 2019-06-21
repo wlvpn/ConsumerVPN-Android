@@ -8,31 +8,13 @@ data class Server(
     val capacity: Int = -1
 )
 
-data class ServerLocation(
-    val city: String? = null,
-    val country: String,
-    val countryCode: String
-) {
-    constructor(country: String, countryCode: String) :
-            this("", country, countryCode)
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other?.javaClass != javaClass) return false
-
-        other as ServerLocation
-
-        if (this.hashCode() != other.hashCode()) {
-            return false
-        }
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return city.hashCode() + country.hashCode() + countryCode.hashCode()
-    }
-}
+/*
+ *  This interface should be implemented in order to provide an specific location type.
+ *  It is an empty interface because it needs to be open enough to add a new ServerLocation
+ *  definition as needed, due to this, there is no property that could be applied
+ *  to every ServerLocation type.
+ */
+interface ServerLocation
 
 data class ServerHost(
     val name: String = "",

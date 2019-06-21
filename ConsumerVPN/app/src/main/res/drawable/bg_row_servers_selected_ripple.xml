@@ -2,6 +2,6 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="?android:colorControlHighlight">
 
-    <item android:drawable="@color/bg_selected_server_row" />
+    <item android:drawable="@color/server_row_bg_selected_color" />
 
 </ripple>

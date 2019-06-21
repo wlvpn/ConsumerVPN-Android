@@ -6,7 +6,7 @@
     <item
         android:id="@+id/item_search"
         android:icon="@drawable/ic_search_24dp"
-        android:iconTint="@color/white"
+        android:iconTint="@color/actionbar_ic_vector_color"
         android:title="@string/home_tab_servers_menu_search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom"
@@ -15,7 +15,7 @@
     <item
         android:id="@+id/item_sort"
         android:icon="@drawable/ic_sort_24dp"
-        android:iconTint="@color/white"
+        android:iconTint="@color/actionbar_ic_vector_color"
         android:title="@string/home_tab_servers_menu_sort"
         app:iconTint="@color/white"
         app:showAsAction="ifRoom"

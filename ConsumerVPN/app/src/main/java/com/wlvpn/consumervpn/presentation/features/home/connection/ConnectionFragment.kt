@@ -14,8 +14,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import com.jakewharton.rxbinding3.view.clicks
 import com.wlvpn.consumervpn.R
-import com.wlvpn.consumervpn.domain.model.Server
-import com.wlvpn.consumervpn.domain.model.ServerLocation
 import com.wlvpn.consumervpn.presentation.di.Injector
 import com.wlvpn.consumervpn.presentation.features.home.HomeViewPagerFragment
 import com.wlvpn.consumervpn.presentation.features.widget.ConnectionStateView
@@ -116,11 +114,11 @@ class ConnectionFragment : HomeViewPagerFragment<ConnectionContract.Presenter>()
         startActivityForResult(intent, PREPARE_VPN_SERVICE)
     }
 
-    override fun setDisconnectedLocation(location: ServerLocation) {
+    override fun setDisconnectedLocation(countryName: String, cityName: String) {
         locationTextView.text = getString(
             R.string.home_connection_location_placeholder,
-            location.city,
-            location.country
+            cityName,
+            countryName
         )
     }
 
@@ -149,12 +147,21 @@ class ConnectionFragment : HomeViewPagerFragment<ConnectionContract.Presenter>()
         disconnectedStateLayout.visibility = View.GONE
     }
 
-    override fun showConnectedServer(server: Server) {
+    override fun showConnectedServer(hostIpAddress: String, countryName: String) {
         val locationText = getString(
             R.string.home_connection_location_placeholder,
-            server.location.city ?: "", server.location.country
+            "", countryName
         )
-        ipTextView.text = server.host.ipAddress
+        ipTextView.text = hostIpAddress
+        connectedLocationTextView.text = locationText
+    }
+
+    override fun showConnectedServer(hostIpAddress: String, countryName: String, cityName: String) {
+        val locationText = getString(
+            R.string.home_connection_location_placeholder,
+            cityName, countryName
+        )
+        ipTextView.text = hostIpAddress
         connectedLocationTextView.text = locationText
     }
 

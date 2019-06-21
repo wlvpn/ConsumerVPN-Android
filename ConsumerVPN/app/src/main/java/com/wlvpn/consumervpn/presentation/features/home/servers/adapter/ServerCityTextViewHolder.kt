@@ -35,14 +35,14 @@ class ServerCityTextViewHolder(
         val typeFace: Typeface?
 
         if (item.isSelected) {
-            textColor = ContextCompat.getColor(itemView.context, R.color.text_color_location_selected)
+            textColor = ContextCompat.getColor(itemView.context, R.color.server_location_selected_text_color)
             typeFace = ResourcesCompat.getFont(itemView.context, R.font.roboto_bold)
             ViewCompat.setElevation(
                 itemView,
                 DEFAULT_ELEVATION
             )
         } else {
-            textColor = ContextCompat.getColor(itemView.context, R.color.text_color_location)
+            textColor = ContextCompat.getColor(itemView.context, R.color.server_location_text_color)
             typeFace = ResourcesCompat.getFont(itemView.context, R.font.roboto_regular)
             ViewCompat.setElevation(itemView, 0f)
         }

@@ -40,10 +40,10 @@ class ServerCountryViewHolder(
         val locationsSize = item.cityCount
 
         if (item.isSelected) {
-            rowTextColor = ContextCompat.getColor(itemView.context, R.color.color_accent)
+            rowTextColor = ContextCompat.getColor(itemView.context, R.color.server_country_selected_text_color)
             typeFace = ResourcesCompat.getFont(itemView.context, R.font.roboto_bold)
         } else {
-            rowTextColor = ContextCompat.getColor(itemView.context, R.color.text_color_primary)
+            rowTextColor = ContextCompat.getColor(itemView.context, R.color.server_country_text_color)
             typeFace = ResourcesCompat.getFont(itemView.context, R.font.roboto_regular)
         }
 

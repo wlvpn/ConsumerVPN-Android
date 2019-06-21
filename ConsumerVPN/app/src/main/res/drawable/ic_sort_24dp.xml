@@ -4,7 +4,6 @@
     android:height="@dimen/vector_ic_size"
     android:tint="@color/ic_fill_color"
     android:viewportWidth="24.0"
-
     android:viewportHeight="24.0">
     <path
         android:fillColor="#FF000000"

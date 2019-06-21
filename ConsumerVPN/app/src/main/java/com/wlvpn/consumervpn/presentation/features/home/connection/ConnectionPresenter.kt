@@ -1,9 +1,11 @@
 package com.wlvpn.consumervpn.presentation.features.home.connection
 
+import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
+import com.wlvpn.consumervpn.data.model.CountryServerLocation
+import com.wlvpn.consumervpn.data.model.FastestServerLocation
 import com.wlvpn.consumervpn.data.exception.NetworkNotAvailableException
 import com.wlvpn.consumervpn.data.exception.UnknownErrorException
 import com.wlvpn.consumervpn.domain.model.ConnectionState
-import com.wlvpn.consumervpn.domain.model.Settings.ConnectionRequest.ConnectOption.*
 import com.wlvpn.consumervpn.domain.service.authentication.UserAuthenticationService
 import com.wlvpn.consumervpn.domain.service.settings.SettingsService
 import com.wlvpn.consumervpn.domain.service.vpn.VpnService
@@ -134,28 +136,12 @@ class ConnectionPresenter(
         getConnectionSettingsDisposable = settingsService.getConnectionRequestSettings()
             .defaultSchedulers(schedulerProvider)
             .subscribe({
-                when (it.connectionOption) {
-                    FASTEST_SERVER -> {
-                        view?.setDisconnectedToFastest()
+                when (val location = it.location) {
+                    is FastestServerLocation ->  view?.setDisconnectedToFastest()
+                    is CityAndCountryServerLocation -> {
+                        view?.setDisconnectedLocation(location.country, location.city)
                     }
-
-                    FASTEST_IN_LOCATION -> {
-                        val location = it.location
-                        if (location?.city == null) {
-                            view?.setDisconnectedLocationToFastest(it.location!!.country)
-                        } else {
-                            view?.setDisconnectedLocation(location)
-                        }
-                    }
-
-                    WITH_SERVER -> {
-                        val location = it.server?.location
-                        if (location?.city == null) {
-                            view?.setDisconnectedToFastest()
-                        } else {
-                            view?.setDisconnectedLocation(location)
-                        }
-                    }
+                    is CountryServerLocation -> view?.setDisconnectedLocationToFastest(location.country)
                 }
                 view?.showDisconnectedView()
             }) {
@@ -167,7 +153,19 @@ class ConnectionPresenter(
         vpnService.getConnectedServer()
             .defaultSchedulers(schedulerProvider)
             .subscribe({
-                view?.showConnectedServer(it)
+                when(val serverLocation = it.location) {
+                    is CityAndCountryServerLocation -> {
+                        view?.showConnectedServer(
+                            it.host.ipAddress,
+                            serverLocation.country,
+                            serverLocation.city)
+                    }
+                    is CountryServerLocation -> {
+                        view?.showConnectedServer(
+                            it.host.ipAddress,
+                            serverLocation.country)
+                    }
+                }
                 view?.showConnectedView()
             }) {
                 Timber.e(it, "Unknown error when obtaining connected server")

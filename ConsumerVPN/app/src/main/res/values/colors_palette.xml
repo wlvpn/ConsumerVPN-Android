@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Material Design Colors
+    If you want to find the right dark and light tones to comply with material design
+    is recommended to use this tool
+    https://material.io/tools/color/
+-->
+
+    <!--
+       If you want to add new colors to this pallet and you don't know how to name them, use these tools:
+       http://chir.ag/projects/name-that-color/
+       https://www.color-blindness.com/color-name-hue/
+
+       These websites provide a name to any HEX color.
+   -->
+
+    <color name="white">#ffffff</color>
+    <color name="white_80">#CCffffff</color>
+    <color name="white_60">#99ffffff</color>
+    <color name="white_40">#66ffffff</color>
+    <color name="white_20">#33ffffff</color>
+    <color name="white_10">#1Affffff</color>
+    <color name="white_8">#14ffffff</color>
+    <color name="white_5">#0Dffffff</color>
+    <color name="black">#000000</color>
+    <color name="black_80">#CC000000</color>
+    <color name="black_60">#99000000</color>
+    <color name="black_40">#66000000</color>
+    <color name="black_20">#33000000</color>
+    <color name="black_10">#1A000000</color>
+    <color name="black_5">#0D000000</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="main_blue">#4A90E2</color>
+    <color name="main_blue_15">#264A90E2</color>
+    <color name="dark_blue">#0063b0</color>
+    <color name="clear_red">#D0021B</color>
+    <color name="clear_dark_red">#960000</color>
+    <color name="error_red">#db493d</color>
+
+    <color name="black_ebony">#0A0D16</color>
+    <color name="black_pearl">#090A0E</color>
+    <color name="black_vulcan">#141720</color>
+
+    <color name="black_rock">#2A2D37</color>
+    <color name="black_charade">#222530</color>
+
+    <color name="steel_gray">#3E414B</color>
+    <color name="dark_gray">#171A21</color>
+    <color name="steel_gray_40">#663E414B</color>
+    <color name="blue_gray">#1F232F</color>
+    <color name="blue_gray_transparent">#E71F232F</color>
+    <color name="black_midnight_express">#10121E</color>
+
+</resources>

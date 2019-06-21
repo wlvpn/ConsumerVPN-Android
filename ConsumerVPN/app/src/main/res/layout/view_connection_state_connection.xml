@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_light"
-                android:textColor="@color/color_accent"
+            android:textColor="@color/connect_state_connection_ip_location_text_color"
                 android:textSize="@dimen/home_connection_text_view_location_text_size"
                 tools:text="254.254.242.254"/>
 
@@ -103,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_light"
-                android:textColor="@color/color_accent"
+            android:textColor="@color/connect_state_connection_ip_location_text_color"
                 android:textSize="@dimen/home_connection_text_view_location_text_size"
                 tools:text="Dallas, United States"/>
 

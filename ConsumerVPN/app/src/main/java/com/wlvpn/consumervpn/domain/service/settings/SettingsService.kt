@@ -16,13 +16,10 @@ interface SettingsService {
 
     fun updateGeneralSettings(updated: Settings.GeneralConnection): Completable
 
-    //TODO Refactor this a long with Settings.ConnectionRequest model
     fun updateSelectedLocation(serverLocation: ServerLocation): Completable
 
-    //TODO Refactor this a long with Settings.ConnectionRequest model
     fun updateSelectedServer(server: Server): Completable
 
-    //TODO Refactor this a long with Settings.ConnectionRequest model
     fun updateSelectedFastestAvailable(): Completable
 
     fun updateConnectionRequestWithStartupSettings(): Completable
