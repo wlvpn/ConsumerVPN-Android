@@ -11,8 +11,9 @@ Class: [com.gentlebreeze.vpn.sdk.model.VpnPop][1]
 Object class that contains information about a certain pop
 
 - **`city`**: `String` value containing the city where this pop is located
-- **`country`**: `String` value containing the country where this pop belongs
-- **`countryCode`**: `String` value containing the country code unique identifier
+- **`country`**: `String` value containing the country where this pop belongs.
+This value will be stored in the selected Locale
+- **`countryCode`**: `String` value containing the ISO two letter country code unique identifier
 - **`latitude`**: `Double` value containing the location in decimal degrees latitude
 - **`longitude`**: `Double` value containing the location in decimal degrees longitude
 
@@ -57,6 +58,9 @@ To Initialize use `SortPopOption` and `SortOrder` values
     - This method will request all available pops by a certain country code sorted and ordered
         - **`countryCode`**: `String` value with the country code unique identifier
         - **`sortPop`**: `SortPop` object model to define how the list will be sorted and ordered
+5. `ICallback<Boolean> updatePopsCountriesLanguage(locale)`
+    - This method will update all pops country name to the desire language
+        - **`locale`**: `Locale` The desire locale containing the desire country Ex. Locale("es", "MX")
 
 All callbacks will return:
 - **`OnNext`**: A List of `VpnPop` object

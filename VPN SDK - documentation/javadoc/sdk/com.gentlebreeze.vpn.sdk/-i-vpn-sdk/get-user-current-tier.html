@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>IVpnSdk.getUserCurrentTier - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk</a>&nbsp;/&nbsp;<a href="index.html">IVpnSdk</a>&nbsp;/&nbsp;<a href="./get-user-current-tier.html">getUserCurrentTier</a><br/>
+<br/>
+<h1>getUserCurrentTier</h1>
+<a name="com.gentlebreeze.vpn.sdk.IVpnSdk$getUserCurrentTier()"></a>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getUserCurrentTier</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Single</span><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.tier.domain.model/-tier/index.html"><span class="identifier">Tier</span></a><span class="symbol">&gt;</span></code>
+<p>Get an observable of the user current tier.</p>
+<p>This observable will return a <a href="../../com.gentlebreeze.vpn.sdk.tier.domain.model/-tier/index.html">Tier</a> subclass.</p>
+<p><a href="../../com.gentlebreeze.vpn.sdk.tier.domain.model/-tier/index.html">Tier</a> is a kotlin sealed class with three children:</p>
+<ul><li><a href="#">SubscriptionTier</a></li>
+<li><a href="#">BandwidthTier</a></li>
+<li><a href="#">EmptyTierTier</a></li>
+</ul>
+<p>This Single will return any of these three children.</p>
+<p>If user has a tier of any kind a <a href="#">SubscriptionTier</a> or <a href="#">BandwidthTier</a> will be emitted.</p>
+<p>If the user doesn't have any current tier, a <a href="#">EmptyTier</a> will be emited</p>
+<p>On Failure, observable will return one of the following throwables through  <code>onError</code>:</p>
+<ul><li><a href="../../com.gentlebreeze.vpn.sdk.tier.data.failure/-api-call-failure/index.html">ApiCallFailure</a></li>
+<li><a href="../../com.gentlebreeze.vpn.sdk.tier.data.failure/-network-not-available-failure/index.html">NetworkNotAvailableFailure</a></li>
+</ul>
+<p><strong>Return</strong><br/>
+a single observable with the user's tier</p>
+</BODY>
+</HTML>

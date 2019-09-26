@@ -116,6 +116,17 @@ in a specific order</p>
 </tr>
 <tr>
 <td>
+<p><a href="fetch-all-servers-by-country-and-city.html">fetchAllServersByCountryAndCity</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">fetchAllServersByCountryAndCity</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchAllServersByCountryAndCity(kotlin.String, kotlin.String, com.gentlebreeze.vpn.sdk.sort.SortServer)/countryCode">countryCode</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchAllServersByCountryAndCity(kotlin.String, kotlin.String, com.gentlebreeze.vpn.sdk.sort.SortServer)/city">city</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchAllServersByCountryAndCity(kotlin.String, kotlin.String, com.gentlebreeze.vpn.sdk.sort.SortServer)/sortServer">sortServer</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.sort/-sort-server/index.html"><span class="identifier">SortServer</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-server/index.html"><span class="identifier">VpnServer</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Get a list of all servers filtered by country code and city in a specific order</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">fetchAllServersByCountryAndCity</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchAllServersByCountryAndCity(kotlin.String, kotlin.String)/countryCode">countryCode</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$fetchAllServersByCountryAndCity(kotlin.String, kotlin.String)/city">city</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-server/index.html"><span class="identifier">VpnServer</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Get a list of all servers filtered by country code and city</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="fetch-all-servers-by-country-code.html">fetchAllServersByCountryCode</a></p>
 </td>
 <td>
@@ -331,6 +342,15 @@ First by country</p>
 </tr>
 <tr>
 <td>
+<p><a href="get-user-current-tier.html">getUserCurrentTier</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getUserCurrentTier</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Single</span><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.tier.domain.model/-tier/index.html"><span class="identifier">Tier</span></a><span class="symbol">&gt;</span></code>
+<p>Get an observable of the user current tier.</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="is-access-token-valid.html">isAccessTokenValid</a></p>
 </td>
 <td>
@@ -421,7 +441,8 @@ containing both the connection state description and enum value</p>
 </td>
 <td>
 <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">prepareVpnService</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$prepareVpnService(android.app.Activity)/activity">activity</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Activity.html"><span class="identifier">Activity</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
-<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">prepareVpnService</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$prepareVpnService(android.app.Fragment)/fragment">fragment</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Fragment.html"><span class="identifier">Fragment</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><s><span class="identifier">prepareVpnService</span></s><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$prepareVpnService(android.app.Fragment)/fragment">fragment</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Fragment.html"><span class="identifier">Fragment</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">prepareVpnService</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$prepareVpnService(androidx.fragment.app.Fragment)/fragment">fragment</span><span class="symbol">:</span>&nbsp;<span class="identifier">Fragment</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Start the intent to prepare the VPN service.
 Will show the permission dialog or return null
 if VPN service is already prepared.</p>
@@ -432,9 +453,12 @@ if VPN service is already prepared.</p>
 <p><a href="refresh-token.html">refreshToken</a></p>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">refreshToken</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-callback/index.html"><span class="identifier">Callback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-login-response/index.html"><span class="identifier">VpnLoginResponse</span></a><span class="symbol">&gt;</span></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><s><span class="identifier">refreshToken</span></s><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-callback/index.html"><span class="identifier">Callback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-login-response/index.html"><span class="identifier">VpnLoginResponse</span></a><span class="symbol">&gt;</span></code>
 <p>Uses internal auth info refresh token to refresh
 the authentication token</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">refreshToken</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$refreshToken(kotlin.String, kotlin.String)/username">username</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$refreshToken(kotlin.String, kotlin.String)/password">password</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-callback/index.html"><span class="identifier">Callback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-login-response/index.html"><span class="identifier">VpnLoginResponse</span></a><span class="symbol">&gt;</span></code>
+<p>Uses internal auth info refresh token to refresh
+the authentication token or executes a login to renew the session</p>
 </td>
 </tr>
 <tr>
@@ -445,6 +469,26 @@ the authentication token</p>
 <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">seedServerList</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">&gt;</span></code>
 <p>Updates list of servers from internal json file
 raw/severs.json, raw/protocols.json</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-custom-geo-info.html">setCustomGeoInfo</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setCustomGeoInfo</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$setCustomGeoInfo(com.gentlebreeze.vpn.sdk.model.VpnGeoData)/vpnGeoData">vpnGeoData</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-geo-data/index.html"><span class="identifier">VpnGeoData</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-i-callback/index.html"><span class="identifier">ICallback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Stores location information from an external source</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="update-pops-country-language.html">updatePopsCountryLanguage</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">updatePopsCountryLanguage</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.IVpnSdk$updatePopsCountryLanguage(java.util.Locale)/locale">locale</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/java/util/Locale.html"><span class="identifier">Locale</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-callback/index.html"><span class="identifier">Callback</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Sets current locale and when a change is detected it will update the language of the
+current countries. This is helpful when a search of a country in a different language is
+needed</p>
 </td>
 </tr>
 <tr>

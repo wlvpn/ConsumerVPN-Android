@@ -31,6 +31,12 @@ Contains values related to successful VPN-SDK login calls
     - This method will tell you if the current has a current session on
 3. `Callback<Unit> logout()`
     - This method will execute a log out operation
+4. `Callback<VpnLoginResponse> refreshToken(username, password)`
+    - This method will try to refresh the session token when the
+     the current one is not valid anymore using parameters to try a login
+     in case the token is invalid:
+        - **`username`**: `String` parameter holding credentials user value
+        - **`password`**: `String` parameter holding credentials password value
 
 ### Examples
 

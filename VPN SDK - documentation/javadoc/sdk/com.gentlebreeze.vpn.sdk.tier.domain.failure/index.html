@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.gentlebreeze.vpn.sdk.tier.domain.failure - sdk</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">sdk</a>&nbsp;/&nbsp;<a href="./index.html">com.gentlebreeze.vpn.sdk.tier.domain.failure</a><br/>
+<br/>
+<h2>Package com.gentlebreeze.vpn.sdk.tier.domain.failure</h2>
+<h3>Exceptions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-domain-failure/index.html">DomainFailure</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">DomainFailure</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-failure/index.html"><span class="identifier">Failure</span></a></code>
+<p>Basic Domain layer Failure, we shouldn't use this failure directly</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-failure/index.html">Failure</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Failure</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a></code>
+<p>This a base class to all failure models, this are intended to not to be thrown, instead
+we should just pas them as error models (through RxJava observables or anything else)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

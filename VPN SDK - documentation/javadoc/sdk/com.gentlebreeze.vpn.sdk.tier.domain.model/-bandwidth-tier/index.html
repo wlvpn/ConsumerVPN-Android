@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>BandwidthTier - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk.tier.domain.model</a>&nbsp;/&nbsp;<a href="./index.html">BandwidthTier</a><br/>
+<br/>
+<h1>BandwidthTier</h1>
+<code><span class="keyword">class </span><span class="identifier">BandwidthTier</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-tier/index.html"><span class="identifier">Tier</span></a></code>
+<p>Represents a user bandwidth tier.</p>
+<h3>Parameters</h3>
+<p><a name="name"></a>
+<code>name</code> - tier's name</p>
+<p><a name="expireDate"></a>
+<code>expireDate</code> - tier's expiration date.</p>
+<p><a name="autoRefillAt"></a>
+<code>autoRefillAt</code> - bandwidth renewal date.</p>
+<p><a name="totalData"></a>
+<code>totalData</code> - total data purchased for this tier.</p>
+<p><a name="dataUsed"></a>
+<code>dataUsed</code> - amount of data used.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">BandwidthTier</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.tier.domain.model.BandwidthTier$<init>(kotlin.String, java.util.Date, java.util.Date, com.gentlebreeze.vpn.sdk.tier.domain.model.BandwidthValue, com.gentlebreeze.vpn.sdk.tier.domain.model.BandwidthValue)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.tier.domain.model.BandwidthTier$<init>(kotlin.String, java.util.Date, java.util.Date, com.gentlebreeze.vpn.sdk.tier.domain.model.BandwidthValue, com.gentlebreeze.vpn.sdk.tier.domain.model.BandwidthValue)/expireDate">expireDate</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/java/util/Date.html"><span class="identifier">Date</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.tier.domain.model.BandwidthTier$<init>(kotlin.String, java.util.Date, java.util.Date, com.gentlebreeze.vpn.sdk.tier.domain.model.BandwidthValue, com.gentlebreeze.vpn.sdk.tier.domain.model.BandwidthValue)/autoRefillAt">autoRefillAt</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/java/util/Date.html"><span class="identifier">Date</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.tier.domain.model.BandwidthTier$<init>(kotlin.String, java.util.Date, java.util.Date, com.gentlebreeze.vpn.sdk.tier.domain.model.BandwidthValue, com.gentlebreeze.vpn.sdk.tier.domain.model.BandwidthValue)/totalData">totalData</span><span class="symbol">:</span>&nbsp;<a href="../-bandwidth-value/index.html"><span class="identifier">BandwidthValue</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.tier.domain.model.BandwidthTier$<init>(kotlin.String, java.util.Date, java.util.Date, com.gentlebreeze.vpn.sdk.tier.domain.model.BandwidthValue, com.gentlebreeze.vpn.sdk.tier.domain.model.BandwidthValue)/dataUsed">dataUsed</span><span class="symbol">:</span>&nbsp;<a href="../-bandwidth-value/index.html"><span class="identifier">BandwidthValue</span></a><span class="symbol">)</span></code>
+<p>Represents a user bandwidth tier.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="auto-refill-at.html">autoRefillAt</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">autoRefillAt</span><span class="symbol">: </span><a href="https://developer.android.com/reference/java/util/Date.html"><span class="identifier">Date</span></a></code>
+<p>bandwidth renewal date.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="data-used.html">dataUsed</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">dataUsed</span><span class="symbol">: </span><a href="../-bandwidth-value/index.html"><span class="identifier">BandwidthValue</span></a></code>
+<p>amount of data used.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="total-data.html">totalData</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">totalData</span><span class="symbol">: </span><a href="../-bandwidth-value/index.html"><span class="identifier">BandwidthValue</span></a></code>
+<p>total data purchased for this tier.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-tier/expire-date.html">expireDate</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">expireDate</span><span class="symbol">: </span><a href="https://developer.android.com/reference/java/util/Date.html"><span class="identifier">Date</span></a></code>
+<p>tier's expiration date</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-tier/name.html">name</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">name</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>tier's name</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

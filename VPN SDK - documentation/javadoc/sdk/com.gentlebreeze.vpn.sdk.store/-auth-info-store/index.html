@@ -29,49 +29,63 @@
 <p><a href="access-expire-epoch.html">accessExpireEpoch</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">accessExpireEpoch</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+<code><span class="keyword">var </span><span class="identifier">accessExpireEpoch</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
 </tr>
 <tr>
 <td>
 <p><a href="access-token.html">accessToken</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">accessToken</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+<code><span class="keyword">var </span><span class="identifier">accessToken</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
 </tr>
 <tr>
 <td>
 <p><a href="account-updated-at.html">accountUpdatedAt</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">accountUpdatedAt</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+<code><span class="keyword">var </span><span class="identifier">accountUpdatedAt</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="password.html">password</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">password</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
 </tr>
 <tr>
 <td>
 <p><a href="refresh-token.html">refreshToken</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">refreshToken</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+<code><span class="keyword">var </span><span class="identifier">refreshToken</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>
 <p><a href="sub-end-epoch.html">subEndEpoch</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">subEndEpoch</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+<code><span class="keyword">var </span><span class="identifier">subEndEpoch</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="username.html">username</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">username</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
 </tr>
 <tr>
 <td>
 <p><a href="vpn-auth-password.html">vpnAuthPassword</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">vpnAuthPassword</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+<code><span class="keyword">var </span><span class="identifier">vpnAuthPassword</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
 </tr>
 <tr>
 <td>
 <p><a href="vpn-auth-username.html">vpnAuthUsername</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">vpnAuthUsername</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+<code><span class="keyword">var </span><span class="identifier">vpnAuthUsername</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -84,55 +98,6 @@
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">clear</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="store-access-expire-epoch.html">storeAccessExpireEpoch</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">storeAccessExpireEpoch</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.AuthInfoStore$storeAccessExpireEpoch(kotlin.Long)/timeRemaining">timeRemaining</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="store-access-token.html">storeAccessToken</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">storeAccessToken</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.AuthInfoStore$storeAccessToken(kotlin.String)/accessToken">accessToken</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="store-account-updated-at.html">storeAccountUpdatedAt</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">storeAccountUpdatedAt</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.AuthInfoStore$storeAccountUpdatedAt(kotlin.Long)/timestamp">timestamp</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="store-refresh-token.html">storeRefreshToken</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">storeRefreshToken</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.AuthInfoStore$storeRefreshToken(kotlin.String)/refreshToken">refreshToken</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="store-sub-end-epoch.html">storeSubEndEpoch</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">storeSubEndEpoch</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.AuthInfoStore$storeSubEndEpoch(kotlin.Long)/subEndEpoch">subEndEpoch</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="store-vpn-auth-password.html">storeVpnAuthPassword</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">storeVpnAuthPassword</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.AuthInfoStore$storeVpnAuthPassword(kotlin.String)/password">password</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="store-vpn-auth-username.html">storeVpnAuthUsername</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">storeVpnAuthUsername</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.AuthInfoStore$storeVpnAuthUsername(kotlin.String)/username">username</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 </tbody>
 </table>

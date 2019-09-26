@@ -20,6 +20,7 @@ _(Data usage is now accessible by using the `listenToConnectionData()` callback)
 - **`CONNECTED`**: _0_
 - **`CONNECTING`**: _1_
 - **`DISCONNECTED`**: _2_
+- **`DISCONNECTED_ERROR`**: _3_
 
 ## `VpnDataUsage`
 
@@ -82,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
                         int connectionState = vpnState.getConnectionState();
 
                         switch (connectionState) {
+                            case VpnState.DISCONNECTED_ERROR:
+                                // Handle any state update in here
+                                break;
                             case VpnState.DISCONNECTED:
                                 // Handle any state update in here
                                 break;
@@ -128,6 +132,10 @@ class MainActivity : AppCompatActivity() {
                     val connectionState = vpnState.connectionState
 
                     when (connectionState) {
+                    
+                        VpnState.DISCONNECTED_ERROR -> {
+                            // Handle any state update in here
+                        }
 
                         VpnState.DISCONNECTED -> {
                             // Handle any state update in here
@@ -140,6 +148,7 @@ class MainActivity : AppCompatActivity() {
                         VpnState.CONNECTING -> {
                             // Handle any state update in here
                         }
+                        
                     }
 
                     Unit

@@ -12,7 +12,7 @@ Before you begin using VPN-SDK, you must setup your project following the next i
 - API Token Access
 - Package Cloud Access TPken
 - Android API level 15+ (4.0.3)
-- Android Build Tools 25.0+
+- Android Build Tools 28.0+
 - Project Gradle plugin version 3x
 
 ### Gradle
@@ -113,6 +113,8 @@ of configuration options:
 * **loginApi (Optional)** -  String value endpoint for the API login
 * **protocolListApi (Optional)** - String value endpoint for the API protocol list
 * **serverListApi - (Optional)** String value endpoint for the API server list
+* **logTag - (Optional)** String value to place an identifier on each log entry
+* **locale - (Optional)** Locale value that allows searches related to countries in different languages
 
 Note: You can add these values directly to your `MyApplication.java` file
 
@@ -134,11 +136,14 @@ dependencies {
 The VPN-SDK adds the following required permissions automatically into your final
 application manifest:
 
-* **android.permission.ACCESS_NETWORK_STATE**: Allows the sdk to get access to 
-information about networks.
-* **android.permission.INTERNET**: Allows the SDK to execute API calls over the Internet.
-* **android.permission.ACCESS_WIFI_STATE**: Allows the SDK to get access to information about 
-Wi-Fi networks.
+* **android.permission.ACCESS_NETWORK_STATE**: Allows the SDK to get access 
+to information about networks.
+* **android.permission.INTERNET**: Allows the SDK to execute API calls 
+over the Internet.
+* **android.permission.ACCESS_WIFI_STATE**: Allows the SDK to get access 
+to information about Wi-Fi networks.
+* **android.permission.FOREGROUND_SERVICE**: Allows the SDK to run the 
+VPN service in the foreground
 
 ```xml
 <manifest
@@ -153,6 +158,10 @@ Wi-Fi networks.
 
     <uses-permission
         android:name="android.permission.ACCESS_WIFI_STATE" />
+        
+    <uses-permission 
+        android:name="android.permission.FOREGROUND_SERVICE" />
+        
     ....
 
     <application ...>
@@ -202,6 +211,23 @@ public class MyApplication extends Application {
                     BuildConfig.PROTOCOL_LIST_API,
                     BuildConfig.SERVER_LIST_API
         ));
+        
+        // OR use the builder
+        
+        vpnSdk = VpnSdk.init(this, new SdkConfig.Builder(
+                BuildConfig.ACCOUNT_NAME,
+                BuildConfig.API_KEY,
+                BuildConfig.AUTH_SUFFIX)
+                .client(BuildConfig.CLIENT)
+                .apiHost(application.getString(R.string.endpoint_main_api))
+                .ipGeoUrl(BuildConfig.IP_GEO)
+                .apiLoginEndpoint(BuildConfig.LOGIN_API)
+                .apiTokenRefreshEndpoint(BuildConfig.REFRESH_API)
+                .apiProtocolListEndpoint(BuildConfig.PROTOCOL_LIST_API)
+                .apiServerListEndpoint(BuildConfig.SERVER_LIST_API)
+                .logTag(MY_SDK_LOG_TAG)
+                .locale(new Locale("en", "US"))
+                .build());
     }
 }
 ```
@@ -209,6 +235,8 @@ public class MyApplication extends Application {
 For Kotlin:
 
 ```kotlin
+private const val MY_SDK_LOG_TAG = "VPN_SDK"
+
 class MyApplication : Application() {
     
     override fun onCreate() {
@@ -225,8 +253,27 @@ class MyApplication : Application() {
                 BuildConfig.LOGIN_API,
                 BuildConfig.REFRESH_API,
                 BuildConfig.PROTOCOL_LIST_API,
-                BuildConfig.SERVER_LIST_API
+                BuildConfig.SERVER_LIST_API,
+                MY_SDK_LOG_TAG,
+                Locale("en", "US")
         ))
+        
+        // Or use the builder
+        
+        vpnSdk = VpnSdk.init(this, SdkConfig.Builder(
+                BuildConfig.ACCOUNT_NAME,
+                BuildConfig.API_KEY,
+                BuildConfig.AUTH_SUFFIX)
+                .client(BuildConfig.CLIENT)
+                .apiHost(application.getString(R.string.endpoint_main_api))
+                .ipGeoUrl(BuildConfig.IP_GEO)
+                .apiLoginEndpoint(BuildConfig.LOGIN_API)
+                .apiTokenRefreshEndpoint(BuildConfig.REFRESH_API)
+                .apiProtocolListEndpoint(BuildConfig.PROTOCOL_LIST_API)
+                .apiServerListEndpoint(BuildConfig.SERVER_LIST_API)
+                .logTag(MY_SDK_LOG_TAG)
+                .locale(Locale("en", "US"))
+                .build())
     }
     
     companion object {

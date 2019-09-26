@@ -1,14 +1,126 @@
 # CHANGELOG
 
+## v1.5.6
+
+### Features
+
+* Added `getUserCurrentTier()` to get user current tier status. 
+This method will return a RxJava2 Single that emits a [Tier] object. 
+A [Tier] is a sealed class with three different 
+children([SubscriptionTier], [BandwidthTier] and [EmptyTier])
+    ```kotlin
+    fun getUserCurrentTier(): Single<Tier>
+    ```
+
+* Added `.apiLimitsEndpoint(...)` to sdk configuration. This configuration is required in order to 
+use `getUserCurrentTier()`. Because this is handled with Retrofit, there is no need to add `/` to 
+this start start of the endpoint.
+    ```kotlin
+    SdkConfig.Builder(...)
+    .
+    .
+    .apiLimitsEndpoint("limits") // No need to add `/` to these endpoint
+    ```
+
+## v1.5.5
+
+### Features
+
+* Added support for Androidx fragments thorough `prepareVpnService(fragment: androidx.fragment.app.Fragment)`
+
+* The call `updateServerList` also does a token refresh if the current access token is invalid
+
+## v1.5.4
+
+### Breaking Changes
+
+* [Dagger v2.23.2](](https://www.google.com)) is required for this version to work correctly
+
+* A new VpnState was added called `Disconnected Error` 
+
+* `refreshToken()` was deprecated use instead `refreshToken(username, password)`
+
+### Bug Fixes
+
+### Features
+
+* Added `setCustomGeoInfo(vpnGeoInfo)` Adds manual geo information to
+the sdk. Setting this values manually invalidates the need to call 
+`fetchGeoInfo()` for the load balance to work. 
+    ```kotlin
+    fun setCustomGeoInfo(vpnGeoData: VpnGeoData): ICallback<Boolean>
+    ```
+
+
+* Added `refreshToken(username, password)` Tries to refresh token
+when the session token is invalid, in case of an error it will automatically
+refresh the session performing a login
+     ```kotlin
+    fun refreshToken(username: String, password: String): Callback<VpnLoginResponse>
+    ```
+
+* Added Locale into the sdk configuration. This allows to switch 
+languages to support different countries names and searches using as 
+a default value `Locale("en", "US")`
+
+    ```kotlin
+     SdkConfig.Builder(ACCOUNT_NAME, API_KEY, AUTH_SUFFIX)
+        // .... Other Configurations
+        .locale(Locale("es", "MX"))
+        .build()
+    ```
+
+* Added `updateCountriesLanguage` this allows to switch, during 
+runtime, the current sdk Locale and updates the name of the countries
+in the SDK database. This helps you to use different languages to
+search for countries using the device language
+
+    ```kotlin
+    fun updatePopsCountryLanguage(locale: Locale): Callback<Boolean>
+    ```
+
+
+* Added VpnState `Disconnected Error`. This will allow handling errors 
+that produce disconnections easier. The most common error on this 
+scenario is "AUTH_FAILURE"
+
+    ```kotlin
+    getVpnSdk().listenToConnectState()
+        .subscribe({ vpnState ->
+            when (vpnState.connectionState) {
+                VpnState.DISCONNECTED_ERROR -> {}
+                VpnState.DISCONNECTED -> {}
+                VpnState.CONNECTED -> {}
+                VpnState.CONNECTING -> {}
+            }
+            Unit
+        }, { throwable ->
+            // Handle throwable in case of an error
+            Unit
+        })
+    ```
+
+* Added `fetchAllServersByCountryAndCity` operations to fetch servers 
+filtered by country and city name. This will avoid the need to fetch 
+pops first and then fetch all servers by VPN Pop
+
+    ``` kotlin
+    fun fetchAllServersByCountryAndCity(countryCode: String, city: String)
+    
+    fun fetchAllServersByCountryAndCity(countryCode: String, city: String, sortServer: SortServer)
+    ```
+
 ## v1.5.3 
 
 ### Breaking Changes
 
-* [Dagger v2.21][Dagger] is required for this version to work correctly
+* [Dagger v2.21](](https://www.google.com)) is required for this version to work correctly
+
+* A new SDKConfig Constructor was added to make the log tag optional
 
 * Added a new logTag, this new tag is used to override the Log output with any desired suffix
 
-```kotlin
+    ```kotlin
 
     //Example using a builder
      SdkConfig = SdkConfig.Builder(
@@ -38,8 +150,7 @@
               override val apiProtocolListEndpoint: String = BuildConfig.PROTOCOL_LIST_API,
               override val apiServerListEndpoint: String = BuildConfig.SERVER_LIST_API,
               val logTag: String
-```
-      
+    ```
 
 * `fetchAvailableVpnPortOptions(vpnProtocolOptions, scrambleEnabled)` was deprecated
 use instead `fetchAvailableVpnPortOptions(vpnProtocolOptions, vpnConnectionProtocolOptions, scrambleEnabled)`
@@ -48,7 +159,8 @@ use instead `fetchAvailableVpnPortOptions(vpnProtocolOptions, vpnConnectionProto
     ```xml
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     ```
 
 * Update servers will no longer update protocols only servers
@@ -74,7 +186,7 @@ while listening for the disconnected state
 * Fixed Pops sorting functionality for search queries, now it prioritize strings starting with the query
 Added the following methods for query search sorting:
 
-```kotlin
+    ```kotlin
     //Fetch a list of all pops sorted by query in specific order, first by city
     fetchPopsFirstByCityQuery(query: String, sortPop: SortPop)
 
@@ -89,7 +201,7 @@ Added the following methods for query search sorting:
 
     Fetch a list of all pops filtered by country code, sorted by city query in specific order
     fetchPopsByCityQuery(countryCode: String, query: String)
-```
+    ```
 
 ### Feature
 
@@ -99,13 +211,13 @@ that react to the VPN connection states. For example, it can be used to notify W
 Quick Tiles Settings or Services. Important: Only use centralized single operations
 otherwise is better to use `listenToConnectState()`
     ```kotlin
-        listenToCentralizedConnectionState(vpnStateConnectionCallback)
+    listenToCentralizedConnectionState(vpnStateConnectionCallback)
     ```
 
 * Added fetch available ports with connection settings.
 Replaces `fetchAvailableVpnPortOptions(vpnProtocolOptions, scrambleEnabled)`
     ``` kotlin
-        fetchAvailableVpnPortOptions(vpnProtocolOptions, vpnConnectionProtocolOptions, scrambleEnabled)
+    fetchAvailableVpnPortOptions(vpnProtocolOptions, vpnConnectionProtocolOptions, scrambleEnabled)
     ```
 
 * Deprecated `connect(VpnPop)` in replacement of only `connectToNearest(VpnPop)`.
@@ -125,17 +237,16 @@ Replaces `fetchAvailableVpnPortOptions(vpnProtocolOptions, scrambleEnabled)`
 
 * Added `connectToNearestRestrictedByCountry(notification)` to perform server balance limited to a given country
 
-
 * Added update protocol and servers call. Replaces `updateServerList`
 
     ```kotlin
-        fun updateServerProtocolList()
+    fun updateServerProtocolList()
     ```
 
 * Added update protocol list
 
     ```kotlin
-        fun updateProtocolList()
+    fun updateProtocolList()
     ```
 
 * Added blocking thread capabilities to `ICallback` class
@@ -154,7 +265,7 @@ country code `fetchAllServersByCountryCode`.
 
     ```kotlin
     fun fetchAllServersByCountryCode(countryCode:String): ICallback<List<VpnServer>>
-
+    
     fun fetchAllServersByCountryCode(countryCode:String): ICallback<List<VpnServer>>
     ```
 
@@ -191,15 +302,15 @@ Introduction of Split tunneling per application and discovery accessibility of t
 Introduction of Builder pattern for the VPN configuration
 
 ```java
-    VpnConnectionConfiguration.Builder(
-                        credentials.getUsername(),
-                        credentials.getPassword())
-                .connectionProtocol(VpnConnectionProtocolOptions.OPENVPN)
-                .vpnProtocol(VpnProtocolOptions.PROTOCOL_UDP)
-                .debugLevel(0)
-                .scrambleOn(false)
-                .port(VpnPortOptions.PORT_443)
-                .build();
+VpnConnectionConfiguration.Builder(
+                    credentials.getUsername(),
+                    credentials.getPassword())
+            .connectionProtocol(VpnConnectionProtocolOptions.OPENVPN)
+            .vpnProtocol(VpnProtocolOptions.PROTOCOL_UDP)
+            .debugLevel(0)
+            .scrambleOn(false)
+            .port(VpnPortOptions.PORT_443)
+            .build();
 ```
                 
 ### Bug Fixes
@@ -227,7 +338,8 @@ connection option due to better server support.
 
 Here is the latest VpnConnectionConfiguration constructor with defaults: 
 
-    VpnConnectionConfiguration(
+```kotlin
+VpnConnectionConfiguration(
         username: String,
         password: String,
         scrambleOn: Boolean = false,
@@ -237,6 +349,7 @@ Here is the latest VpnConnectionConfiguration constructor with defaults:
         connectionProtocol: VpnConnectionProtocolOptions = VpnConnectionProtocolOptions.OPENVPN,
         debugLevel: Int = 5
     )
+```
     
 To activate Strongswan simply change the connectionProtocol value to `VpnConnectionProtocolOptions.IKEV2`.
 This will require the API to support this connection protocol so ensure Strongswan is setup before
@@ -266,14 +379,14 @@ See the SortPop and SortServer objects for reference. They can be used like so:
     ```
 * Added in 3 new Auth helpers:
     ```kotlin
-        // Is current stored access token still valid?
-        fun isAccessTokenValid(): Boolean
-        
-        // Is access token valid and not expired?
-        fun isUserLoggedIn(): Boolean
-        
-        // Refresh the token using the stored refresh token
-        fun refreshToken()
+    // Is current stored access token still valid?
+    fun isAccessTokenValid(): Boolean
+    
+    // Is access token valid and not expired?
+    fun isUserLoggedIn(): Boolean
+    
+    // Refresh the token using the stored refresh token
+    fun refreshToken()
     ```
     
 ### Bug Fixes
@@ -333,4 +446,4 @@ a server or pop. SDK will use your geolocation to determine best server and pop.
 * Fixed the Callback subscribe method so the callbacks are optional in both java and kotlin
 * The SDK `init()` method no longer requires calling the companion object when implementing in java
 
-[Dagger]: https://github.com/google/dagger
+[Dagger]: http://www.reddit.com
