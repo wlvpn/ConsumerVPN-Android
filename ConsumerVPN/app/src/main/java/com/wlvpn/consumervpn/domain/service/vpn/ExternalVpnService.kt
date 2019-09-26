@@ -6,8 +6,8 @@ import com.wlvpn.consumervpn.domain.model.IpGeoLocationInfo
 import com.wlvpn.consumervpn.domain.model.Server
 import com.wlvpn.consumervpn.domain.service.authentication.UserAuthenticationService
 import com.wlvpn.consumervpn.domain.service.settings.SettingsService
-import com.wlvpn.consumervpn.domain.service.vpn.exception.AuthRequiredToConnectException
-import com.wlvpn.consumervpn.domain.service.vpn.exception.VpnNotPreparedException
+import com.wlvpn.consumervpn.domain.service.vpn.exception.AuthRequiredToConnectFailure
+import com.wlvpn.consumervpn.domain.service.vpn.exception.VpnNotPreparedFailure
 import com.wlvpn.consumervpn.presentation.util.zipPair
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -52,7 +52,7 @@ class ExternalVpnService(
                 if (isAuthenticated) {
                     Completable.complete()
                 } else {
-                    Completable.error(AuthRequiredToConnectException())
+                    Completable.error(AuthRequiredToConnectFailure())
                 }
             }
             .andThen(externalVpnConnectionGateway.setupVpn())
@@ -65,7 +65,7 @@ class ExternalVpnService(
                 if (isPrepared) {
                     Completable.complete()
                 } else {
-                    Completable.error(VpnNotPreparedException())
+                    Completable.error(VpnNotPreparedFailure())
                 }
             }
 

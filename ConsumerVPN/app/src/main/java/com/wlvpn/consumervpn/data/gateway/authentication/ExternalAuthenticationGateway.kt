@@ -1,8 +1,8 @@
 package com.wlvpn.consumervpn.data.gateway.authentication
 
 import com.gentlebreeze.vpn.sdk.IVpnSdk
-import com.wlvpn.consumervpn.data.exception.map.NetworkThrowableMapper
-import com.wlvpn.consumervpn.data.exception.map.ThrowableMapper
+import com.wlvpn.consumervpn.data.failure.map.NetworkThrowableMapper
+import com.wlvpn.consumervpn.data.failure.map.ThrowableMapper
 import com.wlvpn.consumervpn.data.util.onErrorMapThrowable
 import com.wlvpn.consumervpn.data.util.toSingle
 import com.wlvpn.consumervpn.domain.gateway.ExternalAuthenticationGateway

@@ -7,7 +7,7 @@ import com.wlvpn.consumervpn.domain.model.Credentials
 import com.wlvpn.consumervpn.domain.repository.ConnectionRequestSettingsRepository
 import com.wlvpn.consumervpn.domain.repository.CredentialsRepository
 import com.wlvpn.consumervpn.domain.repository.GeneralConnectionSettingsRepository
-import com.wlvpn.consumervpn.domain.service.authentication.exception.NotAuthenticatedException
+import com.wlvpn.consumervpn.domain.service.authentication.failure.NotAuthenticatedFailure
 import io.reactivex.Completable
 import io.reactivex.Single
 
@@ -45,6 +45,6 @@ class ExternalUserAuthenticationService(
     override fun getCredentials(): Single<Credentials> =
         credentialsRepository
             .getCredentials()
-            .switchIfEmpty(Single.error(NotAuthenticatedException()))
+            .switchIfEmpty(Single.error(NotAuthenticatedFailure()))
 
 }

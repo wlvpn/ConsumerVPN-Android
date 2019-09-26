@@ -4,7 +4,9 @@ import com.wlvpn.consumervpn.domain.model.Port
 import com.wlvpn.consumervpn.domain.model.Protocol
 import com.wlvpn.consumervpn.domain.model.Settings
 import com.wlvpn.consumervpn.domain.model.Settings.GeneralConnection.StartupConnectOption
+import com.wlvpn.consumervpn.domain.service.authentication.UserAuthenticationService
 import com.wlvpn.consumervpn.domain.service.settings.SettingsService
+import com.wlvpn.consumervpn.domain.service.vpn.VpnService
 import com.wlvpn.consumervpn.presentation.util.SchedulerProvider
 import com.wlvpn.consumervpn.presentation.util.defaultSchedulers
 import com.wlvpn.consumervpn.presentation.util.isRunning
@@ -16,8 +18,10 @@ import kotlin.properties.Delegates
 
 
 class SettingsPresenter(
-        private val settingsService: SettingsService,
-        private val schedulerProvider: SchedulerProvider
+    private val settingsService: SettingsService,
+    private val vpnService: VpnService,
+    private val authenticationService: UserAuthenticationService,
+    private val schedulerProvider: SchedulerProvider
 ) : SettingsContract.Presenter {
 
     override var view: SettingsContract.View? = null
@@ -39,16 +43,17 @@ class SettingsPresenter(
         view?.setStartupConnectPreferenceListOptions(StartupConnectOption.values().asList())
         view?.setProtocolPreferenceListOptions(Protocol.values().asList())
         view?.setPortPreferenceListOptions(current.availablePorts)
+        view?.toolbarVisibility(true)
 
         //If any task is running show loading
         view?.setLoadingVisibility(
-                getSettingsDisposable.isRunning() ||
-                        updateSettingsDisposable.isRunning()
+            getSettingsDisposable.isRunning() ||
+                    updateSettingsDisposable.isRunning()
         )
 
         //Start show settings task
         runShowStoredSettingsTask(onStarted = { view?.setLoadingVisibility(true) },
-                onFinished = { view?.setLoadingVisibility(false) })
+            onFinished = { view?.setLoadingVisibility(false) })
     }
 
     override fun cleanUp() {
@@ -64,12 +69,6 @@ class SettingsPresenter(
 
     override fun onStartupConnectChanged(startupConnectOption: StartupConnectOption) {
         current.startupConnectOption = startupConnectOption
-
-        //TODO: Pending implementation
-        if (startupConnectOption == StartupConnectOption.FASTEST_IN_LOCATION) {
-            view?.showFastestServerNotImplementedMessage()
-        }
-
         runNotifySettingsUpdatedTask()
     }
 
@@ -97,40 +96,55 @@ class SettingsPresenter(
         view?.showAbout()
     }
 
+    override fun onLogOutMenuItemClick() {
+        view?.showLogoutDialog()
+    }
+
+    override fun onLogoutClick() {
+        vpnService.disconnect()
+            .onErrorComplete()
+            .andThen(authenticationService.logout())
+            .subscribe({
+                view?.showLogin()
+            }) {
+                Timber.e(it, "Error while login out")
+            }.addTo(disposables)
+    }
+
     private fun runShowStoredSettingsTask(
-            onStarted: () -> Unit = {},
-            onFinished: () -> Unit = {}
+        onStarted: () -> Unit = {},
+        onFinished: () -> Unit = {}
     ) {
 
         //If this task or runNotifySettingsUpdatedTask are running, don't run this again
         if (!getSettingsDisposable.isRunning() && !updateSettingsDisposable.isRunning()) {
             getSettingsDisposable = settingsService.getGeneralConnectionSettings()
-                    .defaultSchedulers(schedulerProvider)
-                    .doOnSubscribe { onStarted() }
-                    .doFinally { onFinished() }
+                .defaultSchedulers(schedulerProvider)
+                .doOnSubscribe { onStarted() }
+                .doFinally { onFinished() }
                 .subscribe({ current = it }) {
-                        Timber.e(it, "Error getting settings")
-                    }
-                    .addTo(disposables)
+                    Timber.e(it, "Error getting settings")
+                }
+                .addTo(disposables)
         }
     }
 
     private fun runNotifySettingsUpdatedTask(
-            onStarted: () -> Unit = {},
-            onFinished: () -> Unit = {}
+        onStarted: () -> Unit = {},
+        onFinished: () -> Unit = {}
     ) {
         //If this task is running, kill it and start it again
         if (updateSettingsDisposable.isRunning()) {
             updateSettingsDisposable.dispose()
         }
         updateSettingsDisposable = settingsService.updateGeneralSettings(current)
-                .andThen(settingsService.getGeneralConnectionSettings())
-                .defaultSchedulers(schedulerProvider)
-                .doOnSubscribe { onStarted() }
-                .doFinally { onFinished() }
+            .andThen(settingsService.getGeneralConnectionSettings())
+            .defaultSchedulers(schedulerProvider)
+            .doOnSubscribe { onStarted() }
+            .doFinally { onFinished() }
             .subscribe({ current = it }) {
-                    Timber.e(it, "Error updating settings")
-                }
-                .addTo(disposables)
+                Timber.e(it, "Error updating settings")
+            }
+            .addTo(disposables)
     }
 }

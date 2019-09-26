@@ -1,7 +1,7 @@
 package com.wlvpn.consumervpn.presentation.features.login
 
-import com.wlvpn.consumervpn.data.exception.NetworkNotAvailableException
-import com.wlvpn.consumervpn.data.exception.UnknownErrorException
+import com.wlvpn.consumervpn.data.failure.NetworkNotAvailableFailure
+import com.wlvpn.consumervpn.data.failure.UnknownErrorException
 import com.wlvpn.consumervpn.domain.model.Credentials
 import com.wlvpn.consumervpn.domain.service.authentication.UserAuthenticationService
 import com.wlvpn.consumervpn.presentation.util.SchedulerProvider
@@ -48,7 +48,7 @@ class LoginPresenter(
                     }) {
                         view?.progressDialogVisibility(false)
                         when (it) {
-                            is NetworkNotAvailableException -> view?.showNoNetworkMessage()
+                            is NetworkNotAvailableFailure -> view?.showNoNetworkMessage()
 
                             is UnknownErrorException ->
                                 it.message?.let { message ->

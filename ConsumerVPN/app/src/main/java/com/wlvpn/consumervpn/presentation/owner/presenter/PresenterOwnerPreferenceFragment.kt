@@ -13,7 +13,8 @@ import javax.inject.Inject
  */
 
 //TODO We need a way to simplify this class to not depend on parents like [Fragment] or [Activity]
-abstract class PresenterOwnerPreferenceFragment<P : BaseContract.Presenter<*>> : PreferenceFragmentCompat(), PresenterOwner {
+abstract class PresenterOwnerPreferenceFragment<P : BaseContract.Presenter<*>> : PreferenceFragmentCompat(),
+    PresenterOwner {
 
     @Inject
     open lateinit var presenter: P
@@ -37,6 +38,10 @@ abstract class PresenterOwnerPreferenceFragment<P : BaseContract.Presenter<*>> :
             presenter.cleanUp()
         }
         super.onDestroy()
+    }
+
+    override fun isPresenterInitialized(): Boolean {
+        return ::presenter.isInitialized
     }
 
     class PresenterNotInitializedException

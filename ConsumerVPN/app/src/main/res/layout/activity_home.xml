@@ -1,42 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:navigation="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".presentation.features.home.HomeActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="@dimen/home_servers_row_flag_elevation">
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:animateLayoutChanges="true"
+        app:title="@string/home_activity_title" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="@style/ToolbarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="@string/home_activity_title" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            style="@style/TabsLayoutStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabMaxWidth="@dimen/ui_zero" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="@dimen/ui_zero"
+        android:layout_height="@dimen/ui_zero"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <include
         android:id="@+id/progressContainerHome"
         layout="@layout/view_loading_progress_overlay"
-        android:visibility="gone" />
+        android:layout_width="@dimen/ui_zero"
+        android:layout_height="@dimen/ui_zero"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:visibility="visible" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+        android:layout_width="@dimen/ui_zero"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        navigation:itemBackground="@drawable/bg_bottom_navigation"
+        navigation:itemIconTint="@drawable/bottom_navigation_state"
+        navigation:itemTextColor="@drawable/bottom_navigation_state"
+        navigation:menu="@menu/menu_bottom_navigation_main" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

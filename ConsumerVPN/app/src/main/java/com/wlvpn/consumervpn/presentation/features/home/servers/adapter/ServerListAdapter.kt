@@ -66,7 +66,11 @@ class ServerListAdapter(
                 itemList
             )
 
-            if (countryPosition > -1) {
+            if (countryPosition > -1
+                // We validate if the item is already expanded which means cities were previously
+                // included on the list this prevents an error that shows double items
+                && !itemList[countryPosition].isExpanded
+            ) {
                 itemList.addAll(
                     countryPosition + 1,
                     cityItemsMap.getValue(itemSelected.location.countryCode)

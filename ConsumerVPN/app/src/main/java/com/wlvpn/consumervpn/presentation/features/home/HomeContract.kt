@@ -8,9 +8,11 @@ interface HomeContract {
 
         fun onExpiredAccountRetryClick()
 
-        fun onServerTabChangeRequest()
+        fun onConnectFragmentChangeRequest()
 
-        fun onConnectTabChangeRequest()
+        fun onServerFragmentChangeRequest()
+
+        fun onSettingsFragmentChangeRequest()
 
     }
 
@@ -20,9 +22,11 @@ interface HomeContract {
 
         fun progressDialogVisibility(isVisible: Boolean)
 
-        fun showServerTab()
+        fun showConnectionView()
 
-        fun showConnectTab()
+        fun showServersView()
+
+        fun showSettingsView()
 
     }
 }

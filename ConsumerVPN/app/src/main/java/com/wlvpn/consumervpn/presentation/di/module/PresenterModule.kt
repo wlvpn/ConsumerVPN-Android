@@ -79,10 +79,9 @@ class PresenterModule {
         service: VpnService,
         schedulerProvider: SchedulerProvider,
         settingsService: SettingsService,
-        authenticationService: UserAuthenticationService,
         @Named(CONNECT_BUS_PROPERTY) connectionBus: SinglePipelineBus<Event.ConnectionRequestEvent>
     ): ConnectionContract.Presenter =
-        ConnectionPresenter(service, schedulerProvider, settingsService, authenticationService, connectionBus)
+        ConnectionPresenter(service, schedulerProvider, settingsService, connectionBus)
 
     @Provides
     @PerPresentation
@@ -99,9 +98,12 @@ class PresenterModule {
     @PerPresentation
     fun providesSettingsPresenter(
         settingsService: SettingsService,
+        vpnService: VpnService,
+        authenticationService: UserAuthenticationService,
         schedulerProvider: SchedulerProvider
     ): SettingsContract.Presenter =
-        SettingsPresenter(settingsService, schedulerProvider)
+        SettingsPresenter(settingsService, vpnService, authenticationService, schedulerProvider)
+
 
     @Provides
     @PerPresentation

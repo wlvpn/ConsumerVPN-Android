@@ -53,11 +53,11 @@
     <color name="text_input_layout_error_color">@color/error_red</color>
     <color name="text_input_layout_text_color">@color/text_color_primary</color>
 
-    <!-- Tabs -->
-    <color name="tab_indicator_color">@color/color_accent</color>>
-    <color name="tab_text_color">@color/white_60</color>
-    <color name="tab_selected_text_color">@color/white</color>
-    <color name="tab_ripple_color">@color/color_primary_light</color>
+    <!-- Bottom Navigation View -->
+    <color name="bottom_navigation_view_background">@color/color_primary</color>
+    <color name="bottom_navigation_view_ripple">@color/color_primary_light</color>
+    <color name="bottom_navigation_view_item_on">@color/color_accent</color>
+    <color name="bottom_navigation_view_item_off">@color/white</color>
 
     <!-- Connect Animation -->
     <color name="connect_anim_complete_color">@color/color_accent</color>

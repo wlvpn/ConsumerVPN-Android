@@ -3,10 +3,17 @@ package com.wlvpn.consumervpn.presentation.features.home.servers
 import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Parcelable
-import android.view.*
+import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.jakewharton.rxbinding3.appcompat.queryTextChanges
+import com.wlvpn.consumervpn.BuildConfig
 import com.wlvpn.consumervpn.R
 import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
 import com.wlvpn.consumervpn.data.model.CountryServerLocation
@@ -15,12 +22,20 @@ import com.wlvpn.consumervpn.presentation.di.Injector
 import com.wlvpn.consumervpn.presentation.features.connection.DisconnectDialogFragment
 import com.wlvpn.consumervpn.presentation.features.connection.NewConnectionDialogFragment
 import com.wlvpn.consumervpn.presentation.features.connection.OnConnectionDialogResult
-import com.wlvpn.consumervpn.presentation.features.home.HomeViewPagerFragment
-import com.wlvpn.consumervpn.presentation.features.home.servers.adapter.*
+import com.wlvpn.consumervpn.presentation.features.home.servers.adapter.ServerCityRow
+import com.wlvpn.consumervpn.presentation.features.home.servers.adapter.ServerCountryRow
+import com.wlvpn.consumervpn.presentation.features.home.servers.adapter.ServerFastestRow
+import com.wlvpn.consumervpn.presentation.features.home.servers.adapter.ServerListAdapter
+import com.wlvpn.consumervpn.presentation.features.home.servers.adapter.ServerRowItem
+import com.wlvpn.consumervpn.presentation.features.home.servers.adapter.ServerRowListState
+import com.wlvpn.consumervpn.presentation.features.home.servers.adapter.ServerRowListType
 import com.wlvpn.consumervpn.presentation.navigation.FeatureNavigator
+import com.wlvpn.consumervpn.presentation.owner.presenter.PresenterOwnerActivity
+import com.wlvpn.consumervpn.presentation.owner.presenter.PresenterOwnerFragment
 import com.wlvpn.consumervpn.presentation.util.isVisible
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.fragment_servers_expandable.*
+import kotlinx.android.synthetic.main.fragment_servers_expandable.progressBar
+import kotlinx.android.synthetic.main.fragment_servers_expandable.recyclerView
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -30,7 +45,7 @@ private const val TEXT_QUERY_DEBOUNCE_MILLISECONDS = 400L
 private const val RECYCLER_STATE_KEY = "RECYCLER_STATE_KEY"
 
 class ServersFragment :
-    HomeViewPagerFragment<ServersContract.Presenter>(),
+    PresenterOwnerFragment<ServersContract.Presenter>(),
     ServersContract.View,
     ServerListAdapter.OnAdapterRowChanges,
     OnConnectionDialogResult {
@@ -42,8 +57,14 @@ class ServersFragment :
     private lateinit var searchView: SearchView
     private lateinit var countrySortItem: MenuItem
     private lateinit var citySortItem: MenuItem
+
     private var recyclerState: Parcelable? = null
+
     private val viewDisposables = CompositeDisposable()
+
+    companion object {
+        val TAG = "${BuildConfig.APPLICATION_ID}:${this::class.java.name}"
+    }
 
     override fun bindPresenter() {
         presenter.bind(this)
@@ -60,6 +81,9 @@ class ServersFragment :
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as PresenterOwnerActivity<*>).supportActionBar?.title =
+            getString(R.string.servers_fragment_label_title)
+
         return inflater.inflate(R.layout.fragment_servers_expandable, container, false)
     }
 
@@ -72,6 +96,14 @@ class ServersFragment :
 
         // Thanks to this we can handle on back pressing from fragment
         setupBackButtonHandling()
+    }
+
+    override fun toolbarVisibility(isVisible: Boolean) {
+        if (isVisible) {
+            (activity as PresenterOwnerActivity<*>).supportActionBar?.show()
+        } else {
+            (activity as PresenterOwnerActivity<*>).supportActionBar?.hide()
+        }
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {

@@ -2,10 +2,13 @@ package com.wlvpn.consumervpn.domain.service.settings
 
 import com.wlvpn.consumervpn.data.model.FastestServerLocation
 import com.wlvpn.consumervpn.domain.gateway.ExternalSettingsGateway
-import com.wlvpn.consumervpn.domain.model.*
+import com.wlvpn.consumervpn.domain.model.Port
+import com.wlvpn.consumervpn.domain.model.Server
+import com.wlvpn.consumervpn.domain.model.ServerLocation
+import com.wlvpn.consumervpn.domain.model.Settings
 import com.wlvpn.consumervpn.domain.repository.ConnectionRequestSettingsRepository
 import com.wlvpn.consumervpn.domain.repository.GeneralConnectionSettingsRepository
-import com.wlvpn.consumervpn.domain.service.settings.exception.LocationNotSelectedException
+import com.wlvpn.consumervpn.domain.service.settings.failure.LocationNotSelectedFailure
 import io.reactivex.Completable
 import io.reactivex.Single
 
@@ -93,16 +96,6 @@ class DefaultSettingsService(
                     //Set connection request to fastest
                     Settings.GeneralConnection.StartupConnectOption.FASTEST_SERVER ->
                         updateSelectedFastestAvailable()
-                    //Get location and set it to connection request
-                    Settings.GeneralConnection.StartupConnectOption.FASTEST_IN_LOCATION -> {
-
-                        generalSettings.StartupConnectLocation?.let {
-                            updateSelectedLocation(it)
-                        } ?: run {
-                            Completable.error(LocationNotSelectedException())
-                        }
-
-                    }
                     //LAST_SERVER and NONE
                     else -> Completable.complete()
                 }

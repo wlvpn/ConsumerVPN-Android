@@ -47,5 +47,7 @@ class ServersContract {
             expandCurrentSelection: Boolean
         )
 
+        fun toolbarVisibility(isVisible: Boolean)
+
     }
 }

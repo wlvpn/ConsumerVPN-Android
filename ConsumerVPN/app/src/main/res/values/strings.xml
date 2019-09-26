@@ -2,6 +2,8 @@
 <resources>
     <string name="app_name">Consumer VPN</string>
     <string name="app_logo">Consumer VPN logo</string>
+    <string name="generic_button_confirm">Confirm</string>
+    <string name="generic_button_cancel">Cancel</string>
 
     <!-- Login -->
     <string name="hint_login_username">Username or Email</string>
@@ -13,6 +15,7 @@
 
     <!--  Errors -->
     <string name="error_unknown_error">Unknown Error</string>
+    <string name="error_vpn_connection">Error connecting to the VPN, please try again later</string>
     <string name="error_no_connection">No Connection</string>
     <string name="error_links_not_supported">Opening web links is not supported on this device.</string>
     <string name="error_login_username_password_invalid">Username or password not valid</string>
@@ -48,7 +51,9 @@
     <string name="home_connection_visible_location">Visible Location</string>
     <string name="home_connection_public_ip">Public IP</string>
 
-    <!-- Servers Tab -->
+    <!-- Servers -->
+    <string name="servers_menu_button_title">Locations</string>
+    <string name="servers_fragment_label_title">Locations</string>
     <string name="home_dialog_connection_title">Server selection</string>
     <string name="home_dialog_connection_message_city_country">Connect to %s, %s</string>
     <string name="home_dialog_connection_message_fastest_available">Connect to Fastest Available</string>
@@ -60,7 +65,6 @@
     <string name="home_dialog_disconnection_message">Would you like to disconnect from the current location?</string>
     <string name="home_dialog_disconnection_cancel">Cancel</string>
     <string name="home_dialog_disconnection_disconnect">Disconnect</string>
-    <string name="home_tab_tittle_servers">Servers</string>
     <string name="home_tab_servers_menu_sort">Sort</string>
     <string name="home_tab_servers_menu_search">Search</string>
     <string name="sort_menu_option_by_city">Sort by city</string>
@@ -76,7 +80,7 @@
     <string name="row_server_fastest_test">Fastest Available</string>
 
     <!--Settings screen-->
-    <string name="settings_activity_title">Settings</string>
+    <string name="settings_fragment_label_title">Settings</string>">
     <string name="settings_preference_launch_app_startup">Launch application after device start up</string>
     <string name="settings_preference_auto_connect_title">Connect at startup</string>
     <string name="settings_preference_reconnect_title">Auto Reconnect</string>
@@ -90,6 +94,11 @@
     <string name="settings_preference_startup_fastest">Connect to fastest server</string>
     <string name="settings_preference_startup_fastest_in_country">Connect to fastest server in country</string>
     <string name="settings_fastest_in_country_not_implemented">Fastest in country not implemented yet</string>
+    <string name="settings_menu_button_log_out">Log out</string>
+
+    <!-- Log out Dialog-->
+    <string name="logout_dialog_label_title">Log out</string>
+    <string name="logout_dialog_label_message">Are you sure you want to log out?</string>
 
     <!-- Settings preferences key -->
     <string name="preference_launch_startup_key">preference_launch_startup</string>

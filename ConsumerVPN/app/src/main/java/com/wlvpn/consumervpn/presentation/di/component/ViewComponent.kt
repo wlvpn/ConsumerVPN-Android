@@ -7,7 +7,7 @@ import com.wlvpn.consumervpn.presentation.features.home.HomeActivity
 import com.wlvpn.consumervpn.presentation.features.home.connection.ConnectionFragment
 import com.wlvpn.consumervpn.presentation.features.home.servers.ServersFragment
 import com.wlvpn.consumervpn.presentation.features.login.LoginActivity
-import com.wlvpn.consumervpn.presentation.features.settings.SettingsActivity
+import com.wlvpn.consumervpn.presentation.features.settings.SettingsPreferenceFragment
 import com.wlvpn.consumervpn.presentation.features.splash.SplashActivity
 import dagger.Subcomponent
 
@@ -34,7 +34,7 @@ interface ViewComponent {
 
     fun inject(into: ServersFragment)
 
-    fun inject(into: SettingsActivity)
+    fun inject(into: SettingsPreferenceFragment)
 
     fun inject(into: AboutActivity)
 

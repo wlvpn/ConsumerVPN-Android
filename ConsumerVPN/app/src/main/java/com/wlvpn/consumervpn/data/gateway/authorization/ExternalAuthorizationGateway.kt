@@ -3,9 +3,9 @@ package com.wlvpn.consumervpn.data.gateway.authorization
 import com.evernote.android.job.JobManager
 import com.gentlebreeze.vpn.http.api.error.LoginErrorThrowable
 import com.gentlebreeze.vpn.sdk.IVpnSdk
-import com.wlvpn.consumervpn.data.exception.map.NetworkThrowableMapper
-import com.wlvpn.consumervpn.data.exception.map.ThrowableMapper
-import com.wlvpn.consumervpn.data.gateway.authorization.exception.RefreshTokenReLoginException
+import com.wlvpn.consumervpn.data.failure.map.NetworkThrowableMapper
+import com.wlvpn.consumervpn.data.failure.map.ThrowableMapper
+import com.wlvpn.consumervpn.data.gateway.authorization.failure.RefreshTokenReLoginFailure
 import com.wlvpn.consumervpn.data.job.TokenRefreshJob
 import com.wlvpn.consumervpn.data.util.onErrorMapThrowable
 import com.wlvpn.consumervpn.data.util.toSingle
@@ -23,7 +23,7 @@ class ExternalAuthorizationGateway(
     }
 
     override fun refreshToken(credentials: Credentials): Completable = Completable.defer {
-        vpnSdk.refreshToken()
+        vpnSdk.refreshToken(credentials.username,credentials.password)
             .toSingle()
             .onErrorResumeNext {
                 vpnSdk.loginWithUsername(credentials.username, credentials.password)
@@ -63,13 +63,13 @@ class ExternalAuthorizationGateway(
 /**
  * We want a custom mapper for this gateway, we extend [NetworkThrowableMapper]
  *
- * And map sdk's [LoginErrorThrowable] to [RefreshTokenReLoginException] and let [NetworkThrowableMapper] map the rest
+ * And map sdk's [LoginErrorThrowable] to [RefreshTokenReLoginFailure] and let [NetworkThrowableMapper] map the rest
  */
 private class LocalThrowableMapper : NetworkThrowableMapper() {
 
     override fun mapThrowable(throwable: Throwable): Throwable {
         return when (throwable) {
-            is LoginErrorThrowable -> RefreshTokenReLoginException()
+            is LoginErrorThrowable -> RefreshTokenReLoginFailure()
 
             else -> super.mapThrowable(throwable)
         }

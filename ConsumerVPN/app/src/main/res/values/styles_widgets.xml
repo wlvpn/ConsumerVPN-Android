@@ -75,18 +75,9 @@
     </style>
     <!--endregion EditText-->
 
-    <!--region tabs-->
-    <style name="TabsLayoutStyle" parent="Widget.MaterialComponents.TabLayout.Colored">
-        <item name="tabIndicatorColor">@color/tab_indicator_color</item>
-        <item name="tabTextColor">@color/tab_text_color</item>
-        <item name="tabSelectedTextColor">@color/tab_selected_text_color</item>
-        <item name="tabRippleColor">@color/tab_ripple_color</item>
-        <item name="tabGravity">fill</item>
-        <item name="tabMode">fixed</item>
-    </style>
-
     <!-- Toolbar -->
     <style name="ToolbarStyle">
+        <item name="android:elevation">@dimen/default_elevation</item>
         <item name="android:background">@color/actionbar_bg_color</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="android:theme">@style/AppTheme.ToolbarTheme</item>
