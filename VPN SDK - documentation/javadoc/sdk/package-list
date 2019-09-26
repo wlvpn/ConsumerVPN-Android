@@ -1,6 +1,11 @@
 $dokka.format:html
 $dokka.linkExtension:html
-
+$dokka.location:com.gentlebreeze.vpn.sdk.tier.data.util$doBeforeEmitting(io.reactivex.Single((com.gentlebreeze.vpn.sdk.tier.data.util.doBeforeEmitting.T)), io.reactivex.Completable)com.gentlebreeze.vpn.sdk.tier.data.util/io.reactivex.-single/do-before-emitting.html
+$dokka.location:com.gentlebreeze.vpn.sdk.tier.data.util$onErrorMapThrowable(io.reactivex.Completable, kotlin.Function1((kotlin.Throwable, )))com.gentlebreeze.vpn.sdk.tier.data.util/io.reactivex.-completable/on-error-map-throwable.html
+$dokka.location:com.gentlebreeze.vpn.sdk.tier.data.util$onErrorMapThrowable(io.reactivex.Flowable((com.gentlebreeze.vpn.sdk.tier.data.util.onErrorMapThrowable.T)), kotlin.Function1((kotlin.Throwable, )))com.gentlebreeze.vpn.sdk.tier.data.util/io.reactivex.-flowable/on-error-map-throwable.html
+$dokka.location:com.gentlebreeze.vpn.sdk.tier.data.util$onErrorMapThrowable(io.reactivex.Maybe((com.gentlebreeze.vpn.sdk.tier.data.util.onErrorMapThrowable.T)), kotlin.Function1((kotlin.Throwable, )))com.gentlebreeze.vpn.sdk.tier.data.util/io.reactivex.-maybe/on-error-map-throwable.html
+$dokka.location:com.gentlebreeze.vpn.sdk.tier.data.util$onErrorMapThrowable(io.reactivex.Observable((com.gentlebreeze.vpn.sdk.tier.data.util.onErrorMapThrowable.T)), kotlin.Function1((kotlin.Throwable, )))com.gentlebreeze.vpn.sdk.tier.data.util/io.reactivex.-observable/on-error-map-throwable.html
+$dokka.location:com.gentlebreeze.vpn.sdk.tier.data.util$onErrorMapThrowable(io.reactivex.Single((com.gentlebreeze.vpn.sdk.tier.data.util.onErrorMapThrowable.T)), kotlin.Function1((kotlin.Throwable, )))com.gentlebreeze.vpn.sdk.tier.data.util/io.reactivex.-single/on-error-map-throwable.html
 com.gentlebreeze.vpn.sdk
 com.gentlebreeze.vpn.sdk.callback
 com.gentlebreeze.vpn.sdk.config
@@ -10,3 +15,14 @@ com.gentlebreeze.vpn.sdk.migration
 com.gentlebreeze.vpn.sdk.model
 com.gentlebreeze.vpn.sdk.sort
 com.gentlebreeze.vpn.sdk.store
+com.gentlebreeze.vpn.sdk.tier.data.datasource
+com.gentlebreeze.vpn.sdk.tier.data.failure
+com.gentlebreeze.vpn.sdk.tier.data.failure.map
+com.gentlebreeze.vpn.sdk.tier.data.gateway
+com.gentlebreeze.vpn.sdk.tier.data.model
+com.gentlebreeze.vpn.sdk.tier.data.util
+com.gentlebreeze.vpn.sdk.tier.domain.failure
+com.gentlebreeze.vpn.sdk.tier.domain.gateway
+com.gentlebreeze.vpn.sdk.tier.domain.model
+com.gentlebreeze.vpn.sdk.tier.domain.service
+com.gentlebreeze.vpn.sdk.tier.domain.service.failure

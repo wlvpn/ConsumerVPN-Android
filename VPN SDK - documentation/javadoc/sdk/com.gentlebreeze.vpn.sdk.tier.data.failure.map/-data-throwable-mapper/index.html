@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>DataThrowableMapper - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk.tier.data.failure.map</a>&nbsp;/&nbsp;<a href="./index.html">DataThrowableMapper</a><br/>
+<br/>
+<h1>DataThrowableMapper</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">DataThrowableMapper</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-throwable-mapper/index.html"><span class="identifier">ThrowableMapper</span></a></code>
+<p>This mapper passes through data and domain <a href="#">Failure</a>s anything else is thrown as</p>
+<p>UnknownErrorException, if you need a more specific map, feel free to extend this class</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">DataThrowableMapper</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>This mapper passes through data and domain <a href="#">Failure</a>s anything else is thrown as</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="map-throwable.html">mapThrowable</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">mapThrowable</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.tier.data.failure.map.DataThrowableMapper$mapThrowable(kotlin.Throwable)/throwable">throwable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a></code>
+<p>Maps a Throwable to another Throwable</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-network-throwable-mapper/index.html">NetworkThrowableMapper</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">NetworkThrowableMapper</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">DataThrowableMapper</span></a></code>
+<p>A mapper specialization of <a href="./index.html">DataThrowableMapper</a>, this will map any sdk network exception to ours</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

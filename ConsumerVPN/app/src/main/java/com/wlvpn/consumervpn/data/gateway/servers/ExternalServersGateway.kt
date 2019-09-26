@@ -7,8 +7,8 @@ import com.gentlebreeze.vpn.sdk.model.VpnServer
 import com.gentlebreeze.vpn.sdk.sort.SortOrder
 import com.gentlebreeze.vpn.sdk.sort.SortPop
 import com.gentlebreeze.vpn.sdk.sort.SortPopOption
-import com.wlvpn.consumervpn.data.exception.map.NetworkThrowableMapper
-import com.wlvpn.consumervpn.data.exception.map.ThrowableMapper
+import com.wlvpn.consumervpn.data.failure.map.NetworkThrowableMapper
+import com.wlvpn.consumervpn.data.failure.map.ThrowableMapper
 import com.wlvpn.consumervpn.data.job.ServersRefreshJob
 import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
 import com.wlvpn.consumervpn.data.model.CountryServerLocation

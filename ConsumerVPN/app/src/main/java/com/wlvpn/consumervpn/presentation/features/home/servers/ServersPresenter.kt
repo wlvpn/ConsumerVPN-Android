@@ -48,6 +48,7 @@ class ServersPresenter(
     override var view: ServersContract.View? = null
 
     override fun start() {
+        view?.toolbarVisibility(true)
     }
 
     override fun cleanUp() {

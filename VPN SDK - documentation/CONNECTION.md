@@ -15,8 +15,27 @@ Model class that holds information pertaining to a user's authentication
 - **`accountUpdatedAt`**: `long` value that contains last date where the account was updated
 - **`refreshToken`**: `String` value that contains the refresh token
 - **`subEndEpoch`**: `long` date value whe sub epoch ends
-- **`vpnAuthPassword`**: `String` value that contains the authorization password to realize calls
-- **`vpnAuthUsername`**: `String` value that contains the authorization user to realize calls
+- **`vpnAuthPassword`**: `String` value that contains the authorization password to perform calls
+- **`vpnAuthUsername`**: `String` value that contains the authorization user to perform calls
+
+## `VpnConfigurarion`
+
+Class: [com.gentlebreeze.vpn.sdk.model.VpnConfiguration][2]
+
+Model container class for configuration of the VPN connection
+
+- **`username`** `String` value that holds the user to access the VPN server
+- **`password`** `String` value that holds password to access the VPN server
+- **`scrambleOn`** `Boolean` value to indicate if scramble should be turned on
+- **`reconnectOn`** `Boolean` value to indicate if the VPN should reconnect in a 
+server dropout scenario
+- **`port`** `VpnPortOptions` Contains the port value to perform the connection
+- **`protocol`** `VpnProtocolOptions` Contains the protocol value to perform the connection
+- **`debugLevel`** `Integer`  value based on OpenVPN debug levels (0...11)
+- **`isLocalLanEnabled`** `Boolean` value that enables the app to access the local network outside of the 
+VPN Tunnel 
+- **`splitTunnelApps`** `List<String>` list of application packages values that can connect
+to the internet outside of the VPN tunnel
 
 ## Prepare related Methods
 
@@ -406,13 +425,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
         
         companion object {
-            val ACTION_DISCONNECT = "com.myapp.action.DISCONNECT"
+            const val ACTION_DISCONNECT = "com.myapp.action.DISCONNECT"
         }
     }
     
     companion object {
-        val NOTIFICATION_ID_VPN_STATUS = 1
-        val NOTIFICATION_ID_VPN_REVOKED = 2
+        const val NOTIFICATION_ID_VPN_STATUS = 1
+        const val NOTIFICATION_ID_VPN_REVOKED = 2
     }
 }
 ```

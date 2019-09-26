@@ -3,11 +3,11 @@ package com.wlvpn.consumervpn.data.job
 import com.evernote.android.job.Job
 import com.evernote.android.job.JobRequest
 import com.wlvpn.consumervpn.BuildConfig
-import com.wlvpn.consumervpn.data.exception.NetworkNotAvailableException
-import com.wlvpn.consumervpn.data.gateway.authorization.exception.RefreshTokenReLoginException
+import com.wlvpn.consumervpn.data.failure.NetworkNotAvailableFailure
+import com.wlvpn.consumervpn.data.gateway.authorization.failure.RefreshTokenReLoginFailure
 import com.wlvpn.consumervpn.domain.service.authentication.UserAuthenticationService
 import com.wlvpn.consumervpn.domain.service.authorization.UserAuthorizationService
-import com.wlvpn.consumervpn.domain.service.authorization.exception.UserNotAuthorizedException
+import com.wlvpn.consumervpn.domain.service.authorization.failure.UserNotAuthorizedFailure
 import com.wlvpn.consumervpn.domain.service.vpn.VpnService
 import timber.log.Timber
 
@@ -40,15 +40,15 @@ class TokenRefreshJob internal constructor(
         }
     }
 
-    override fun onRunJob(params: Job.Params): Job.Result {
+    override fun onRunJob(params: Params): Result {
         userAuthorizationService.refreshToken()
             .blockingGet()
             ?.let { throwable ->
                 when (throwable) {
-                    is UserNotAuthorizedException ->
+                    is UserNotAuthorizedFailure ->
                         Timber.e(throwable, "Impossible to refresh token. The user is not authorized")
 
-                    is RefreshTokenReLoginException -> {
+                    is RefreshTokenReLoginFailure -> {
                         Timber.e(throwable, "Re-login failed while refreshing token. Login out user")
 
                         // Logout clears the background jobs
@@ -61,13 +61,13 @@ class TokenRefreshJob internal constructor(
                             }
                     }
 
-                    is NetworkNotAvailableException ->
+                    is NetworkNotAvailableFailure ->
                         Timber.e(throwable, "Network was not available while refreshing token")
 
                     else -> Timber.e(throwable, "An error occurred while refreshing token")
                 }
             }
 
-        return Job.Result.SUCCESS
+        return Result.SUCCESS
     }
 }

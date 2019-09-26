@@ -1,15 +1,14 @@
 package com.wlvpn.consumervpn.presentation.features.home.connection
 
+import com.wlvpn.consumervpn.data.failure.NetworkNotAvailableFailure
+import com.wlvpn.consumervpn.data.failure.UnknownErrorException
 import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
 import com.wlvpn.consumervpn.data.model.CountryServerLocation
 import com.wlvpn.consumervpn.data.model.FastestServerLocation
-import com.wlvpn.consumervpn.data.exception.NetworkNotAvailableException
-import com.wlvpn.consumervpn.data.exception.UnknownErrorException
 import com.wlvpn.consumervpn.domain.model.ConnectionState
-import com.wlvpn.consumervpn.domain.service.authentication.UserAuthenticationService
 import com.wlvpn.consumervpn.domain.service.settings.SettingsService
 import com.wlvpn.consumervpn.domain.service.vpn.VpnService
-import com.wlvpn.consumervpn.domain.service.vpn.exception.VpnNotPreparedException
+import com.wlvpn.consumervpn.domain.service.vpn.exception.VpnNotPreparedFailure
 import com.wlvpn.consumervpn.presentation.bus.Event
 import com.wlvpn.consumervpn.presentation.bus.SinglePipelineBus
 import com.wlvpn.consumervpn.presentation.util.SchedulerProvider
@@ -25,7 +24,6 @@ class ConnectionPresenter(
     private val vpnService: VpnService,
     private val schedulerProvider: SchedulerProvider,
     private val settingsService: SettingsService,
-    private val authenticationService: UserAuthenticationService,
     private val connectionEventBus: SinglePipelineBus<Event.ConnectionRequestEvent>
 ) : ConnectionContract.Presenter {
 
@@ -45,30 +43,12 @@ class ConnectionPresenter(
     override var view: ConnectionContract.View? = null
 
     override fun start() {
+        view?.toolbarVisibility(false)
         getCurrentVpnState()
         listenToVpnStates()
         listenToConnectionRequestEvent()
-
         // Always refresh the location at the beginning to avoid false positive locations on connect
         fetchGeoInfo()
-    }
-
-    override fun onLogoutClick() {
-        if (connectDisposable.isRunning()) {
-            connectDisposable.dispose()
-        }
-        vpnService.disconnect()
-            .onErrorComplete()
-            .andThen(authenticationService.logout())
-            .subscribe({
-                view?.showLogin()
-            }) {
-                Timber.e(it, "Error while login out")
-            }.addTo(disposables)
-    }
-
-    override fun onSettingsClick() {
-        view?.showSettings()
     }
 
     override fun cleanUp() {
@@ -137,7 +117,7 @@ class ConnectionPresenter(
             .defaultSchedulers(schedulerProvider)
             .subscribe({
                 when (val location = it.location) {
-                    is FastestServerLocation ->  view?.setDisconnectedToFastest()
+                    is FastestServerLocation -> view?.setDisconnectedToFastest()
                     is CityAndCountryServerLocation -> {
                         view?.setDisconnectedLocation(location.country, location.city)
                     }
@@ -145,7 +125,7 @@ class ConnectionPresenter(
                 }
                 view?.showDisconnectedView()
             }) {
-                Timber.e(it, "Unknown error when connecting to the vpn")
+                Timber.e(it, "Error showing state")
             }.addTo(disposables)
     }
 
@@ -153,17 +133,19 @@ class ConnectionPresenter(
         vpnService.getConnectedServer()
             .defaultSchedulers(schedulerProvider)
             .subscribe({
-                when(val serverLocation = it.location) {
+                when (val serverLocation = it.location) {
                     is CityAndCountryServerLocation -> {
                         view?.showConnectedServer(
                             it.host.ipAddress,
                             serverLocation.country,
-                            serverLocation.city)
+                            serverLocation.city
+                        )
                     }
                     is CountryServerLocation -> {
                         view?.showConnectedServer(
                             it.host.ipAddress,
-                            serverLocation.country)
+                            serverLocation.country
+                        )
                     }
                 }
                 view?.showConnectedView()
@@ -174,7 +156,7 @@ class ConnectionPresenter(
     }
 
     private fun connectToVPN() {
-        if (connectionState == ConnectionState.DISCONNECTED) {
+        if (connectionState == ConnectionState.DISCONNECTED || connectionState == ConnectionState.DISCONNECTED_ERROR) {
 
             if (connectDisposable.isRunning()) {
                 connectDisposable.dispose()
@@ -193,9 +175,9 @@ class ConnectionPresenter(
                     updateDisconnectedView()
                     when (throwable) {
 
-                        is VpnNotPreparedException -> view?.showVpnPermissionsDialog()
+                        is VpnNotPreparedFailure -> view?.showVpnPermissionsDialog()
 
-                        is NetworkNotAvailableException -> view?.showNoNetworkMessage()
+                        is NetworkNotAvailableFailure -> view?.showNoNetworkMessage()
 
                         is UnknownErrorException ->
                             throwable.message?.let { message ->
@@ -236,6 +218,7 @@ class ConnectionPresenter(
     private fun fetchGeoInfo() {
         disposables.add(
             vpnService.fetchGeoInfo()
+                .defaultSchedulers(schedulerProvider)
                 .subscribe({ }, //do nothing, just fetches and updates the info
                     { t: Throwable? -> Timber.e("Error updating geoInfo $t") })
         )
@@ -249,6 +232,11 @@ class ConnectionPresenter(
             ConnectionState.CONNECTING -> view?.showConnectingView()
 
             ConnectionState.DISCONNECTED -> updateDisconnectedView()
+
+            ConnectionState.DISCONNECTED_ERROR -> {
+                view?.showConnectionErrorMessage()
+                updateDisconnectedView()
+            }
 
             ConnectionState.UNKNOWN -> { /* no-op */
             }

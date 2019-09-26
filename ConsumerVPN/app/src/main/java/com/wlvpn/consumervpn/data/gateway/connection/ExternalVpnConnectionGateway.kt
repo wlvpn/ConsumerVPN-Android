@@ -1,14 +1,18 @@
 package com.wlvpn.consumervpn.data.gateway.connection
 
 import com.gentlebreeze.vpn.sdk.IVpnSdk
-import com.gentlebreeze.vpn.sdk.model.*
+import com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration
+import com.gentlebreeze.vpn.sdk.model.VpnConnectionProtocolOptions
+import com.gentlebreeze.vpn.sdk.model.VpnNotification
+import com.gentlebreeze.vpn.sdk.model.VpnPop
+import com.gentlebreeze.vpn.sdk.model.VpnState
 import com.wlvpn.consumervpn.BuildConfig
+import com.wlvpn.consumervpn.data.failure.map.NetworkThrowableMapper
+import com.wlvpn.consumervpn.data.failure.map.ThrowableMapper
+import com.wlvpn.consumervpn.data.gateway.connection.failure.NoServersFoundForSelectionFailure
+import com.wlvpn.consumervpn.data.gateway.connection.failure.ServerNotSelectedToVpnFailure
 import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
 import com.wlvpn.consumervpn.data.model.CountryServerLocation
-import com.wlvpn.consumervpn.data.exception.map.NetworkThrowableMapper
-import com.wlvpn.consumervpn.data.exception.map.ThrowableMapper
-import com.wlvpn.consumervpn.data.gateway.connection.exception.NoServersFoundForSelectionException
-import com.wlvpn.consumervpn.data.gateway.connection.exception.ServerNotSelectedToVpnException
 import com.wlvpn.consumervpn.data.toVpnPort
 import com.wlvpn.consumervpn.data.toVpnProtocol
 import com.wlvpn.consumervpn.data.toVpnServer
@@ -16,15 +20,19 @@ import com.wlvpn.consumervpn.data.util.onErrorMapThrowable
 import com.wlvpn.consumervpn.data.util.toObservable
 import com.wlvpn.consumervpn.data.util.toSingle
 import com.wlvpn.consumervpn.domain.gateway.ExternalVpnConnectionGateway
-import com.wlvpn.consumervpn.domain.model.*
+import com.wlvpn.consumervpn.domain.model.ConnectionState
+import com.wlvpn.consumervpn.domain.model.Credentials
+import com.wlvpn.consumervpn.domain.model.IpGeoLocationInfo
+import com.wlvpn.consumervpn.domain.model.Server
+import com.wlvpn.consumervpn.domain.model.ServerHost
+import com.wlvpn.consumervpn.domain.model.ServerLocation
+import com.wlvpn.consumervpn.domain.model.Settings
 import com.wlvpn.consumervpn.presentation.notification.vpn.VpnNotificationFactory
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 import timber.log.Timber
-
-private const val AUTH_FAILURE_DESCRIPTION = "Authentication failure"
 
 class ExternalVpnConnectionGateway(
     private val vpnSdk: IVpnSdk,
@@ -55,7 +63,6 @@ class ExternalVpnConnectionGateway(
         return fetchGeoInfo()
             .onErrorMapThrowable { mapThrowable(it) }
             .ignoreElement()
-
     }
 
     override fun isVpnConnected(): Single<Boolean> = Single.defer {
@@ -73,16 +80,8 @@ class ExternalVpnConnectionGateway(
     override fun listenToConnectState(): Observable<ConnectionState> =
         vpnSdk.listenToConnectState().toObservable()
             .flatMap {
-                //TODO HACK, this forces to remove notification, the SDK should fix this ASAP
-                if (vpnSdk.getConnectionDescription() == AUTH_FAILURE_DESCRIPTION) {
-                    vpnSdk.disconnect()
-                            .toSingle()
-                            .ignoreElement()
-                            .andThen(Observable.just(vpnStateToDomainState(it.connectionState)))
-                } else {
                     Observable.just(vpnStateToDomainState(it.connectionState))
-                }
-            }.onErrorMapThrowable { mapThrowable(it) }
+                }.onErrorMapThrowable { mapThrowable(it) }
 
     override fun getConnectionState(): Single<ConnectionState> {
         return Single.just(vpnSdk.getConnectionState())
@@ -142,7 +141,6 @@ class ExternalVpnConnectionGateway(
             .onErrorMapThrowable { mapThrowable(it) }
             .ignoreElement()
 
-
     private fun connectWithServer(
         server: Server?,
         connectionConfig: VpnConnectionConfiguration
@@ -156,9 +154,8 @@ class ExternalVpnConnectionGateway(
             ).toSingle()
                 .onErrorMapThrowable { mapThrowable(it) }
                 .ignoreElement()
-
         } else {
-            Completable.error(ServerNotSelectedToVpnException())
+            Completable.error(ServerNotSelectedToVpnFailure())
         }
     }
 
@@ -181,7 +178,7 @@ class ExternalVpnConnectionGateway(
                     .toSingle()
                     .flattenAsObservable { it }
                     .firstElement()
-                    .switchIfEmpty(Maybe.error(NoServersFoundForSelectionException()))
+                    .switchIfEmpty(Maybe.error(NoServersFoundForSelectionFailure()))
                     .flatMapCompletable {
                         connectWitVpnPop(it, connectionConfig)
                     }
@@ -233,6 +230,11 @@ class ExternalVpnConnectionGateway(
             VpnState.DISCONNECTED -> {
                 ConnectionState.DISCONNECTED
             }
+
+            VpnState.DISCONNECTED_ERROR -> {
+                ConnectionState.DISCONNECTED_ERROR
+            }
+
             else -> {
                 Timber.e("An unknown state received: $state")
                 ConnectionState.UNKNOWN
@@ -248,7 +250,7 @@ class ExternalVpnConnectionGateway(
                     IpGeoLocationInfo(
                         vpnGeoData.geoCity,
                         vpnGeoData.geoCountryCode,
-                        vpnGeoData.geoIp,
+                        vpnGeoData.geoIp!!,
                         vpnGeoData.geoLatitude,
                         vpnGeoData.geoLongitude
                     )

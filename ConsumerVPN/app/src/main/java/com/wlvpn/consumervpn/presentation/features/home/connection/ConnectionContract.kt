@@ -6,10 +6,6 @@ interface ConnectionContract {
 
     interface Presenter : BaseContract.Presenter<View> {
 
-        fun onLogoutClick()
-
-        fun onSettingsClick()
-
         fun onConnectClick()
 
         fun onDisconnectClick()
@@ -34,8 +30,6 @@ interface ConnectionContract {
 
         fun showVpnPermissionsDialog()
 
-        fun showSettings()
-
         fun showErrorMessage(message: String)
 
         fun setDisconnectedLocation(countryName: String, cityName: String)
@@ -52,9 +46,13 @@ interface ConnectionContract {
 
         fun showServersView()
 
+        fun showConnectionErrorMessage()
+
         fun showNoNetworkMessage()
 
         fun showUnknownErrorMessage()
+
+        fun toolbarVisibility(isVisible: Boolean)
 
     }
 

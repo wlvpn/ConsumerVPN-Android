@@ -13,7 +13,7 @@ sealed class Settings {
         var startupConnectOption: StartupConnectOption = StartupConnectOption.NONE,
         var StartupConnectLocation: ServerLocation? = null
     ) : Settings() {
-        enum class StartupConnectOption { LAST_SERVER, FASTEST_SERVER, FASTEST_IN_LOCATION, NONE }
+        enum class StartupConnectOption { LAST_SERVER, FASTEST_SERVER, NONE }
     }
 
     data class ConnectionRequest(

@@ -9,10 +9,25 @@
 <br/>
 <h1>refreshToken</h1>
 <a name="com.gentlebreeze.vpn.sdk.VpnSdk$refreshToken()"></a>
-<code><span class="keyword">fun </span><span class="identifier">refreshToken</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-callback/index.html"><span class="identifier">Callback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-login-response/index.html"><span class="identifier">VpnLoginResponse</span></a><span class="symbol">&gt;</span></code>
+<code><span class="keyword">fun </span><s><span class="identifier">refreshToken</span></s><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-callback/index.html"><span class="identifier">Callback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-login-response/index.html"><span class="identifier">VpnLoginResponse</span></a><span class="symbol">&gt;</span></code>
 <p>Overrides <a href="../-i-vpn-sdk/refresh-token.html">IVpnSdk.refreshToken</a></p>
+<br/>
+<strong>Deprecated:</strong> Deprecated in 1.4<br/>
+<br/>
 <p>Uses internal auth info refresh token to refresh
 the authentication token</p>
+<p><strong>Return</strong><br/>
+callback with a new login response object</p>
+<a name="com.gentlebreeze.vpn.sdk.VpnSdk$refreshToken(kotlin.String, kotlin.String)"></a>
+<code><span class="keyword">fun </span><span class="identifier">refreshToken</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$refreshToken(kotlin.String, kotlin.String)/username">username</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$refreshToken(kotlin.String, kotlin.String)/password">password</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.callback/-callback/index.html"><span class="identifier">Callback</span></a><span class="symbol">&lt;</span><a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-login-response/index.html"><span class="identifier">VpnLoginResponse</span></a><span class="symbol">&gt;</span></code>
+<p>Overrides <a href="../-i-vpn-sdk/refresh-token.html">IVpnSdk.refreshToken</a></p>
+<p>Uses internal auth info refresh token to refresh
+the authentication token or executes a login to renew the session</p>
+<h3>Parameters</h3>
+<p><a name="username"></a>
+<code>username</code> - The username login credentials value</p>
+<p><a name="password"></a>
+<code>password</code> - The password login credentials value</p>
 <p><strong>Return</strong><br/>
 callback with a new login response object</p>
 </BODY>

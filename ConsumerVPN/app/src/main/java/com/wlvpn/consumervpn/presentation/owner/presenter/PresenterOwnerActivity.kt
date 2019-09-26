@@ -38,6 +38,10 @@ abstract class PresenterOwnerActivity<P : BaseContract.Presenter<*>> : AppCompat
         super.onDestroy()
     }
 
+    override fun isPresenterInitialized(): Boolean {
+        return ::presenter.isInitialized
+    }
+
     class PresenterNotInitializedException
         (message: String = "Presenter needs to be initialized with bindPresenter()") : RuntimeException(message)
 }

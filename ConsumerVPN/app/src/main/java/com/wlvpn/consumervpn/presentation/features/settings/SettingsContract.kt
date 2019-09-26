@@ -23,6 +23,10 @@ interface SettingsContract {
         fun onAutoReconnect(reconnect: Boolean)
 
         fun onAboutPreferenceClick()
+
+        fun onLogOutMenuItemClick()
+
+        fun onLogoutClick()
     }
 
     interface View : BaseContract.View {
@@ -40,5 +44,11 @@ interface SettingsContract {
         fun showFastestServerNotImplementedMessage()
 
         fun showAbout()
+
+        fun showLogin()
+
+        fun showLogoutDialog()
+
+        fun toolbarVisibility(isVisible: Boolean)
     }
 }

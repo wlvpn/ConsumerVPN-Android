@@ -39,6 +39,11 @@ abstract class PresenterOwnerFragment<P : BaseContract.Presenter<*>> : Fragment(
         super.onDestroy()
     }
 
+    override fun isPresenterInitialized(): Boolean {
+        return ::presenter.isInitialized
+    }
+
     class PresenterNotInitializedException
-        (message: String = "Presenter needs to be initialized with bindPresenter()") : RuntimeException(message)
+        (message: String = "Presenter needs to be initialized with bindPresenter()") :
+        RuntimeException(message)
 }

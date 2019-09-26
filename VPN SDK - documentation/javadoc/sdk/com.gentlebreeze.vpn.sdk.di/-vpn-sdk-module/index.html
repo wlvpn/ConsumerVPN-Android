@@ -8,7 +8,7 @@
 <a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk.di</a>&nbsp;/&nbsp;<a href="./index.html">VpnSdkModule</a><br/>
 <br/>
 <h1>VpnSdkModule</h1>
-<code><span class="keyword">class </span><span class="identifier">VpnSdkModule</span></code>
+<code><span class="identifier">@Module</span> <span class="keyword">class </span><span class="identifier">VpnSdkModule</span></code>
 <h3>Constructors</h3>
 <table>
 <tbody>
@@ -120,7 +120,14 @@
 <p><a href="provide-ok-http.html">provideOkHttp</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">provideOkHttp</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">OkHttpClient</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">provideOkHttp</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.di.VpnSdkModule$provideOkHttp(com.gentlebreeze.vpn.http.api.VpnApiConfiguration)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<span class="identifier">VpnApiConfiguration</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">OkHttpClient</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="provide-pop-country-name-update.html">providePopCountryNameUpdate</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">providePopCountryNameUpdate</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.di.VpnSdkModule$providePopCountryNameUpdate(com.gentlebreeze.vpn.sdk.store.DeviceInfoStore)/deviceInfo">deviceInfo</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.store/-device-info-store/index.html"><span class="identifier">DeviceInfoStore</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">PopCountryNameUpdateFunction</span></code></td>
 </tr>
 <tr>
 <td>

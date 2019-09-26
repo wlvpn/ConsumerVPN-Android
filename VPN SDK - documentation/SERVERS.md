@@ -61,12 +61,20 @@ To Initialize use `SortServerOption` and `SortOrder` values
         - **`sortServer`**: `SortServer` object model to define how the list will be sorted and ordered
 5. `ICallback<List<VpnServer>> fetchAllServersByCountryCode(countryCode)`
     - This method will obtain all available servers from a certain country
-        - **`countryCode`**: `String` Two letter ISO country code eg. (us, mx)
+        - **`countryCode`**: `String` Two letter ISO country code eg. (US, MX)
 6. `ICallback<List<VpnServer>> fetchAllServersByCountryCode(countryCode, sortServer)`
     - This method will obtain all available servers from a certain country sorted and ordered
-        - **`countryCode`**: `String` Two letter ISO country code eg. (us, mx)
+        - **`countryCode`**: `String` Two letter ISO country code eg. (US, MX)
         - **`sortServer`**: `SortServer` object model to define how the list will be sorted and ordered
-
+7. `ICallback<List<VpnServer>> fetchAllServersByCountryAndCity(countryCode, city)`
+    - This method will obtain all available servers from a certain country city
+        - **`countryCode`**: `String` Two letter ISO country code eg. (US, MX)
+        - **`city`**: `String` The city name
+8. `ICallback<List<VpnServer>> fetchAllServersByCountryAndCity(countryCode, city, sortServer)`
+    - This method will obtain all available servers from a certain country city sorted and ordered
+        - **`countryCode`**: `String` Two letter ISO country code eg. (US, MX)
+        - **`city`**: `String` The city name
+        - **`sortServer`**: `SortServer` object model to define how the list will be sorted and ordered
 
 
 All callbacks returning will return:

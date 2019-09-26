@@ -37,8 +37,11 @@ class HomePresenter(
 
     override fun start() {
         // Initializes or onPageSelected current jobs
-        userAuthorizationService.scheduleRefreshToken()
-        serversService.scheduleRefreshServers()
+        userAuthorizationService.scheduleRefreshToken().subscribe({ /*No op*/ }
+            , { Timber.e(it, "Error scheduling refresh token") })
+
+        serversService.scheduleRefreshServers().subscribe({ /*No op*/ }
+            , { Timber.e(it, "Error scheduling server refresh token") })
 
         // Review if the account is expired and inform the user about it
         if (loginDisposable.isDisposed) {
@@ -95,12 +98,16 @@ class HomePresenter(
         }
     }
 
-    override fun onServerTabChangeRequest() {
-        view?.showServerTab()
+    override fun onConnectFragmentChangeRequest() {
+        view?.showConnectionView()
     }
 
-    override fun onConnectTabChangeRequest() {
-        view?.showConnectTab()
+    override fun onServerFragmentChangeRequest() {
+        view?.showServersView()
+    }
+
+    override fun onSettingsFragmentChangeRequest() {
+        view?.showSettingsView()
     }
 
     override fun cleanUp() {

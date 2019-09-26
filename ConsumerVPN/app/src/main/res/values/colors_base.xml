@@ -13,7 +13,7 @@
     <color name="color_accent">@color/main_blue</color>
     <color name="color_accent_dark">@color/dark_blue</color>
     <color name="text_color_primary">@color/white</color>
-    <color name="text_color_secondary">@color/white</color>
+    <color name="text_color_secondary">@color/white_60</color>
     <color name="text_color_gray">@color/white_60</color>
     <color name="text_color_dark">@color/steel_gray</color>
     <color name="window_background">@color/color_primary_dark</color>

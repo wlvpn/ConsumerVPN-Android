@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/item_log_out"
+        android:icon="@drawable/ic_log_out_24dp"
+        android:iconTint="@color/actionbar_ic_vector_color"
+        android:title="@string/settings_menu_button_log_out"
+        app:iconTint="@color/white"
+        app:showAsAction="ifRoom"
+        tools:targetApi="o" />
+
+</menu>
