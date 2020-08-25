@@ -4,7 +4,9 @@ import android.app.Application
 import android.app.NotificationManager
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Resources
 import android.net.ConnectivityManager
+import android.os.Build
 import com.gentlebreeze.http.connectivity.ConnectivityNetworkStateProvider
 import com.gentlebreeze.http.connectivity.INetworkStateProvider
 import com.gentlebreeze.vpn.sdk.IVpnSdk
@@ -12,6 +14,7 @@ import com.gentlebreeze.vpn.sdk.VpnSdk
 import com.gentlebreeze.vpn.sdk.config.SdkConfig
 import com.wlvpn.consumervpn.BuildConfig
 import com.wlvpn.consumervpn.R
+import com.wlvpn.consumervpn.domain.model.SystemInformation
 import com.wlvpn.consumervpn.domain.service.vpn.VpnService
 import com.wlvpn.consumervpn.presentation.VpnNotificationStatusController
 import com.wlvpn.consumervpn.presentation.bus.Event
@@ -27,7 +30,6 @@ import javax.inject.Named
 const val IS_DEVICE_TV_PROPERTY = "IS_DEVICE_TV_PROPERTY"
 const val CONNECT_BUS_PROPERTY = "CONNECT_BUS_PROPERTY"
 const val COMMON_SHARED_PREFERENCES_NAMESPACE = "COMMON_SHARED_PREFERENCES"
-
 
 /**
  * A module that holds with dependencies that needs a application context.
@@ -66,6 +68,9 @@ class AppModule(private val application: Application) {
     @PerApplication
     @Named(IS_DEVICE_TV_PROPERTY)
     fun providesIsDeviceTv() = isTv(application)
+
+    @Provides
+    fun provideResources(): Resources = application.resources
 
     @Provides
     fun providesSchedulerProvider(): SchedulerProvider = DefaultSchedulerProvider()
@@ -129,5 +134,17 @@ class AppModule(private val application: Application) {
             notificationManager,
             vpnNotificationChannel,
             vpnNotificationFactory
+        )
+
+    @Provides
+    fun providesSystemInformation(): SystemInformation =
+        SystemInformation(
+            appVersionName = BuildConfig.VERSION_NAME,
+            model = Build.MODEL,
+            manufacturer = Build.MANUFACTURER,
+            osVersion = Build.VERSION.RELEASE,
+            sdkLevel = Build.VERSION.SDK_INT.toString(),
+            board = Build.BOARD,
+            brand = Build.BRAND
         )
 }

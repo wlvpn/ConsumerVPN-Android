@@ -30,6 +30,11 @@
         <item name="windowNoTitle">false</item>
     </style>
 
+    <style name="AppTheme.Support">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
+    </style>
+
     <style name="DropDownListView" parent="@android:style/Widget.Holo.ListView.DropDown">
         <item name="android:background">@color/white</item>
         <item name="android:divider">@color/transparent</item>
@@ -48,6 +53,10 @@
     <style name="DialogButtonStyle.Light" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/dialog_button_text_color</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="LicensesTheme.LicenseList">
+        <item name="android:windowBackground">@color/window_background</item>
     </style>
 
 </resources>

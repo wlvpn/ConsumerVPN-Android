@@ -37,7 +37,7 @@ interface LoginContract {
 
         fun hideKeyboard()
 
-        fun invalidCredentialsMessage()
+        fun showInvalidCredentialsMessage()
 
         fun showNoNetworkMessage()
 

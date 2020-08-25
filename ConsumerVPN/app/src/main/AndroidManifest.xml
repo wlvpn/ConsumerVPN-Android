@@ -4,6 +4,7 @@
     tools:ignore="ImpliedTouchscreenHardware,MissingLeanbackLauncher,MissingLeanbackSupport">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -44,6 +45,16 @@
             android:parentActivityName=".presentation.features.home.HomeActivity"
             android:theme="@style/AppTheme.About" />
 
+        <activity
+            android:name=".presentation.features.support.ContactSupportActivity"
+            android:label="@string/support_label_title"
+            android:parentActivityName=".presentation.features.home.HomeActivity"
+            android:theme="@style/AppTheme.Support" />
+
+        <activity
+            android:name="com.netprotect.licenses.presentation.feature.licenseList.SoftwareLicensesActivity"
+            android:parentActivityName=".presentation.features.about.AboutActivity"/>
+
         <receiver
             android:name=".data.receivers.VpnReceiver"
             android:exported="false">
@@ -53,17 +64,6 @@
                 <action android:name="com.wlvpn.consumervpn.presentation.ACTION_DISCONNECT" />
             </intent-filter>
 
-        </receiver>
-
-        <receiver
-            android:name=".data.receivers.StartupReceiver"
-            android:enabled="true"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
-
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </receiver>
 
     </application>

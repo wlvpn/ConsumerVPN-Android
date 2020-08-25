@@ -19,6 +19,9 @@ import com.wlvpn.consumervpn.R
 import com.wlvpn.consumervpn.domain.model.Port
 import com.wlvpn.consumervpn.domain.model.Protocol
 import com.wlvpn.consumervpn.domain.model.Settings
+import com.wlvpn.consumervpn.domain.model.VpnProtocol
+import com.wlvpn.consumervpn.domain.model.VpnProtocol.IKEV2
+import com.wlvpn.consumervpn.domain.model.VpnProtocol.OPENVPN
 import com.wlvpn.consumervpn.presentation.di.Injector
 import com.wlvpn.consumervpn.presentation.features.logout.LogoutDialogFragment
 import com.wlvpn.consumervpn.presentation.features.logout.OnLogoutDialogResult
@@ -35,13 +38,14 @@ class SettingsPreferenceFragment
     @Inject
     lateinit var featureNavigator: FeatureNavigator
 
-    private lateinit var autoReconnectPreference: SwitchPreference
-    private lateinit var scramblePreference: SwitchPreference
-    private lateinit var launchStartupPreference: SwitchPreference
-    private lateinit var protocolPreference: ListPreference
-    private lateinit var portPreference: ListPreference
-    private lateinit var startupConnectPreference: ListPreference
-    private lateinit var aboutPreference: Preference
+    private var autoReconnectPreference: SwitchPreference? = null
+    private var vpnProtocolPreference: ListPreference? = null
+    private var scramblePreference: SwitchPreference? = null
+    private var protocolPreference: ListPreference? = null
+    private var portPreference: ListPreference? = null
+    private var startupConnectPreference: ListPreference? = null
+    private var contactSupportPreference: Preference? = null
+    private var aboutPreference: Preference? = null
 
     private var loadingView: View? = null
 
@@ -82,41 +86,37 @@ class SettingsPreferenceFragment
 
         Injector.INSTANCE.initViewComponent(activity as AppCompatActivity).inject(this)
 
-        autoReconnectPreference = preferenceManager
-            .findPreference(getString(R.string.preference_reconnect_key))
-                as SwitchPreference
+        autoReconnectPreference =
+            preferenceManager.findPreference(getString(R.string.preference_reconnect_key))
 
-        scramblePreference = preferenceManager
-            .findPreference(getString(R.string.preference_scramble_key))
-                as SwitchPreference
+        vpnProtocolPreference =
+            preferenceManager.findPreference(getString(R.string.preference_vpn_protocol_key))
 
-        launchStartupPreference = preferenceManager
-            .findPreference(getString(R.string.preference_launch_startup_key))
-                as SwitchPreference
+        scramblePreference =
+            preferenceManager.findPreference(getString(R.string.preference_scramble_key))
 
-        protocolPreference = preferenceManager
-            .findPreference(getString(R.string.preference_protocol_key))
-                as ListPreference
+        protocolPreference =
+            preferenceManager.findPreference(getString(R.string.preference_protocol_key))
 
-        portPreference = preferenceManager
-            .findPreference(getString(R.string.preference_port_key))
-                as ListPreference
+        portPreference = preferenceManager.findPreference(getString(R.string.preference_port_key))
 
-        startupConnectPreference = preferenceManager
-            .findPreference(getString(R.string.preference_auto_connect_key))
-                as ListPreference
+        startupConnectPreference =
+            preferenceManager.findPreference(getString(R.string.preference_auto_connect_key))
 
-        aboutPreference = preferenceManager
-            .findPreference(getString(R.string.preference_about_key))
-                as Preference
+        contactSupportPreference =
+            preferenceManager.findPreference(getString(R.string.preference_support_key))
 
-        preferenceScreen.isPersistent = false
-        autoReconnectPreference.isPersistent = false
-        scramblePreference.isPersistent = false
-        protocolPreference.isPersistent = false
-        portPreference.isPersistent = false
-        startupConnectPreference.isPersistent = false
-        launchStartupPreference.isPersistent = false
+        aboutPreference =
+            preferenceManager.findPreference(getString(R.string.preference_about_key))
+
+        preferenceScreen?.isPersistent = false
+        autoReconnectPreference?.isPersistent = false
+        vpnProtocolPreference?.isPersistent = false
+        scramblePreference?.isPersistent = false
+        protocolPreference?.isPersistent = false
+        portPreference?.isPersistent = false
+        startupConnectPreference?.isPersistent = false
+        contactSupportPreference?.isPersistent = false
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -170,17 +170,29 @@ class SettingsPreferenceFragment
         super.onPause()
     }
 
+    override fun setVpnProtocolPreferenceListOptions(options: List<VpnProtocol>) {
+        val keys = options.map { option -> option.name }.toTypedArray()
+        val values = options.map { option ->
+            when (option) {
+                OPENVPN -> getString(R.string.settings_fragment_connection_option_openvpn)
+                IKEV2 -> getString(R.string.settings_fragment_connection_option_ikev2)
+            }
+        }.toTypedArray()
+        vpnProtocolPreference?.entries = values
+        vpnProtocolPreference?.entryValues = keys
+    }
+
     override fun setPortPreferenceListOptions(options: List<Port>) {
         val values = options.map { option -> option.portNumber.toString() }.toTypedArray()
-        portPreference.entries = values
-        portPreference.entryValues = values
+        portPreference?.entries = values
+        portPreference?.entryValues = values
     }
 
     override fun setProtocolPreferenceListOptions(options: List<Protocol>) {
         val keys = options.map { option -> option.name }.toTypedArray()
         val values = options.map { option -> option.protocolName }.toTypedArray()
-        protocolPreference.entries = values
-        protocolPreference.entryValues = keys
+        protocolPreference?.entries = values
+        protocolPreference?.entryValues = keys
     }
 
     override fun setStartupConnectPreferenceListOptions(
@@ -190,17 +202,31 @@ class SettingsPreferenceFragment
 
         val values = options.map { option -> getStartupConnectOptionTitle(option) }.toTypedArray()
 
-        startupConnectPreference.entries = values
-        startupConnectPreference.entryValues = keys
+        startupConnectPreference?.entries = values
+        startupConnectPreference?.entryValues = keys
     }
 
     override fun updateSettings(settings: Settings.GeneralConnection) {
-        launchStartupPreference.isChecked = settings.launchOnStartup
-        autoReconnectPreference.isChecked = settings.autoReconnect
-        scramblePreference.isChecked = settings.scramble
-        protocolPreference.findValueAndSet(settings.protocol.name)
-        startupConnectPreference.findValueAndSet(settings.startupConnectOption.name)
-        portPreference.findValueAndSet(settings.port.portNumber.toString())
+        autoReconnectPreference?.isChecked = settings.autoReconnect
+        vpnProtocolPreference?.findValueAndSet(settings.vpnProtocol.name)
+        scramblePreference?.isChecked = settings.scramble
+        protocolPreference?.findValueAndSet(settings.protocol.name)
+        startupConnectPreference?.findValueAndSet(settings.startupConnectOption.name)
+        portPreference?.findValueAndSet(settings.port.portNumber.toString())
+    }
+
+    override fun showIkev2Preferences() {
+        protocolPreference?.isVisible = false
+        autoReconnectPreference?.isVisible = false
+        scramblePreference?.isVisible = false
+        portPreference?.isVisible = false
+    }
+
+    override fun showOpenVpnPreferences() {
+        protocolPreference?.isVisible = true
+        autoReconnectPreference?.isVisible = true
+        scramblePreference?.isVisible = true
+        portPreference?.isVisible = true
     }
 
     override fun setLoadingVisibility(visibility: Boolean) {
@@ -213,6 +239,10 @@ class SettingsPreferenceFragment
             getString(R.string.settings_fastest_in_country_not_implemented),
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    override fun showSupport() {
+        featureNavigator.navigateToSupport()
     }
 
     override fun showAbout() {
@@ -243,37 +273,39 @@ class SettingsPreferenceFragment
     }
 
     private fun setupPreferenceListeners() {
-        launchStartupPreference.setOnPreferenceChangeListener { _, value ->
-            presenter.onAppStartupLaunchChanged(value as Boolean)
-            false
-        }
-
-        startupConnectPreference.setOnPreferenceChangeListener { _, value ->
+        startupConnectPreference?.setOnPreferenceChangeListener { _, value ->
             presenter.onStartupConnectChanged(
-                Settings.GeneralConnection.StartupConnectOption.valueOf(
-                    value as String
-                )
+                Settings.GeneralConnection.StartupConnectOption.valueOf(value as String)
             )
             false
         }
-        scramblePreference.setOnPreferenceChangeListener { _, value ->
+        vpnProtocolPreference?.setOnPreferenceChangeListener { _, value ->
+            presenter.onVpnProtocolChanged(VpnProtocol.valueOf(value as String))
+            false
+        }
+        scramblePreference?.setOnPreferenceChangeListener { _, value ->
             presenter.onScrambleChanged(value as Boolean)
             false
         }
-        protocolPreference.setOnPreferenceChangeListener { _, value ->
+        protocolPreference?.setOnPreferenceChangeListener { _, value ->
             presenter.onProtocolChanged(Protocol.valueOf(value as String))
             false
         }
-        portPreference.setOnPreferenceChangeListener { _, value ->
+        portPreference?.setOnPreferenceChangeListener { _, value ->
             presenter.onPortChanged(Port((value as String).toInt()))
             false
         }
-        autoReconnectPreference.setOnPreferenceChangeListener { _, value ->
+        autoReconnectPreference?.setOnPreferenceChangeListener { _, value ->
             presenter.onAutoReconnect(value as Boolean)
             false
         }
 
-        aboutPreference.setOnPreferenceClickListener {
+        contactSupportPreference?.setOnPreferenceClickListener {
+            presenter.onSupportPreferenceClick()
+            true
+        }
+
+        aboutPreference?.setOnPreferenceClickListener {
             presenter.onAboutPreferenceClick()
             true
         }

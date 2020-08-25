@@ -4,10 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.net.Uri
+import com.netprotect.licenses.presentation.feature.licenseList.SoftwareLicensesActivity
 import com.wlvpn.consumervpn.R
 import com.wlvpn.consumervpn.presentation.features.about.AboutActivity
 import com.wlvpn.consumervpn.presentation.features.home.HomeActivity
 import com.wlvpn.consumervpn.presentation.features.login.LoginActivity
+import com.wlvpn.consumervpn.presentation.features.support.ContactSupportActivity
 
 /**
  * A navigator that uses context to start activities or fragments.
@@ -35,6 +37,12 @@ class DefaultFeatureNavigator(private val context: Activity) : FeatureNavigator 
         openWebViewWithUrl(context.getString(R.string.url_sign_up), onWebViewNotSupported)
     }
 
+    override fun navigateToSupport() {
+        Intent(context, ContactSupportActivity::class.java).apply {
+            context.startActivity(this)
+        }
+    }
+
     override fun navigateToAbout() {
         val intent = Intent(context, AboutActivity::class.java)
         context.startActivity(intent)
@@ -57,6 +65,11 @@ class DefaultFeatureNavigator(private val context: Activity) : FeatureNavigator 
                 HomeActivity.REQUESTED_BOTTOM_NAVIGATION_CHANGE_KEY,
                 HomeActivity.CONNECT_BOTTOM_NAVIGATION_KEY
             )
+        context.startActivity(intent)
+    }
+
+    override fun navigateToLicensesView() {
+        val intent = Intent(context, SoftwareLicensesActivity::class.java)
         context.startActivity(intent)
     }
 

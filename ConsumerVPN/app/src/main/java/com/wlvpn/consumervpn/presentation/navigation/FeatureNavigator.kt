@@ -31,6 +31,11 @@ interface FeatureNavigator {
     fun navigateToSettings()
 
     /**
+     * Navigates to Support Screen
+     */
+    fun navigateToSupport()
+
+    /**
      * Navigates to the About Screen
      * */
     fun navigateToAbout()
@@ -44,6 +49,11 @@ interface FeatureNavigator {
      * Navigates to connection view
      */
     fun navigateToConnectView()
+
+    /**
+     * Navigates to licenses view
+     */
+    fun navigateToLicensesView()
 
 
 }

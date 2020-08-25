@@ -1,5 +1,7 @@
 package com.wlvpn.consumervpn.data
 
+import com.gentlebreeze.vpn.module.openvpn.api.connection.ConnectionProtocol
+import com.gentlebreeze.vpn.sdk.model.VpnConnectionProtocolOptions
 import com.gentlebreeze.vpn.sdk.model.VpnPop
 import com.gentlebreeze.vpn.sdk.model.VpnPortOptions
 import com.gentlebreeze.vpn.sdk.model.VpnProtocolOptions
@@ -26,6 +28,12 @@ internal fun Server.toVpnServer(): VpnServer {
 }
 
 internal fun Port.toVpnPort(): VpnPortOptions = VpnPortOptions(portNumber)
+
+internal fun VpnProtocol.toVpnConnectionProtocol(): VpnConnectionProtocolOptions =
+    when (this) {
+        VpnProtocol.OPENVPN -> VpnConnectionProtocolOptions.OPENVPN
+        VpnProtocol.IKEV2 -> VpnConnectionProtocolOptions.IKEV2
+    }
 
 internal fun VpnPop.toDomainServerLocation() : ServerLocation {
     return if (city.isNotEmpty()) { CityAndCountryServerLocation(city, country, countryCode) }

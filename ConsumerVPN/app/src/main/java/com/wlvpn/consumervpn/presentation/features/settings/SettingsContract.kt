@@ -4,23 +4,26 @@ import com.wlvpn.consumervpn.domain.model.Port
 import com.wlvpn.consumervpn.domain.model.Protocol
 import com.wlvpn.consumervpn.domain.model.Settings
 import com.wlvpn.consumervpn.domain.model.Settings.GeneralConnection.StartupConnectOption
+import com.wlvpn.consumervpn.domain.model.VpnProtocol
 import com.wlvpn.consumervpn.presentation.features.BaseContract
 
 interface SettingsContract {
 
     interface Presenter : BaseContract.Presenter<View> {
 
-        fun onAppStartupLaunchChanged(launchOnStartup: Boolean)
-
         fun onStartupConnectChanged(startupConnectOption: StartupConnectOption)
 
         fun onScrambleChanged(scramble: Boolean)
+
+        fun onVpnProtocolChanged(vpnProtocol: VpnProtocol)
 
         fun onProtocolChanged(protocol: Protocol)
 
         fun onPortChanged(port: Port)
 
         fun onAutoReconnect(reconnect: Boolean)
+
+        fun onSupportPreferenceClick()
 
         fun onAboutPreferenceClick()
 
@@ -33,6 +36,12 @@ interface SettingsContract {
 
         fun updateSettings(settings: Settings.GeneralConnection)
 
+        fun showIkev2Preferences()
+
+        fun showOpenVpnPreferences()
+
+        fun setVpnProtocolPreferenceListOptions(options: List<VpnProtocol>)
+
         fun setPortPreferenceListOptions(options: List<Port>)
 
         fun setProtocolPreferenceListOptions(options: List<Protocol>)
@@ -42,6 +51,8 @@ interface SettingsContract {
         fun setLoadingVisibility(visibility: Boolean)
 
         fun showFastestServerNotImplementedMessage()
+
+        fun showSupport()
 
         fun showAbout()
 

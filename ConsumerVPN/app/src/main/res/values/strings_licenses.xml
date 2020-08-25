@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <string name="licenses_label_epl_license">EPL v1.0</string>
+    <string name="licenses_label_mit_license">MIT License</string>
+    <string name="licenses_label_apache_2_license">Apache License 2.0</string>
+    <string name="licenses_label_gpl_2_0_license">GPL 2.0</string>
+    <string name="licenses_label_lgpl_2_1_license">LGPL 2.1</string>
+
+    <string name="licenses_label_open_vpn_name">OpenVPN</string>
+    <string name="licenses_label_open_vpn_copyright">Copyright ©  2002–2019 OpenVPN Inc.</string>
+    <string name="licenses_label_open_vpn_website">https://openvpn.net/</string>
+
+    <string name="licenses_label_strong_swan_name">StrongSwan</string>
+    <string name="licenses_label_strong_swan_copyright">Copyright ©  2017 StrongSwan Org.</string>
+    <string name="licenses_label_strong_swan_website">https://wiki.strongswan.org/projects/strongswan</string>
+
+    <string name="licenses_label_fresco_name">Fresco</string>
+    <string name="licenses_label_fresco_copyright">Copyright © Facebook, Inc. and its affiliates.</string>
+    <string name="licenses_label_fresco_website">https://github.com/facebook/fresco</string>
+
+    <string name="licenses_label_androidx_name">Androidx Libraries</string>
+    <string name="licenses_label_androidx_copyright">Copyright © 2005–2013, The Android Open Source Project</string>
+    <string name="licenses_label_androidx_website">https://source.android.com/</string>
+
+    <string name="licenses_label_gson_name">Gson</string>
+    <string name="licenses_label_gson_copyright">Copyright 2008 Google Inc.</string>
+    <string name="licenses_label_gson_website">https://github.com/google/gson</string>
+
+    <string name="licenses_label_retrofit_name">Retrofit</string>
+    <string name="licenses_label_retrofit_copyright">Copyright 2013 Square, Inc.</string>
+    <string name="licenses_label_retrofit_website">https://square.github.io/retrofit/</string>
+
+    <string name="licenses_label_evernote_jobs_name">Android-Job</string>
+    <string name="licenses_label_evernote_jobs_copyright">Copyright © 2007–2017 by Evernote Corporation, All rights reserved.</string>
+    <string name="licenses_label_evernote_jobs_website">https://github.com/evernote/android-job</string>
+
+    <string name="licenses_label_junit_name">jUnit 4</string>
+    <string name="licenses_label_junit_copyright">Copyright © 2002–2020 JUnit. All Rights Reserved.</string>
+    <string name="licenses_label_junit_website">https://junit.org/junit4/</string>
+
+    <string name="licenses_label_mockito_name">Mockito</string>
+    <string name="licenses_label_mockito_copyright">Copyright © 2007 Mockito contributors</string>
+    <string name="licenses_label_mockito_website">https://site.mockito.org/</string>
+
+    <string name="licenses_label_timber_name">Timber</string>
+    <string name="licenses_label_timber_copyright">Copyright 2013 Jake Wharton</string>
+    <string name="licenses_label_tmber_website">https://github.com/JakeWharton/timber</string>
+
+    <string name="licenses_label_okhttp_name">okHttp</string>
+    <string name="licenses_label_okhttp_copyright">Copyright 2019 Square, Inc.</string>
+    <string name="licenses_label_okhtpp_website">https://square.github.io/okhttp/</string>
+
+    <string name="licenses_label_apache_commons_name">Apache Commons IO</string>
+    <string name="licenses_label_apache_commons_copyright">Copyright © 2002–2019 The Apache Software Foundation. All Rights Reserved.</string>
+    <string name="licenses_label_apache_commons_website">https://commons.apache.org/proper/commons-io/</string>
+
+    <string name="licenses_label_rxjava_name">RxJava</string>
+    <string name="licenses_label_rxjava_copyright">Copyright © 2016-present, RxJava Contributors.</string>
+    <string name="licenses_label_rxjava_website">https://github.com/ReactiveX/RxJava</string>
+
+    <string name="licenses_label_rxandroid_name">RxAndroid</string>
+    <string name="licenses_label_rxandroid_copyright">Copyright 2015 The RxAndroid authors</string>
+    <string name="licenses_label_rxandroid_website">https://github.com/ReactiveX/RxAndroid</string>
+
+    <string name="licenses_label_dagger_name">Dagger</string>
+    <string name="licenses_label_dagger_copyright">Copyright 2012 The Dagger Authors</string>
+    <string name="licenses_label_dagger_website">https://github.com/google/dagger</string>
+
+    <string name="licenses_label_logan_square_name">LoganSquare</string>
+    <string name="licenses_label_logan_square_copyright">Copyright 2015 BlueLine Labs, Inc.</string>
+    <string name="licenses_label_logan_square_website">https://github.com/bluelinelabs/LoganSquare</string>
+
+    <string name="licenses_label_rxbinding_name">RxBinding</string>
+    <string name="licenses_label_rxbinding_copyright">Copyright © 2015 Jake Wharton</string>
+    <string name="licenses_label_rxbinding_website">https://github.com/JakeWharton/RxBinding</string>
+
+    <string name="licenses_label_android_pathview_name">android-pathview</string>
+    <string name="licenses_label_android_pathview_copyright">Copyright 2016 Georgi Eftimov</string>
+    <string name="licenses_label_android_pathview_website">https://github.com/geftimov/android-pathview</string>
+
+    <string name="licenses_label_calligraphy_name">Calligraphy</string>
+    <string name="licenses_label_calligraphy_copyright">Copyright 2013 Christopher Jenkins</string>
+    <string name="licenses_label_calligraphy_website">https://github.com/chrisjenx/Calligraphy</string>
+
+    <string name="licenses_label_jackson_jaxrs_providers_name">jackson-jaxrs-providers</string>
+    <string name="licenses_label_jackson_jaxrs_providers_copyright">Copyright ©2009–2011 FasterXML, LLC. All rights reserved unless otherwise indicated.</string>
+    <string name="licenses_label_jackson_jaxrs_providers_website">https://github.com/FasterXML/jackson-jaxrs-providers</string>
+
+    <string name="licenses_label_slf4j_name">SLF4J</string>
+    <string name="licenses_label_slf4j_copyright">Copyright © 2004–2017 QOS.ch</string>
+    <string name="licenses_label_slf4j_website">http://www.slf4j.org/</string>
+
+    <string name="licenses_label_logback_name">Logback</string>
+    <string name="licenses_label_logback_copyright">Copyright © 1999–2017, QOS.ch. All rights reserved.</string>
+    <string name="licenses_label_logback_website">http://logback.qos.ch/</string>
+
+    <string name="licenses_label_autovalue_name">AutoValue</string>
+    <string name="licenses_label_autovalue_copyright">Copyright 2013 Google LLC</string>
+    <string name="licenses_label_autovalue_website">https://github.com/google/auto/tree/master/value</string>
+
+    <string name="licenses_label_leakcanary_name">LeakCanary</string>
+    <string name="licenses_label_leakcanary_copyright">Copyright 2015 Square, Inc.</string>
+    <string name="licenses_label_leakcanary_website">https://square.github.io/leakcanary/</string>
+
+</resources>

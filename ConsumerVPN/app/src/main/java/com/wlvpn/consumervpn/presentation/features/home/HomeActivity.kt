@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.wlvpn.consumervpn.R
 import com.wlvpn.consumervpn.presentation.di.Injector
@@ -12,6 +13,7 @@ import com.wlvpn.consumervpn.presentation.features.home.connection.ConnectionFra
 import com.wlvpn.consumervpn.presentation.features.home.servers.ServersFragment
 import com.wlvpn.consumervpn.presentation.features.settings.SettingsPreferenceFragment
 import com.wlvpn.consumervpn.presentation.owner.presenter.PresenterOwnerActivity
+import com.wlvpn.consumervpn.presentation.util.bindView
 import kotlinx.android.synthetic.main.activity_home.*
 
 private const val FRAGMENT_TAG_KEY = "HOME_FRAGMENT_KEY"

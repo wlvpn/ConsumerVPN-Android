@@ -1,10 +1,11 @@
 package com.wlvpn.consumervpn.presentation.di.component
 
-import com.wlvpn.consumervpn.data.receivers.StartupReceiver
 import com.wlvpn.consumervpn.data.receivers.VpnReceiver
 import com.wlvpn.consumervpn.presentation.ConsumerApplication
 import com.wlvpn.consumervpn.presentation.di.module.AppModule
 import com.wlvpn.consumervpn.presentation.di.module.GatewayModule
+import com.wlvpn.consumervpn.presentation.di.module.InteractorModule
+import com.wlvpn.consumervpn.presentation.di.module.LicensesConfigurationModule
 import com.wlvpn.consumervpn.presentation.di.module.RepositoryModule
 import com.wlvpn.consumervpn.presentation.di.module.ServiceModule
 import com.wlvpn.consumervpn.presentation.di.scope.PerApplication
@@ -19,7 +20,9 @@ import dagger.Component
 @Component(
     modules = [AppModule::class,
         ServiceModule::class,
+        InteractorModule::class,
         RepositoryModule::class,
+        LicensesConfigurationModule::class,
         GatewayModule::class]
 )
 interface ApplicationComponent {
@@ -33,7 +36,5 @@ interface ApplicationComponent {
     fun inject(into: ConsumerApplication)
 
     fun inject(into: VpnReceiver)
-
-    fun inject(into: StartupReceiver)
     //endregion injectors
 }

@@ -1,5 +1,9 @@
 package com.wlvpn.consumervpn.presentation.di.module
 
+import android.app.Application
+import com.wlvpn.consumervpn.R
+import com.wlvpn.consumervpn.domain.interactor.logs.GetApplicationLogsContract
+import com.wlvpn.consumervpn.domain.interactor.logs.SendCommentsContract
 import com.wlvpn.consumervpn.domain.service.authentication.UserAuthenticationService
 import com.wlvpn.consumervpn.domain.service.authorization.UserAuthorizationService
 import com.wlvpn.consumervpn.domain.service.servers.ServersService
@@ -22,6 +26,8 @@ import com.wlvpn.consumervpn.presentation.features.settings.SettingsContract
 import com.wlvpn.consumervpn.presentation.features.settings.SettingsPresenter
 import com.wlvpn.consumervpn.presentation.features.splash.SplashContract
 import com.wlvpn.consumervpn.presentation.features.splash.SplashPresenter
+import com.wlvpn.consumervpn.presentation.features.support.ContactSupportContract
+import com.wlvpn.consumervpn.presentation.features.support.ContactSupportPresenter
 import com.wlvpn.consumervpn.presentation.util.SchedulerProvider
 import com.wlvpn.consumervpn.presentation.util.StartupStatus
 import dagger.Module
@@ -92,7 +98,13 @@ class PresenterModule {
         @Named(CONNECT_BUS_PROPERTY) connectionEventBus: SinglePipelineBus<Event.ConnectionRequestEvent>,
         schedulerProvider: SchedulerProvider
     ): ServersContract.Presenter =
-        ServersPresenter(serversService, settingsService, vpnService, connectionEventBus, schedulerProvider)
+        ServersPresenter(
+            serversService,
+            settingsService,
+            vpnService,
+            connectionEventBus,
+            schedulerProvider
+        )
 
     @Provides
     @PerPresentation
@@ -110,4 +122,19 @@ class PresenterModule {
     fun providesAboutPresenter(): AboutContract.Presenter =
         AboutPresenter()
 
+    @Provides
+    @PerPresentation
+    fun providesContactSupportPresenter(
+        application: Application,
+        schedulerProvider: SchedulerProvider,
+        getApplicationLogsInteractor: GetApplicationLogsContract.Interactor,
+        sendCommentsInteractor: SendCommentsContract.Interactor
+
+    ): ContactSupportContract.Presenter =
+        ContactSupportPresenter(
+            getApplicationLogsInteractor,
+            sendCommentsInteractor,
+            application.getString(R.string.support_web_address),
+            schedulerProvider
+        )
 }

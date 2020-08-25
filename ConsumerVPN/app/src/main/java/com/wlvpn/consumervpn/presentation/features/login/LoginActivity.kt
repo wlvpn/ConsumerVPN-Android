@@ -132,7 +132,7 @@ class LoginActivity :
         return false
     }
 
-    override fun invalidCredentialsMessage() {
+    override fun showInvalidCredentialsMessage() {
         showErrorMessage(getString(R.string.error_login_username_password_invalid))
     }
 

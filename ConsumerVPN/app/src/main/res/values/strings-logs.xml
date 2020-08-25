@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="support_email_address" translatable="false">support@consumervpn.com</string>
+    <string name="support_email_subject" translatable="false">Support ConsumerVpn</string>
+    <string name="support_web_address" translatable="false">https://wlvpn.com</string>
+
+    <!--Support-->
+    <!--Message for support only, no need for translation-->
+    <string name="support_label_diagnosis_message_format" translatable="false">
+        Android diagnosis generated on:\n
+        %1$s\n
+        ========================================\n
+        User:\n
+        %2$s\n
+        ========================================\n
+        System information:\n
+        %3$s\n
+        ========================================\n
+        Settings:\n
+        %4$s\n
+        ========================================\n
+        Logs:\n
+        %5$s
+        \n\n
+    </string>
+</resources>

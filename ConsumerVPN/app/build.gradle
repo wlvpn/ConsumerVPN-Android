@@ -25,6 +25,7 @@ android {
 
         buildConfigField 'String', 'FLAGS_HOSTNAME', '"https://static.wlvpn.com/flags/"'
 
+        buildConfigField 'String', 'IKE_REMOTE_ID', '"vpn.wlvpn.com"'
     }
 
     // These keys are intended for tests environments only, the release keys should not live in the gradle file
@@ -85,7 +86,6 @@ android {
     flavorDimensions "platform"
     productFlavors {
         mobile {
-
             dimension "platform"
         }
         tv {
@@ -106,6 +106,11 @@ android {
         ignore 'InvalidPackage'
     }
 
+    packagingOptions {
+        // Excludes WG binaries
+        exclude "**/libwg-go.so"
+    }
+
 }
 
 dependencies {
@@ -115,8 +120,9 @@ dependencies {
                     support         : "1.0.0",
                     lifecycle       : "2.0.0",
                     constraintLayout: "1.1.3",
-                    material        : "1.1.0-alpha09",
-                    appCompat       : "1.1.0-rc01"
+                    material        : "1.1.0",
+                    appCompat       : "1.1.0",
+                    preferences     : "1.1.1"
             ],
             rxJava       : "2.2.10",
             rxAndroid    : "2.1.1",
@@ -127,12 +133,14 @@ dependencies {
             retrofit     : "2.5.0",
             leakCanary   : "1.6.3",
             fresco       : "1.13.0",
-            vpnSdk       : "1.5.6.58206@aar",
-            nativeEncrypt: "1.0.058045@aar",
+            vpnSdk       : "1.5.11.88891@aar",
             timber       : "4.7.1",
             autoValue    : "1.6.5",
             loganSquare  : "1.3.7",
             evernoteJobs : "1.2.6",
+            slf4j        : "1.7.25",
+            logback      : "2.0.0",
+            licenses     : "1.0.80577",
             test         : [
                     junit  : "4.12",
                     mockito: "2.24.0"
@@ -153,9 +161,15 @@ dependencies {
     implementation "androidx.cardview:cardview:$versions.os.support"
     implementation "androidx.gridlayout:gridlayout:$versions.os.support"
     implementation "com.google.android.material:material:$versions.os.material"
+    implementation "androidx.preference:preference:$versions.os.preferences"
+    implementation "androidx.preference:preference-ktx:$versions.os.preferences"
     //endregion OS
 
     // region Libs
+
+    // Logs
+    implementation "org.slf4j:slf4j-api:$versions.slf4j"
+    implementation "com.github.tony19:logback-android:$versions.logback"
 
     // Rx Bindings
     implementation "com.jakewharton.rxbinding3:rxbinding:$versions.rxBinding"
@@ -165,9 +179,6 @@ dependencies {
     // Gson
     implementation "com.google.code.gson:gson:$versions.gson"
 
-    // Native EncrKeyption
-    implementation "com.stackpath.nativencrkeyption:nativencrkeyption:$versions.nativeEncrypt"
-
     // Timber
     implementation "com.jakewharton.timber:timber:$versions.timber"
 
@@ -175,6 +186,9 @@ dependencies {
     implementation("com.gentlebreeze.vpn.sdk:sdk:$versions.vpnSdk") {
         transitive = true
     }
+
+    //Internal libraries
+    implementation "com.netprotect.licenses:app:$versions.licenses"
 
     // RxJava
     implementation "io.reactivex.rxjava2:rxjava:$versions.rxJava"

@@ -1,0 +1,12 @@
+package com.wlvpn.consumervpn.domain.model
+
+private const val OPENVPN_VPN_PROTOCOL_NAME = "OPENVPN"
+private const val IKEV2_VPN_PROTOCOL_NAME = "IKEV2"
+
+enum class VpnProtocol(
+    val protocolName: String
+) {
+
+    OPENVPN(OPENVPN_VPN_PROTOCOL_NAME),
+    IKEV2(IKEV2_VPN_PROTOCOL_NAME)
+}
