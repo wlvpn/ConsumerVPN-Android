@@ -7,12 +7,14 @@ import com.gentlebreeze.vpn.sdk.model.VpnNotification
 import com.gentlebreeze.vpn.sdk.model.VpnPop
 import com.gentlebreeze.vpn.sdk.model.VpnState
 import com.wlvpn.consumervpn.BuildConfig
+import com.wlvpn.consumervpn.BuildConfig.IKE_REMOTE_ID
 import com.wlvpn.consumervpn.data.failure.map.NetworkThrowableMapper
 import com.wlvpn.consumervpn.data.failure.map.ThrowableMapper
 import com.wlvpn.consumervpn.data.gateway.connection.failure.NoServersFoundForSelectionFailure
 import com.wlvpn.consumervpn.data.gateway.connection.failure.ServerNotSelectedToVpnFailure
 import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
 import com.wlvpn.consumervpn.data.model.CountryServerLocation
+import com.wlvpn.consumervpn.data.toVpnConnectionProtocol
 import com.wlvpn.consumervpn.data.toVpnPort
 import com.wlvpn.consumervpn.data.toVpnProtocol
 import com.wlvpn.consumervpn.data.toVpnServer
@@ -209,11 +211,20 @@ class ExternalVpnConnectionGateway(
             vpnSdk.getAuthInfo().vpnAuthPassword ?: credentials.password
         )
             .scrambleOn(general.scramble)
-            .reconnetOn(general.autoReconnect)
-            .port(general.port.toVpnPort())
+            .reconnectOn(general.autoReconnect)
+            .remoteId(IKE_REMOTE_ID)
+            .apply {
+                // TODO: implement port settings to VPN protocol selection relationship, currently
+                // the settings repository only consider one port option ignoring the available
+                // options for each VPN protocol
+                if (general.vpnProtocol.toVpnConnectionProtocol()
+                    != VpnConnectionProtocolOptions.IKEV2) {
+                    port(general.port.toVpnPort())
+                }
+            }
             .vpnProtocol(general.protocol.toVpnProtocol())
             .shouldOverrideMobileMtu(false)
-            .connectionProtocol(VpnConnectionProtocolOptions.OPENVPN)
+            .connectionProtocol(general.vpnProtocol.toVpnConnectionProtocol())
             .debugLevel(if (BuildConfig.DEBUG) 5 else 0)
             .build()
 

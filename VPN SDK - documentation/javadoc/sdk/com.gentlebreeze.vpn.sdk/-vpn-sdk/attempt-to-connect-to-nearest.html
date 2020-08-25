@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>VpnSdk.attemptToConnectToNearest - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk</a>&nbsp;/&nbsp;<a href="index.html">VpnSdk</a>&nbsp;/&nbsp;<a href="./attempt-to-connect-to-nearest.html">attemptToConnectToNearest</a><br/>
+<br/>
+<h1>attemptToConnectToNearest</h1>
+<a name="com.gentlebreeze.vpn.sdk.VpnSdk$attemptToConnectToNearest(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)"></a>
+<code><span class="keyword">fun </span><span class="identifier">attemptToConnectToNearest</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$attemptToConnectToNearest(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/pop">pop</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-pop/index.html"><span class="identifier">VpnPop</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$attemptToConnectToNearest(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$attemptToConnectToNearest(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/vpnRevokedNotification">vpnRevokedNotification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$attemptToConnectToNearest(com.gentlebreeze.vpn.sdk.model.VpnPop, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html"><span class="identifier">VpnConnectionConfiguration</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Completable</span></code>
+<p>Overrides <a href="../-i-vpn-sdk/attempt-to-connect-to-nearest.html">IVpnSdk.attemptToConnectToNearest</a></p>
+<p>Attempt to connect to a server from a given VpnPop if any available,
+after performing a load balance considering maintenance, server capacity and distance
+one will be taken as the best suited for the connection.
+If there are no candidate servers available in the specified VpnPop,
+the nearest one from other VpnPop will be used, expanding the tolerance distance,
+first by checking the nearest ones, then if the specified VpnPop's country
+does not have a single available server, the search will be opened
+to the next near countries until finding one.</p>
+<h3>Parameters</h3>
+<p><a name="pop"></a>
+<code>pop</code> - pop to attempt to connect to</p>
+<p><a name="notification"></a>
+<code>notification</code> - vpn notification</p>
+<p><a name="vpnRevokedNotification"></a>
+<code>vpnRevokedNotification</code> - notification shown if the
+VPN permission is revoked</p>
+<p><a name="configuration"></a>
+<code>configuration</code> - Container object containing server,
+    notification configuration, and credentials</p>
+<p><strong>Return</strong><br/>
+a Rx2 Completable for this connection, will complete on a successful connection.</p>
+<a name="com.gentlebreeze.vpn.sdk.VpnSdk$attemptToConnectToNearest(com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)"></a>
+<code><span class="keyword">fun </span><span class="identifier">attemptToConnectToNearest</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$attemptToConnectToNearest(com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$attemptToConnectToNearest(com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/vpnRevokedNotification">vpnRevokedNotification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$attemptToConnectToNearest(com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html"><span class="identifier">VpnConnectionConfiguration</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Completable</span></code>
+<p>Overrides <a href="../-i-vpn-sdk/attempt-to-connect-to-nearest.html">IVpnSdk.attemptToConnectToNearest</a></p>
+<p>Attempt to connect to the best server relative to your geolocation
+with no preference for country or city</p>
+<h3>Parameters</h3>
+<p><a name="notification"></a>
+<code>notification</code> - vpn notification</p>
+<p><a name="vpnRevokedNotification"></a>
+<code>vpnRevokedNotification</code> - notification shown if the
+VPN permission is revoked</p>
+<p><a name="configuration"></a>
+<code>configuration</code> - Container object containing server,
+    notification configuration, and credentials</p>
+<p><strong>Return</strong><br/>
+a Rx2 Completable for this connection, will complete on a successful connection.</p>
+</BODY>
+</HTML>

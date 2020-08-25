@@ -18,7 +18,7 @@
     <string name="error_vpn_connection">Error connecting to the VPN, please try again later</string>
     <string name="error_no_connection">No Connection</string>
     <string name="error_links_not_supported">Opening web links is not supported on this device.</string>
-    <string name="error_login_username_password_invalid">Username or password not valid</string>
+    <string name="error_login_username_password_invalid">Invalid credentials, please try again</string>
     <string name="error_not_authenticated_user">User must be authenticated in order to execute the operation</string>
 
     <!-- Notifications -->
@@ -81,14 +81,17 @@
 
     <!--Settings screen-->
     <string name="settings_fragment_label_title">Settings</string>">
-    <string name="settings_preference_launch_app_startup">Launch application after device start up</string>
+    <string name="settings_fragment_connection_option_openvpn">OpenVPN</string>
+    <string name="settings_fragment_connection_option_ikev2">IKEv2</string>
     <string name="settings_preference_auto_connect_title">Connect at startup</string>
+    <string name="settings_preference_vpn_protocol_title">VPN Protocol</string>
     <string name="settings_preference_reconnect_title">Auto Reconnect</string>
     <string name="settings_preference_scramble_title">Scramble</string>
     <string name="settings_preference_scramble_description">Adds obfuscation, allowing it to bypass network traffic sensors which aim to detect usage of a VPN and block it.</string>
     <string name="settings_preference_protocol_title">Protocol</string>
     <string name="settings_preference_port_title">Port</string>
     <string name="settings_preference_about_title">About ConsumerVPN</string>
+    <string name="settings_preference_support_title">Contact Support</string>
     <string name="settings_preference_startup_do_not">Do not automatically connect</string>
     <string name="settings_preference_startup_last_server">Connect to last connected server</string>
     <string name="settings_preference_startup_fastest">Connect to fastest server</string>
@@ -101,20 +104,40 @@
     <string name="logout_dialog_label_message">Are you sure you want to log out?</string>
 
     <!-- Settings preferences key -->
-    <string name="preference_launch_startup_key">preference_launch_startup</string>
-    <string name="preference_auto_connect_key">preference_auto_connect</string>
-    <string name="preference_reconnect_key">preference_reconnect</string>
-    <string name="preference_scramble_key">preference_scramble</string>
-    <string name="preference_protocol_key">preference_protocol</string>
-    <string name="preference_port_key">preference_port</string>
-    <string name="preference_about_key">preference_about</string>
-    <string name="preference_category_startup_key">preference_category_startup</string>
+    <string name="preference_vpn_protocol_key" translatable="false">preference_vpn_protocol</string>
+    <string name="preference_auto_connect_key" translatable="false">preference_auto_connect</string>
+    <string name="preference_reconnect_key" translatable="false">preference_reconnect</string>
+    <string name="preference_scramble_key" translatable="false">preference_scramble</string>
+    <string name="preference_protocol_key" translatable="false">preference_protocol</string>
+    <string name="preference_port_key" translatable="false">preference_port</string>
+    <string name="preference_about_key" translatable="false">preference_about</string>
+    <string name="preference_category_startup_key" translatable="false">preference_category_startup</string>
+    <string name="preference_support_key" translatable="false">preference_support</string>
+
+    <!-- Contact Support -->
+    <string name="support_label_title">Support</string>
+    <string name="support_label_scan_code">Please scan this code to visit the support website</string>
+    <string name="support_image_content_description_qr">Support Web Site QR Code</string>
+    <string name="support_label_need_help">Need some help? We can find a fix.</string>
+    <string name="support_label_describe_trouble">Describe the trouble you\'re experiencing so we can lend a hand.</string>
+    <string name="support_label_empty_notes_error_message">Please, write a description of your problem.</string>
+    <string name="support_label_email_subject">Support IPVanish</string>
+    <string name="support_label_email_not_supported_message">Send email is not supported on this device.</string>
+    <string name="support_checkbox_diagnosis_message">Include diagnostic and system information</string>
+    <string name="support_menu_button_send">Send</string>
+    <string name="support_toast_contact_support">Visit %s to contact support</string>
+
+    <string name="support_dialog_label_message">Please contact us through %1$s or send us an e-mail to %2$s.</string>
+    <string name="support_dialog_visit_support_website_title">Visit our support website</string>
+    <string name="support_dialog_visit_support_website_message">No compatible email clients found, please visit our support site for contact</string>
+    <string name="support_dialog_visit_support_website_positive_button">Open support site</string>
+    <string name="support_dialog_visit_support_website_negative_button">Cancel</string>
 
     <!--About screen-->
     <string name="about_activity_title">About</string>
+    <string name="about_activity_licenses_button">Open source licenses</string>
     <string name="about_msg_body_wlvpn">Want to build a VPN app like this?\n Contact partners@wlvpn.com</string>
     <string name="about_more_url"><a href="https://wlvpn.com/">More about WLVPN</a></string>
     <string name="about_version_name">v%s</string>
-
-
+    
 </resources>

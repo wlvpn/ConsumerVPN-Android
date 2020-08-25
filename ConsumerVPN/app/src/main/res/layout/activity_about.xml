@@ -56,4 +56,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/about_licenses_button"
+        style="@style/MaterialTextButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/txt_main_url"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/about_activity_licenses_button" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

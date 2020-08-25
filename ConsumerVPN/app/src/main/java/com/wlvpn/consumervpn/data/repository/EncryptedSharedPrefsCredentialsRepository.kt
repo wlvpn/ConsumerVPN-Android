@@ -2,7 +2,8 @@ package com.wlvpn.consumervpn.data.repository
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
-import com.stackpath.nativencrkeyption.Encrypter
+import com.netprotect.nativencrkeyption.Encrypter
+
 import com.wlvpn.consumervpn.domain.model.Credentials
 import com.wlvpn.consumervpn.domain.repository.CredentialsRepository
 import io.reactivex.Completable

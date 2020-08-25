@@ -14,7 +14,7 @@
 <p>Attempt to connect to a server from a given VpnPop if any available,
 after performing a load balance considering maintenance, server capacity and distance
 one will be taken as the best suited for the connection.
-If there is no candidate servers available in the specified VpnPop,
+If there are no candidate servers available in the specified VpnPop,
 the nearest one from other VpnPop will be used, expanding the tolerance distance,
 first by checking the nearest ones, then if the specified VpnPop's country
 does not have a single available server, the search will be opened
@@ -24,6 +24,9 @@ to the next near countries until finding one.</p>
 <code>pop</code> - pop to attempt to connect to</p>
 <p><a name="notification"></a>
 <code>notification</code> - vpn notification</p>
+<p><a name="vpnRevokedNotification"></a>
+<code>vpnRevokedNotification</code> - notification shown if the
+VPN permission is revoked</p>
 <p><a name="configuration"></a>
 <code>configuration</code> - Container object containing server,
     notification configuration, and credentials</p>
@@ -37,6 +40,9 @@ with no preference for country or city</p>
 <h3>Parameters</h3>
 <p><a name="notification"></a>
 <code>notification</code> - vpn notification</p>
+<p><a name="vpnRevokedNotification"></a>
+<code>vpnRevokedNotification</code> - notification shown if the
+VPN permission is revoked</p>
 <p><a name="configuration"></a>
 <code>configuration</code> - Container object containing server,
     notification configuration, and credentials</p>

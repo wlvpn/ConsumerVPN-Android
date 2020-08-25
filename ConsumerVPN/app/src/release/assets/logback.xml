@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration debug='true'>
+
+    <property name="LOG_DIR" value="/data/data/com.wlvpn.consumervpn/files/log" />
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <file>${LOG_DIR}/local_diagnostics.txt</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/local_diagnostics_%i.txt</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>2</maxIndex>
+        </rollingPolicy>
+
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>70KB</maxFileSize>
+        </triggeringPolicy>
+
+        <encoder>
+            <pattern>%d{yyyy/MM/dd HH:mm:ss:SSS} [%thread] - %msg%n</pattern>
+        </encoder>
+
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="file" />
+    </root>
+
+</configuration>

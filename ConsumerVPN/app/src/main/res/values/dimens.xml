@@ -107,4 +107,10 @@
     <dimen name="home_servers_row_city_height">@dimen/spacing_xxxlarge</dimen>
     <!-- endregion -->
 
+    <!-- Support -->
+    <dimen name="support_container_padding">@dimen/spacing_normal</dimen>
+    <dimen name="support_controls_margin_top">@dimen/spacing_normal</dimen>
+    <dimen name="support_regular_text_size">@dimen/textMedium</dimen>
+    <dimen name="support_small_text_size">@dimen/textSmall</dimen>
+
 </resources>

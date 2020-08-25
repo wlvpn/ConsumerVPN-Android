@@ -4,6 +4,7 @@ import com.wlvpn.consumervpn.domain.model.Port
 import com.wlvpn.consumervpn.domain.model.Protocol
 import com.wlvpn.consumervpn.domain.model.Settings
 import com.wlvpn.consumervpn.domain.model.Settings.GeneralConnection.StartupConnectOption
+import com.wlvpn.consumervpn.domain.model.VpnProtocol
 import com.wlvpn.consumervpn.domain.service.authentication.UserAuthenticationService
 import com.wlvpn.consumervpn.domain.service.settings.SettingsService
 import com.wlvpn.consumervpn.domain.service.vpn.VpnService
@@ -36,11 +37,16 @@ class SettingsPresenter(
     Delegates.observable(Settings.GeneralConnection()) { _, _, updatedSettings ->
         view?.setPortPreferenceListOptions(updatedSettings.availablePorts)
         view?.updateSettings(updatedSettings)
+        when (updatedSettings.vpnProtocol) {
+            VpnProtocol.OPENVPN -> view?.showOpenVpnPreferences()
+            VpnProtocol.IKEV2 -> view?.showIkev2Preferences()
+        }
     }
 
     override fun start() {
         //Set initial list options
         view?.setStartupConnectPreferenceListOptions(StartupConnectOption.values().asList())
+        view?.setVpnProtocolPreferenceListOptions(VpnProtocol.values().asList())
         view?.setProtocolPreferenceListOptions(Protocol.values().asList())
         view?.setPortPreferenceListOptions(current.availablePorts)
         view?.toolbarVisibility(true)
@@ -61,12 +67,6 @@ class SettingsPresenter(
         super.cleanUp()
     }
 
-    override fun onAppStartupLaunchChanged(launchOnStartup: Boolean) {
-        current.launchOnStartup = launchOnStartup
-
-        runNotifySettingsUpdatedTask()
-    }
-
     override fun onStartupConnectChanged(startupConnectOption: StartupConnectOption) {
         current.startupConnectOption = startupConnectOption
         runNotifySettingsUpdatedTask()
@@ -74,6 +74,11 @@ class SettingsPresenter(
 
     override fun onScrambleChanged(scramble: Boolean) {
         current.scramble = scramble
+        runNotifySettingsUpdatedTask()
+    }
+
+    override fun onVpnProtocolChanged(vpnProtocol: VpnProtocol) {
+        current.vpnProtocol = vpnProtocol
         runNotifySettingsUpdatedTask()
     }
 
@@ -90,6 +95,10 @@ class SettingsPresenter(
     override fun onAutoReconnect(reconnect: Boolean) {
         current.autoReconnect = reconnect
         runNotifySettingsUpdatedTask()
+    }
+
+    override fun onSupportPreferenceClick() {
+        view?.showSupport()
     }
 
     override fun onAboutPreferenceClick() {

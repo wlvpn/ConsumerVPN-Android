@@ -51,8 +51,8 @@ class LoginPresenter(
                             is NetworkNotAvailableFailure -> view?.showNoNetworkMessage()
 
                             is UnknownErrorException ->
-                                it.message?.let { message ->
-                                    view?.showErrorMessage(message)
+                                it.message?.let { _ ->
+                                    view?.showInvalidCredentialsMessage()
                                 } ?: run {
                                     view?.showUnknownErrorMessage()
                                 }

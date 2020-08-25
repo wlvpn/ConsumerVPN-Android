@@ -4,9 +4,9 @@ package com.wlvpn.consumervpn.domain.model
 sealed class Settings {
 
     data class GeneralConnection(
-        var launchOnStartup: Boolean = false,
         var autoReconnect: Boolean = false,
         var scramble: Boolean = false,
+        var vpnProtocol: VpnProtocol = VpnProtocol.OPENVPN,
         var protocol: Protocol = Protocol.TCP,
         var port: Port = Port(),
         var availablePorts: List<Port> = emptyList(),

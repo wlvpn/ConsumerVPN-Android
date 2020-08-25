@@ -81,6 +81,11 @@ For detailed explanation and examples, see VPN-SDK's [Implementation][2]
 
 For all detailed documentation, see [Javadoc][3]
 
+## Open source licenses
+
+For details on the Open Source Licenses used by the VPN SDK, see [Licenses][4] 
+
 [1]: SETUP.md
 [2]: IMPLEMENTATION.md
 [3]: ../docs/javadoc/sdk/index.html
+[4]: LICENSES.md

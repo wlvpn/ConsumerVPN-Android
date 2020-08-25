@@ -1,0 +1,165 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AuthInfoEncryptionStore - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk.store</a>&nbsp;/&nbsp;<a href="./index.html">AuthInfoEncryptionStore</a><br/>
+<br/>
+<h1>AuthInfoEncryptionStore</h1>
+<code><span class="keyword">class </span><span class="identifier">AuthInfoEncryptionStore</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">AuthInfo</span><span class="symbol">, </span><a href="../-store-migration/index.html"><span class="identifier">StoreMigration</span></a></code>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-migration-from-v1to-v2-fix-storing-null-word/index.html">MigrationFromV1toV2FixStoringNullWord</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">MigrationFromV1toV2FixStoringNullWord</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-store-migration/-migration-version/index.html"><span class="identifier">MigrationVersion</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-migration-v2to-v3-new-encryption-key-on-data-corruption/index.html">MigrationV2toV3NewEncryptionKeyOnDataCorruption</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">MigrationV2toV3NewEncryptionKeyOnDataCorruption</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-store-migration/-migration-version/index.html"><span class="identifier">MigrationVersion</span></a></code>
+<p>There are some situations that caused the encryption key to be corrupted, now
+it is fixed, but when the stored data is corrupt it will be necessary to wipe out
+that data.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">AuthInfoEncryptionStore</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.AuthInfoEncryptionStore$<init>(android.content.SharedPreferences)/sharedPreferences">sharedPreferences</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/SharedPreferences.html"><span class="identifier">SharedPreferences</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="access-expire-epoch.html">accessExpireEpoch</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">accessExpireEpoch</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="access-token.html">accessToken</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">accessToken</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="account-updated-at.html">accountUpdatedAt</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">accountUpdatedAt</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="password.html">password</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">password</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="refresh-token.html">refreshToken</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">refreshToken</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="sub-end-epoch.html">subEndEpoch</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">subEndEpoch</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="username.html">username</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">username</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="vpn-auth-password.html">vpnAuthPassword</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">vpnAuthPassword</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="vpn-auth-username.html">vpnAuthUsername</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">vpnAuthUsername</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="clear.html">clear</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">clear</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-versioning-not-found.html">onVersioningNotFound</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onVersioningNotFound</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-store-migration/add-all-migration-steps.html">addAllMigrationSteps</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addAllMigrationSteps</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.StoreMigration$addAllMigrationSteps(kotlin.collections.List((com.gentlebreeze.vpn.sdk.store.StoreMigration.MigrationVersion)))/migrationList">migrationList</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-store-migration/-migration-version/index.html"><span class="identifier">MigrationVersion</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-store-migration/add-migration-step.html">addMigrationStep</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addMigrationStep</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.store.StoreMigration$addMigrationStep(com.gentlebreeze.vpn.sdk.store.StoreMigration.MigrationVersion)/migration">migration</span><span class="symbol">:</span>&nbsp;<a href="../-store-migration/-migration-version/index.html"><span class="identifier">MigrationVersion</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-store-migration/start-migration.html">startMigration</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">startMigration</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Important: This must be called in order to perform automatic necessary version migrations,
+it is not possible to put this code as a init because there is a bug in kotlin to
+properly solve initialization hierarchy</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

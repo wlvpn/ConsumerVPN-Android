@@ -4,10 +4,6 @@
     <PreferenceCategory
             android:key="@string/preference_category_startup_key"
             android:title="Startup">
-        <SwitchPreference
-            android:icon="@drawable/ic_launch_startup_24dp"
-            android:key="@string/preference_launch_startup_key"
-            android:title="@string/settings_preference_launch_app_startup" />
         <ListPreference
             android:icon="@drawable/ic_connect_startup"
             android:key="@string/preference_auto_connect_key"
@@ -16,6 +12,11 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Connection">
+        <ListPreference
+            android:icon="@drawable/ic_vpn_protocol"
+            android:key="@string/preference_vpn_protocol_key"
+            android:summary="%s"
+            android:title="@string/settings_preference_vpn_protocol_title" />
         <SwitchPreference
             android:icon="@drawable/ic_auto_connect"
             android:key="@string/preference_reconnect_key"
@@ -39,6 +40,10 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="General">
+        <Preference
+            android:icon="@drawable/ic_contact_24dp"
+            android:key="@string/preference_support_key"
+            android:title="@string/settings_preference_support_title" />
         <Preference
             android:icon="@drawable/ic_about"
             android:key="@string/preference_about_key"

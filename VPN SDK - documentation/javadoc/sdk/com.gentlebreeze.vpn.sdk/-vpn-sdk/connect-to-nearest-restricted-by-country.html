@@ -14,7 +14,7 @@
 <p>Attempt to connect to a server from a given VpnPop if any available,
 after performing a load balance considering maintenance, server capacity and distance
 one will be taken as the best suited for the connection.
-If there is no candidate servers available in the specified VpnPop,
+If there are no candidate servers available in the specified VpnPop,
 the nearest one from other VpnPop will be used, expanding the tolerance distance,
 by checking the nearest ones, but never outside the specified VpnPop's country.</p>
 <h3>Parameters</h3>
@@ -22,6 +22,9 @@ by checking the nearest ones, but never outside the specified VpnPop's country.<
 <code>pop</code> - pop to attempt to connect to</p>
 <p><a name="notification"></a>
 <code>notification</code> - vpn notification</p>
+<p><a name="vpnRevokedNotification"></a>
+<code>vpnRevokedNotification</code> - notification shown if the
+VPN permission is revoked</p>
 <p><a name="configuration"></a>
 <code>configuration</code> - Container object containing server,
     notification configuration, and credentials</p>
@@ -39,6 +42,9 @@ expanding the tolerance distance, but never outside the specified country.</p>
 <code>countryCode</code> - Two letter ISO country code representation (e.g. US, UK)</p>
 <p><a name="notification"></a>
 <code>notification</code> - vpn notification</p>
+<p><a name="vpnRevokedNotification"></a>
+<code>vpnRevokedNotification</code> - notification shown if the
+VPN permission is revoked</p>
 <p><a name="configuration"></a>
 <code>configuration</code> - Container object containing server,
     notification configuration, and credentials</p>
@@ -51,6 +57,9 @@ the country defined by geolocation from the configuration</p>
 <h3>Parameters</h3>
 <p><a name="notification"></a>
 <code>notification</code> - vpn notification</p>
+<p><a name="vpnRevokedNotification"></a>
+<code>vpnRevokedNotification</code> - notification shown if the
+VPN permission is revoked</p>
 <p><a name="configuration"></a>
 <code>configuration</code> - Container object containing server,
     notification configuration, and credentials</p>

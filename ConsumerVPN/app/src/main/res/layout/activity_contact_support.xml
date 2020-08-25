@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/support_container_padding">
+
+            <TextView
+                android:id="@+id/needHelpTextView"
+                android:layout_width="@dimen/ui_zero"
+                android:layout_height="wrap_content"
+                android:text="@string/support_label_need_help"
+                android:textSize="@dimen/support_regular_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/supportDescriptionTextView"
+                android:layout_width="@dimen/ui_zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/support_controls_margin_top"
+                android:text="@string/support_label_describe_trouble"
+                android:textSize="@dimen/support_regular_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/needHelpTextView" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/supportUserNotesTextInputLayout"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="@dimen/ui_zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/support_controls_margin_top"
+                android:textSize="@dimen/support_regular_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/supportDescriptionTextView">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/problemDescriptionEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/support_regular_text_size"
+                    tools:text="My vpn won't start " />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/checkBoxIncludeDiagnostics"
+                android:layout_width="@dimen/ui_zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/support_controls_margin_top"
+                android:checked="true"
+                android:text="@string/support_checkbox_diagnosis_message"
+                android:textSize="@dimen/support_regular_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/supportUserNotesTextInputLayout" />
+
+            <TextView
+                android:id="@+id/textViewDiagnosticInformation"
+                android:layout_width="@dimen/ui_zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/support_controls_margin_top"
+                android:textIsSelectable="true"
+                android:textSize="@dimen/support_small_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/checkBoxIncludeDiagnostics"
+                tools:text="@string/support_label_diagnosis_message_format" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/progressBar"
+        layout="@layout/view_loading_progress_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+</FrameLayout>
