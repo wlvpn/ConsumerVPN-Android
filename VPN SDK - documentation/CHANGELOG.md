@@ -1,5 +1,68 @@
 # CHANGELOG
 
+## v1.5.11
+* Fixed typo on VpnConfiguration's argument `reconnectOn`
+
+## v1.5.10
+
+### Features
+* Added `apiHostMirrorConfiguration(...)` to the SDK configuration. With this configuration
+if the main API host fails to respond the request, the SDK will retry it with the given list of host mirrors.
+In addition to that, there is an option to stop the mirror call flow when a certain HTTP code is
+returned by the endpoint (httpBreakingCodes). e.g. An a 401 code (Unauthorized) is a client failure
+which should be ignored by the mirror call flow.
+
+A `MirrorsConfiguration` is needed to call this method:
+
+```kotlin
+MirrorsConfiguration(
+    mirrorUrlList.  //A list of URL objects with the host mirrors 
+    httpBreakingCodes  //A list of integers with Http codes, this is optional an defaults to [401,409]
+) 
+```
+
+* Added `openvpn_config_extras.txt` file. This file can be overridden to add extra configurations to OpenVpn.
+
+## v1.5.9
+
+### Features
+* Added new Failure `NetworkErrorFailure` thrown whenever there's a network error during the 
+`limits` Endpoint
+
+* Added the possibility to change the api key after the library initialization
+
+```kotlin
+fun setApiKey(apiKey: String): Completable
+```
+
+* Added the possibility to change the authentication suffix after the
+  library initialization
+
+```kotlin
+fun setAuthSuffix(authSuffix: String): Completable
+```
+
+## v1.5.8
+
+### Features
+* Added `attemptToDisconnect()` variation of `disconnect()`, will return
+a `Completable` instead fo a `ICallback`, which will complete on a 
+successful disconnection otherwise will emit a failure ([CouldNotDisconnectException]).
+This method does not operate by default on a particular scheduler.
+
+## v1.5.7
+
+### Features
+
+* Added `attemptToConnectToNearest(...)`,
+`attemptToConnectToNearestRestrictedByCountry(...)`,
+ `attemptToConnect(...)` variations of current `connect...` methods;
+    These variations will return a `Completable` instead of a `ICallback`,
+    which will complete on a successful connection
+    otherwise will emit a failure ([CouldNotEstablishConnectionException]).
+    These methods do not operate by default on a particular scheduler.
+
+
 ## v1.5.6
 
 ### Features

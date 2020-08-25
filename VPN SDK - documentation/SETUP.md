@@ -282,7 +282,87 @@ class MyApplication : Application() {
 }
 ```
 
-## Disclaimer
+
+If a dynamic api key is needed you can modify the api key after the
+library was initialized.
+
+For Java:
+
+```java
+    getVpnSdk().setApiKey("My new api key")
+        .subscribe();
+```
+
+For Kotlin:
+
+```kotlin
+vpnSdk.setApiKey("My new api key")
+    .subscribe()
+```
+
+If a dynamic Authentication suffix is needed you can modify it
+after the library was initialized.
+
+For Java:
+
+```java
+getVpnSdk().setAuthSuffix("My new auth suffix")
+    .subscribe();
+```
+
+For Kotlin:
+
+```kotlin
+vpnSdk.setAuthSuffix("My new auth suffix")
+    .subscribe()
+```
+
+### 4. Removing VPN protocol binaries
+If a VPN protocol is not being supported, it is recommended to remove the protocol's binaries 
+to make the final .APK file smaller.
+
+To remove a VPN protocol binary is necessary to use DSL Gradle object `packagingOptions` 
+in your application's Gradle file. 
+ 
+* OpenVPN
+
+````groovy
+packagingOptions {
+        exclude "**/libopenvpn.so"
+        exclude "**/libovpnexec.so"
+        }
+````
+
+* IKEv2
+
+````groovy
+packagingOptions {
+         //Removes StrongSwan-IKE libraries
+                exclude "**/libcharon.so"
+                exclude "**/libimcv.so"
+                exclude "**/libipsec.so"
+                exclude "**/libstrongswan.so"
+                exclude "**/libtnccs.so"
+                exclude "**/libtncif.so"
+                exclude "**/libtpmtss.so"
+        }
+
+````   
+
+* WireGuard
+
+````groovy
+packagingOptions {
+         //Removes StrongSwan-IKE libraries
+                exclude "**/libcharon.so"
+                exclude "**/libimcv.so"
+                exclude "**/libipsec.so"
+                exclude "**/libstrongswan.so"
+                exclude "**/libtnccs.so"
+                exclude "**/libtncif.so"
+                exclude "**/libtpmtss.so"
+        }
+```` 
 
 [1]: https://gradle.org/install/
 [2]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html

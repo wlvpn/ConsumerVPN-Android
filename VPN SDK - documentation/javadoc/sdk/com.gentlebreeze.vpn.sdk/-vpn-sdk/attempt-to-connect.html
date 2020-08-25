@@ -1,0 +1,26 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>VpnSdk.attemptToConnect - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk</a>&nbsp;/&nbsp;<a href="index.html">VpnSdk</a>&nbsp;/&nbsp;<a href="./attempt-to-connect.html">attemptToConnect</a><br/>
+<br/>
+<h1>attemptToConnect</h1>
+<a name="com.gentlebreeze.vpn.sdk.VpnSdk$attemptToConnect(com.gentlebreeze.vpn.sdk.model.VpnServer, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration, com.gentlebreeze.vpn.sdk.model.VpnNotification)"></a>
+<code><span class="keyword">fun </span><span class="identifier">attemptToConnect</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$attemptToConnect(com.gentlebreeze.vpn.sdk.model.VpnServer, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration, com.gentlebreeze.vpn.sdk.model.VpnNotification)/server">server</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-server/index.html"><span class="identifier">VpnServer</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$attemptToConnect(com.gentlebreeze.vpn.sdk.model.VpnServer, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration, com.gentlebreeze.vpn.sdk.model.VpnNotification)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$attemptToConnect(com.gentlebreeze.vpn.sdk.model.VpnServer, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration, com.gentlebreeze.vpn.sdk.model.VpnNotification)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html"><span class="identifier">VpnConnectionConfiguration</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.VpnSdk$attemptToConnect(com.gentlebreeze.vpn.sdk.model.VpnServer, com.gentlebreeze.vpn.sdk.model.VpnNotification, com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration, com.gentlebreeze.vpn.sdk.model.VpnNotification)/vpnRevokedNotification">vpnRevokedNotification</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html"><span class="identifier">VpnNotification</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Completable</span></code>
+<p>Overrides <a href="../-i-vpn-sdk/attempt-to-connect.html">IVpnSdk.attemptToConnect</a></p>
+<p>Attempt to connect to the given server.</p>
+<h3>Parameters</h3>
+<p><a name="server"></a>
+<code>server</code> - server to attempt to connect to</p>
+<p><a name="notification"></a>
+<code>notification</code> - vpn notification</p>
+<p><a name="configuration"></a>
+<code>configuration</code> - Container object containing server,
+    notification configuration, and credentials</p>
+<p><strong>Return</strong><br/>
+a Rx2 Completable for this connection, will complete on a successful connection.</p>
+</BODY>
+</HTML>
