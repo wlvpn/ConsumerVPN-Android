@@ -2,6 +2,7 @@
 
 ## v1.5.11
 * Fixed typo on VpnConfiguration's argument `reconnectOn`
+* Fixes IPv6 IP leak on IKEv2
 
 ## v1.5.10
 
