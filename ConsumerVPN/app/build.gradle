@@ -134,7 +134,7 @@ dependencies {
             retrofit     : "2.5.0",
             leakCanary   : "1.6.3",
             fresco       : "1.13.0",
-            vpnSdk       : "1.5.11.93888",
+            vpnSdk       : "1.5.12.108439",
             timber       : "4.7.1",
             autoValue    : "1.6.5",
             loganSquare  : "1.3.7",
