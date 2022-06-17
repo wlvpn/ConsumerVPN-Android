@@ -23,6 +23,8 @@ interface SettingsContract {
 
         fun onAutoReconnect(reconnect: Boolean)
 
+        fun onKillSwitchPreferenceClick()
+
         fun onSupportPreferenceClick()
 
         fun onAboutPreferenceClick()
@@ -59,6 +61,8 @@ interface SettingsContract {
         fun showLogin()
 
         fun showLogoutDialog()
+
+        fun showKillSwitchDialog()
 
         fun toolbarVisibility(isVisible: Boolean)
     }

@@ -1,15 +1,19 @@
 package com.wlvpn.consumervpn.presentation.navigation
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.net.Uri
+import android.widget.Toast
 import com.netprotect.licenses.presentation.feature.licenseList.SoftwareLicensesActivity
 import com.wlvpn.consumervpn.R
 import com.wlvpn.consumervpn.presentation.features.about.AboutActivity
 import com.wlvpn.consumervpn.presentation.features.home.HomeActivity
 import com.wlvpn.consumervpn.presentation.features.login.LoginActivity
 import com.wlvpn.consumervpn.presentation.features.support.ContactSupportActivity
+
+private const val DEVICE_VPN_SETTINGS = "android.net.vpn.SETTINGS"
 
 /**
  * A navigator that uses context to start activities or fragments.
@@ -81,6 +85,20 @@ class DefaultFeatureNavigator(private val context: Activity) : FeatureNavigator 
                 HomeActivity.SETTINGS_BOTTOM_NAVIGATION_KEY
             )
         context.startActivity(intent)
+    }
+
+    override fun navigateToVpnSettings() {
+        try {
+            val intent = Intent(DEVICE_VPN_SETTINGS)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context.startActivity(intent)
+        } catch (exception: ActivityNotFoundException) {
+            Toast.makeText(
+                context,
+                R.string.kill_switch_dialog_label_error,
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 
     private fun openWebViewWithUrl(url: String, onWebViewNotSupported: () -> Unit) {

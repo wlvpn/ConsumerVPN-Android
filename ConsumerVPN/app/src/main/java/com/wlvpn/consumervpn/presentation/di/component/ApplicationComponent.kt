@@ -1,6 +1,8 @@
 package com.wlvpn.consumervpn.presentation.di.component
 
 import com.wlvpn.consumervpn.data.receivers.VpnReceiver
+import com.wlvpn.consumervpn.data.worker.ServersRefreshWorker
+import com.wlvpn.consumervpn.data.worker.TokenRefreshWorker
 import com.wlvpn.consumervpn.presentation.ConsumerApplication
 import com.wlvpn.consumervpn.presentation.di.module.AppModule
 import com.wlvpn.consumervpn.presentation.di.module.GatewayModule
@@ -36,5 +38,9 @@ interface ApplicationComponent {
     fun inject(into: ConsumerApplication)
 
     fun inject(into: VpnReceiver)
+
+    fun inject(into: TokenRefreshWorker)
+
+    fun inject(into: ServersRefreshWorker)
     //endregion injectors
 }
