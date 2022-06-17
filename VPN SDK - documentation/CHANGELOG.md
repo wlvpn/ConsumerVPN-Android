@@ -1,8 +1,15 @@
 # CHANGELOG
 
+## v.1.5.13
+* Fixes crashes with Android 13
+* Add SdkConfig.version attribute.
+* Updated documentation.
+
+## v1.5.12
+* Disables IPv6 support for IKEv2
+
 ## v1.5.11
 * Fixed typo on VpnConfiguration's argument `reconnectOn`
-* Fixes IPv6 IP leak on IKEv2
 
 ## v1.5.10
 

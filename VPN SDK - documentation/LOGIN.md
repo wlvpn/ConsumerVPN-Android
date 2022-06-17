@@ -18,75 +18,58 @@ Contains values related to successful VPN-SDK login calls
 
 ## Login Methods
 
-1. `Callback<VpnLoginResponse> loginWithUsername(username, password)`
-    - This method will execute a login action using parameters:
-        - **`username`**: `String` parameter holding credentials user value
-        - **`password`**: `String` parameter holding credentials password value
-    - This method returns a `Callback`:
-        - **`onSuccess`** responds with a `VpnLoginResponse` object.
-        - **`onError`** throws a `Throwable` object of the following types:
-            - **`NetworkUnavailableException`**: For Network related errors
-            - **`LoginErrorThrowable`**: For Login related issues while log in.
-2. `Boolean isUserLoggedIn()`
-    - This method will tell you if the current has a current session on
-3. `Callback<Unit> logout()`
-    - This method will execute a log out operation
-4. `Callback<VpnLoginResponse> refreshToken(username, password)`
-    - This method will try to refresh the session token when the
-     the current one is not valid anymore using parameters to try a login
-     in case the token is invalid:
-        - **`username`**: `String` parameter holding credentials user value
-        - **`password`**: `String` parameter holding credentials password value
+### `loginWithUsername(...)`
 
-### Examples
+```kotlin
+    fun loginWithUsername(
+        /** parameter holding credentials user value **/
+        username: String,
+        /** parameter holding credentials password value **/
+        password: String
+    ): Callback<VpnLoginResponse>
+```
+Attempts to login the user into the VPN service.
 
-#### Java Example
+The returned callback will respond with either of these two:
+- **`onSuccess`** responds with a `VpnLoginResponse` object.
+- **`onError`** throws a `Throwable` object of the following types:
+    - **`NetworkUnavailableException`**: For Network related errors.
+    - **`LoginErrorThrowable`**: For Login related issues.
+    
 
-```java
-public class MainActivity extends AppCompatActivity
-        implements View.OnClickListener {
+### `refreshToken(...)`
+```kotlin
+    fun refreshToken(
+        /** The user's username **/
+        username: String,
+        /** The user's password **/
+        password: String
+    ): Callback<VpnLoginResponse>
 
-    // Setup your Activity and Button listeners
-
-    @Override
-    public void onClick(View view) {
-        switch(view.getId()) {
-            case R.id.login_button:
-                MyApplication.getVpnSdk().loginWithUsername(email, password)
-                        .subscribe(vpnLoginResponse -> {
-                            // Save any preferences or check any LoginResponse object properties in here
-                            // Send the user to another activity in here
-                            return Unit.INSTANCE;
-                        }, throwable -> {
-                            throwable.printStackTrace();
-                            // Handle and manipulate errors in here
-                            return Unit.INSTANCE;
-                        });
-                break;
-
-            case R.id.logout_button:
-                MyApplication.getVpnSdk().logout().subscribe(unit -> {
-                    // Handle any action after a successful log out
-                    return Unit.INSTANCE;
-                }, throwable -> {
-                    // Handle and manipulate errors in here
-                    throwable.printStackTrace();
-                });
-                break;
-                
-            case R.id.is_user_login_button:
-                if (MyApplication.getVpnSdk().isUserLoggedIn()) {
-                    // The user was not logged in 
-                } else {
-                    // The user previously log into platform
-                }
-                break;
-        }
-    }
-}
 ```
 
-#### Kotlin Example
+You can use this method to update the session token when the current one is invalid or has expired.
+
+The returned callback will respond with either of these two:
+- **`onSuccess`** responds with a `VpnLoginResponse` object.
+- **`onError`** throws a `Throwable` object of the following types:
+    - **`NetworkUnavailableException`**: For Network related errors
+    - **`LoginErrorThrowable`**: For Login related issues.
+
+
+### `isUserLoggedIn()`
+```kotlin
+fun isUserLoggedIn(): Boolean
+```
+Returns true if the user has a valid session by validating the access token.
+
+### `logout()`
+```kotlin
+fun logout(): Callback<Unit>
+```
+Logs out the user of the VPN service; clears auth and account info.
+
+### Example
 
 ```kotlin
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -96,22 +79,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.login_button -> {
-                MyApplication.vpnSdk!!.loginWithUsername(email, password)
-                        .subscribe({ (accessToken, refreshToken, accountType, accountStatus, accessExpireEpoch, subEndEpoch, email) ->
+                MyApplication.vpnSdk?.loginWithUsername(email, password)
+                        ?.subscribe({ (accessToken, refreshToken, accountType, accountStatus,
+                            accessExpireEpoch, subEndEpoch, email) ->
                             // Save any preferences or check any LoginResponse object properties in here
                             // Send the user to another activity in here
-                            Unit
                         }) { throwable ->
                             throwable.printStackTrace()
                             // Handle and manipulate errors in here
-                            Unit
                         }
             }
 
             R.id.logout_button -> {
-                MyApplication.vpnSdk!!.logout().subscribe({ unit ->
+                MyApplication.vpnSdk?.logout()
+                    ?.subscribe({ unit ->
                     // Handle any action after a successful log out
-                        Unit
                     }) { throwable ->
                         // Handle and manipulate errors in here
                         throwable.printStackTrace()
@@ -119,7 +101,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             
             R.id.is_user_login_button -> {
-                if (MyApplication.vpnSdk!!.isUserLoggedIn()) {
+                if (MyApplication.vpnSdk?.isUserLoggedIn()) {
                     // The user was not logged in 
                 } else {
                     // The user previously log into platform
@@ -130,4 +112,4 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 }
 ```
 
-[1]: Javadocs/myClass.html
+[1]: javadoc/sdk/com.gentlebreeze.vpn.sdk.model/-vpn-login-response/index.html

@@ -1,9 +1,9 @@
 # Setup
 
-The VPN-SDK is a Kotlin first library. Although it can be used with Java
+The VPN-SDK is a Kotlin first library. Although it's compatible with Java
 with no problem, we recommend using Kotlin for the best experience.
 
-Before you begin using VPN-SDK, you must setup your project following the next instructions
+Before you begin using VPN-SDK, you must set up your project following the next instructions.
 
 ## Requirements
 
@@ -13,18 +13,18 @@ Before you begin using VPN-SDK, you must setup your project following the next i
 - Package Cloud Access TPken
 - Android API level 15+ (4.0.3)
 - Android Build Tools 28.0+
-- Project Gradle plugin version 3x
+- Project Gradle plugin version 4.0.0
 
 ### Gradle
 
-Install gradle on your local machine to support global variables in gradle files
+Install gradle on your local machine to support global variables in gradle files.
 
 For detailed instructions to install gradle on your local machine, 
 see Gradle's [Installation Guide][1]. 
 
 ### Java 8
 
-To support Java 8 Lambda in your project make sure your gradle file contains Java 8 support
+To support Java's 8 Lambda in your project make sure your gradle file contains Java 8 support:
 
 ```groovy
 android {
@@ -94,6 +94,10 @@ defaultConfig {
     buildConfigField 'String', 'REFRESH_API', '"refresh"'
     buildConfigField 'String', 'SERVER_LIST_API', '"servers"'
     buildConfigField 'String', 'IP_GEO', '"https://myipgeoserver.com/v2?apikey=my_api_geo_server_key"'
+    buildConfigField 'String', 'SDK_LOG_TAG', '"VPN_SDK"'
+    buildConfigField 'String', 'IKE_REMOTE_ID', '"strongswan_remote_id"'
+    buildConfigField 'String', 'WIREGUARD_ENDPOINT', '"wg_endpoint"'
+    buildConfigField 'String', 'CREATE_ACCOUNT_ENDPOINT', '"create_account_endpoint"'
 }
 ```
 
@@ -103,31 +107,30 @@ other API configuration options that are available for modifying API
 endpoints but, in most cases, modifying these are are not necessary. Here is a complete list
 of configuration options:
 
-* **accountName (Required)** - String value containing your account name
-* **apiKey (Required)** -  String value containing your API key
-* **authSuffix (Required)** - String value containing your auth suffix
-* **apiTokenRefreshEndpoint (Optional)** - String value endpoint for the API token refresh
-* **client (Optional)** - String value designating the client (e.g. Android)
-* **apiHost (Optional)** - String value designating the API hostname
-* **ipGeoUrl (Optional)** - String value designating the IP Geo API hostname
-* **loginApi (Optional)** -  String value endpoint for the API login
-* **protocolListApi (Optional)** - String value endpoint for the API protocol list
-* **serverListApi - (Optional)** String value endpoint for the API server list
-* **logTag - (Optional)** String value to place an identifier on each log entry
-* **locale - (Optional)** Locale value that allows searches related to countries in different languages
+* `accountName` **(Required)** -  Your account name.
+* `apiKey` **(Required)** -   Your API key.
+* `authSuffix` **(Required)** -  Your auth suffix.
+* `apiTokenRefreshEndpoint` **(Optional)** -  Endpoint for the API token refresh.
+* `client` **(Optional)** -  The client type (e.g. Android).
+* `apiHost` **(Optional)** -  The API hostname.
+* `ipGeoUrl` **(Optional)** -  The IP Geo API hostname.
+* `loginApi` **(Optional)** -   Endpoint for the login API.
+* `protocolListApi` **(Optional)** -  Endpoint for the protocol list API.
+* `serverListApi` - **(Optional)** -  Endpoint for the server list API.
+* `version` - **(Optional)** - A version identifier used in the user agent header of the requests.
+* `sdkLogTag` - **(Optional)** - An identifier to use on each log entry.
+* `ikeRemoteId` - **(Optional)** - The remote id used in the StrongSwan protocol.
+* `wireguardEndpoint` - **(Optional)** - Endpoint used by WireGuard protocol.
+* `createAccountEndpoint` - **(Optional)** - Endpoint used to create accounts.
 
-Note: You can add these values directly to your `MyApplication.java` file
+>**Note**: You can add these values directly to your `MyApplication.java` file
 
-Also in your module-level `build.gradle` file, add this to your `dependencies` block. The
-dependency must have the transitive flag to get the libraries passed down from
-the maven repo.
+Also, in your module-level `build.gradle` file, add this to your `dependencies` block.
 
 ```groovy
-def vpnSdk = "1.3.16684@aar" // Or latest
+def vpnSdk = "1.5.13.0" // Or latest
 dependencies {
-    implementation("com.gentlebreeze.vpn.sdk:sdk:$vpnSdk") {
-        transitive = true
-    }
+    implementation "com.gentlebreeze.vpn.sdk:sdk:$vpnSdk"
 }
 ```
 
@@ -136,14 +139,14 @@ dependencies {
 The VPN-SDK adds the following required permissions automatically into your final
 application manifest:
 
-* **android.permission.ACCESS_NETWORK_STATE**: Allows the SDK to get access 
+* `android.permission.ACCESS_NETWORK_STATE`: Allows the SDK to get access 
 to information about networks.
-* **android.permission.INTERNET**: Allows the SDK to execute API calls 
+* `android.permission.INTERNET`: Allows the SDK to execute API calls 
 over the Internet.
-* **android.permission.ACCESS_WIFI_STATE**: Allows the SDK to get access 
+* `android.permission.ACCESS_WIFI_STATE`: Allows the SDK to get access 
 to information about Wi-Fi networks.
-* **android.permission.FOREGROUND_SERVICE**: Allows the SDK to run the 
-VPN service in the foreground
+* `android.permission.FOREGROUND_SERVICE`: Allows the SDK to run the 
+VPN service in the foreground.
 
 ```xml
 <manifest
@@ -170,69 +173,24 @@ VPN service in the foreground
 </manifest>
 ``` 
 
-The final result merged application `manifest` could be seen at
-`app/build/intermediates/manifests/full/(debug|release)/AndroidManifest.xml`
+You can find the merged `manifest` of your application at:
+> app/build/intermediates/manifests/full/(debug|release)/AndroidManifest.xml
 
-There is no need to remove any permission if you now have those set it up into your current 
+There is no need to remove any permission if you now have those set up into your current 
 application `manifest`. The final result will not produce any repeated values.
 
 ### 3. Library Initialization
 
 After adding the dependency, you can initialize the VPN-SDK in your application.
-The best place to initialize the library is as a static reference in your Application class
-but this can also be initialized in an activity if necessary.
 
-In your application file add the following code in the `onCreate` method
+The recommended practice is to use any Dependency Injection (a library or custom implementation)
+to inject an instance of the `IVpnSdk` API.
 
-For Java:
+Although it is recommended to use DI, you can easily add a static reference in your Application class
+or directly initialize the library in an activity if necessary.
 
-```java
-public class MyApplication extends Application {
-    
-    private static IVpnSdk vpnSdk;
-    
-    public static IVpnSdk getVpnSdk() {
-        return vpnSdk; 
-    }
-        
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        
-        vpnSdk = VpnSdk.init(this, new SdkConfig(
-                    BuildConfig.ACCOUNT_NAME,
-                    BuildConfig.API_KEY,
-                    BuildConfig.AUTH_SUFFIX,
-                    BuildConfig.CLIENT,
-                    BuildConfig.BASE_HOSTNAME,
-                    BuildConfig.IP_GEO,
-                    BuildConfig.LOGIN_API,
-                    BuildConfig.REFRESH_API,
-                    BuildConfig.PROTOCOL_LIST_API,
-                    BuildConfig.SERVER_LIST_API
-        ));
-        
-        // OR use the builder
-        
-        vpnSdk = VpnSdk.init(this, new SdkConfig.Builder(
-                BuildConfig.ACCOUNT_NAME,
-                BuildConfig.API_KEY,
-                BuildConfig.AUTH_SUFFIX)
-                .client(BuildConfig.CLIENT)
-                .apiHost(application.getString(R.string.endpoint_main_api))
-                .ipGeoUrl(BuildConfig.IP_GEO)
-                .apiLoginEndpoint(BuildConfig.LOGIN_API)
-                .apiTokenRefreshEndpoint(BuildConfig.REFRESH_API)
-                .apiProtocolListEndpoint(BuildConfig.PROTOCOL_LIST_API)
-                .apiServerListEndpoint(BuildConfig.SERVER_LIST_API)
-                .logTag(MY_SDK_LOG_TAG)
-                .locale(new Locale("en", "US"))
-                .build());
-    }
-}
-```
+Let's initialize the library the Application class:
 
-For Kotlin:
 
 ```kotlin
 private const val MY_SDK_LOG_TAG = "VPN_SDK"
@@ -260,20 +218,32 @@ class MyApplication : Application() {
         
         // Or use the builder
         
-        vpnSdk = VpnSdk.init(this, SdkConfig.Builder(
-                BuildConfig.ACCOUNT_NAME,
-                BuildConfig.API_KEY,
-                BuildConfig.AUTH_SUFFIX)
+        vpnSdk = VpnSdk.init(
+            this,
+            Builder(BuildConfig.ACCOUNT_NAME, BuildConfig.API_KEY, BuildConfig.AUTH_SUFFIX)
                 .client(BuildConfig.CLIENT)
-                .apiHost(application.getString(R.string.endpoint_main_api))
+                .version(BuildConfig.VERSION_NAME)
+                .apiHost(BuildConfig.HOSTNAME)
+                .apiHostMirrorConfiguration(
+                    mirrorsConfiguration
+                )
                 .ipGeoUrl(BuildConfig.IP_GEO)
                 .apiLoginEndpoint(BuildConfig.LOGIN_API)
                 .apiTokenRefreshEndpoint(BuildConfig.REFRESH_API)
+                .apiWireGuardConnectionEndpoint(BuildConfig.API_WIREGUARD_CONNECTION_HOSTNAME)
+                .apiWireGuardMirrorsConfiguration(
+                    wireGuardmirrorsConfiguration
+                )
                 .apiProtocolListEndpoint(BuildConfig.PROTOCOL_LIST_API)
                 .apiServerListEndpoint(BuildConfig.SERVER_LIST_API)
-                .logTag(MY_SDK_LOG_TAG)
-                .locale(Locale("en", "US"))
-                .build())
+                .accountCreationConfiguration(
+                    AccountCreationConfiguration(
+                        CreateAccountKeyUtil().getAccountCreationKey(),
+                        BuildConfig.CREATE_ACCOUNT_API
+                    )
+                ).logTag(BuildConfig.SDK_LOG_TAG)
+                .build()
+        )
     }
     
     companion object {
@@ -286,14 +256,6 @@ class MyApplication : Application() {
 If a dynamic api key is needed you can modify the api key after the
 library was initialized.
 
-For Java:
-
-```java
-    getVpnSdk().setApiKey("My new api key")
-        .subscribe();
-```
-
-For Kotlin:
 
 ```kotlin
 vpnSdk.setApiKey("My new api key")
@@ -303,14 +265,6 @@ vpnSdk.setApiKey("My new api key")
 If a dynamic Authentication suffix is needed you can modify it
 after the library was initialized.
 
-For Java:
-
-```java
-getVpnSdk().setAuthSuffix("My new auth suffix")
-    .subscribe();
-```
-
-For Kotlin:
 
 ```kotlin
 vpnSdk.setAuthSuffix("My new auth suffix")
@@ -326,16 +280,16 @@ in your application's Gradle file.
  
 * OpenVPN
 
-````groovy
+```groovy
 packagingOptions {
         exclude "**/libopenvpn.so"
         exclude "**/libovpnexec.so"
         }
-````
+```
 
 * IKEv2
 
-````groovy
+```groovy
 packagingOptions {
          //Removes StrongSwan-IKE libraries
                 exclude "**/libcharon.so"
@@ -347,11 +301,11 @@ packagingOptions {
                 exclude "**/libtpmtss.so"
         }
 
-````   
+```   
 
 * WireGuard
 
-````groovy
+```groovy
 packagingOptions {
          //Removes StrongSwan-IKE libraries
                 exclude "**/libcharon.so"
@@ -362,7 +316,7 @@ packagingOptions {
                 exclude "**/libtncif.so"
                 exclude "**/libtpmtss.so"
         }
-```` 
+``` 
 
 [1]: https://gradle.org/install/
 [2]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html

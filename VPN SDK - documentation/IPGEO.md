@@ -7,70 +7,46 @@ determine the current user's location using only the reported global IP address.
 
 Class: [com.gentlebreeze.vpn.sdk.model.VpnGeoData][1]
 
-Object class that contains information about a certain ip Geo Location
+Model that contains information about a certain ip Geo Location.
 
-- **`geoCity`**: `String` value that contains current IP user's current city
-- **`geoCountryCode`**: `String` value containing current IP Country code identifier
-- **`geoIp`**: `String` value that contains current device global IP address
-- **`geoLatitude`**: `Double` value containing the IP geo longitude coordinate
-- **`geoLongitude`**: `Double` value containing the IP geo latitude coordinate
+- **`geoCity`**: `String` The user's city name.
+- **`geoCountryCode`**: `String` The user's two letter ISO country code representation (e.g. US, UK)
+- **`geoIp`**: `String` The device current public ip.
+- **`geoLatitude`**: `Double` The user's longitude coordinate.
+- **`geoLongitude`**: `Double` The user's latitude coordinate.
 
 ## VpnGeoData Fetching Related Methods
 
-1. `ICallback<VpnGeoData> fetchGeoInfo()`
-    - This method will obtain relevant information about the current IP
-    
-All callbacks will return:
-- **`OnSuccess`**: returns a `VpnGeoData` object
-- **`OnError`**: throws a `Throwable` object
+---
 
-All callbacks must be `unsubscribe` during the activity `onDestroy` or 
-`onPause` lifecycle method
+### `fetchGeoInfo()`
+Interface: [com.gentlebreeze.vpn.sdk.IVpnSdk][2]
 
-**`Important`**: Geolocation will change to reflect current connection values. For 
-example if a user is connected only to the ISP (Internet Service Provider) these values
-will represent the location reported by the ISP. Otherwise if the user is connected
-to the VPN these values will represent the VPN location instead.
+```kotlin
+/** Returns a callback with a VpnGeoData object **/
+fun fetchGeoInfo(): ICallback<VpnGeoData>
+```
+This method will obtain relevant information about the user's device public current IP.
+
+The returned callback will respond with either of these two:
+- **`OnSuccess`**: with a `VpnGeoData` object.
+- **`OnError`**: with a `Throwable` object.
+
+Don't forget to call  `Callback.unsubscribe()`  in the activity's `onDestroy` or 
+`onPause` lifecycle methods.
 
 If the fetch method fails any `best available` connection will connect to the previous 
 city. In case that there is no previous city or country selected, the country by default 
 will be the `US`
 
-### Examples
+>**`Important`**: Geolocation will change to reflect current connection values. For
+example if a user is connected only to the ISP (Internet Service Provider) these values
+will represent the location reported by the ISP. Otherwise if the user is connected
+to the VPN these values will represent the VPN location instead.
 
-### Java example
-        
-```java
-public class IPGeoActivity extends AppCompatActivity {
-    
-    private ICallback<VpnGeoData> vpnGeoDataCallback;
-    
-    // Setup yor activity controls and interactions
-    
-    @Override
-    public void onDestroy() {
-        if (vpnGeoDataCallback != null) {
-            vpnGeoDataCallback.unsubscribe();
-            vpnGeoDataCallback = null;
-        }
-        
-        super.onDestroy();
-    }
-    
-    public ICallback<VpnGeoData> getVpnGeoDataCallback() {
-        return MyApplication.getVpnSdk()
-                .fetchGeoInfo()
-                .subscribe(vpnGeoData -> {
-                    // Manipulate the geo info data in here
-                    return Unit.Instance;
-                }, throwable -> {
-                    // Handle any error scenario in here
-                });
-    }
-}
-```
+## Example
 
-#### Kotlin example
+---
 
 ```kotlin
 class IPGeoActivity : AppCompatActivity() {
@@ -86,10 +62,10 @@ class IPGeoActivity : AppCompatActivity() {
         super.onDestroy()
     }
     
-    fun getVpnPopCallback(): ICallback<VpnGeoData> {
+    fun getVpnPopCallback(): ICallback<VpnGeoData>? {
     
-        return MyApplication.vpnSdk!!.fetchGeoInfo()
-                .subscribe({vpnGeoData:VpnGeoData -> 
+        return MyApplication.vpnSdk?.fetchGeoInfo()
+                ?.subscribe({vpnGeoData:VpnGeoData -> 
                     // Manipulate the geo info data in here
                     Unit
                 }, {throwable: Throwable -> 
@@ -101,3 +77,4 @@ class IPGeoActivity : AppCompatActivity() {
 ```
 
 [1]: ../docs/javadoc/sdk/com.gentlebreeze.vpn.sdk.model/-vpn-geo-data/index.html
+[2]: javadoc/sdk/com.gentlebreeze.vpn.sdk/-i-vpn-sdk/index.html

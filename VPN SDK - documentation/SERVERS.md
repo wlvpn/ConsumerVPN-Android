@@ -6,34 +6,33 @@ Fetching servers is how your app can obtain specific information about our VPN s
 
 Class: [com.gentlebreeze.vpn.sdk.model.VpnServer][1]
 
-Object class that contains information about a certain server inside a server
+Model that with information about a certain server.
 
-- **`capacity`**: `int` value containing with server capacity
-- **`ipAddress`**: `String` value containing server IP Address
-- **`isInMaintenance`**: `boolean` value that reveals if the selected server is in maintenance
-- **`name`**: `String` value containing the server name identifier
-- **`popName`**: `String` value containing the pop name that houses this server
-- **`scheduledMaintenance`**: `long` value that contains the date for any scheduled maintenance
-- **`describeContents()`** `int` value that describes the server content 
+- **`capacity`**: `int` The server capacity
+- **`ipAddress`**: `String` The server IP Address
+- **`isInMaintenance`**: `boolean` reveals if the selected server is in maintenance.
+- **`name`**: `String` The server name identifier.
+- **`popName`**: `String` The name of the pop that houses this server.
+- **`scheduledMaintenance`**: `long` The date of the next scheduled maintenance.
 
 ## `SortServerOption`
 
 Class: [com.gentlebreeze.vpn.sdk.sort.SortServerOption][2]
 
-Enum class that holds options for sorting a pops list
+Enum class that holds options for sorting a list of servers.
 
-- **`COUNTRY`**: Use this sort enum value to order the list by country 
-- **`CITY`**: Use this sort enum value to order the list by city
-- **`NAME`**: Use this sort enum value to order the list by pop name
+- **`COUNTRY`**: Orders the list by the server's country.
+- **`CITY`**: Orders the list by the server's city.
+- **`NAME`**: Orders the list by the server's name.
 
 ## `SortOrder` (Enum)
 
 Class: [com.gentlebreeze.vpn.sdk.sort.SortOrder][3]
 
-Enum class that holds options for ordering alphabetically a servers list
+Enum class that holds options for ordering alphabetically a list of servers.
 
-- **`ASC`**: Use this sort enum value to show ascending alphabetically order
-- **`DESC`**: Use this sort enum value to descending alphabetically order
+- **`ASC`**: Orders the list alphabetically ascending.
+- **`DESC`**: Orders the list alphabetically descending.
 
 ## `SortServer`
 
@@ -47,91 +46,105 @@ To Initialize use `SortServerOption` and `SortOrder` values
 
 ## Server List Fetching Related Methods
 
-1. `ICallback<List<VpnServer>> fetchAllServers()`
-    - This method will obtain all available severs
-2. `ICallback<List<VpnServer>> fetchAllServers(sortServer)`
-    - This method will obtain all available servers sorted and ordered
-        - **`sortServer`**: `SortServer` object model to define how the list will be sorted and ordered
-3. `ICallback<List<VpnServer>> fetchAllServersByPop(pop)`
-    - This method will obtain all available servers from a certain pop
-        - **`pop`**: `VpnPop` model object to filter it's servers
-4. `ICallback<List<VpnServer>> fetchAllServersByPop(pop, sortServer)`
-    - This method will obtain all available servers from a certain pop sorted and ordered 
-        - **`pop`**: `VpnPop` model object to filter it's servers
-        - **`sortServer`**: `SortServer` object model to define how the list will be sorted and ordered
-5. `ICallback<List<VpnServer>> fetchAllServersByCountryCode(countryCode)`
-    - This method will obtain all available servers from a certain country
-        - **`countryCode`**: `String` Two letter ISO country code eg. (US, MX)
-6. `ICallback<List<VpnServer>> fetchAllServersByCountryCode(countryCode, sortServer)`
-    - This method will obtain all available servers from a certain country sorted and ordered
-        - **`countryCode`**: `String` Two letter ISO country code eg. (US, MX)
-        - **`sortServer`**: `SortServer` object model to define how the list will be sorted and ordered
-7. `ICallback<List<VpnServer>> fetchAllServersByCountryAndCity(countryCode, city)`
-    - This method will obtain all available servers from a certain country city
-        - **`countryCode`**: `String` Two letter ISO country code eg. (US, MX)
-        - **`city`**: `String` The city name
-8. `ICallback<List<VpnServer>> fetchAllServersByCountryAndCity(countryCode, city, sortServer)`
-    - This method will obtain all available servers from a certain country city sorted and ordered
-        - **`countryCode`**: `String` Two letter ISO country code eg. (US, MX)
-        - **`city`**: `String` The city name
-        - **`sortServer`**: `SortServer` object model to define how the list will be sorted and ordered
+### `fetchAllServers(...)`
+```kotlin
+/** Returns a callback with list of servers **/
+fun fetchAllServers(): ICallback<List<VpnServer>>
+```
+Gets a list of all servers.
+```kotlin
+fun fetchAllServers(
+   /** Defines the list sorting and ordering.  **/
+   sortServer: SortServer
+   /** Returns a callback with list of servers **/
+): ICallback<List<VpnServer>>
+```
+Gets a list of all servers in specific order.
+### `fetchAllServersByCountryCode(...)`
+```kotlin
+fun fetchAllServersByCountryCode(
+   /** Two letter ISO country code eg. (US, MX) **/
+   countryCode: String
+   /** Returns a callback with a list of servers **/
+): ICallback<List<VpnServer>>
+```
+Gets a list of all servers filtered by country code.
+```kotlin
+fun fetchAllServersByCountryCode(
+   /** Two letter ISO country code eg. (US, MX) **/
+   countryCode: String,
+   /** Defines the list sorting and ordering.  **/
+   sortServer: SortServer
+   /** Returns a callback with a list of servers **/
+): ICallback<List<VpnServer>>
+```
+Gets a list of all servers filtered by country code in a specific order.
+### `fetchAllServersByCountryAndCity(...)`
+```kotlin
+fun fetchAllServersByCountryAndCity(
+   /** Two letter ISO country code eg. (US, MX) **/
+   countryCode: String, 
+   /** The city name **/
+   city: String
+   /** Defines the list sorting and ordering.  **/
+   sortServer: SortServer
+   /** Returns a callback with a list of servers **/
+): ICallback<List<VpnServer>>
+```
+Gets a list of all servers filtered by country code and city in a specific order.
+```kotlin
+fun fetchAllServersByCountryAndCity(
+   /** Two letter ISO country code eg. (US, MX) **/
+   countryCode: String,
+   /** The city name **/
+   city: String
+   /** Returns a callback with a list of servers **/
+): ICallback<List<VpnServer>>
+```
+Get a list of all servers filtered by country code and city.
+### `fetchAllServersByPop(...)`
+```kotlin
+fun fetchAllServersByPop(
+   /** a pop to filter the server list **/
+   pop: VpnPop
+   /** Returns a callback with a list of servers **/
+): ICallback<List<VpnServer>>
+```
+Get a list of all servers in a given pop.
+```kotlin
+fun fetchAllServersByPop(
+   /** a pop to filter the server list **/
+   pop: VpnPop,
+   /** Defines the list sorting and ordering.  **/
+   sortServer: SortServer
+   /** Returns a callback with a list of servers **/
+): ICallback<List<VpnServer>>
+```
+Get a list of all servers in a given pop in specific order.
 
-
-All callbacks returning will return:
+The returned callback will respond with either of these two:
 - **`OnNext`**: A List of `VpnServer`
 - **`OnError`**: throws a `Throwable` object
 
-All callbacks must be `unsubscribe` during the activity `onDestroy` or 
-`onPause` lifecycle method
+Don't forget to call  `Callback.unsubscribe()`  in the activity's `onDestroy` or 
+`onPause` lifecycle methods.
 
 ## Single Server Fetching Related Methods
 
-1. `ICallback<VpnServer> fetchServerByName(name)`
-    - This method will get a server by it's unique name
-        - **`name`**: `String` value containing the name of the server you are trying to fetch
-        
-        
-All callbacks must be `unsubscribe` during the activity `onDestroy` or 
-`onPause` lifecycle method
-
-### Examples
-
-### Java
-        
-```java
-public class ServerListActivity extends AppCompatActivity {
-    
-    private ICallback<List<VpnServer>> vpnServerCallback;
-    
-    // Setup yor activity controls and interactions
-    
-    @Override
-    public void onDestroy() {
-        if (vpnServerCallback != null) {
-            vpnServerCallback.unsubscribe();
-        }
-        
-        super.onDestroy();
-    }
-    
-    public ICallback<List<VpnServer>> getVpnPopCallback() {
-        return MyApplication.getVpnSdk()
-                .fetchAllPops(new SortPop(SortPopOption.COUNTRY, SortOrder.DESC))
-                .onNext(vpnPopsList -> {
-                    // Manipulate vpnPop List like set it into a Recycler View Adapter
-                    return Unit.INSTANCE;
-                })
-                .onError(throwable -> {
-                    throwable.printStackTrace();
-                    // Handle any error scenario in here
-                    return Unit.INSTANCE;
-                })
-                .subscribe();
-    }
-}
+### `fetchServerByName(...)`
+```kotlin
+fun fetchServerByName(
+   /** The name of the server **/
+   name: String
+   /** Returns a callback with a list of servers **/
+): ICallback<VpnServer>
 ```
+Fetches a server by its name.
+        
+Don't forget to call  `Callback.unsubscribe()`  in the activity's `onDestroy` or 
+`onPause` lifecycle methods.
 
-#### Kotlin
+### Example
 
 ```kotlin
 class PopListActivity : AppCompatActivity() {
@@ -146,19 +159,17 @@ class PopListActivity : AppCompatActivity() {
         super.onDestroy()
     }
     
-    fun getVpnPopCallback(): ICallback<List<VpnPop>> {
-        return MyApplication.vpnSdk!!
-                .fetchAllPops(SortPop(SortPopOption.COUNTRY, SortOrder.DESC))
-                .onNext { vpnPopsList ->
+    fun getVpnPopCallback(): ICallback<List<VpnPop>>? {
+        return MyApplication.vpnSdk?
+                ?.fetchAllPops(SortPop(SortPopOption.COUNTRY, SortOrder.DESC))
+                ?.onNext { vpnPopsList ->
                     // Manipulate vpnPop List like set it into a Recycler View Adapter
-                    Unit
                 }
-                .onError { throwable ->
+                ?.onError { throwable ->
                     throwable.printStackTrace()
                     // Handle any error scenario in here
-                    Unit
                 }
-                .subscribe()
+                ?.subscribe()
     }
 }
 ```
