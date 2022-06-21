@@ -23,6 +23,8 @@ import com.wlvpn.consumervpn.domain.model.VpnProtocol
 import com.wlvpn.consumervpn.domain.model.VpnProtocol.IKEV2
 import com.wlvpn.consumervpn.domain.model.VpnProtocol.OPENVPN
 import com.wlvpn.consumervpn.presentation.di.Injector
+import com.wlvpn.consumervpn.presentation.features.connection.KillSwitchDialogFragment
+import com.wlvpn.consumervpn.presentation.features.connection.OnKillSwitchDialogResult
 import com.wlvpn.consumervpn.presentation.features.logout.LogoutDialogFragment
 import com.wlvpn.consumervpn.presentation.features.logout.OnLogoutDialogResult
 import com.wlvpn.consumervpn.presentation.navigation.FeatureNavigator
@@ -33,7 +35,7 @@ import javax.inject.Inject
 
 class SettingsPreferenceFragment
     : PresenterOwnerPreferenceFragment<SettingsContract.Presenter>(),
-    SettingsContract.View, OnLogoutDialogResult {
+    SettingsContract.View, OnLogoutDialogResult, OnKillSwitchDialogResult {
 
     @Inject
     lateinit var featureNavigator: FeatureNavigator
@@ -46,6 +48,7 @@ class SettingsPreferenceFragment
     private var startupConnectPreference: ListPreference? = null
     private var contactSupportPreference: Preference? = null
     private var aboutPreference: Preference? = null
+    private var killSwitchPreference: Preference? = null
 
     private var loadingView: View? = null
 
@@ -109,6 +112,9 @@ class SettingsPreferenceFragment
         aboutPreference =
             preferenceManager.findPreference(getString(R.string.preference_about_key))
 
+        killSwitchPreference =
+            preferenceManager.findPreference(getString(R.string.preference_kill_switch_key))
+
         preferenceScreen?.isPersistent = false
         autoReconnectPreference?.isPersistent = false
         vpnProtocolPreference?.isPersistent = false
@@ -117,6 +123,7 @@ class SettingsPreferenceFragment
         portPreference?.isPersistent = false
         startupConnectPreference?.isPersistent = false
         contactSupportPreference?.isPersistent = false
+        killSwitchPreference?.isPersistent = false
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -149,9 +156,28 @@ class SettingsPreferenceFragment
         }
     }
 
+    override fun showKillSwitchDialog() {
+        activity?.let { activity ->
+            val dialogFragment = KillSwitchDialogFragment.newInstance()
+            dialogFragment.onResultCallback = this
+            dialogFragment.show(
+                activity.supportFragmentManager,
+                KillSwitchDialogFragment.TAG
+            )
+        }
+    }
+
     override fun onLogoutDialogResponse(resultCode: Int) {
         when (resultCode) {
             DialogInterface.BUTTON_POSITIVE -> presenter.onLogoutClick()
+
+            DialogInterface.BUTTON_NEGATIVE -> return
+        }
+    }
+
+    override fun onKillSwitchDialogResponse(resultCode: Int, dialogTag: String) {
+        when (resultCode) {
+            DialogInterface.BUTTON_POSITIVE -> featureNavigator.navigateToVpnSettings()
 
             DialogInterface.BUTTON_NEGATIVE -> return
         }
@@ -309,6 +335,11 @@ class SettingsPreferenceFragment
             presenter.onAboutPreferenceClick()
             true
         }
+        
+        killSwitchPreference?.setOnPreferenceClickListener {
+            presenter.onKillSwitchPreferenceClick()
+            true
+        }
     }
 
     private fun getStartupConnectOptionTitle(
@@ -323,6 +354,7 @@ class SettingsPreferenceFragment
                 getString(R.string.settings_preference_startup_fastest)
         }
     }
+
 }
 
 private fun ListPreference.findValueAndSet(value: String) {

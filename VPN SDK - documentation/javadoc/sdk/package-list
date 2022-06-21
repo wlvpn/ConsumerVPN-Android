@@ -10,6 +10,17 @@ com.gentlebreeze.vpn.sdk
 com.gentlebreeze.vpn.sdk.callback
 com.gentlebreeze.vpn.sdk.config
 com.gentlebreeze.vpn.sdk.di
+com.gentlebreeze.vpn.sdk.features.create.data.api
+com.gentlebreeze.vpn.sdk.features.create.data.datasource
+com.gentlebreeze.vpn.sdk.features.create.data.failure
+com.gentlebreeze.vpn.sdk.features.create.data.failure.map
+com.gentlebreeze.vpn.sdk.features.create.data.gateway
+com.gentlebreeze.vpn.sdk.features.create.data.model
+com.gentlebreeze.vpn.sdk.features.create.data.repository
+com.gentlebreeze.vpn.sdk.features.create.domain
+com.gentlebreeze.vpn.sdk.features.create.domain.gateway
+com.gentlebreeze.vpn.sdk.features.create.domain.model
+com.gentlebreeze.vpn.sdk.features.create.domain.service
 com.gentlebreeze.vpn.sdk.mapper
 com.gentlebreeze.vpn.sdk.migration
 com.gentlebreeze.vpn.sdk.model
@@ -26,3 +37,4 @@ com.gentlebreeze.vpn.sdk.tier.domain.gateway
 com.gentlebreeze.vpn.sdk.tier.domain.model
 com.gentlebreeze.vpn.sdk.tier.domain.service
 com.gentlebreeze.vpn.sdk.tier.domain.service.failure
+com.gentlebreeze.vpn.sdk.util

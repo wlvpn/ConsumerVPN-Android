@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>VpnSdkAccountModule - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.gentlebreeze.vpn.sdk.di</a>&nbsp;/&nbsp;<a href="./index.html">VpnSdkAccountModule</a><br/>
+<br/>
+<h1>VpnSdkAccountModule</h1>
+<code><span class="identifier">@Module</span> <span class="keyword">class </span><span class="identifier">VpnSdkAccountModule</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">VpnSdkAccountModule</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="provides-account-creation-api-data-source.html">providesAccountCreationApiDataSource</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">providesAccountCreationApiDataSource</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.di.VpnSdkAccountModule$providesAccountCreationApiDataSource(com.gentlebreeze.vpn.sdk.config.SdkConfig)/config">config</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.config/-sdk-config/index.html"><span class="identifier">SdkConfig</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.features.create.data.datasource/-account-creation-data-source/index.html"><span class="identifier">AccountCreationDataSource</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="provides-account-creation-service.html">providesAccountCreationService</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">providesAccountCreationService</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.di.VpnSdkAccountModule$providesAccountCreationService(com.gentlebreeze.vpn.sdk.features.create.domain.gateway.ExternalAccountCreationGateway, kotlin.Boolean, com.gentlebreeze.vpn.sdk.features.create.domain.DeviceInfoRepository)/externalAccountCreationGateway">externalAccountCreationGateway</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.features.create.domain.gateway/-external-account-creation-gateway/index.html"><span class="identifier">ExternalAccountCreationGateway</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.di.VpnSdkAccountModule$providesAccountCreationService(com.gentlebreeze.vpn.sdk.features.create.domain.gateway.ExternalAccountCreationGateway, kotlin.Boolean, com.gentlebreeze.vpn.sdk.features.create.domain.DeviceInfoRepository)/isTvDevice">isTvDevice</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.di.VpnSdkAccountModule$providesAccountCreationService(com.gentlebreeze.vpn.sdk.features.create.domain.gateway.ExternalAccountCreationGateway, kotlin.Boolean, com.gentlebreeze.vpn.sdk.features.create.domain.DeviceInfoRepository)/deviceInfoRepository">deviceInfoRepository</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.features.create.domain/-device-info-repository/index.html"><span class="identifier">DeviceInfoRepository</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.features.create.domain.service/-account-creation-service/index.html"><span class="identifier">AccountCreationService</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="provides-device-info-repository.html">providesDeviceInfoRepository</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">providesDeviceInfoRepository</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.di.VpnSdkAccountModule$providesDeviceInfoRepository(android.content.SharedPreferences)/sharedPreferences">sharedPreferences</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/SharedPreferences.html"><span class="identifier">SharedPreferences</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.features.create.domain/-device-info-repository/index.html"><span class="identifier">DeviceInfoRepository</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="provides-external-account-creation-gateway.html">providesExternalAccountCreationGateway</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">providesExternalAccountCreationGateway</span><span class="symbol">(</span><span class="identifier" id="com.gentlebreeze.vpn.sdk.di.VpnSdkAccountModule$providesExternalAccountCreationGateway(com.gentlebreeze.vpn.sdk.features.create.data.datasource.AccountCreationDataSource, com.google.gson.Gson)/accountCreationDataSource">accountCreationDataSource</span><span class="symbol">:</span>&nbsp;<a href="../../com.gentlebreeze.vpn.sdk.features.create.data.datasource/-account-creation-data-source/index.html"><span class="identifier">AccountCreationDataSource</span></a><span class="symbol">, </span><span class="identifier" id="com.gentlebreeze.vpn.sdk.di.VpnSdkAccountModule$providesExternalAccountCreationGateway(com.gentlebreeze.vpn.sdk.features.create.data.datasource.AccountCreationDataSource, com.google.gson.Gson)/gson">gson</span><span class="symbol">:</span>&nbsp;<span class="identifier">Gson</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.gentlebreeze.vpn.sdk.features.create.domain.gateway/-external-account-creation-gateway/index.html"><span class="identifier">ExternalAccountCreationGateway</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -10,6 +10,7 @@ Class: [com.gentlebreeze.vpn.sdk.model.VpnPop][1]
 
 Object class that contains information about a certain pop
 
+- **`name`**: `String` value containing the name of the pop
 - **`city`**: `String` value containing the city where this pop is located
 - **`country`**: `String` value containing the country where this pop belongs.
 This value will be stored in the selected Locale
@@ -46,67 +47,148 @@ To Initialize use `SortPopOption` and `SortOrder` values
 
 ## Pop Fetching Related Methods
 
-1. `ICallback<List<VpnPop>> fetchAllPops()`
-    - This method will request all available pops
-2. `ICallback<List<VpnPop>> fetchAllPops(sortPop))`
-    - This method will request all available pops sorted and ordered
-        - **`sortPop`**: `SortPop` object model to define how the list will be sorted and ordered
-3. `ICallback<List<VpnPop>> fetchAllPopsByCountryCode(countryCode)`
-    - This method will request all available pops by a certain country
-        - **`countryCode`**: `String` value with the country code unique identifier
-4. `ICallback<List<VpnPop>> fetchAllPopsByCountryCode(countryCode, sortPop)`
-    - This method will request all available pops by a certain country code sorted and ordered
-        - **`countryCode`**: `String` value with the country code unique identifier
-        - **`sortPop`**: `SortPop` object model to define how the list will be sorted and ordered
-5. `ICallback<Boolean> updatePopsCountriesLanguage(locale)`
-    - This method will update all pops country name to the desire language
-        - **`locale`**: `Locale` The desire locale containing the desire country Ex. Locale("es", "MX")
+### `fetchAllPops(...)`
+```kotlin
+ /** Returns a callback with list of pops**/
+ fun fetchAllPops(): ICallback<List<VpnPop>>
+```
+Get a list of all pops.
 
-All callbacks will return:
-- **`OnNext`**: A List of `VpnPop` object
+```kotlin
+fun fetchAllPops(
+   /** the sort order the list will be returned**/
+  sortPop: SortPop
+   /** Returns a callback with list of pops**/
+): ICallback<List<VpnPop>>
+```
+Get a list of all pops in specific order
+### `fetchPopsFirstByCityQuery(...)`
+```kotlin
+fun fetchPopsFirstByCityQuery(
+   /** query to search by **/
+   query: String,
+   /** the sort order the list will be returned**/
+   sortPop: SortPop
+   /** Returns a callback with list of pops**/
+): ICallback<List<VpnPop>>
+```
+Fetch a list of all pops sorted by query in specific order First by city.
+### `fetchPopsFirstByCountryQuery(...)`
+```kotlin
+fun fetchPopsFirstByCountryQuery(
+   /** query to search by **/
+   query: String,
+   /** the sort order the list will be returned**/
+   sortPop: SortPop
+   /** Returns a callback with list of pops**/
+): ICallback<List<VpnPop>>
+```
+Fetch a list of all pops sorted by query in specific order First by country.
+### `fetchPopsByCountryCodeFilterByCityQuery(...)`
+```kotlin
+ fun fetchPopsByCountryCodeFilterByCityQuery(
+   /** Two letter ISO country code representation (e.g. US, UK) **/
+     countryCode: String,
+   /** query to search by **/
+     query: String,
+   /** the sort order the list will be returned**/
+     sortPop: SortPop
+     /** Returns a callback with list of pops**/
+ ): ICallback<List<VpnPop>>
+```
+Fetch a list of all pops by country query, sorted by query in specific order.
+### `fetchPopsByCityQuery(...)`
+```kotlin
+fun fetchPopsByCityQuery(
+   /** Two letter ISO country code representation (e.g. US, UK) **/
+   countryCode: String,
+   /** query to search by **/
+   query: String
+   /** Returns a callback with list of pops**/
+): ICallback<List<VpnPop>>
+
+```
+Fetch a list of all pops filtered by country code, sorted by city query in specific order.
+### `fetchPopsByCountryQuery(...)`
+```kotlin
+fun fetchPopsByCountryQuery(
+   /** query to search by **/
+   query: String
+   /** Returns a callback with list of pops**/
+): ICallback<List<VpnPop>>
+```
+Fetch a list of all pops sorted by country query in specific order.
+### `fetchPopsByCountryQueryAndVpnProtocol(...)`
+```kotlin
+fun fetchPopsByCountryQueryAndVpnProtocol(
+   /** query to search by **/
+   query: String,
+   /** VPN Protocol to filter by **/
+   vpnProtocol: String
+   /** Returns a callback with list of pops**/
+): ICallback<List<VpnPop>>
+```
+Fetch a list of all pops sorted by country query in specific order, filtered by protocol.
+### `fetchAllPopsByCountryCode(...)`
+```kotlin
+fun fetchAllPopsByCountryCode(
+   /** Two letter ISO country code representation (e.g. US, UK) **/
+   countryCode: String
+   /** Returns a callback with list of pops**/
+): ICallback<List<VpnPop>>
+```
+Get a lists of all pops in a country.
+```kotlin
+fun fetchAllPopsByCountryCode(
+   /** Two letter ISO country code representation (e.g. US, UK) **/
+   countryCode: String,
+   /** the sort order the list will be returned**/
+   sortPop: SortPop
+   /** Returns a callback with list of pops**/
+): ICallback<List<VpnPop>>
+```
+Get a lists of all pops in a country in a specific order.
+### `fetchPopByName(...)`
+```kotlin
+fun fetchPopByName(
+   /** pop name to filter by **/
+   name: String
+   /** Returns a callback with a single pop **/
+): ICallback<VpnPop>
+```
+Fetches a pop by its name.
+### `fetchPopByCountryCodeAndCity(...)`
+```kotlin
+fun fetchPopByCountryCodeAndCity(
+   /** Two letter ISO country code representation (e.g. US, UK) **/
+   countryCode: String,
+   /** country city to filter by **/
+   city: String
+   /** Returns a callback with a single pop**/
+): ICallback<VpnPop>
+```
+Fetches a pop by its city name.
+### `fetchPopByCountryCodeAndCityAndVpnProtocol(...)`
+```kotlin
+fun fetchPopByCountryCodeAndCityAndVpnProtocol(
+   /** Two letter ISO country code representation (e.g. US, UK) **/
+   countryCode: String,
+   /** country city to filter by **/
+   city: String,
+   vpnProtocol: String
+   /** Returns a callback with a single pop**/
+): ICallback<VpnPop>
+```
+Fetches a pop by its city name and protocol
+
+The returned callback will respond with either of these two:
+- **`OnNext`**: A List of `VpnPop` object (or a single `VpnPop`)
 - **`OnError`**: throws a `Throwable` object
 
-All callbacks must be `unsubscribe` during the activity `onDestroy` or 
-`onPause` lifecycle method
+All callbacks need must call `unsubscribe` during the activity `onDestroy` or 
+`onPause` lifecycle methods.
 
-### Examples
-
-### Java Example
-        
-```java
-public class PopListActivity extends AppCompatActivity {
-    
-    private ICallback<List<VpnPop>> vpnPopCallback;
-    
-    // Setup your activity controls and interactions
-    
-    @Override
-    public void onDestroy() {
-        if (vpnPopCallback != null) {
-            vpnPopCallback.unsubscribe();
-        }
-        
-        super.onDestroy();
-    }
-    
-    public ICallback<List<VpnPop>> getVpnPopCallback() {
-        return MyApplication.getVpnSdk()
-                .fetchAllPops(new SortPop(SortPopOption.COUNTRY, SortOrder.DESC))
-                .onNext(vpnPopsList -> {
-                    // Manipulate vpnPop List like set it into a Recycler View Adapter
-                    return Unit.INSTANCE;
-                })
-                .onError(throwable -> {
-                    throwable.printStackTrace();
-                    // Handle any error scenario in here
-                    return Unit.INSTANCE;
-                })
-                .subscribe();
-    }
-}
-```
-
-#### Kotlin Example
+### Example
 
 ```kotlin
 class PopListActivity : AppCompatActivity() {
@@ -121,19 +203,17 @@ class PopListActivity : AppCompatActivity() {
         super.onDestroy()
     }
     
-    fun getVpnPopCallback(): ICallback<List<VpnPop>> {
-        return MyApplication.vpnSdk!!
-                .fetchAllPops(SortPop(SortPopOption.COUNTRY, SortOrder.DESC))
-                .onNext { vpnPopsList ->
+    fun getVpnPopCallback(): ICallback<List<VpnPop>>? {
+        return MyApplication.vpnSdk
+                ?.fetchAllPops(SortPop(SortPopOption.COUNTRY, SortOrder.DESC))
+                ?.onNext { vpnPopsList ->
                     // Manipulate vpnPop List like set it into a Recycler View Adapter
-                    Unit
                 }
-                .onError { throwable ->
+                ?.onError { throwable ->
                     throwable.printStackTrace()
                     // Handle any error scenario in here
-                    Unit
                 }
-                .subscribe()
+                ?.subscribe()
     }
 }
 ```
@@ -142,6 +222,6 @@ class PopListActivity : AppCompatActivity() {
 
 This is not an official Google product. 
 
-[1]: Javadocs/myClass.html
-[2]: Javadocs/myClass.html
-[3]: Javadocs/myClass.html
+[1]: javadoc/sdk/com.gentlebreeze.vpn.sdk.model/-vpn-pop/index.html
+[2]: javadoc/sdk/com.gentlebreeze.vpn.sdk.sort/-sort-pop-option/index.html
+[3]: javadoc/sdk/com.gentlebreeze.vpn.sdk.sort/-sort-order/index.html

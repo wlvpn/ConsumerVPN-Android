@@ -68,6 +68,7 @@ class ConnectionPresenter(
 
         if (!disconnectDisposable.isRunning()) {
             disconnectDisposable = vpnService.disconnect()
+                .defaultSchedulers(schedulerProvider)
                 .subscribe({
                     updateDisconnectedView()
                 }) {}

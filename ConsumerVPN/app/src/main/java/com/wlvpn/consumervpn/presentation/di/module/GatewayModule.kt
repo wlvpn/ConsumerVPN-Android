@@ -1,6 +1,7 @@
 package com.wlvpn.consumervpn.presentation.di.module
 
 import android.app.Application
+import androidx.work.WorkManager
 import com.gentlebreeze.vpn.sdk.IVpnSdk
 import com.wlvpn.consumervpn.R
 import com.wlvpn.consumervpn.data.gateway.authentication.ExternalAuthenticationGateway
@@ -27,9 +28,10 @@ class GatewayModule {
 
     @Provides
     fun providesExternalAuthorizationGateway(
-        vpnSdk: IVpnSdk
+        vpnSdk: IVpnSdk,
+        workManager: WorkManager
     ): com.wlvpn.consumervpn.domain.gateway.ExternalAuthorizationGateway =
-        ExternalAuthorizationGateway(vpnSdk)
+        ExternalAuthorizationGateway(vpnSdk, workManager)
 
     @Provides
     fun providesExternalSettingsGateway(
@@ -49,8 +51,10 @@ class GatewayModule {
 
     @Provides
     fun providesSdkExternalServersGateway(
-        vpnSdk: IVpnSdk
-    ): com.wlvpn.consumervpn.domain.gateway.ExternalServersGateway = ExternalServersGateway(vpnSdk)
+        vpnSdk: IVpnSdk,
+        workManager: WorkManager
+    ): com.wlvpn.consumervpn.domain.gateway.ExternalServersGateway =
+        ExternalServersGateway(vpnSdk, workManager)
 
     @Provides
     fun provideLogbackGateway(

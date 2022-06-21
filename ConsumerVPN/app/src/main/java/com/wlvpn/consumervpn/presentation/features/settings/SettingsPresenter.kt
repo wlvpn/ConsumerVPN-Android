@@ -97,6 +97,10 @@ class SettingsPresenter(
         runNotifySettingsUpdatedTask()
     }
 
+    override fun onKillSwitchPreferenceClick() {
+        view?.showKillSwitchDialog()
+    }
+
     override fun onSupportPreferenceClick() {
         view?.showSupport()
     }

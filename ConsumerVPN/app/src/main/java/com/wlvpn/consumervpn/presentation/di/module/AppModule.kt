@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.os.Build
+import androidx.work.WorkManager
 import com.gentlebreeze.http.connectivity.ConnectivityNetworkStateProvider
 import com.gentlebreeze.http.connectivity.INetworkStateProvider
 import com.gentlebreeze.vpn.sdk.IVpnSdk
@@ -147,4 +148,28 @@ class AppModule(private val application: Application) {
             board = Build.BOARD,
             brand = Build.BRAND
         )
+
+    @Provides
+    @PerApplication
+    fun providesWorkManager(
+        application: Application
+    ): WorkManager {
+        val logLevel = if (BuildConfig.DEBUG) {
+            android.util.Log.VERBOSE
+        } else {
+            android.util.Log.INFO
+        }
+
+        val configuration = androidx.work.Configuration
+            .Builder()
+            .setMinimumLoggingLevel(logLevel)
+            .build()
+
+        WorkManager.initialize(
+            application,
+            configuration
+        )
+
+        return WorkManager.getInstance(application)
+    }
 }

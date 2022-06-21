@@ -36,7 +36,12 @@
             android:key="@string/preference_port_key"
             android:summary="%s"
             android:title="@string/settings_preference_port_title" />
-
+        <Preference
+            android:icon="@drawable/ic_kill_switch"
+            android:key="@string/preference_kill_switch_key"
+            android:persistent="false"
+            android:summary="@string/settings_preference_kill_switch_description"
+            android:title="@string/settings_preference_kill_switch_title" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="General">

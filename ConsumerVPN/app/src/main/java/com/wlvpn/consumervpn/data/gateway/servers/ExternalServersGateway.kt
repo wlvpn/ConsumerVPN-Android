@@ -1,6 +1,6 @@
 package com.wlvpn.consumervpn.data.gateway.servers
 
-import com.evernote.android.job.JobManager
+import androidx.work.WorkManager
 import com.gentlebreeze.vpn.sdk.IVpnSdk
 import com.gentlebreeze.vpn.sdk.model.VpnPop
 import com.gentlebreeze.vpn.sdk.model.VpnServer
@@ -9,12 +9,12 @@ import com.gentlebreeze.vpn.sdk.sort.SortPop
 import com.gentlebreeze.vpn.sdk.sort.SortPopOption
 import com.wlvpn.consumervpn.data.failure.map.NetworkThrowableMapper
 import com.wlvpn.consumervpn.data.failure.map.ThrowableMapper
-import com.wlvpn.consumervpn.data.job.ServersRefreshJob
 import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
 import com.wlvpn.consumervpn.data.model.CountryServerLocation
 import com.wlvpn.consumervpn.data.toDomainServerLocation
 import com.wlvpn.consumervpn.data.util.onErrorMapThrowable
 import com.wlvpn.consumervpn.data.util.toSingle
+import com.wlvpn.consumervpn.data.worker.ServersRefreshWorker
 import com.wlvpn.consumervpn.domain.gateway.ExternalServersGateway
 import com.wlvpn.consumervpn.domain.model.Server
 import com.wlvpn.consumervpn.domain.model.ServerHost
@@ -24,7 +24,8 @@ import io.reactivex.Maybe
 import io.reactivex.rxkotlin.toObservable
 
 class ExternalServersGateway(
-    private val vpnSdk: IVpnSdk
+    private val vpnSdk: IVpnSdk,
+    private val workManager: WorkManager
 ) : ExternalServersGateway, ThrowableMapper by NetworkThrowableMapper() {
 
     override fun fetchAllServers(): Maybe<List<Server>> =
@@ -224,13 +225,13 @@ class ExternalServersGateway(
 
     override fun scheduleRefreshServers() =
         Completable.create { emitter ->
-            ServersRefreshJob.schedule()
+            ServersRefreshWorker.schedule(workManager)
             emitter.onComplete()
         }
 
     override fun cancelScheduledRefreshServers() =
         Completable.create { emitter ->
-            JobManager.instance().cancelAllForTag(ServersRefreshJob.JOB_ID)
+            workManager.cancelUniqueWork(ServersRefreshWorker.WORKER_ID)
             emitter.onComplete()
         }
 }

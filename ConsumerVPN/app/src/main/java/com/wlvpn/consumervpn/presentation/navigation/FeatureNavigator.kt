@@ -31,6 +31,11 @@ interface FeatureNavigator {
     fun navigateToSettings()
 
     /**
+     * Navigates to VPN Settings
+     */
+    fun navigateToVpnSettings()
+
+    /**
      * Navigates to Support Screen
      */
     fun navigateToSupport()
@@ -54,6 +59,5 @@ interface FeatureNavigator {
      * Navigates to licenses view
      */
     fun navigateToLicensesView()
-
 
 }

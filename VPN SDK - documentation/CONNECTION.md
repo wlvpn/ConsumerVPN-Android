@@ -1,101 +1,308 @@
 # VPN Connection
 
-Connection API is the base for our VPN application. 
-In general, it helps to create and secure network tunneling connection 
-in your VPN application.
+The connection API creates and secures a network tunneling connection for your VPN application.
 
 ## `AuthInfo`
 
 Class: [com.gentlebreeze.vpn.sdk.model.AuthInfo][5]
 
-Model class that holds information pertaining to a user's authentication
+A model class that holds information pertaining to a user's authentication.
 
-- **`accessExpireEpoch`**: `long` value that holds expire epoch date
-- **`accessToken`**: `String` value that contains user access token
-- **`accountUpdatedAt`**: `long` value that contains last date where the account was updated
-- **`refreshToken`**: `String` value that contains the refresh token
-- **`subEndEpoch`**: `long` date value whe sub epoch ends
-- **`vpnAuthPassword`**: `String` value that contains the authorization password to perform calls
-- **`vpnAuthUsername`**: `String` value that contains the authorization user to perform calls
+- **`accessExpireEpoch`**: `long` The epoch time date when the access token expires.
+- **`accessToken`**: `String` The user access token.
+- **`accountUpdatedAt`**: `long` The epoch time date when the account was last updated.
+- **`refreshToken`**: `String` The user refresh token.
+- **`subEndEpoch`**: `long` The epoch time date when the user's subscription end.
+- **`vpnAuthPassword`**: `String` The user's password.
+- **`vpnAuthUsername`**: `String` The user's username.
 
 ## `VpnConfigurarion`
 
-Class: [com.gentlebreeze.vpn.sdk.model.VpnConfiguration][2]
+Class: [com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration][2]
 
-Model container class for configuration of the VPN connection
+A model class that holds the configuration of a VPN connection.
 
-- **`username`** `String` value that holds the user to access the VPN server
-- **`password`** `String` value that holds password to access the VPN server
-- **`scrambleOn`** `Boolean` value to indicate if scramble should be turned on
-- **`reconnectOn`** `Boolean` value to indicate if the VPN should reconnect in a 
-server dropout scenario
-- **`port`** `VpnPortOptions` Contains the port value to perform the connection
-- **`protocol`** `VpnProtocolOptions` Contains the protocol value to perform the connection
-- **`debugLevel`** `Integer`  value based on OpenVPN debug levels (0...11)
-- **`isLocalLanEnabled`** `Boolean` value that enables the app to access the local network outside of the 
-VPN Tunnel 
-- **`splitTunnelApps`** `List<String>` list of application packages values that can connect
-to the internet outside of the VPN tunnel
+- **`username`** `String` The user's username to access the VPN server.
+- **`password`** `String` The user's password to access the VPN server.
+- **`scrambleOn`** `Boolean` Indicates if scramble should be turned on/off.
+- **`reconnectOn`** `Boolean` Indicates if the VPN should reconnect in a server dropout scenario.
+- **`remoteId`** `String` The remote ID for IKEv2 connections.
+- **`port`** `VpnPortOptions` The port value to perform the connection.
+- **`protocol`** `VpnProtocolOptions` The internet protocol to perform the connection (UDP or TCP).
+- **`connectionProtocol`** `VpnConnectionProtocolOptions` The VPN protocol 
+  to use (WireGuard, OpenVPN or IKEv2).
+- **`debugLevel`** `Integer`  The OpenVPN debug level (from 0 to 11)  
+- **`isLocalLanEnabled`** `Boolean` Indicates to enable access to the local network 
+  outside of the VPN tunnel. 
+- **`splitTunnelApps`** `List<String>` The list of application packages that can connect
+to the internet outside of the VPN tunnel.
+- **`shouldOverrideMobileMtu`** `Boolean` indicates to override the MTU value when the user 
+  is on a mobile connection.
+- **`apiAuthMode`** `ApiAuthMode` The api auth method to use.
+- **`shouldLoadBalanceRestrictByProtocol`** `Boolean` Indicates to apply a load balance with 
+the supplied VPN protocol.
 
 ## Prepare related Methods
 
-Prepare is a required operation by Android to request permission from the user
-to allow our app to connect to VPN networks.
+---
 
-1. `void prepareVpnService(context)`
-    - Our Sdk Method to prepare our app. The execution of this method and the user
-      authorization is required to operate VPN connections in our app
-        - **`context`**: `Context` activity context to process permission in an activity
-    - Responds in `onActivityResult()` 
-        - where  resultCode == `RESULT_OK` and requestCode == `VPN_PREPARE` is success
-        
-2. `boolean isVpnServicePrepared()`
-    - Will tell us if the user already gave permission to our app to use VPN networks
+Before starting a connection, your app needs to ask for VPN permission from the user. 
+Android will refuse to start the VPN service without the user's approval.
+
+The following methods will help you to prepare for that condition.
+
+
+### `prepareVpnService(...)`
+
+Interface: [com.gentlebreeze.vpn.sdk.IVpnSdk][8]
+
+```kotlin
+fun prepareVpnService(
+        /** The activity that android will use to promp the VPN permissions dialog **/
+        activity: Activity
+    )
+// OR
+fun prepareVpnService(
+    /** The fragment that android will use to promp the VPN permissions dialog **/
+        fragment: androidx.fragment.app.Fragment
+    )
+```
+
+### `isVpnServicePrepared()`
+
+Interface: [com.gentlebreeze.vpn.sdk.IVpnSdk][8]
+
+```kotlin
+/** Returns true if the user approved the VPN permissions **/
+fun isVpnServicePrepared(): Boolean
+```
+
+This will return true if the user has approved the VPN permission to your app.
 
 ## Connection related methods
 
-**Related Classes**
+---
 
-Class: [com.gentlebreeze.vpn.sdk.model.vpnNotification][1]
+### `connect(...)`
 
-Class: [com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration][2]
+Interface: [com.gentlebreeze.vpn.sdk.IVpnSdk][8]
 
-Class: [com.gentlebreeze.vpn.sdk.model.VpnPop][3]
+```kotlin
+fun connect(
+   /** The desired server to connect **/
+   server: VpnServer,
+   /** Notification model builder helper to attach a persistent notification **/
+   notification: VpnNotification,
+   /** Notification model builder to show a notification when the system revokes the permission for the VPN to run **/
+   vpnRevokedNotification: VpnNotification,
+   /** A helper model with the configuration to run the VPN **/
+   configuration: VpnConnectionConfiguration
+   /** onSuccess responds with a success boolean.
+   onError throws a Throwable object. **/
+): ICallback<Boolean>
+```
+Connects to a VPN using the desired server.
 
-Class: [com.gentlebreeze.vpn.sdk.model.VpnServer][4]
+### `connectToNearest(...)`
 
-1. `ICallback<Boolean> connect(vpnNotification, vpnRevokedNotification, vpnConnectionConfiguration)`
-    - Simple vpn connection with a notification tile. Requires previous call of `fetchGeoInfo` 
-    to work as a `Best Location` connection. See [IP Geolocation - fetchGeoInfo][6]
-        - **`vpnNotification`**: `VpnNotification` Notification model builder helper to attached a persistent notification
-        - **`vpnRevokedNotification`**: `VpnNotification` Notification model builder to show a notification when the system revokes the permission for the VPN to run
-        - **`vpnConnectionConfiguration`**: `VpnConnectionConfiguration` is a helper model object to set the desire configuration to run our vpn
-2. `ICallback<Boolean> connect(countryCode, vpnNotification, vpnRevokedNotification, vpnConnectionConfiguration)`
-    - Connects to a VPN using the desire unique country code to restrict into a country location
-        - **`countryCode`**: The unique identifier code for countries
-        - **`vpnNotification`**: `VpnNotification` Notification model builder helper to attached a persistent notification
-        - **`vpnRevokedNotification`**: `VpnNotification` Notification model builder to show a notification when the system revokes the permission for the VPN to run
-        - **`vpnConnectionConfiguration`**: `VpnConnectionConfiguration` is a helper model object to set the desire configuration to run our vpn                                 
-3. `ICallback<Boolean> connect(vpnPop, vpnNotification, vpnRevokedNotification, vpnConnectionConfiguration)`
-    - Connects to a VPN restricted to a desire city location using a VPN Pop
-        - **`vpnPop`**: The desire city VPN Pop to make our connection
-        - **`vpnNotification`**: `VpnNotification` Notification model builder helper to attached a persistent notification
-        - **`vpnRevokedNotification`**: `VpnNotification` Notification model builder to show a notification when the system revokes the permission for the VPN to run
-        - **`vpnConnectionConfiguration`**: `VpnConnectionConfiguration` is a helper model object 
-4. `ICallback<Boolean> connect(vpnServer, vpnNotification, vpnRevokedNotification, vpnConnectionConfiguration)`
-    - Connects to a VPN restricted to an specific server
-        - **`vpnServer`**: The desire VPN Server to make our connection
-        - **`vpnNotification`**: `VpnNotification` Notification model builder helper to attached a persistent notification
-        - **`vpnRevokedNotification`**: `VpnNotification` Notification model builder to show a notification when the system revokes the permission for the VPN to run
-        - **`vpnConnectionConfiguration`**: `VpnConnectionConfiguration` is a helper model object 
- 5. `ICallback<Boolean> disconnect()`
-    - Will disconnect a current vpn connection
- 
- All method callbacks will execute:
- - **`onSuccess`** responds with a success `boolean`.
- - **`onError`** throws a `Throwable` object.
+Interface: [com.gentlebreeze.vpn.sdk.IVpnSdk][8]
 
-### Examples
+
+- #### By IpGeo
+
+Connects to the best server relative to your geolocation with no preference for country or city.
+
+```kotlin
+fun connectToNearest(
+   /** Notification model builder helper to attach a persistent notification **/
+   notification: VpnNotification,
+   /** Notification model builder to show a notification when the system revokes the permission for the VPN to run **/
+   vpnRevokedNotification: VpnNotification,
+   /** A helper model with the configuration to run the VPN **/
+   configuration: VpnConnectionConfiguration
+   /** onSuccess responds with a success boolean.
+   onError throws a Throwable object. **/
+): ICallback<Boolean>
+```
+- #### By VpnPop
+
+Connects to a server from a given VpnPop if any available, after performing a load balance 
+considering maintenance, server capacity and distance will be taken as the best suited 
+for the connection. 
+
+If there are no candidate servers available in the specified VpnPop, 
+the nearest one from other VpnPop will be used, expanding the tolerance distance, first by checking
+the nearest ones, then if the specified VpnPop's country does not have a single available server,
+the search will be opened to the next near countries until finding one.
+```kotlin
+fun connectToNearest(
+   /**  pop to attempt to connect to **/
+   vpnPop: VpnPop,
+   /** Notification model builder helper to attach a persistent notification **/
+   notification: VpnNotification,
+   /** Notification model builder to show a notification when the system revokes the permission for the VPN to run **/
+   vpnRevokedNotification: VpnNotification,
+   /** A helper model with the configuration to run the VPN **/
+   configuration: VpnConnectionConfiguration
+   /** onSuccess responds with a success boolean.
+   onError throws a Throwable object. **/
+): ICallback<Boolean> 
+```
+
+### `connectToNearestRestrictedByCountry`
+
+Interface: [com.gentlebreeze.vpn.sdk.IVpnSdk][8]
+
+- #### By IpGeo
+
+Connects to the best server relative to your geolocation with no preference for city but 
+**restricted by the country obtained.**
+
+```kotlin
+fun connectToNearestRestrictedByCountry(
+   /** Notification model builder helper to attach a persistent notification **/
+   notification: VpnNotification,
+   /** Notification model builder to show a notification when the system revokes the permission for the VPN to run **/
+   vpnRevokedNotification: VpnNotification,
+   /** A helper model with the configuration to run the VPN **/
+   configuration: VpnConnectionConfiguration
+   /** onSuccess responds with a success boolean.
+   onError throws a Throwable object. **/
+): ICallback<Boolean>
+```
+
+- #### By VpnPop
+
+Connects to a server from a given VpnPop if any available, after performing a load balance 
+considering maintenance, server capacity and distance one will be taken as the best suited for the 
+connection.
+
+If there are no candidate servers available in the specified VpnPop, the nearest one 
+from other VpnPop will be used, expanding the tolerance distance, by checking the nearest ones, 
+**but never outside the specified VpnPop's country.**
+```kotlin
+fun connectToNearestRestrictedByCountry(
+   /** VpnPop to attempt to connect **/
+    vpnPop: VpnPop,
+   /** Notification model builder helper to attach a persistent notification **/
+   notification: VpnNotification,
+   /** Notification model builder to show a notification when the system revokes the permission for the VPN to run **/
+   vpnRevokedNotification: VpnNotification,
+   /** A helper model with the configuration to run the VPN **/
+   configuration: VpnConnectionConfiguration
+   /** onSuccess responds with a success boolean.
+   onError throws a Throwable object. **/
+): ICallback<Boolean>
+```
+
+- #### By Country Code
+
+Connects to a server from a given country code if any available, after performing a load balance 
+considering maintenance, server capacity and distance one will be taken as the best suited for the 
+connection.
+
+The nearest VpnPop will be used, expanding the tolerance distance, **but never outside
+the specified country.**
+```kotlin
+fun connectToNearestRestrictedByCountry(
+  /** Two letter ISO country code representation (e.g. US, UK) **/
+    countryCode: String,
+   /** Notification model builder helper to attach a persistent notification **/
+   notification: VpnNotification,
+   /** Notification model builder to show a notification when the system revokes the permission for the VPN to run **/
+   vpnRevokedNotification: VpnNotification,
+   /** A helper model with the configuration to run the VPN **/
+   configuration: VpnConnectionConfiguration
+   /** onSuccess responds with a success boolean.
+   onError throws a Throwable object. **/
+): ICallback<Boolean>
+```
+### `disconnect(...)`
+
+Interface: [com.gentlebreeze.vpn.sdk.IVpnSdk][8]
+
+```kotlin
+/** onSuccess responds with a success boolean.
+onError throws a Throwable object. **/
+ fun disconnect(): ICallback<Boolean>
+```
+Disconnects from a current VPN connection.
+
+### `getConnectionState()`
+
+```kotlin
+/** Returns the last reported VPN state **/
+fun getConnectionState(): Int
+```
+Gets the last known VPN state. See more about VPN states [here][9].
+
+### `getConnectionDescription()`
+Interface: [com.gentlebreeze.vpn.sdk.IVpnSdk][8]
+
+```kotlin
+/** Returns the description of current VPN state **/
+fun getConnectionDescription(): VpnConnectionInfo
+```
+
+Gets the description of the current VPN State. See more about VPN states [here][9].
+
+### `isConnected()`
+
+Interface: [com.gentlebreeze.vpn.sdk.IVpnSdk][8]
+
+```kotlin
+/** Returns true if connected, false if disconnected and not attempting to connect. **/
+fun isConnected(): Boolean
+```
+
+Determine if the device is connected to the VPN.
+
+### `getConnectedDate()`
+
+Interface: [com.gentlebreeze.vpn.sdk.IVpnSdk][8]
+
+```kotlin
+/** Returns the date of connection start time **/
+fun getConnectedDate(): Date
+```
+
+Get the Date of the initial connection.
+
+### `getConnectedTimeInSeconds()`
+
+Interface: [com.gentlebreeze.vpn.sdk.IVpnSdk][8]
+
+```kotlin
+/** Returns the seconds passed since connected **/
+fun getConnectedTimeInSeconds(): Long
+```
+Get Connected Time in Seconds.
+
+### `getConnectionInfo()`
+
+Interface: [com.gentlebreeze.vpn.sdk.IVpnSdk][8]
+
+```kotlin
+/** Returns the model with the connection info **/
+fun getConnectionInfo(): VpnConnectionInfo
+```
+Get the current connection info
+
+
+
+### `attemptToConnect.../attemtToDisconnect` variants
+
+Interface: [com.gentlebreeze.vpn.sdk.IVpnSdk][8]
+
+All the `connect...(...)` and `disconnect(...)` methods have a variant with the prefix `attemptTo...`; 
+these variants do the exact same task as their counterpart, the main difference is that they don't 
+return a `ICallback`, instead,they return an *RxJava2 completable* which doesn't complete until the VPN 
+state changes to `Connected` for the connect methods and `Disconnected` for the disconnect method.
+
+
+## Examples
+
+---
 
 In this example, we will attempt to connect to the VPN and setup a notification with a disconnect button.
 
@@ -121,165 +328,7 @@ In this example, we will attempt to connect to the VPN and setup a notification 
 
 ```
 
-#### Java Example
-        
-```java
-public class MainActivity extends AppCompatActivity
-        implements View.OnClickListener {
-    
-    // Setup yor activity controls and interactions
-    
-    public final static int NOTIFICATION_ID_VPN_STATUS = 1;
-    public final static int NOTIFICATION_ID_VPN_REVOKED = 2;
-    
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to
-        if (resultCode == RESULT_OK && requestCode == VPN_PREPARE) {
-            startVpnConnection();
-        } else {
-            //Canceled
-        }
-    }
-    
-    @Override
-    public void onClick(View view) {
-        // Create your own routine to saved and retrieve a selected pop
-        VpnPop vpnPop = PreferencesUtil.getSelectedVpnPop();
-        
-        try {
-            if (MyApplication.getVpnSdk().isVpnServicePrepared()) {
-
-                VpnNotification notificationVpnStatus = new VpnNotification(
-                        getBaseConnectionNotification().build(), NOTIFICATION_ID_VPN_STATUS);
-                
-                VpnNotification notificationVpnRevoked = new VpnNotification(
-                        getVpnRevokedNotification().build(), NOTIFICATION_ID_VPN_REVOKED);
-
-                MyApplication.getVpnSdk().connect(
-                        vpnPop,
-                        notificationVpnStatus,
-                        notificationVpnRevoked,
-                        getVpnConnectionConfiguration()
-                ).subscribe(null, throwable -> {
-                    // Handle any error on vpn connect failure
-                    return Unit.INSTANCE;
-                });
-
-            } else {
-                MyApplication.getVpnSdk().prepareVpnService(this);
-            }
-        } catch (ActivityNotFoundException ex) {
-            ex.printStackTrace();
-            // Handle here any error if was impossible to execute prepare vpn 
-        }
-    }
-    
-    public NotificationCompat.Builder getBaseConnectionNotification() {
-        
-        Bitmap bitmapIconLarge = BitmapFactory.decodeResource(
-                getApplicationContext().getResources(), R.drawable.ic_logo);
-        
-        return new NotificationCompat.Builder(getApplicationContext(),
-                "VpnNotificationChannel")
-                .setLocalOnly(false)
-                .setOngoing(true)
-                .setSmallIcon(R.drawable.ic_app_notification)
-                .setLargeIcon(bitmapIconLarge)
-                .setVisibility(NotificationCompat.VISIBILITY_SECRET)
-                .setContentIntent(getPendingOpenAppIntent())
-                .setUsesChronometer(true)
-                .setShowWhen(true)
-                .addAction(0, "Disconnect", getPendingDisconnectIntent());
-    }
-    
-     public NotificationCompat.Builder getVpnRevokedNotification() {
-            
-            Bitmap bitmapIconLarge = BitmapFactory.decodeResource(
-                    getApplicationContext().getResources(), R.drawable.ic_logo);
-            
-            return new NotificationCompat.Builder(getApplicationContext(),
-                    "VpnNotificationChannel")
-                    .setOngoing(false)
-                    .setSmallIcon(R.drawable.ic_app_notification)
-                    .setLargeIcon(bitmapIconLarge)
-                    .setContentTitle("VPN Revoked")
-                    .setContentText("The system revoked the VPN permission");
-        }
-    
-    private VpnConnectionConfiguration getVpnConnectionConfiguration() {
-        VpnAuthInfo vpnAuthInfo = MyApplication.getVpnSdk().getAuthInfo();
-        
-        // Create your own routine to saved and retrieve user credentials
-        String username = vpnAuthInfo.getVpnAuthUsername() != null ?
-                vpnAuthInfo.getVpnAuthUsername() :
-                PreferencesUtil.getUsername();
-        String password = vpnAuthInfo.getVpnAuthPassword() != null ?
-                vpnAuthInfo.getVpnAuthPassword() :
-                PreferencesUtil.getPassword();
-        
-        return new VpnConnectionConfiguration(
-                username,
-                password,
-                false, // Scramble
-                true, // Auto Reconnect
-                VpnPortOptions.PORT_443,
-                VpnProtocolOptions.PROTOCOL_UDP,
-                VpnConnectionProtocolOptions.OPENVPN,
-                BuildConfig.DEBUG ? 5 : 0);
-    }
-    
-    private PendingIntent getPendingOpenAppIntent() {
-        final Intent intentOpenApp = new Intent(getApplicationContext(), MainActivity.class);
-        intentOpenApp.setAction(Intent.ACTION_MAIN);
-        intentOpenApp.addCategory(Intent.CATEGORY_LAUNCHER);
-        return PendingIntent.getActivity(getApplicationContext(), 0,
-                intentOpenApp, FLAG_UPDATE_CURRENT);
-    }
-    
-    private PendingIntent getPendingDisconnectIntent() {
-        final Intent intentDisconnect = new Intent(
-                getApplicationContext(), VpnConnectionReceiver.class);
-        intentDisconnect.setAction(VpnConnectionReceiver.ACTION_DISCONNECT);
-        return PendingIntent.getBroadcast(getApplicationContext(), 0,
-                intentDisconnect, FLAG_UPDATE_CURRENT);
-    }
-    
-    public static class VpnConnectionReceiver extends BroadcastReceiver {
-        
-        public static final String ACTION_DISCONNECT = "com.myapp.action.DISCONNECT";
-        
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent != null && intent.getAction() != null) {
-                switch (intent.getAction()) {
-                    case ACTION_DISCONNECT:
-                        disconnect(context);
-                        break;
-                }
-            }
-        }
-        
-        private void disconnect(Context context) {
-            NotificationManager notificationManager = (NotificationManager) context
-                    .getSystemService(Context.NOTIFICATION_SERVICE);
-
-            notificationManager.cancel("VpnNotifications", MainActivity.NOTIFICATION_ID);
-
-            MyApplication.getVpnSdk().disconnect()
-                    .subscribe(aBoolean -> {
-                        // Disconnected from Receiver
-                        return Unit.INSTANCE;
-                    }, throwable -> {
-                        // Failed to disconnect
-                        return Unit.INSTANCE;
-                    });
-        }
-    }
-}
-```
-
-#### Kotlin Example
+### MainActivity
 
 ```kotlin
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -327,15 +376,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val username = vpnAuthUsername ?: PreferencesUtil.getUsername()
             val password = vpnAuthPassword ?: PreferencesUtil.getPassword()
             
-            return VpnConnectionConfiguration(
-                    username,
-                    password,
-                    false, // Scramble
-                    true, // Auto Protect
-                    VpnPortOptions.PORT_443,
-                    VpnProtocolOptions.PROTOCOL_UDP,
-                    VpnConnectionProtocolOptions.OPENVPN, 
-                    if (BuildConfig.DEBUG) 5 else 0)
+            return VpnConnectionConfiguration.Builder(username,password)
+                .scrambleOn(false)
+                .reconnectOn(true)
+                .port(VpnPortOptions.PORT_443)
+                .vpnProtocol(VpnProtocolOptions.PROTOCOL_UDP)
+                .connectionProtocol(VpnConnectionProtocolOptions.OPENVPN)
+                .debugLevel(if (BuildConfig.DEBUG) 5 else 0)
+                .build()
         }
     
     val pendingOpenAppIntent: PendingIntent
@@ -370,7 +418,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val vpnPop = PreferencesUtil.getSelectedVpnPop()
 
         try {
-            if (MyApplication.vpnSdk!!.isVpnServicePrepared()) {
+            if (MyApplication.vpnSdk?.isVpnServicePrepared()) {
 
                 val notification = VpnNotification(
                         baseConnectionNotification.build(), NOTIFICATION_ID_VPN_STATUS)
@@ -378,18 +426,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val notificationVpnRevoked = VpnNotification(
                         vpnRevokedNotificationBuilder.build(), NOTIFICATION_ID_VPN_REVOKED)
 
-                MyApplication.vpnSdk!!.connect(
+                MyApplication.vpnSdk?.connect(
                         vpnPop,
                         notification,
                         notificationVpnRevoked,
                         vpnConnectionConfiguration
-                ).subscribe(null, { throwable ->
-                    // Handle any error on vpn connect failure
-                    Unit
+                )?.subscribe({
+                    // Check the current connection information
+                    val connectionInfo = MyApplication.vpnSdk!!.getConnectionInfo()
+
+                    Timber.i("Server IP Address: ${connectionInfo.ipAddress}")
+                }, { throwable ->
+                    // Handle any error on VPN connect failure
                 })
 
             } else {
-                MyApplication.vpnSdk!!.prepareVpnService(this)
+                MyApplication.vpnSdk?.prepareVpnService(this)
             }
         } catch (ex: ActivityNotFoundException) {
             ex.printStackTrace()
@@ -414,13 +466,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             
             notificationManager.cancel("VpnNotifications", MainActivity.NOTIFICATION_ID)
             
-            MyApplication.vpnSdk!!.disconnect()
-                    .subscribe({ aBoolean ->
+            MyApplication.vpnSdk?.disconnect()
+                    ?.subscribe({ aBoolean ->
                         // Disconnected from Receiver
-                        Unit
                     }) { throwable ->
                         // Failed to disconnect
-                        Unit
                     }
         }
         
@@ -436,9 +486,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 }
 ```
 
+
+
 [1]: javadoc/sdk/com.gentlebreeze.vpn.sdk.model/-vpn-notification/index.html
 [2]: javadoc/sdk/com.gentlebreeze.vpn.sdk.model/-vpn-connection-configuration/index.html
 [3]: javadoc/sdk/com.gentlebreeze.vpn.sdk.model/-vpn-pop/index.html
 [4]: javadoc/sdk/com.gentlebreeze.vpn.sdk.model/-vpn-server/index.html
 [5]: javadoc/sdk/com.gentlebreeze.vpn.sdk.model/-vpn-auth-info/index.html
-[6]: IPGEO.md
+[6]: javadoc/sdk/com.gentlebreeze.vpn.sdk.model/-vpn-connection-info/index.html
+[7]: IPGEO.md
+[8]: javadoc/sdk/com.gentlebreeze.vpn.sdk/-i-vpn-sdk/index.html
+[9]: LISTENER.md

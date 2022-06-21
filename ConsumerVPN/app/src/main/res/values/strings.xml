@@ -92,6 +92,8 @@
     <string name="settings_preference_port_title">Port</string>
     <string name="settings_preference_about_title">About ConsumerVPN</string>
     <string name="settings_preference_support_title">Contact Support</string>
+    <string name="settings_preference_kill_switch_title">Android Kill Switch</string>
+    <string name="settings_preference_kill_switch_description">Enable your system to block internet connections when the VPN is not active.</string>
     <string name="settings_preference_startup_do_not">Do not automatically connect</string>
     <string name="settings_preference_startup_last_server">Connect to last connected server</string>
     <string name="settings_preference_startup_fastest">Connect to fastest server</string>
@@ -113,6 +115,18 @@
     <string name="preference_about_key" translatable="false">preference_about</string>
     <string name="preference_category_startup_key" translatable="false">preference_category_startup</string>
     <string name="preference_support_key" translatable="false">preference_support</string>
+    <string name="preference_kill_switch_key" translatable="false">preference_kill_switch</string>
+
+    <!-- Kill switch dialog -->
+    <string name="kill_switch_dialog_label_title">Enable OS kill switch</string>
+    <string name="kill_switch_dialog_label_message">
+        \u2022 Navigate to your device settings\n\u2022 Select \"Connections\" or \"Network &amp; internet\"
+        \n\u2022 Go to \"Advanced\" or \"More connection settings\"
+        \n\u2022 Select VPN
+        \n\u2022 Tap the cog next to IPVanish\n\u2022 Enable both \"Always-on VPN\" and \"Block connections without VPN\"
+    </string>
+    <string name="kill_switch_dialog_label_error">Error: Unable to launch. Please open Settings manually.</string>
+    <string name="kill_switch_dialog_button_take_me_there">Take me there</string>
 
     <!-- Contact Support -->
     <string name="support_label_title">Support</string>

@@ -15,6 +15,7 @@ import com.wlvpn.consumervpn.domain.repository.CredentialsRepository
 import com.wlvpn.consumervpn.domain.repository.GeneralConnectionSettingsRepository
 import dagger.Module
 import dagger.Provides
+import java.lang.ref.WeakReference
 import javax.inject.Named
 
 
@@ -48,7 +49,7 @@ class RepositoryModule {
     ):
             CredentialsRepository {
         return EncryptedSharedPrefsCredentialsRepository(
-                application.packageName, preferences, gson
+                application.packageName, preferences, gson, WeakReference(application)
         )
     }
 
