@@ -1,7 +1,9 @@
 # CHANGELOG
 
+## v1.6.0
+* Adds Support to target SDK target 31
+
 ## v.1.5.13
-* Fixes crashes with Android 13
 * Add SdkConfig.version attribute.
 * Updated documentation.
 
