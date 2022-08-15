@@ -9,6 +9,13 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="mailto" />
+        </intent>
+    </queries>
+
     <application
         android:name=".presentation.ConsumerApplication"
         android:allowBackup="false"
@@ -22,6 +29,7 @@
         <activity
             android:name=".presentation.features.splash.SplashActivity"
             android:noHistory="true"
+            android:exported="true"
             android:theme="@style/AppTheme.SplashTheme">
 
             <intent-filter>

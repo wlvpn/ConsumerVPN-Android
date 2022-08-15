@@ -27,9 +27,8 @@ class ConsumerContactSupportGateway(
             putExtra(Intent.EXTRA_TEXT, comments)
 
             resolveActivity(context.packageManager)?.let {
-                context.startActivity(this)
-
                 emitter.onComplete()
+                context.startActivity(this)
 
             } ?: emitter.onError(SendEmailNotSupportedFailure())
         }

@@ -5,7 +5,6 @@ import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.netprotect.licenses.implementation.input.LicensesInputLocator
 import com.netprotect.licenses.implementation.install.Licenses
-import com.squareup.leakcanary.LeakCanary
 import com.wlvpn.consumervpn.BuildConfig
 import com.wlvpn.consumervpn.data.gateway.logs.LogTree
 import com.wlvpn.consumervpn.presentation.di.Injector
@@ -23,12 +22,6 @@ class ConsumerApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return
-        }
-
-        LeakCanary.install(this)
 
         if (BuildConfig.DEBUG) {
             FLog.setMinimumLoggingLevel(FLog.VERBOSE)

@@ -61,7 +61,12 @@ internal class VpnConnectionStatusNotification(
         get() {
             val intentDisconnect = Intent(context, VpnReceiver::class.java)
             intentDisconnect.action = ACTION_DISCONNECT
-            return PendingIntent.getBroadcast(context, 0, intentDisconnect, PendingIntent.FLAG_UPDATE_CURRENT)
+            return PendingIntent.getBroadcast(
+                context,
+                0,
+                intentDisconnect,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
         }
 
     /**
@@ -75,7 +80,12 @@ internal class VpnConnectionStatusNotification(
             intentOpenApp.action = Intent.ACTION_MAIN
             intentOpenApp.addCategory(Intent.CATEGORY_LAUNCHER)
 
-            return PendingIntent.getActivity(context, 0, intentOpenApp, PendingIntent.FLAG_UPDATE_CURRENT)
+            return PendingIntent.getActivity(
+                context,
+                0,
+                intentOpenApp,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
         }
 
 }
