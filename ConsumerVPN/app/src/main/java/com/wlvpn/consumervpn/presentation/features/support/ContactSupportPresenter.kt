@@ -59,6 +59,7 @@ class ContactSupportPresenter(
                 .subscribe({
                     view?.setLoadingViewVisibility(false)
                 }) {
+                    view?.setLoadingViewVisibility(false)
                     when (it) {
                         is SendEmailNotSupportedFailure -> {
                             Timber.e(it, "Sending email is not supported in this device.")
