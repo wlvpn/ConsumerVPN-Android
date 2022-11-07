@@ -1,5 +1,53 @@
 # CHANGELOG
 
+## v1.6.2
+* Adds new OpenVPN certificate file. The previous certificate will expire on March 2023.
+
+## v1.6.1
+* Adds custom DNS configuration for all protocols; when set, the VPN will use the provided server
+  to resolve all the incoming requests.
+
+The default value is `null`, which will tell to the VPN to
+use the DNS server provided by the VPN server.
+
+If using a DNS in the local network, please ensure to enable `local lan` in
+order to the VPN to reach it.
+
+*Warning*: Is encouraged to avoid using a custom DNS as this could compromise the privacy of the
+user. A common use case for this property is tech savvy users who own a DNS server (with AD blockers
+or adult content blockers) and knowledge the risk of using it.
+
+Using the DNS server provided by the VPN server ensures total privacy.
+
+
+Usage:
+
+```kotlin
+
+    // External dns
+    val customDns = "1.1.1.3" // Cloudfare no malware no adult content
+    
+    VpnConnectionConfiguration
+        .Builder(username, password)
+        .connectionProtocol(VpnConnectionProtocolOptions.WireGuard)
+        ...
+        .dns(IpAddress(customDns))
+        .build()
+
+
+    // Local network dns
+    val customDns = "192.168.1.23" // A local server with PiHole or AdGuard
+
+    VpnConnectionConfiguration
+        .Builder(username, password)
+        .connectionProtocol(VpnConnectionProtocolOptions.WireGuard)
+        ... 
+        .isLocalLanAllowed(true)  // Enable this to allow the vpn to reach the server
+        .dns(IpAddress(customDns))
+        .build()
+    
+```
+
 ## v1.6.0
 * Adds Support to target SDK target 31
 
