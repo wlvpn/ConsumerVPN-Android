@@ -145,3 +145,11 @@
 
 -keep class dagger.* { *; }
 -keep class javax.inject.* { *; }
+
+# IKEv2
+-keep class org.strongswan.android.logic.Scheduler { *; }
+
+# Logback
+-keep class ch.qos.logback.core.rolling.RollingFileAppender { *; }
+-keep class ch.qos.logback.core.rolling.FixedWindowRollingPolicy { *; }
+-keep class ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy { *; }
