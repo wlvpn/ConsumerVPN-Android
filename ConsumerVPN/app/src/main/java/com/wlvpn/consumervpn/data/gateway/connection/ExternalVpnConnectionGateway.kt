@@ -1,5 +1,6 @@
 package com.wlvpn.consumervpn.data.gateway.connection
 
+import com.gentlebreeze.vpn.core.configuration.ApiAuthMode
 import com.gentlebreeze.vpn.sdk.IVpnSdk
 import com.gentlebreeze.vpn.sdk.model.VpnConnectionConfiguration
 import com.gentlebreeze.vpn.sdk.model.VpnConnectionProtocolOptions
@@ -217,10 +218,18 @@ class ExternalVpnConnectionGateway(
                 // TODO: implement port settings to VPN protocol selection relationship, currently
                 // the settings repository only consider one port option ignoring the available
                 // options for each VPN protocol
-                if (general.vpnProtocol.toVpnConnectionProtocol()
-                    != VpnConnectionProtocolOptions.IKEV2) {
-                    port(general.port.toVpnPort())
+                when(general.vpnProtocol.toVpnConnectionProtocol()){
+                    VpnConnectionProtocolOptions.OPENVPN -> {
+                        port(general.port.toVpnPort())
+                    }
+                    VpnConnectionProtocolOptions.WIREGUARD -> {
+                        apiAuthMode(ApiAuthMode.BEARER_TOKEN_AUTH)
+                    }
+                    else -> {
+                        // No op
+                    }
                 }
+
             }
             .vpnProtocol(general.protocol.toVpnProtocol())
             .shouldOverrideMobileMtu(false)

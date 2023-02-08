@@ -60,6 +60,9 @@ class AppModule(private val application: Application) {
             .apiTokenRefreshEndpoint(application.getString(R.string.token_refresh_api))
             .apiProtocolListEndpoint(application.getString(R.string.protocol_list_api))
             .apiServerListEndpoint(application.getString(R.string.server_list_api))
+            .apiWireGuardConnectionEndpoint(application.getString(R.string.wireguard_endpoint_main_api))
+            .apiWireGuardUserPassAuthEndpoint(application.getString(R.string.wireguard_credentials_auth_api))
+            .apiWireGuardBearerAuthEndpoint(application.getString(R.string.wireguard_bearer_auth_api))
             .build()
 
         return VpnSdk.init(application, vpnSdkConfig)

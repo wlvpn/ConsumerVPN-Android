@@ -1,6 +1,5 @@
 package com.wlvpn.consumervpn.data
 
-import com.gentlebreeze.vpn.module.openvpn.api.connection.ConnectionProtocol
 import com.gentlebreeze.vpn.sdk.model.VpnConnectionProtocolOptions
 import com.gentlebreeze.vpn.sdk.model.VpnPop
 import com.gentlebreeze.vpn.sdk.model.VpnPortOptions
@@ -8,7 +7,14 @@ import com.gentlebreeze.vpn.sdk.model.VpnProtocolOptions
 import com.gentlebreeze.vpn.sdk.model.VpnServer
 import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
 import com.wlvpn.consumervpn.data.model.CountryServerLocation
-import com.wlvpn.consumervpn.domain.model.*
+import com.wlvpn.consumervpn.domain.model.Port
+import com.wlvpn.consumervpn.domain.model.Protocol
+import com.wlvpn.consumervpn.domain.model.Server
+import com.wlvpn.consumervpn.domain.model.ServerLocation
+import com.wlvpn.consumervpn.domain.model.VpnProtocol
+import com.wlvpn.consumervpn.domain.model.VpnProtocol.IKEV2
+import com.wlvpn.consumervpn.domain.model.VpnProtocol.OPENVPN
+import com.wlvpn.consumervpn.domain.model.VpnProtocol.WIREGUARD
 
 internal fun Protocol.toVpnProtocol(): VpnProtocolOptions =
         when (this) {
@@ -31,8 +37,9 @@ internal fun Port.toVpnPort(): VpnPortOptions = VpnPortOptions(portNumber)
 
 internal fun VpnProtocol.toVpnConnectionProtocol(): VpnConnectionProtocolOptions =
     when (this) {
-        VpnProtocol.OPENVPN -> VpnConnectionProtocolOptions.OPENVPN
-        VpnProtocol.IKEV2 -> VpnConnectionProtocolOptions.IKEV2
+        OPENVPN -> VpnConnectionProtocolOptions.OPENVPN
+        IKEV2 -> VpnConnectionProtocolOptions.IKEV2
+        WIREGUARD -> VpnConnectionProtocolOptions.WIREGUARD
     }
 
 internal fun VpnPop.toDomainServerLocation() : ServerLocation {

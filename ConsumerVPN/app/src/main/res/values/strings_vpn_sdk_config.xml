@@ -6,6 +6,9 @@
     <string name="login_api" translatable="false">login</string>
     <string name="token_refresh_api" translatable="false">login</string>
     <string name="server_list_api" translatable="false">servers</string>
+    <string name="wireguard_bearer_auth_api" translatable="false">v3/wireguard</string>
+    <string name="wireguard_credentials_auth_api" translatable="false">/generate</string>
+
 
     <!--IPGeo config-->
     <string name="ip_geo_url" translatable="false">YOUR_API_GEO_URL</string>

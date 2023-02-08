@@ -153,3 +153,8 @@
 -keep class ch.qos.logback.core.rolling.RollingFileAppender { *; }
 -keep class ch.qos.logback.core.rolling.FixedWindowRollingPolicy { *; }
 -keep class ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy { *; }
+
+# WireGuard
+-keep class com.gentlebreeze.vpn.core.wireguard.api.model.** { *; }
+-keep class com.netprotect.vpn.module.wireguard.api.connection.** { *; }
+-keep class com.gentlebreeze.vpn.core.configuration.** { *; }
