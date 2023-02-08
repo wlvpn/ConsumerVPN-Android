@@ -42,6 +42,8 @@ interface SettingsContract {
 
         fun showOpenVpnPreferences()
 
+        fun showWireGuardPreferences()
+
         fun setVpnProtocolPreferenceListOptions(options: List<VpnProtocol>)
 
         fun setPortPreferenceListOptions(options: List<Port>)

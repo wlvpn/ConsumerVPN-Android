@@ -2,4 +2,5 @@
 <resources>
     <!-- Warning!!, never use this endpoint in production -->
     <string name="endpoint_main_api">https://api-staging.wlvpn.com/v3/%s</string>
+    <string name="wireguard_endpoint_main_api">https://api.wlvpn.com/</string>
 </resources>

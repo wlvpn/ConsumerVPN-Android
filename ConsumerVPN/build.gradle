@@ -18,7 +18,7 @@ allprojects {
         google()
         jcenter()
         maven {
-            url "https://packagecloud.io/priv/${packagecloud_token}/cloak/android-vpn-sdk/maven2"
+            url "https://packagecloud.io/priv/${packagecloud_vpn_token}/cloak/android-vpn-sdk/maven2"
         }
     }
 }

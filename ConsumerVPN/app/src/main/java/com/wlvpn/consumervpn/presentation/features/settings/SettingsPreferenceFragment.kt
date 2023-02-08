@@ -16,12 +16,14 @@ import androidx.preference.Preference
 import androidx.preference.SwitchPreference
 import com.wlvpn.consumervpn.BuildConfig
 import com.wlvpn.consumervpn.R
+import com.wlvpn.consumervpn.R.string
 import com.wlvpn.consumervpn.domain.model.Port
 import com.wlvpn.consumervpn.domain.model.Protocol
 import com.wlvpn.consumervpn.domain.model.Settings
 import com.wlvpn.consumervpn.domain.model.VpnProtocol
 import com.wlvpn.consumervpn.domain.model.VpnProtocol.IKEV2
 import com.wlvpn.consumervpn.domain.model.VpnProtocol.OPENVPN
+import com.wlvpn.consumervpn.domain.model.VpnProtocol.WIREGUARD
 import com.wlvpn.consumervpn.presentation.di.Injector
 import com.wlvpn.consumervpn.presentation.features.connection.KillSwitchDialogFragment
 import com.wlvpn.consumervpn.presentation.features.connection.OnKillSwitchDialogResult
@@ -200,8 +202,9 @@ class SettingsPreferenceFragment
         val keys = options.map { option -> option.name }.toTypedArray()
         val values = options.map { option ->
             when (option) {
-                OPENVPN -> getString(R.string.settings_fragment_connection_option_openvpn)
-                IKEV2 -> getString(R.string.settings_fragment_connection_option_ikev2)
+                OPENVPN -> getString(string.settings_fragment_connection_option_openvpn)
+                IKEV2 -> getString(string.settings_fragment_connection_option_ikev2)
+                WIREGUARD -> getString(string.settings_fragment_connection_option_wireguard)
             }
         }.toTypedArray()
         vpnProtocolPreference?.entries = values
@@ -253,6 +256,13 @@ class SettingsPreferenceFragment
         autoReconnectPreference?.isVisible = true
         scramblePreference?.isVisible = true
         portPreference?.isVisible = true
+    }
+
+    override fun showWireGuardPreferences() {
+        protocolPreference?.isVisible = false
+        autoReconnectPreference?.isVisible = false
+        scramblePreference?.isVisible = false
+        portPreference?.isVisible = false
     }
 
     override fun setLoadingVisibility(visibility: Boolean) {

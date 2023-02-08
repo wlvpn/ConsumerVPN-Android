@@ -5,6 +5,9 @@ import com.wlvpn.consumervpn.domain.model.Protocol
 import com.wlvpn.consumervpn.domain.model.Settings
 import com.wlvpn.consumervpn.domain.model.Settings.GeneralConnection.StartupConnectOption
 import com.wlvpn.consumervpn.domain.model.VpnProtocol
+import com.wlvpn.consumervpn.domain.model.VpnProtocol.IKEV2
+import com.wlvpn.consumervpn.domain.model.VpnProtocol.OPENVPN
+import com.wlvpn.consumervpn.domain.model.VpnProtocol.WIREGUARD
 import com.wlvpn.consumervpn.domain.service.authentication.UserAuthenticationService
 import com.wlvpn.consumervpn.domain.service.settings.SettingsService
 import com.wlvpn.consumervpn.domain.service.vpn.VpnService
@@ -38,8 +41,9 @@ class SettingsPresenter(
         view?.setPortPreferenceListOptions(updatedSettings.availablePorts)
         view?.updateSettings(updatedSettings)
         when (updatedSettings.vpnProtocol) {
-            VpnProtocol.OPENVPN -> view?.showOpenVpnPreferences()
-            VpnProtocol.IKEV2 -> view?.showIkev2Preferences()
+            OPENVPN -> view?.showOpenVpnPreferences()
+            IKEV2 -> view?.showIkev2Preferences()
+            WIREGUARD -> view?.showWireGuardPreferences()
         }
     }
 

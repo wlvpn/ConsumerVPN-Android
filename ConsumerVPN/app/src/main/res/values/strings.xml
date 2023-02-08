@@ -83,6 +83,7 @@
     <string name="settings_fragment_label_title">Settings</string>">
     <string name="settings_fragment_connection_option_openvpn">OpenVPN</string>
     <string name="settings_fragment_connection_option_ikev2">IKEv2</string>
+    <string name="settings_fragment_connection_option_wireguard">WireGuard®</string>
     <string name="settings_preference_auto_connect_title">Connect at startup</string>
     <string name="settings_preference_vpn_protocol_title">VPN Protocol</string>
     <string name="settings_preference_reconnect_title">Auto Reconnect</string>
