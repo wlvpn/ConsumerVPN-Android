@@ -95,6 +95,7 @@ android {
     }
 
     compileOptions {
+        coreLibraryDesugaringEnabled = true
         sourceCompatibility "1.8"
         targetCompatibility "1.8"
     }
@@ -123,7 +124,8 @@ dependencies {
                     material        : "1.1.0",
                     appCompat       : "1.1.0",
                     preferences     : "1.1.1",
-                    workManager     : "2.7.1"
+                    workManager     : "2.7.1",
+                    desugar         : "1.1.5"
             ],
             rxJava       : "2.2.10",
             rxAndroid    : "2.1.1",
@@ -165,6 +167,7 @@ dependencies {
     implementation "androidx.preference:preference:$versions.os.preferences"
     implementation "androidx.preference:preference-ktx:$versions.os.preferences"
     implementation "androidx.work:work-runtime-ktx:$versions.os.workManager"
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:$versions.os.desugar"
     //endregion OS
 
     // region Libs
