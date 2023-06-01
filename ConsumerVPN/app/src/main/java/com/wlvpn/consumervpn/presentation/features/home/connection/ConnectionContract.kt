@@ -34,9 +34,11 @@ interface ConnectionContract {
 
         fun setDisconnectedLocation(countryName: String, cityName: String)
 
-        fun showConnectedServer(hostIpAddress: String, countryName: String)
+        fun showConnectedServer(countryName: String)
 
-        fun showConnectedServer(hostIpAddress: String, countryName: String, cityName: String)
+        fun showConnectedServer(countryName: String, cityName: String)
+
+        fun showPublicIp(publicIpAddress: String)
 
         fun setDisconnectedToFastest()
 

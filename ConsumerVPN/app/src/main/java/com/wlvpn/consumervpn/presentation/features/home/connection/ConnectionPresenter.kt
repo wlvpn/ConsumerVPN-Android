@@ -109,6 +109,7 @@ class ConnectionPresenter(
     }
 
     private fun updateDisconnectedView() {
+        view?.showDisconnectedView()
 
         if (getConnectionSettingsDisposable.isRunning()) {
             getConnectionSettingsDisposable.dispose()
@@ -124,27 +125,32 @@ class ConnectionPresenter(
                     }
                     is CountryServerLocation -> view?.setDisconnectedLocationToFastest(location.country)
                 }
-                view?.showDisconnectedView()
             }) {
                 Timber.e(it, "Error showing state")
             }.addTo(disposables)
     }
 
     private fun updateConnectedView() {
+        vpnService.fetchGeoInfo()
+            .defaultSchedulers(schedulerProvider)
+            .subscribe({
+                view?.showPublicIp(it.ip)
+                view?.showConnectedView()
+            }) {
+                Timber.e(it, "Unknown error when obtaining public ip address")
+            }.addTo(disposables)
         vpnService.getConnectedServer()
             .defaultSchedulers(schedulerProvider)
             .subscribe({
                 when (val serverLocation = it.location) {
                     is CityAndCountryServerLocation -> {
                         view?.showConnectedServer(
-                            it.host.ipAddress,
                             serverLocation.country,
                             serverLocation.city
                         )
                     }
                     is CountryServerLocation -> {
                         view?.showConnectedServer(
-                            it.host.ipAddress,
                             serverLocation.country
                         )
                     }
@@ -153,7 +159,6 @@ class ConnectionPresenter(
             }) {
                 Timber.e(it, "Unknown error when obtaining connected server")
             }.addTo(disposables)
-
     }
 
     private fun connectToVPN() {

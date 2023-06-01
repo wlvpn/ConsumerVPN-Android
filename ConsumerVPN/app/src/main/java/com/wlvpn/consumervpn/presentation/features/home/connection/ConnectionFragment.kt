@@ -145,24 +145,26 @@ class ConnectionFragment
         groupConnected.updatePreLayout(connectionStateLayout as ConstraintLayout)
         connectionStateLayout.visibility = View.VISIBLE
         disconnectedStateLayout.visibility = View.GONE
+        ipTextView.text = getString(R.string.home_connection_loading)
     }
 
-    override fun showConnectedServer(hostIpAddress: String, countryName: String) {
+    override fun showConnectedServer(countryName: String) {
         val locationText = getString(
             R.string.home_connection_location_placeholder,
             "", countryName
         )
-        ipTextView.text = hostIpAddress
         connectedLocationTextView.text = locationText
     }
 
-    override fun showConnectedServer(hostIpAddress: String, countryName: String, cityName: String) {
+    override fun showConnectedServer(countryName: String, cityName: String) {
         val locationText = getString(
-            R.string.home_connection_location_placeholder,
-            cityName, countryName
+            R.string.home_connection_location_placeholder, cityName, countryName
         )
-        ipTextView.text = hostIpAddress
         connectedLocationTextView.text = locationText
+    }
+
+    override fun showPublicIp(publicIpAddress: String) {
+        ipTextView.text = publicIpAddress
     }
 
     override fun showConnectedView() {
