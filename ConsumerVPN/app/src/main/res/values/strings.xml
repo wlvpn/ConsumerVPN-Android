@@ -50,6 +50,7 @@
     <string name="home_connection_location_placeholder">%s, %s</string>
     <string name="home_connection_visible_location">Visible Location</string>
     <string name="home_connection_public_ip">Public IP</string>
+    <string name="home_connection_loading">Loading…</string>
 
     <!-- Servers -->
     <string name="servers_menu_button_title">Locations</string>
@@ -124,7 +125,7 @@
         \u2022 Navigate to your device settings\n\u2022 Select \"Connections\" or \"Network &amp; internet\"
         \n\u2022 Go to \"Advanced\" or \"More connection settings\"
         \n\u2022 Select VPN
-        \n\u2022 Tap the cog next to IPVanish\n\u2022 Enable both \"Always-on VPN\" and \"Block connections without VPN\"
+        \n\u2022 Tap the cog next to ConsumerVPN\n\u2022 Enable both \"Always-on VPN\" and \"Block connections without VPN\"
     </string>
     <string name="kill_switch_dialog_label_error">Error: Unable to launch. Please open Settings manually.</string>
     <string name="kill_switch_dialog_button_take_me_there">Take me there</string>
@@ -136,7 +137,7 @@
     <string name="support_label_need_help">Need some help? We can find a fix.</string>
     <string name="support_label_describe_trouble">Describe the trouble you\'re experiencing so we can lend a hand.</string>
     <string name="support_label_empty_notes_error_message">Please, write a description of your problem.</string>
-    <string name="support_label_email_subject">Support IPVanish</string>
+    <string name="support_label_email_subject">Support ConsumerVPN</string>
     <string name="support_label_email_not_supported_message">Send email is not supported on this device.</string>
     <string name="support_checkbox_diagnosis_message">Include diagnostic and system information</string>
     <string name="support_menu_button_send">Send</string>
