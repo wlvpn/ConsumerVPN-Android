@@ -1,4 +1,7 @@
 # CHANGELOG
+## v1.6.3
+* Adds Split tunneling support based on domains (Only Android 13)
+* Mitigates IKEv2 IPv6 leaks
 
 ## v1.6.2
 * Adds new OpenVPN certificate file. The previous certificate will expire on March 2023.
