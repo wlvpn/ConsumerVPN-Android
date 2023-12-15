@@ -1,5 +1,6 @@
 package com.wlvpn.consumervpn.presentation.features.home.connection
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.net.VpnService
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
@@ -49,6 +51,10 @@ class ConnectionFragment
     private val groupConnected: Group by bindView(R.id.group_connected)
 
     private val clickDisposables = CompositeDisposable()
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { /*No op*/ }
 
     companion object {
         val TAG = "${BuildConfig.APPLICATION_ID}:${this::class.java.name}"
@@ -127,7 +133,8 @@ class ConnectionFragment
     }
 
     override fun setDisconnectedLocationToFastest(countryName: String) {
-        locationTextView.text = getString(R.string.home_connection_location_best_country_placeholder, countryName)
+        locationTextView.text =
+            getString(R.string.home_connection_location_best_country_placeholder, countryName)
     }
 
     override fun showDisconnectedView() {
@@ -202,6 +209,14 @@ class ConnectionFragment
 
     override fun showConnectionErrorMessage() {
         showErrorMessage(getString(R.string.error_vpn_connection))
+    }
+
+    override fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissionLauncher.launch(
+                Manifest.permission.POST_NOTIFICATIONS
+            )
+        }
     }
 
     private fun setupClickViews() {

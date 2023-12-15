@@ -4,10 +4,13 @@ import android.app.Application
 import com.wlvpn.consumervpn.R
 import com.wlvpn.consumervpn.domain.gateway.ContactSupportGateway
 import com.wlvpn.consumervpn.domain.gateway.LogsGateway
+import com.wlvpn.consumervpn.domain.gateway.notification.NotificationPermissionGateway
 import com.wlvpn.consumervpn.domain.interactor.logs.GetApplicationLogsContract
 import com.wlvpn.consumervpn.domain.interactor.logs.GetApplicationLogsInteractor
 import com.wlvpn.consumervpn.domain.interactor.logs.SendCommentsContract
 import com.wlvpn.consumervpn.domain.interactor.logs.SendCommentsInteractor
+import com.wlvpn.consumervpn.domain.interactor.notification.NotificationPermissionContract
+import com.wlvpn.consumervpn.domain.interactor.notification.NotificationPermissionInteractor
 import com.wlvpn.consumervpn.domain.model.SystemInformation
 import com.wlvpn.consumervpn.domain.repository.CredentialsRepository
 import com.wlvpn.consumervpn.domain.repository.GeneralConnectionSettingsRepository
@@ -47,5 +50,12 @@ class InteractorModule {
         supportGateway,
         settingsRepository,
         credentialsRepository
+    )
+
+    @Provides
+    fun providesNotificationPermissionInteractor(
+        notificationPermissionGateway: NotificationPermissionGateway
+    ): NotificationPermissionContract.Interactor = NotificationPermissionInteractor(
+        notificationPermissionGateway
     )
 }

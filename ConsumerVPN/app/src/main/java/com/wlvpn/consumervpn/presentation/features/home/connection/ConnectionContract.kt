@@ -56,6 +56,8 @@ interface ConnectionContract {
 
         fun toolbarVisibility(isVisible: Boolean)
 
+        fun requestNotificationPermission()
+
     }
 
 }
