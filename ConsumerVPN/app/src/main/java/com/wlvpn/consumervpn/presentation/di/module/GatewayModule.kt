@@ -13,6 +13,8 @@ import com.wlvpn.consumervpn.data.gateway.servers.ExternalServersGateway
 import com.wlvpn.consumervpn.data.gateway.settings.ExternalSettingsGateway
 import com.wlvpn.consumervpn.domain.gateway.ContactSupportGateway
 import com.wlvpn.consumervpn.domain.gateway.LogsGateway
+import com.wlvpn.consumervpn.domain.gateway.notification.AndroidNotificationPermissionGateway
+import com.wlvpn.consumervpn.domain.gateway.notification.NotificationPermissionGateway
 import com.wlvpn.consumervpn.presentation.notification.vpn.VpnNotificationFactory
 import dagger.Module
 import dagger.Provides
@@ -70,4 +72,9 @@ class GatewayModule {
         application.getString(R.string.support_email_address),
         application.getString(R.string.support_email_subject)
     )
+
+    @Provides
+    fun providesNotificationPermissionGateway(
+        application: Application
+    ): NotificationPermissionGateway = AndroidNotificationPermissionGateway(application)
 }

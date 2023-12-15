@@ -119,8 +119,9 @@ class SettingsPresenter(
 
     override fun onLogoutClick() {
         vpnService.disconnect()
-            .onErrorComplete()
             .andThen(authenticationService.logout())
+            .defaultSchedulers(schedulerProvider)
+            .onErrorComplete()
             .subscribe({
                 view?.showLogin()
             }) {

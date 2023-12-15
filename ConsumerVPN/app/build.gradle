@@ -9,12 +9,12 @@ apply plugin: 'kotlin-kapt'
 apply from: "../config/quality.gradle"
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     defaultConfig {
         ndk.abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64'
         applicationId "com.wlvpn.consumervpn"
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
@@ -120,12 +120,16 @@ dependencies {
             os           : [
                     support         : "1.0.0",
                     lifecycle       : "2.0.0",
-                    constraintLayout: "1.1.3",
-                    material        : "1.1.0",
-                    appCompat       : "1.1.0",
+                    constraintLayout: "2.1.4",
+                    material        : "1.6.1",
+                    appCompat       : "1.4.2",
                     preferences     : "1.1.1",
                     workManager     : "2.7.1",
-                    desugar         : "1.1.5"
+                    desugar         : "1.1.5",
+                    recyclerview    : "1.2.1",
+                    annotation      : "1.3.0",
+                    browser         : "1.5.0",
+                    gridlayout      : "1.0.0"
             ],
             rxJava       : "2.2.10",
             rxAndroid    : "2.1.1",
@@ -136,7 +140,7 @@ dependencies {
             retrofit     : "2.5.0",
             leakCanary   : "2.9.1",
             fresco       : "1.13.0",
-            vpnSdk       : "1.6.3.167043",
+            vpnSdk       : "1.6.3.181839",
             timber       : "4.7.1",
             autoValue    : "1.6.5",
             loganSquare  : "1.3.7",
@@ -155,9 +159,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$versions.os.lifecycle"
     implementation "androidx.constraintlayout:constraintlayout:$versions.os.constraintLayout"
     implementation "androidx.appcompat:appcompat:$versions.os.appCompat"
-    implementation "androidx.annotation:annotation:$versions.os.support"
-    implementation "androidx.browser:browser:$versions.os.support"
-    implementation "androidx.recyclerview:recyclerview:$versions.os.support"
+    implementation "androidx.annotation:annotation:$versions.os.annotation"
+    implementation "androidx.browser:browser:$versions.os.browser"
+    implementation "androidx.recyclerview:recyclerview:$versions.os.recyclerview"
     implementation "androidx.cardview:cardview:$versions.os.support"
     implementation "androidx.leanback:leanback:$versions.os.support"
     implementation "androidx.leanback:leanback-preference:$versions.os.support"

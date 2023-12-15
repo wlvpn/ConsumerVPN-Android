@@ -4,6 +4,7 @@ import android.app.Application
 import com.wlvpn.consumervpn.R
 import com.wlvpn.consumervpn.domain.interactor.logs.GetApplicationLogsContract
 import com.wlvpn.consumervpn.domain.interactor.logs.SendCommentsContract
+import com.wlvpn.consumervpn.domain.interactor.notification.NotificationPermissionContract
 import com.wlvpn.consumervpn.domain.service.authentication.UserAuthenticationService
 import com.wlvpn.consumervpn.domain.service.authorization.UserAuthorizationService
 import com.wlvpn.consumervpn.domain.service.servers.ServersService
@@ -85,9 +86,16 @@ class PresenterModule {
         service: VpnService,
         schedulerProvider: SchedulerProvider,
         settingsService: SettingsService,
-        @Named(CONNECT_BUS_PROPERTY) connectionBus: SinglePipelineBus<Event.ConnectionRequestEvent>
+        @Named(CONNECT_BUS_PROPERTY) connectionBus: SinglePipelineBus<Event.ConnectionRequestEvent>,
+        notificationPermissionsInteractor: NotificationPermissionContract.Interactor
     ): ConnectionContract.Presenter =
-        ConnectionPresenter(service, schedulerProvider, settingsService, connectionBus)
+        ConnectionPresenter(
+            service,
+            schedulerProvider,
+            settingsService,
+            connectionBus,
+            notificationPermissionsInteractor
+        )
 
     @Provides
     @PerPresentation

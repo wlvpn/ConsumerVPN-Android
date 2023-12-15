@@ -5,6 +5,7 @@ import com.wlvpn.consumervpn.data.failure.UnknownErrorException
 import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
 import com.wlvpn.consumervpn.data.model.CountryServerLocation
 import com.wlvpn.consumervpn.data.model.FastestServerLocation
+import com.wlvpn.consumervpn.domain.interactor.notification.NotificationPermissionContract
 import com.wlvpn.consumervpn.domain.model.ConnectionState
 import com.wlvpn.consumervpn.domain.service.settings.SettingsService
 import com.wlvpn.consumervpn.domain.service.vpn.VpnService
@@ -17,6 +18,7 @@ import com.wlvpn.consumervpn.presentation.util.isRunning
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposables
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import kotlin.properties.Delegates
 
@@ -24,7 +26,8 @@ class ConnectionPresenter(
     private val vpnService: VpnService,
     private val schedulerProvider: SchedulerProvider,
     private val settingsService: SettingsService,
-    private val connectionEventBus: SinglePipelineBus<Event.ConnectionRequestEvent>
+    private val connectionEventBus: SinglePipelineBus<Event.ConnectionRequestEvent>,
+    private val notificationPermissionInteractor: NotificationPermissionContract.Interactor
 ) : ConnectionContract.Presenter {
 
     private val disposables = CompositeDisposable()
@@ -49,6 +52,7 @@ class ConnectionPresenter(
         listenToConnectionRequestEvent()
         // Always refresh the location at the beginning to avoid false positive locations on connect
         fetchGeoInfo()
+        checkNotificationPermission()
     }
 
     override fun cleanUp() {
@@ -228,6 +232,21 @@ class ConnectionPresenter(
                 .subscribe({ }, //do nothing, just fetches and updates the info
                     { t: Throwable? -> Timber.e("Error updating geoInfo $t") })
         )
+    }
+
+    private fun checkNotificationPermission() {
+        notificationPermissionInteractor.execute()
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
+            .subscribe({ status ->
+                when (status) {
+                    NotificationPermissionContract.Status.PermissionNotGranted ->
+                        view?.requestNotificationPermission()
+                    else -> { /* Permission already granted */ }
+                }
+            }) { throwable ->
+                Timber.e(throwable, "Error obtaining notification permission")
+            }.addTo(disposables)
     }
 
     private var connectionState: ConnectionState by
