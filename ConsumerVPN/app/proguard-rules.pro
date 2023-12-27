@@ -60,6 +60,9 @@
 -keep class **$$JsonObjectMapper { *; }
 -dontwarn com.bluelinelabs.logansquare.processor.**
 
+# Strongswan
+-keep class org.strongswan.android.logic.Scheduler { *; }
+
 # AutoValue
 -dontwarn javax.lang.**
 -dontwarn javax.tools.**
