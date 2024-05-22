@@ -24,8 +24,6 @@ task pmd(type: Pmd) {
     exclude '**/gen/**'
 
     reports {
-        xml.enabled = false
-        html.enabled = true
         xml {
             destination new File("${project.buildDir}/reports/pmd/pmd.xml")
         }

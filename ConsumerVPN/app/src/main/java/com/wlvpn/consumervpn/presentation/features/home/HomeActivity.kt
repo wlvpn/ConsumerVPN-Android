@@ -4,17 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.wlvpn.consumervpn.R
+import com.wlvpn.consumervpn.databinding.ActivityHomeBinding
 import com.wlvpn.consumervpn.presentation.di.Injector
 import com.wlvpn.consumervpn.presentation.features.account.AccountExpiredDialogFragment
 import com.wlvpn.consumervpn.presentation.features.home.connection.ConnectionFragment
 import com.wlvpn.consumervpn.presentation.features.home.servers.ServersFragment
 import com.wlvpn.consumervpn.presentation.features.settings.SettingsPreferenceFragment
 import com.wlvpn.consumervpn.presentation.owner.presenter.PresenterOwnerActivity
-import com.wlvpn.consumervpn.presentation.util.bindView
-import kotlinx.android.synthetic.main.activity_home.*
 
 private const val FRAGMENT_TAG_KEY = "HOME_FRAGMENT_KEY"
 
@@ -26,6 +24,8 @@ class HomeActivity :
 
     private var currentFragmentTag = ""
 
+    private lateinit var binding: ActivityHomeBinding
+
     companion object {
         const val REQUESTED_BOTTOM_NAVIGATION_CHANGE_KEY = "REQUESTED_BOTTOM_NAVIGATION_CHANGE_KEY"
         const val CONNECT_BOTTOM_NAVIGATION_KEY = "CONNECT_BOTTOM_NAVIGATION_KEY"
@@ -35,8 +35,8 @@ class HomeActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         Injector.INSTANCE.initViewComponent(this).inject(this)
 
@@ -86,7 +86,7 @@ class HomeActivity :
     }
 
     override fun progressDialogVisibility(isVisible: Boolean) {
-        progressContainerHome.visibility = if (isVisible) View.VISIBLE else View.GONE
+        binding.progressContainerHome.root.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
     override fun showConnectionView() {
@@ -131,12 +131,15 @@ class HomeActivity :
                 ConnectionFragment.TAG -> {
                     ConnectionFragment()
                 }
+
                 ServersFragment.TAG -> {
                     ServersFragment()
                 }
+
                 SettingsPreferenceFragment.TAG -> {
                     SettingsPreferenceFragment()
                 }
+
                 else -> throw NotImplementedError()
             }
             currentFragmentTag = fragmentTag
@@ -147,8 +150,8 @@ class HomeActivity :
     }
 
     private fun setupViews() {
-        setSupportActionBar(toolbar)
-        bottomNavigationView.setOnNavigationItemSelectedListener(this)
+        setSupportActionBar(binding.toolbar)
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
         showFragment(currentFragmentTag)
     }
@@ -156,9 +159,14 @@ class HomeActivity :
     private fun checkNavigationChangeRequest() {
         if (intent != null && intent.hasExtra(REQUESTED_BOTTOM_NAVIGATION_CHANGE_KEY)) {
             when (intent.getStringExtra(REQUESTED_BOTTOM_NAVIGATION_CHANGE_KEY)) {
-                CONNECT_BOTTOM_NAVIGATION_KEY -> bottomNavigationView.selectedItemId = R.id.action_connection
-                SERVERS_BOTTOM_NAVIGATION_KEY -> bottomNavigationView.selectedItemId = R.id.action_servers
-                SETTINGS_BOTTOM_NAVIGATION_KEY -> bottomNavigationView.selectedItemId = R.id.action_settings
+                CONNECT_BOTTOM_NAVIGATION_KEY -> binding.bottomNavigationView.selectedItemId =
+                    R.id.action_connection
+
+                SERVERS_BOTTOM_NAVIGATION_KEY -> binding.bottomNavigationView.selectedItemId =
+                    R.id.action_servers
+
+                SETTINGS_BOTTOM_NAVIGATION_KEY -> binding.bottomNavigationView.selectedItemId =
+                    R.id.action_settings
             }
         }
     }

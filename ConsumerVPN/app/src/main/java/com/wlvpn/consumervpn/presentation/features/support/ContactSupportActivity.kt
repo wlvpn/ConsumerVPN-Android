@@ -9,13 +9,13 @@ import android.view.View
 import android.widget.Toast
 import com.jakewharton.rxbinding3.view.clicks
 import com.wlvpn.consumervpn.R
+import com.wlvpn.consumervpn.databinding.ActivityContactSupportBinding
 import com.wlvpn.consumervpn.presentation.di.Injector
 import com.wlvpn.consumervpn.presentation.navigation.FeatureNavigator
 import com.wlvpn.consumervpn.presentation.owner.presenter.PresenterOwnerActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.activity_contact_support.*
 import java.util.concurrent.TimeUnit
 
 private const val CLICK_DELAY_MILLISECONDS = 500L
@@ -27,15 +27,21 @@ class ContactSupportActivity : PresenterOwnerActivity<ContactSupportContract.Pre
 
     lateinit var featureNavigator: FeatureNavigator
 
+    private lateinit var binding: ActivityContactSupportBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contact_support)
+        binding = ActivityContactSupportBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         Injector.INSTANCE.initViewComponent(this).inject(this)
 
-        checkBoxIncludeDiagnostics.clicks()
+        binding.checkBoxIncludeDiagnostics.clicks()
             .observeOn(AndroidSchedulers.mainThread())
             .throttleFirst(CLICK_DELAY_MILLISECONDS, TimeUnit.MILLISECONDS)
-            .subscribe { presenter.onIncludeLogsChanged(checkBoxIncludeDiagnostics.isChecked) }
+            .subscribe {
+                presenter.onIncludeLogsChanged(binding.checkBoxIncludeDiagnostics.isChecked)
+            }
             .addTo(clickDisposables)
     }
 
@@ -47,7 +53,7 @@ class ContactSupportActivity : PresenterOwnerActivity<ContactSupportContract.Pre
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuSend ->
-                presenter.onSendCommentsClick(problemDescriptionEditText.text.toString())
+                presenter.onSendCommentsClick(binding.problemDescriptionEditText.text.toString())
             android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
@@ -58,12 +64,13 @@ class ContactSupportActivity : PresenterOwnerActivity<ContactSupportContract.Pre
     }
 
     override fun setLogs(logs: String) {
-        textViewDiagnosticInformation.text = logs
+        binding.textViewDiagnosticInformation.text = logs
     }
 
     override fun logsVisibility(visibility: Boolean) {
-        checkBoxIncludeDiagnostics.isChecked = visibility
-        textViewDiagnosticInformation.visibility = if (visibility) View.VISIBLE else View.GONE
+        binding.checkBoxIncludeDiagnostics.isChecked = visibility
+        binding.textViewDiagnosticInformation.visibility =
+            if (visibility) View.VISIBLE else View.GONE
     }
 
     override fun showVisitSupportWebsiteDialog() {
@@ -95,13 +102,13 @@ class ContactSupportActivity : PresenterOwnerActivity<ContactSupportContract.Pre
     }
 
     override fun setEmptyCommentsMessageVisibility(visibility: Boolean) {
-        supportUserNotesTextInputLayout.error = when {
+        binding.supportUserNotesTextInputLayout.error = when {
             visibility -> getString(R.string.support_label_empty_notes_error_message)
             else -> null
         }
     }
 
     override fun setLoadingViewVisibility(visibility: Boolean) {
-        progressBar.visibility = if (visibility) View.VISIBLE else View.GONE
+        binding.progressBar.root.visibility = if (visibility) View.VISIBLE else View.GONE
     }
 }

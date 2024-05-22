@@ -22,9 +22,11 @@ class AccountExpiredDialogFragment : DialogFragment(),
          */
         const val TAG = "consumer:MembershipExpiredDialogFragment"
 
-        const val RETRY_RESPONSE_CODE = R.string.home_dialog_expired_account_retry
+        @JvmField
+        val RETRY_RESPONSE_CODE = R.string.home_dialog_expired_account_retry
 
-        const val CANCEL_RESPONSE_CODE = R.string.home_dialog_expired_account_cancel
+        @JvmField
+        val CANCEL_RESPONSE_CODE = R.string.home_dialog_expired_account_cancel
     }
 
     var onResultCallback: OnAccountExpiredDialogResult? = null
