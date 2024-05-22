@@ -8,10 +8,10 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import com.jakewharton.rxbinding3.view.clicks
 import com.wlvpn.consumervpn.R
+import com.wlvpn.consumervpn.databinding.ViewServersItemRowCountryBinding
 import com.wlvpn.consumervpn.presentation.util.setCountryFlag
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposables
-import kotlinx.android.synthetic.main.view_servers_item_row_country.view.*
 import java.util.concurrent.TimeUnit
 
 class ServerCountryViewHolder(
@@ -47,9 +47,7 @@ class ServerCountryViewHolder(
             typeFace = ResourcesCompat.getFont(itemView.context, R.font.roboto_regular)
         }
 
-        setCountryFlag(itemView.countryFlagImageView, item.location.countryCode)
-
-        val background: Drawable? = if (item.isExpanded || item.isSelected) {
+        val itemBackground: Drawable? = if (item.isExpanded || item.isSelected) {
             ViewCompat.setElevation(
                 itemView,
                 DEFAULT_ELEVATION
@@ -60,30 +58,34 @@ class ServerCountryViewHolder(
             ContextCompat.getDrawable(itemView.context, R.drawable.bg_row_servers_ripple)
         }
 
-        itemView.nameTextView.text = item.location.country
-        itemView.background = background
-        itemView.nameTextView.setTextColor(rowTextColor)
-        itemView.nameTextView.typeface = typeFace
-        itemView.citiesButton.setTextColor(rowTextColor)
-        itemView.citiesButton.text = itemView.context.resources.getQuantityString(
-            R.plurals.row_server_cities_number,
-            locationsSize,
-            locationsSize
-        )
+        ViewServersItemRowCountryBinding.bind(itemView).apply {
+            setCountryFlag(countryFlagImageView, item.location.countryCode)
 
-        rowClickDisposable = itemView.clicks()
-            .throttleFirst(CLICK_DELAY_MILLISECONDS, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                callback.rowClick(itemView, adapterPosition, this.item)
-            }
+            nameTextView.text = item.location.country
+            itemView.background = itemBackground
+            nameTextView.setTextColor(rowTextColor)
+            nameTextView.typeface = typeFace
+            citiesButton.setTextColor(rowTextColor)
+            citiesButton.text = itemView.context.resources.getQuantityString(
+                R.plurals.row_server_cities_number,
+                locationsSize,
+                locationsSize
+            )
 
-        expandButtonClickDisposable = itemView.citiesButton.clicks()
-            .throttleFirst(CLICK_DELAY_MILLISECONDS, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                callback.rowClick(itemView.citiesButton, adapterPosition, this.item)
-            }
+            rowClickDisposable = itemView.clicks()
+                .throttleFirst(CLICK_DELAY_MILLISECONDS, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    callback.rowClick(itemView, adapterPosition, item)
+                }
+
+            expandButtonClickDisposable = citiesButton.clicks()
+                .throttleFirst(CLICK_DELAY_MILLISECONDS, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    callback.rowClick(citiesButton, adapterPosition, item)
+                }
+        }
     }
 
 }

@@ -8,9 +8,10 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import com.jakewharton.rxbinding3.view.clicks
 import com.wlvpn.consumervpn.R
+import com.wlvpn.consumervpn.databinding.ViewServersItemRowCountryBinding
+import com.wlvpn.consumervpn.databinding.ViewServersItemRowFastestBinding
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposables
-import kotlinx.android.synthetic.main.view_servers_item_row_fastest.view.*
 import java.util.concurrent.TimeUnit
 
 class ServerFastestViewHolder(
@@ -33,10 +34,10 @@ class ServerFastestViewHolder(
 
         val textColor: Int
         val typeFace: Typeface?
-        val background: Drawable?
+        val itemBackground: Drawable?
 
         if (item.isSelected) {
-            background = ContextCompat.getDrawable(itemView.context, R.drawable.bg_row_servers_selected_ripple)
+            itemBackground = ContextCompat.getDrawable(itemView.context, R.drawable.bg_row_servers_selected_ripple)
             textColor = ContextCompat.getColor(itemView.context, R.color.server_location_selected_text_color)
             typeFace = ResourcesCompat.getFont(itemView.context, R.font.roboto_bold)
             ViewCompat.setElevation(
@@ -44,15 +45,17 @@ class ServerFastestViewHolder(
                 DEFAULT_ELEVATION
             )
         } else {
-            background = ContextCompat.getDrawable(itemView.context, R.drawable.bg_row_servers_ripple)
+            itemBackground = ContextCompat.getDrawable(itemView.context, R.drawable.bg_row_servers_ripple)
             textColor = ContextCompat.getColor(itemView.context, R.color.server_location_text_color)
             typeFace = ResourcesCompat.getFont(itemView.context, R.font.roboto_regular)
             ViewCompat.setElevation(itemView, 0f)
         }
 
-        itemView.fastestTextView.setTextColor(textColor)
-        itemView.fastestTextView.typeface = typeFace
-        itemView.background = background
+        ViewServersItemRowFastestBinding.bind(itemView).apply {
+            fastestTextView.setTextColor(textColor)
+            fastestTextView.typeface = typeFace
+            itemView.background = itemBackground
+        }
 
         rowClickDisposable = itemView.clicks()
             .throttleFirst(CLICK_DELAY_MILLISECONDS, TimeUnit.MILLISECONDS)

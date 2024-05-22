@@ -1,4 +1,8 @@
 # CHANGELOG
+## v1.6.4
+* Improves compatibility with the latest versions of Android Studio
+* Updates OpenVPN integration
+
 ## v1.6.3
 * Adds Split tunneling support based on domains (Only supported on Android 13)
 * Mitigates IPv6 leak from the IKEv2 protocol

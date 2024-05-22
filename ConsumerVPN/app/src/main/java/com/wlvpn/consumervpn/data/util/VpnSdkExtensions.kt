@@ -7,14 +7,14 @@ import io.reactivex.Single
 /**
  *  This extension helps to transform ANY SDK [ICallback] into a Single observable object
  */
-fun <T> ICallback<T>.toSingle(): Single<T> =
+fun <T:Any> ICallback<T>.toSingle(): Single<T> =
     Single.create<T> {
         blockCurrentThread()
         subscribe(it::onSuccess) { throwable -> it.tryOnError(throwable) }
     }
         .doOnDispose { unsubscribe() }
 
-fun <T> ICallback<T>.toObservable(): Observable<T> =
+fun <T:Any> ICallback<T>.toObservable(): Observable<T> =
     Observable.create<T> {
         blockCurrentThread()
         subscribe(it::onNext) { throwable -> it.tryOnError(throwable) }

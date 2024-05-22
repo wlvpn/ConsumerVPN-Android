@@ -17,6 +17,7 @@ import com.wlvpn.consumervpn.BuildConfig
 import com.wlvpn.consumervpn.R
 import com.wlvpn.consumervpn.data.model.CityAndCountryServerLocation
 import com.wlvpn.consumervpn.data.model.CountryServerLocation
+import com.wlvpn.consumervpn.databinding.FragmentServersExpandableBinding
 import com.wlvpn.consumervpn.domain.model.ServerLocation
 import com.wlvpn.consumervpn.presentation.di.Injector
 import com.wlvpn.consumervpn.presentation.features.connection.DisconnectDialogFragment
@@ -34,8 +35,6 @@ import com.wlvpn.consumervpn.presentation.owner.presenter.PresenterOwnerActivity
 import com.wlvpn.consumervpn.presentation.owner.presenter.PresenterOwnerFragment
 import com.wlvpn.consumervpn.presentation.util.isVisible
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.fragment_servers_expandable.progressBar
-import kotlinx.android.synthetic.main.fragment_servers_expandable.recyclerView
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -62,6 +61,8 @@ class ServersFragment :
 
     private val viewDisposables = CompositeDisposable()
 
+    private var binding: FragmentServersExpandableBinding? = null
+
     companion object {
         val TAG = "${BuildConfig.APPLICATION_ID}:${this::class.java.name}"
     }
@@ -84,13 +85,14 @@ class ServersFragment :
         (activity as PresenterOwnerActivity<*>).supportActionBar?.title =
             getString(R.string.servers_fragment_label_title)
 
-        return inflater.inflate(R.layout.fragment_servers_expandable, container, false)
+        binding = FragmentServersExpandableBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        progressBar.visibility = View.VISIBLE
+        binding?.progressBar?.visibility = View.VISIBLE
 
         presenter.onListLoad(null)
 
@@ -116,7 +118,7 @@ class ServersFragment :
 
     override fun onSaveInstanceState(outState: Bundle) {
         // Save current recycler position in state
-        recyclerView.layoutManager?.let { state ->
+        binding?.recyclerView?.layoutManager?.let { state ->
             outState.putParcelable(RECYCLER_STATE_KEY, state.onSaveInstanceState())
         }
 
@@ -180,7 +182,7 @@ class ServersFragment :
 
         // On Fragments sometimes the view state remains so always make sure to save recycler state in case
         // The state never enters on restore state
-        recyclerView.layoutManager?.let { state ->
+        binding?.recyclerView?.layoutManager?.let { state ->
             recyclerState = state.onSaveInstanceState()
         }
     }
@@ -290,11 +292,11 @@ class ServersFragment :
                 serverListState.currentSortType
             )
 
-            recyclerView.adapter = adapter
+            binding?.recyclerView?.adapter = adapter
 
             // If there's a previous state  restore it
             recyclerState?.let { state ->
-                recyclerView.layoutManager?.onRestoreInstanceState(state)
+                binding?.recyclerView?.layoutManager?.onRestoreInstanceState(state)
             }
         } else {
             // always pass the current type list
@@ -303,7 +305,7 @@ class ServersFragment :
             adapter.notifyDataSetChanged()
         }
 
-        progressBar.visibility = View.GONE
+        binding?.progressBar?.visibility = View.GONE
     }
 
     override fun onRowChange(item: ServerRowItem, view: View) {
@@ -323,7 +325,7 @@ class ServersFragment :
     }
 
     override fun onLastItemExpanded(itemPosition: Int) {
-        recyclerView.scrollToPosition(itemPosition + 1)
+        binding?.recyclerView?.scrollToPosition(itemPosition + 1)
     }
 
     override fun onCurrentSelectedItemClick(currentItem: ServerRowItem) {

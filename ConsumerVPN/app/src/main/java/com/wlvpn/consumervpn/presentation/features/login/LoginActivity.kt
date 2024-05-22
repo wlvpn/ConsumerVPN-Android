@@ -9,12 +9,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import com.jakewharton.rxbinding3.view.clicks
+import com.jakewharton.rxbinding3.view.visibility
 import com.wlvpn.consumervpn.R
+import com.wlvpn.consumervpn.databinding.ActivityHomeBinding
+import com.wlvpn.consumervpn.databinding.ActivityLoginBinding
 import com.wlvpn.consumervpn.presentation.di.Injector
 import com.wlvpn.consumervpn.presentation.navigation.FeatureNavigator
 import com.wlvpn.consumervpn.presentation.owner.presenter.PresenterOwnerActivity
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.activity_login.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -30,29 +32,31 @@ class LoginActivity :
 
     private val clickDisposables = CompositeDisposable()
 
+    private lateinit var binding: ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         Injector.INSTANCE.initViewComponent(this).inject(this)
 
-        editTextPassword.editText?.setOnEditorActionListener(this)
+        binding.editTextPassword.editText?.setOnEditorActionListener(this)
 
-        clickDisposables.add(buttonLogin.clicks()
+        clickDisposables.add(binding.buttonLogin.clicks()
             .throttleFirst(CLICK_DELAY_MILLISECONDS, TimeUnit.MILLISECONDS)
             .subscribe {
                 presenter.onLoginClick(
-                    editTextUsername.editText?.text.toString(),
-                    editTextPassword.editText?.text.toString()
+                    binding.editTextUsername.editText?.text.toString(),
+                    binding.editTextPassword.editText?.text.toString()
                 )
             })
 
-        clickDisposables.add(buttonSignUp.clicks()
+        clickDisposables.add(binding.buttonSignUp.clicks()
             .throttleFirst(CLICK_DELAY_MILLISECONDS, TimeUnit.MILLISECONDS)
             .subscribe { presenter.onSignUpClick() })
 
-        clickDisposables.add(buttonForgotPassword.clicks()
+        clickDisposables.add(binding.buttonForgotPassword.clicks()
             .throttleFirst(CLICK_DELAY_MILLISECONDS, TimeUnit.MILLISECONDS)
             .subscribe { presenter.onForgotPasswordClick() })
 
@@ -80,17 +84,17 @@ class LoginActivity :
     override fun showEmptyUserOrPasswordMessage() {
         val error = getString(R.string.error_login_username_password_invalid)
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
-        editTextUsername.error = error
-        editTextPassword.error = error
+        binding.editTextUsername.error = error
+        binding.editTextPassword.error = error
     }
 
     override fun dismissErrorMessage() {
-        editTextUsername.error = null
-        editTextPassword.error = null
+        binding.editTextUsername.error = null
+        binding.editTextPassword.error = null
     }
 
     override fun progressDialogVisibility(isVisible: Boolean) {
-        progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
+        binding.progressBar.root.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
     override fun showErrorMessage(errorMessage: String) {
@@ -122,8 +126,8 @@ class LoginActivity :
                     && keyEvent.keyCode == KeyEvent.KEYCODE_ENTER)
         ) {
             presenter.onLoginClick(
-                editTextUsername.editText?.text.toString(),
-                editTextPassword.editText?.text.toString()
+                binding.editTextUsername.editText?.text.toString(),
+                binding.editTextPassword.editText?.text.toString()
             )
 
             return true

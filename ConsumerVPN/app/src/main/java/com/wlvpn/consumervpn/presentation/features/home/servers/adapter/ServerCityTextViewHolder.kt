@@ -8,9 +8,9 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import com.jakewharton.rxbinding3.view.clicks
 import com.wlvpn.consumervpn.R
+import com.wlvpn.consumervpn.databinding.ViewServersItemRowCityBinding
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposables
-import kotlinx.android.synthetic.main.view_servers_item_row_city.view.*
 import java.util.concurrent.TimeUnit
 
 class ServerCityTextViewHolder(
@@ -47,9 +47,11 @@ class ServerCityTextViewHolder(
             ViewCompat.setElevation(itemView, 0f)
         }
 
-        itemView.cityName.text = item.location.city
-        itemView.cityName.setTextColor(textColor)
-        itemView.cityName.typeface = typeFace
+        ViewServersItemRowCityBinding.bind(itemView).apply {
+            cityName.text = item.location.city
+            cityName.setTextColor(textColor)
+            cityName.typeface = typeFace
+        }
 
         rowClickDisposable = itemView.clicks()
             .throttleFirst(CLICK_DELAY_MILLISECONDS, TimeUnit.MILLISECONDS)

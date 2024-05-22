@@ -8,10 +8,10 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import com.jakewharton.rxbinding3.view.clicks
 import com.wlvpn.consumervpn.R
+import com.wlvpn.consumervpn.databinding.ViewServersItemRowCityCountryBinding
 import com.wlvpn.consumervpn.presentation.util.setCountryFlag
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposables
-import kotlinx.android.synthetic.main.view_servers_item_row_city_country.view.*
 import java.util.concurrent.TimeUnit
 
 class ServerCityCountryViewHolder(
@@ -36,14 +36,14 @@ class ServerCityCountryViewHolder(
         val textColorCountry: Int
         val typeFaceCity: Typeface?
         val typeFaceCountry: Typeface?
-        val background: Drawable?
+        val itemBackground: Drawable?
         val countryText = itemView.context.getString(
             R.string.row_server_city_country_placeholder,
             item.location.country
         )
 
         if (item.isSelected) {
-            background = ContextCompat.getDrawable(itemView.context, R.drawable.bg_row_servers_selected_ripple)
+            itemBackground = ContextCompat.getDrawable(itemView.context, R.drawable.bg_row_servers_selected_ripple)
             textColorCity = ContextCompat.getColor(itemView.context, R.color.server_location_selected_text_color)
             textColorCountry = ContextCompat.getColor(itemView.context, R.color.server_country_selected_text_color)
             typeFaceCity = ResourcesCompat.getFont(itemView.context, R.font.roboto_bold)
@@ -53,7 +53,7 @@ class ServerCityCountryViewHolder(
                 DEFAULT_ELEVATION
             )
         } else {
-            background = ContextCompat.getDrawable(itemView.context, R.drawable.bg_row_servers_ripple)
+            itemBackground = ContextCompat.getDrawable(itemView.context, R.drawable.bg_row_servers_ripple)
             textColorCity = ContextCompat.getColor(itemView.context, R.color.server_location_text_color)
             textColorCountry = ContextCompat.getColor(itemView.context, R.color.white_60)
             typeFaceCity = ResourcesCompat.getFont(itemView.context, R.font.roboto_regular)
@@ -61,16 +61,18 @@ class ServerCityCountryViewHolder(
             ViewCompat.setElevation(itemView, 0f)
         }
 
-        setCountryFlag(itemView.countryFlagImageView, item.location.countryCode)
+        ViewServersItemRowCityCountryBinding.bind(itemView).apply {
+            setCountryFlag(countryFlagImageView, item.location.countryCode)
 
-        itemView.cityTextView.text = item.location.city
-        itemView.cityTextView.setTextColor(textColorCity)
-        itemView.cityTextView.typeface = typeFaceCity
+            cityTextView.text = item.location.city
+            cityTextView.setTextColor(textColorCity)
+            cityTextView.typeface = typeFaceCity
 
-        itemView.countryTextView.text = countryText
-        itemView.countryTextView.setTextColor(textColorCountry)
-        itemView.countryTextView.typeface = typeFaceCountry
-        itemView.background = background
+            countryTextView.text = countryText
+            countryTextView.setTextColor(textColorCountry)
+            countryTextView.typeface = typeFaceCountry
+            itemView.background = itemBackground
+        }
 
         rowClickDisposable = itemView.clicks()
             .throttleFirst(CLICK_DELAY_MILLISECONDS, TimeUnit.MILLISECONDS)
