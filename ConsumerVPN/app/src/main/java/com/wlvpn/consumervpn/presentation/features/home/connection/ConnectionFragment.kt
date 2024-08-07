@@ -52,6 +52,8 @@ class ConnectionFragment
 
     private val clickDisposables = CompositeDisposable()
 
+    private var hasPermissionBeenShown = false
+
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { /*No op*/ }
@@ -213,9 +215,12 @@ class ConnectionFragment
 
     override fun requestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requestPermissionLauncher.launch(
-                Manifest.permission.POST_NOTIFICATIONS
-            )
+            if (hasPermissionBeenShown.not()) {
+                requestPermissionLauncher.launch(
+                    Manifest.permission.POST_NOTIFICATIONS
+                )
+                hasPermissionBeenShown = true
+            }
         }
     }
 
