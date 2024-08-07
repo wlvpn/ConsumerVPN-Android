@@ -1,5 +1,6 @@
 # CHANGELOG
 ## v1.6.4
+* Updates base sample project to be compatible with targeting Android API 34
 * Improves compatibility with the latest versions of Android Studio
 * Updates OpenVPN integration
 
