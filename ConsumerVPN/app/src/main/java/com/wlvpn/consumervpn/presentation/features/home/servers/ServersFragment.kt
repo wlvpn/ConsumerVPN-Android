@@ -41,6 +41,8 @@ import javax.inject.Inject
 
 private const val TEXT_QUERY_DEBOUNCE_MILLISECONDS = 400L
 
+private const val SEARCH_QUERY_KEY = "SEARCH_QUERY_KEY"
+
 private const val RECYCLER_STATE_KEY = "RECYCLER_STATE_KEY"
 
 class ServersFragment :
@@ -57,6 +59,7 @@ class ServersFragment :
     private lateinit var countrySortItem: MenuItem
     private lateinit var citySortItem: MenuItem
 
+    private var searchViewState: String? = null
     private var recyclerState: Parcelable? = null
 
     private val viewDisposables = CompositeDisposable()
@@ -110,6 +113,7 @@ class ServersFragment :
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         savedInstanceState?.let { bundle ->
+            searchViewState = bundle.getString(SEARCH_QUERY_KEY)
             recyclerState = bundle.getParcelable(RECYCLER_STATE_KEY)
         }
 
@@ -117,11 +121,11 @@ class ServersFragment :
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        // Save current recycler position in state
+        // Save current searchview and recycler position its states
+        outState.putString(SEARCH_QUERY_KEY, searchView.query.toString())
         binding?.recyclerView?.layoutManager?.let { state ->
             outState.putParcelable(RECYCLER_STATE_KEY, state.onSaveInstanceState())
         }
-
         super.onSaveInstanceState(outState)
     }
 
@@ -136,7 +140,6 @@ class ServersFragment :
 
         viewDisposables.add(
             searchView.queryTextChanges()
-                .skipInitialValue()
                 .debounce(TEXT_QUERY_DEBOUNCE_MILLISECONDS, TimeUnit.MILLISECONDS)
                 .subscribe({ text ->
                     val searchText = text.toString()
@@ -151,6 +154,14 @@ class ServersFragment :
         searchView.setOnCloseListener {
             presenter.onLoadFilteredList(null)
             false
+        }
+        // If there's a previous state restore it
+        searchViewState?.let { state ->
+            searchView.setQuery(state, false)
+            if (state.isNotEmpty()) {
+                searchView.isIconified = false
+                searchView.clearFocus()
+            }
         }
     }
 
@@ -180,8 +191,13 @@ class ServersFragment :
     override fun onPause() {
         super.onPause()
 
-        // On Fragments sometimes the view state remains so always make sure to save recycler state in case
-        // The state never enters on restore state
+        // On Fragments sometimes the view state remains so always make sure to save searchview
+        // and recycler state in case the state never enters on restore state
+        if (::searchView.isInitialized) {
+            searchView.query?.toString()?.let { state ->
+                searchViewState = state
+            }
+        }
         binding?.recyclerView?.layoutManager?.let { state ->
             recyclerState = state.onSaveInstanceState()
         }

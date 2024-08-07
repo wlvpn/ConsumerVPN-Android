@@ -32,7 +32,7 @@ interface ApplicationComponent {
     /**
      * A reference to the [PresentationComponent] sub component.
      */
-    var presenterComponent: PresentationComponent
+    val presenterComponent: PresentationComponent
 
     //region injectors
     fun inject(into: ConsumerApplication)

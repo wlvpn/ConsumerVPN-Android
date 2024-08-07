@@ -71,7 +71,7 @@ class SettingsPreferenceFragment
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         loadingView = activity?.findViewById(R.id.progressContainerHome)
 
         (activity as PresenterOwnerActivity<*>).supportActionBar?.title =

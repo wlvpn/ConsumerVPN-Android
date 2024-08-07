@@ -16,7 +16,7 @@ android {
         ndk.abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64'
         applicationId "com.wlvpn.consumervpn"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
 
@@ -129,39 +129,38 @@ dependencies {
                     cardview        : "1.0.0",
                     gridLayout      : "1.0.0",
                     leanback        : "1.1.0-rc01",
-                    lifecycle       : "2.4.1",
-                    lifecycleViewModel: "2.4.1",
+                    lifecycle       : "2.8.0",
+                    lifecycleViewModel: "2.8.0",
                     constraintLayout: "2.1.4",
-                    material        : "1.7.0",
-                    appCompat       : "1.5.0",
-                    preferences     : "1.1.1",
-                    workManager     : "2.7.1",
+                    material        : "1.12.0",
+                    appCompat       : "1.6.1",
+                    preferences     : "1.2.1",
+                    workManager     : "2.9.0",
                     desugar         : "2.0.3",
-                    recyclerview    : "1.2.1",
-                    annotation      : "1.3.0",
-                    browser         : "1.5.0",
-                    gridlayout      : "1.0.0"
+                    recyclerview    : "1.3.2",
+                    annotation      : "1.8.0",
+                    browser         : "1.8.0"
             ],
-            rxJava       : "2.2.19",
+            rxJava       : "2.2.21",
             rxAndroid    : "2.1.1",
             rxKotlin     : "2.4.0",
             rxBinding    : "3.1.0",
-            gson         : "2.8.5",
-            dagger       : "2.47",
-            retrofit     : "2.5.0",
-            leakCanary   : "2.9.1",
-            fresco       : "1.13.0",
-            vpnSdk       : "1.6.4.210792",
-            timber       : "4.7.1",
-            autoValue    : "1.6.5",
+            gson         : "2.11.0",
+            dagger       : "2.51.1",
+            retrofit     : "2.11.0",
+            leakCanary   : "2.14",
+            fresco       : "3.1.3",
+            vpnSdk       : "1.6.4.218669",
+            timber       : "5.0.1",
+            autoValue    : "1.10.4",
             loganSquare  : "1.3.7",
-            slf4j        : "1.7.25",
-            logback      : "2.0.0",
-            licenses     : "1.0.80577",
+            slf4j        : "2.0.13",
+            logback      : "3.0.0",
+            licenses     : "1.0.83737",
             nativencrkeyption :"1.1.0140581-SNAPSHOT",
             test         : [
-                    junit  : "4.12",
-                    mockito: "2.24.0"
+                    junit  : "4.13.2",
+                    mockito: "3.3.3"
             ]
     ]
 
